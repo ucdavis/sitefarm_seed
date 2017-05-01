@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: sf_article_category_terms
+label: 'Article Category Terms'
+type: 'canonical_entities:taxonomy_term'
+pattern: 'articles/[term:name]'
+selection_criteria:
+  e4d424b6-715d-44fe-8df5-3e0c33c3a8b0:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      sf_article_category: sf_article_category
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: e4d424b6-715d-44fe-8df5-3e0c33c3a8b0
+selection_logic: and
+weight: -5
+relationships: {  }

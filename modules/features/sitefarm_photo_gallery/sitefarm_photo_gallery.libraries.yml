@@ -1,0 +1,24 @@
+sitefarm_photo_gallery:
+  version: VERSION
+  js:
+    js/slick.js: {}
+  dependencies:
+    - sitefarm_photo_gallery/sitefarm_photo_gallery.slick
+
+sitefarm_photo_gallery.slick:
+  version: VERSION
+  css:
+    component:
+      /libraries/slick/slick.css: {}
+  js:
+    /libraries/slick/slick.min.js: { minified: true }
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+
+sitefarm_photo_gallery.slick_theme:
+  version: VERSION
+  css:
+    theme:
+      /libraries/slick/slick-theme.css: {}
+

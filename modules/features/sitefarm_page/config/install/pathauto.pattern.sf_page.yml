@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: sf_page
+label: 'Basic Page'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  77bdb256-a659-42a2-b88e-3517a6138292:
+    id: node_type
+    bundles:
+      sf_page: sf_page
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 77bdb256-a659-42a2-b88e-3517a6138292
+selection_logic: and
+weight: -5
+relationships: {  }

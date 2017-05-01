@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: sf_focus_box
+label: 'Focus Box'
+revision: 1
+description: 'A box with an image, title, and body to bring focus to a specific area of a page.'

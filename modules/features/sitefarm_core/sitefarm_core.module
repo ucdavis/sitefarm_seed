@@ -1,0 +1,402 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Database\Query\Condition;
+
+/**
+ * Implements hook_form_alter().
+ */
+function sitefarm_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Move Node Edit fields into the advanced tabs group
+  $advanced_tabs = \Drupal::service('sf.advanced_tabs')->loadForm($form);
+
+  // Move the Feature Content field to the Promotion Options group
+  $advanced_tabs->moveField('field_sf_featured_status', 'options');
+
+  // Create a Categorizing tray for types with taxonomy references
+  $advanced_tabs->createGroup('categorizing', 'Categorizing', 94);
+
+  // Move the tags and branding fields to the Categorization group
+  $advanced_tabs->moveField('field_sf_tags', 'categorizing');
+  $advanced_tabs->moveField('field_sf_branding', 'categorizing');
+  $form = $advanced_tabs->save();
+
+  // Alter the 'Add another item' text on the Email field
+  if (isset($form['field_sf_emails']['widget']['add_more']['#value'])) {
+    $form['field_sf_emails']['widget']['add_more']['#value'] = t('Add another email');
+  }
+  // Alter the 'Add another item' text on the Phone Number field
+  if (isset($form['field_sf_phone_numbers']['widget']['add_more']['#value'])) {
+    $form['field_sf_phone_numbers']['widget']['add_more']['#value'] = t('Add another phone number');
+  }
+  // Alter the 'Add another item' text on the Website field
+  if (isset($form['field_sf_websites']['widget']['add_more']['#value'])) {
+    $form['field_sf_websites']['widget']['add_more']['#value'] = t('Add another Website');
+  }
+
+  // Add javascript to check the url path and populate the path visibility with
+  // the current page if using
+  if ($form_id == 'block_form') {
+    $form['#attached']['library'][] = 'sitefarm_core/sitefarm_core.blocks_path_visibility';
+  }
+}
+
+/**
+ * hook_form_BASE_FORM_ID_alter() for the node_form.
+ */
+function sitefarm_core_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Remove the menu 'Weight' field so that it doesn't confuse people
+  if (isset($form['menu'])) {
+    $form['menu']['link']['weight']['#access'] = FALSE;
+  }
+
+  // Change the Meta Tags label to 'SEO'
+  if (isset($form['field_sf_meta_tags'])) {
+    $form['field_sf_meta_tags']['widget'][0]['#title'] = 'SEO';
+  }
+
+  // Attach javascript to ensure that required javascript fields don't go under
+  // the admin toolbar
+  $form['#attached']['library'][] = 'sitefarm_core/sitefarm_core.required_fields';
+
+  // Add a label to the sidebar
+  $form['advanced']['#prefix'] = '<h2>' . t('Additional Options') . '</h2>';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ *
+ * For the ID form_content form.
+ */
+function sitefarm_core_form_block_content_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $generator = \Drupal::service('sf.block_content_generate_description');
+  $generator->createFromTitle($form);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ *
+ * For the ID form_block.
+ */
+function sitefarm_core_form_block_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Get the Sitefarm forms helper service
+  $form_helper = \Drupal::service('sf.block_form_helpers');
+  $block_plugin = $form_helper->getBlockEntityPlugin($form_state);
+
+  // Hide the following visibility options
+  $hide = [
+    'entity_bundle:block_content',
+    'entity_bundle:contact_message',
+    'entity_bundle:crop',
+    'entity_bundle:redirect',
+    'entity_bundle:scheduled_update',
+    'entity_bundle:shortcut',
+    'entity_bundle:menu_link_content',
+    'node_type',
+  ];
+
+  foreach ($hide as $name) {
+    unset($form['visibility'][$name]);
+  }
+
+  // Move the path visibility to the top
+  if (isset($form['visibility']['request_path'])) {
+    // Move the path to the top of the array
+    $form['visibility'] = array('request_path' => $form['visibility']['request_path']) + $form['visibility'];
+    // Move the visibility tabs back to the top so that everything below it renders
+    $form['visibility'] = array('visibility_tabs' => $form['visibility']['visibility_tabs']) + $form['visibility'];
+  }
+
+  // Default the Search block title to disabled
+  if ($block_plugin->getBaseId() == 'search_form_block') {
+    $form_helper->unCheckBlockTitle($form, $form_state);
+  }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function sitefarm_core_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  // Hide users who have the administrator role on admin "people" display
+  if ($view->id() == 'user_admin_people' && roleassign_restrict_access()) {
+    // Create a Condition object so that we can check if a role is set or not
+    // even available. Regular authenticated users do not get a user role.
+    $or_condition = new Condition('OR');
+
+    $query->addTable('user__roles');
+    $query->addWhere(0, $or_condition
+      ->condition('user__roles.roles_target_id', 'administrator', '<>')
+      ->condition('user__roles.roles_target_id', 'administrator', 'IS NULL')
+    );
+    $query->distinct = TRUE;
+  }
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function sitefarm_core_element_info_alter(array &$info) {
+  if (isset($info['textarea'])) {
+    $info['textarea']['#attached']['library'][] = 'sitefarm_core/sitefarm_core.ckeditor';
+  }
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function sitefarm_core_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
+  if (isset($element['#title']) && $element['#title'] == 'Body') {
+    $element['summary']['#description']= t('Enter text you would like to use as a brief, custom teaser OR leave blank and the system will use a trimmed segment of the body text instead.');
+  }
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function sitefarm_core_field_widget_image_image_form_alter(&$element, FormStateInterface $form_state, $form) {
+  // Add a new process function to change the title attribute of the primary image.
+  if ($element['#field_name'] == 'field_sf_primary_image') {
+    $element['#process'][] = 'sitefarm_core_primary_image_widget_process';
+  }
+
+  // Add custom help text to focal_point UI.
+  foreach ($element['#process'] as $process) {
+    if (is_array($process) && in_array('Drupal\focal_point\Plugin\Field\FieldWidget\FocalPointImageWidget', $process)) {
+      $element['#process'][] = 'sitefarm_core_focal_point_widget_process';
+    }
+  }
+}
+
+/**
+ * Element #process callback function.
+ *
+ * Change Title attribute to say "Caption
+ *
+ * @see sitefarm_core_field_widget_image_image_form_alter()
+ */
+function sitefarm_core_primary_image_widget_process($element, FormStateInterface $form_state, $form) {
+  $element['title']['#title'] = t('Caption');
+  $element['title']['#description'] = '';
+
+  return $element;
+}
+
+/**
+ * Element #process callback function.
+ *
+ * Add a description of focal point usage
+ *
+ * @see sitefarm_core_field_widget_image_image_form_alter()
+ */
+function sitefarm_core_focal_point_widget_process($element, FormStateInterface $form_state, $form) {
+  if ($element['alt']['#access']) {
+    $element['focal_point_how'] = array(
+      '#markup' => '<p><strong>' .
+        t('What\'s the plus sign for? ') . '</strong>' .
+        t('Wherever the crosshair is placed is guaranteed to be in any cropped image.')
+        . '</p>',
+      '#weight' => $element['alt']['#weight'] - 1,
+    );
+  }
+
+  return $element;
+}
+
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function sitefarm_core_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  // Use the Restricted text format for teasers on a body field
+  if ($view_mode == 'teaser'
+    && isset($build['body']['#formatter'])
+    && $build['body']['#formatter'] == 'text_summary_or_trimmed'
+  ) {
+    $build['body'][0]['#format'] = 'restricted_html';
+  }
+
+  // Strip Poster view mode html and use plain text filter
+  if ($view_mode == 'poster' && isset($build['body'][0]['#format'])) {
+    $build['body'][0]['#text'] = strip_tags($build['body'][0]['#text']);
+    $build['body'][0]['#format'] = 'plain_text';
+  }
+}
+
+/**
+ * Implements hook_toolbar_alter().
+ */
+function sitefarm_core_toolbar_alter(&$items) {
+  // Fix the url of the Place Block link on the front page so that it works
+  if (isset($items['block_place'])) {
+    $options = $items['block_place']['tab']['#url']->getOptions();
+
+    $is_front = \Drupal::service('path.matcher')->isFrontPage();
+
+    if ($is_front) {
+      $new_url = Url::fromRoute('<front>', [], $options);
+      $items['block_place']['tab']['#url'] = $new_url;
+    }
+  }
+
+  // Remove the Acquia Connector notice nagging in the toolbar
+  if (isset($items['acquia_connector'])) {
+    unset($items['acquia_connector']);
+  }
+}
+
+/**
+ * Implements hook_preprocess_status_messages().
+ */
+function sitefarm_core_preprocess_status_messages(array &$variables) {
+  // Delete Acquia Connector warning messages
+  $message_count = count($variables['message_list']);
+  $warning_count = 0;
+  $acquia_connector_warning = FALSE;
+
+  if (isset($variables['message_list']['warning'])) {
+    $warning_count = count($variables['message_list']['warning']);
+
+    foreach ($variables['message_list']['warning'] as $key => $value) {
+      if (is_object($value) && strpos($value->__toString(), 'Acquia Subscription')) {
+        $acquia_connector_warning = TRUE;
+        if ($warning_count == 1) {
+          unset($variables['message_list']['warning']);
+        }
+        else {
+          unset($variables['message_list']['warning'][$key]);
+        }
+      }
+    }
+  }
+
+  // Remove this message alert if the only message is a acquia message
+  if ($message_count == 1 && $warning_count == 1 && $acquia_connector_warning) {
+    unset($variables['message_list']);
+  }
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function sitefarm_core_page_attachments_alter(array &$attachments) {
+  if (preg_match("/^.*\.ucdavis\.edu$/", $_SERVER["HTTP_HOST"])) {
+    // Only on *.ucdavis.edu sites
+    $ga_inject =
+      "ga('create', 'UA-398023-53', 'auto', 'globalTracker');" .
+      "ga('globalTracker.send', 'pageview');" .
+      "ga('create', 'UA-75813690-2', 'auto', 'globalTrackerSiteFarm');" .
+      "ga('globalTrackerSiteFarm.send', 'pageview');";
+    if (!preg_match("/^UA-/", \Drupal::config('google_analytics.settings')->get('account'))) {
+      // Add a GA attachment since one doesn't already exist.
+      $attachments['#attached']['html_head'][] = [
+        0 => [
+          '#value' => '(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("set", "anonymizeIp", true);' . $ga_inject,
+          '#tag' => 'script',
+        ],
+        1 => 'google_analytics_tracking_script',
+      ];
+    }
+    else {
+      // GA attachment already exists. Inject the SiteFarm and StratComm GA IDs.
+      foreach ($attachments['#attached']['html_head'] as $key => $attachment) {
+        if (in_array('google_analytics_tracking_script', $attachment)) {
+          $attachments['#attached']['html_head'][$key][0]['#value'] .= $ga_inject;
+          break;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_themes_uninstalled().
+ */
+function sitefarm_core_themes_installed(array $theme_list) {
+  // Each theme needs the ability to override image styles so that they can
+  // match the style for the custom theme. In addition, subthemes of
+  // sitefarm_one may want to alter an image style. This searches for any
+  // sitefarm image style config in a newly installed theme by looking for a
+  // prefix of "sf_".
+
+  // Exit if this is the first time the sitefarm_one is installed during install
+  if (in_array('sitefarm_one', $theme_list)) {
+    $new_config = \Drupal::config('image.style.sf_focal_link')->isNew();
+
+    if ($new_config) {
+      return;
+    }
+  }
+
+  // Loop through each of the newly installed theme
+  foreach ($theme_list as $theme_name) {
+    // Exit if the theme does not have config
+    $theme_config_path = DRUPAL_ROOT . base_path() . drupal_get_path('theme', $theme_name) . '/config/optional';
+    if (!file_exists($theme_config_path)) {
+      continue;
+    }
+
+    // Get all config files
+    $config_files = scandir($theme_config_path);
+    $image_style_files = preg_grep('/image\.style\.sf_/', $config_files);
+
+    // If the new theme has SiteFarm image styles we want to revert to them
+    if ($image_style_files) {
+      $revert_styles = preg_replace('/^image\.style\.(sf_[^\.]+)\.yml$/', '$1', $image_style_files);
+
+      /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+      $config_revert = \Drupal::service('config_update.config_update');
+
+      // Revert the image styles in the sitefarm_one theme
+      foreach ($revert_styles as $image_style) {
+        $config_revert->revert('image_style', $image_style);
+      }
+    }
+  }
+
+  // Flush all caches on theme install to fix multiple errors
+  drupal_flush_all_caches();
+}
+
+/**
+ * Implements hook_themes_uninstalled().
+ */
+function sitefarm_core_themes_uninstalled(array $themes) {
+  // Flush all caches on theme uninstall to fix multiple errors
+  // Error: Call to undefined function _datetime_type_field_views_data() in
+  // datetime_range_field_views_data()
+  // (line 14 of core/modules/datetime_range/datetime_range.views.inc).
+  drupal_flush_all_caches();
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function sitefarm_core_preprocess_block(&$variables) {
+
+  // Add some Sitefarm specific help text to the Help page block.
+  if ($variables['base_plugin_id'] == 'help_block' && isset($variables['content'][0]['#markup'])) {
+    $markup = $variables['content'][0]['#markup'];
+
+    $custom = <<<EOT
+
+<h2>SiteFarm Resources</h2>
+<p><strong>Training for everyone:</strong><br>
+<a href="http://sitefarm.ucdavis.edu/training/all">http://sitefarm.ucdavis.edu/training/all</a></p>
+<p><strong>Training for managers:</strong><br>
+<a href="http://sitefarm.ucdavis.edu/training/managers">http://sitefarm.ucdavis.edu/training/managers</a></p>
+<p>&nbsp;</p>
+
+EOT;
+
+    // Only do this to the Help "Getting Started" block
+    if (strpos($markup, 'Getting Started')) {
+      $variables['content'][0]['#markup'] = $custom . $markup;
+    }
+  }
+
+}

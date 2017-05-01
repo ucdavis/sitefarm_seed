@@ -1,0 +1,211 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.sf_person.body
+    - field.field.node.sf_person.field_hide_from_lists
+    - field.field.node.sf_person.field_sf_address
+    - field.field.node.sf_person.field_sf_credentials
+    - field.field.node.sf_person.field_sf_emails
+    - field.field.node.sf_person.field_sf_featured_status
+    - field.field.node.sf_person.field_sf_files
+    - field.field.node.sf_person.field_sf_first_name
+    - field.field.node.sf_person.field_sf_last_name
+    - field.field.node.sf_person.field_sf_meta_tags
+    - field.field.node.sf_person.field_sf_name_prefix
+    - field.field.node.sf_person.field_sf_office_hours
+    - field.field.node.sf_person.field_sf_office_location
+    - field.field.node.sf_person.field_sf_person_type
+    - field.field.node.sf_person.field_sf_phone_numbers
+    - field.field.node.sf_person.field_sf_position_title
+    - field.field.node.sf_person.field_sf_primary_image
+    - field.field.node.sf_person.field_sf_tags
+    - field.field.node.sf_person.field_sf_unit
+    - field.field.node.sf_person.field_sf_websites
+    - image.style.thumbnail
+    - node.type.sf_person
+  module:
+    - address
+    - file
+    - image
+    - link
+    - metatag
+    - path
+    - telephone
+    - text
+id: node.sf_person.default
+targetEntityType: node
+bundle: sf_person
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 18
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+  field_hide_from_lists:
+    weight: 24
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+  field_sf_address:
+    weight: 17
+    settings:
+      default_country: ''
+    third_party_settings: {  }
+    type: address_default
+  field_sf_credentials:
+    weight: 8
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_sf_emails:
+    weight: 12
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+  field_sf_featured_status:
+    weight: 23
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+  field_sf_files:
+    weight: 19
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+  field_sf_first_name:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_sf_last_name:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_sf_meta_tags:
+    weight: 25
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
+  field_sf_name_prefix:
+    weight: 5
+    settings:
+      size: 30
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_sf_office_hours:
+    weight: 15
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+  field_sf_office_location:
+    weight: 16
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_sf_person_type:
+    weight: 21
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+  field_sf_phone_numbers:
+    weight: 13
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: telephone_default
+  field_sf_position_title:
+    weight: 10
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_sf_primary_image:
+    weight: 9
+    settings:
+      preview_image_style: thumbnail
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: image_image
+  field_sf_tags:
+    weight: 22
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete_tags
+  field_sf_unit:
+    weight: 11
+    settings:
+      size: 30
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_sf_websites:
+    weight: 14
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+  langcode:
+    type: language_select
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 3
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  promote: true

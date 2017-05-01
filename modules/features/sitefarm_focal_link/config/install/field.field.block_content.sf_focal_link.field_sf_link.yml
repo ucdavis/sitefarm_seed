@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.sf_focal_link
+    - field.storage.block_content.field_sf_link
+  module:
+    - link
+id: block_content.sf_focal_link.field_sf_link
+field_name: field_sf_link
+entity_type: block_content
+bundle: sf_focal_link
+label: Link
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

@@ -1,0 +1,65 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\lock_sitefarm_features\Access\LockFeatureAccess;
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function lock_sitefarm_features_element_info_alter(array &$info) {
+  if (isset($info['operations'])) {
+    $info['operations']['#attached']['library'][] = 'lock_sitefarm_features/lock_sitefarm_features.styles';
+  }
+}
+
+/**
+ * Implements hook_entity_operation_alter().
+ */
+function lock_sitefarm_features_entity_operation_alter(array &$operations, EntityInterface $entity) {
+  $lock = new LockFeatureAccess();
+  $entity_type = $entity->getEntityTypeId();
+
+  if (\Drupal::currentUser()->id() != 1) {
+    $locked_entities = array_merge(
+      $lock->getLockedNodeTypes(),
+      $lock->getLockedBlockTypes(),
+      $lock->getLockedTextFormats(),
+      $lock->getLockedPathautoPatterns()
+    );
+
+    // Completely lock entity operations
+    if (in_array($entity->id(), $locked_entities) && $entity_type !== 'image_style') {
+      $operations = [
+        'locked' => [
+          'title' => t('Locked')
+        ]
+      ];
+    }
+
+    // Partially lock Taxonomy, but still leave listing and adding terms
+    if (in_array($entity->id(), $lock->getLockedTaxonomy())) {
+      foreach ($operations as $key => $value) {
+        if ($key != 'list' && $key != 'add') {
+          unset($operations[$key]);
+        }
+      }
+    }
+
+    // Lock down Image styles except for the Flush operation
+    $theme = \Drupal::service('theme_handler')->getDefault();
+    if ($theme == 'sitefarm_one' && in_array($entity->id(), $lock->getLockedImageStyles()) && ($entity_type == 'image_style')) {
+      foreach ($operations as $key => $value) {
+        if ($key != 'flush') {
+          unset($operations[$key]);
+        }
+      }
+    }
+
+    // Partially lock Taxonomy, but still leave listing and adding terms
+    if (in_array($entity->id(), $lock->getLockedViews())) {
+      unset($operations['edit']);
+      unset($operations['delete']);
+    }
+  }
+
+}

@@ -1,0 +1,12 @@
+addthis_profile_id: ''
+additional_services: true
+counter: false
+icon_style: addthis_32x32_style
+local_services_definition: false
+shared_video_width: 360
+shared_video_height: 270
+services:
+  facebook: facebook
+  twitter: twitter
+  google_plusone_share: google_plusone_share
+  email: email

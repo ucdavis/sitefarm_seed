@@ -1,0 +1,4 @@
+services:
+  site_credits.site_information:
+    class: Drupal\site_credits\SiteInformation
+    arguments: ["@config.factory"]

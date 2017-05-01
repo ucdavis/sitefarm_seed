@@ -1,0 +1,68 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\site_credits\SiteInformation;
+
+/**
+ * Implements hook_theme().
+ */
+function site_credits_theme() {
+  return [
+    'block__site_credits' => array(
+      'render element' => 'elements',
+      'base hook' => 'block',
+    ),
+  ];
+}
+
+/*
+ * Implements hook_form_alter.
+ */
+function site_credits_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // Add extra fields to the Site Information page /admin/config/system/site-information
+  if ($form_id == 'system_site_information_settings') {
+    $config = \Drupal::config('system.site');
+    $callback = \Drupal::service('site_credits.site_information');
+
+    // Add a Site Credit Information field to the site information config page
+    $form['site_information']['credit_info'] = array(
+      '#type' => 'text_format',
+      '#title' => t('Site Credit Information'),
+      '#format' => 'basic_html',
+      '#allowed_formats' => ['basic_html'],
+      '#description' => t('Place this site\'s credit information such as address, phone, and email address.'),
+      '#default_value' => $config->get('credit_info') ? $config->get('credit_info')['value'] : '',
+      '#weight' => 1,
+    );
+
+    // Attach the function to save the form
+    $form['#submit'][] = [$callback, 'submitForm'];
+  }
+
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function site_credits_preprocess_block(&$variables) {
+  if ($variables['base_plugin_id'] == 'site_credits_block') {
+    $variables['site_logo'] = '';
+    if ($variables['content']['site_logo']['#access'] && $variables['content']['site_logo']['#uri']) {
+      $variables['site_logo'] = $variables['content']['site_logo']['#uri'];
+    }
+    $variables['site_name'] = '';
+    if ($variables['content']['site_name']['#access'] && $variables['content']['site_name']['#markup']) {
+      $variables['site_name'] = $variables['content']['site_name']['#markup'];
+    }
+    $variables['site_slogan'] = '';
+    if ($variables['content']['site_slogan']['#access'] && $variables['content']['site_slogan']['#markup']) {
+      $variables['site_slogan']['#markup'] = $variables['content']['site_slogan']['#markup'];
+    }
+    $variables['site_credit_info'] = '';
+    if ($variables['content']['site_credit_info']['#access'] && $variables['content']['site_credit_info']['#text']) {
+      $variables['site_credit_info'] = $variables['content']['site_credit_info'];
+    }
+  }
+}

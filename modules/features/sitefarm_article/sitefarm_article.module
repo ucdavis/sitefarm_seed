@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * Implements hook_form_alter().
+ */
+function sitefarm_article_form_alter(&$form, &$form_state, $form_id) {
+  // Move Node Edit fields into the advanced tabs group
+  $advanced_tabs = \Drupal::service('sf.advanced_tabs')->loadForm($form);
+
+  // Move the Article Category fields to the Categorization group
+  $advanced_tabs->moveField('field_sf_article_category', 'categorizing');
+
+  // Move the Article Type field to the Categorization group
+  $advanced_tabs->moveField('field_sf_article_type', 'categorizing');
+
+  $form = $advanced_tabs->save();
+}

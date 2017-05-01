@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.sf_focus_box
+    - field.field.block_content.sf_focus_box.body
+    - field.field.block_content.sf_focus_box.field_sf_image
+    - field.field.block_content.sf_focus_box.field_sf_title
+  module:
+    - image
+    - text
+id: block_content.sf_focus_box.default
+targetEntityType: block_content
+bundle: sf_focus_box
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+  field_sf_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: sf_focus_box
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  field_sf_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+hidden: {  }

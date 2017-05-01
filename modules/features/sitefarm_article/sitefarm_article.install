@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Revert article views for RSS feeds
+ */
+function sitefarm_article_update_8101(&$sandbox) {
+  $messages = array();
+
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('config_update.config_update');
+  $config_revert->revert('view', 'sf_articles_latest_blog');
+  $config_revert->revert('view', 'sf_articles_latest_news');
+  $config_revert->revert('view', 'sf_articles_recent');
+
+  $messages[] = t('Article views updated.');
+
+  return implode('<br />', $messages);
+}
+
+/**
+ * Revert article views for RSS feeds on Blog and News Term pages.
+ */
+function sitefarm_article_update_8102(&$sandbox) {
+  $messages = array();
+
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('config_update.config_update');
+  $config_revert->revert('view', 'sf_articles_latest_blog');
+  $config_revert->revert('view', 'sf_articles_latest_news');
+
+  $messages[] = t('Article views updated.');
+
+  return implode('<br />', $messages);
+}
+
+/**
+ * Revert Latest Blog view for RSS error.
+ */
+function sitefarm_article_update_8103(&$sandbox) {
+  $messages = array();
+
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('config_update.config_update');
+  $config_revert->revert('view', 'sf_articles_latest_blog');
+
+  $messages[] = t('Article views updated.');
+
+  return implode('<br />', $messages);
+}
+
+/**
+ * Reset the Article Simple XML Sitemap config to default
+ */
+function sitefarm_article_update_8105(&$sandbox) {
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('config_update.config_update');
+  $config_revert->revert('system.simple', 'simple_sitemap.bundle_settings.node.sf_article');
+  $config_revert->revert('system.simple', 'simple_sitemap.bundle_settings.taxonomy_term.sf_article_category');
+  $config_revert->revert('system.simple', 'simple_sitemap.bundle_settings.taxonomy_term.sf_article_type');
+
+  return t('Simple XML Sitemap article config updated.');
+}

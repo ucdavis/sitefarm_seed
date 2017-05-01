@@ -1,0 +1,43 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.sf_marketing_highlight_horizntl
+    - field.field.block_content.sf_marketing_highlight_horizntl.field_sf_image
+    - field.field.block_content.sf_marketing_highlight_horizntl.field_sf_link
+    - field.field.block_content.sf_marketing_highlight_horizntl.field_sf_title
+  module:
+    - image
+    - link
+id: block_content.sf_marketing_highlight_horizntl.default
+targetEntityType: block_content
+bundle: sf_marketing_highlight_horizntl
+mode: default
+content:
+  field_sf_image:
+    weight: 1
+    label: hidden
+    settings:
+      image_style: sf_landscape_16x9
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  field_sf_link:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+  field_sf_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+hidden: {  }

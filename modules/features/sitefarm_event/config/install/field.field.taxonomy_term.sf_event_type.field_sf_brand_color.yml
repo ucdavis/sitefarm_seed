@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_sf_brand_color
+    - taxonomy.vocabulary.sf_event_type
+  module:
+    - options
+id: taxonomy_term.sf_event_type.field_sf_brand_color
+field_name: field_sf_brand_color
+entity_type: taxonomy_term
+bundle: sf_event_type
+label: 'Brand Color'
+description: 'Choose a color to be assigned to this category.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

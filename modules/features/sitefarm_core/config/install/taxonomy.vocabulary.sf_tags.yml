@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: Tags
+vid: sf_tags
+description: 'Keywords which help to classify an piece of content.'
+hierarchy: 0
+weight: 0

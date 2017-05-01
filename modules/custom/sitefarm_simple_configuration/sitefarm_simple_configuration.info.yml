@@ -1,0 +1,6 @@
+name: Simple Configuration
+description: 'Simplified configuration page that is more usable to Site Managers.'
+type: module
+core: 8.x
+package: SiteFarm
+configure: sitefarm.admin_index

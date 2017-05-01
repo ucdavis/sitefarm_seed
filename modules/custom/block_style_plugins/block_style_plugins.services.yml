@@ -1,0 +1,5 @@
+services:
+  plugin.manager.block_style.processor:
+    class: Drupal\block_style_plugins\Plugin\BlockStyleManager
+    parent: default_plugin_manager
+    arguments: ['@theme_handler']

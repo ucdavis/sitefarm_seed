@@ -1,0 +1,6 @@
+roleassign_roles:
+  contributor: contributor
+  editor: editor
+  site_manager: site_manager
+  site_builder: '0'
+  administrator: '0'

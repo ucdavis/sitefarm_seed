@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Person Type'
+vid: sf_person_type
+description: 'The classification for a Person'
+hierarchy: 0
+weight: 0

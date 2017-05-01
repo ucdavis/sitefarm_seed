@@ -1,0 +1,24 @@
+photoswipe_always_load_non_admin: false
+options:
+  showAnimationDuration: 333
+  hideAnimationDuration: 333
+  showHideOpacity: false
+  bgOpacity: 1
+  spacing: 0.12
+  allowPanToNext: true
+  maxSpreadZoom: 2
+  loop: true
+  pinchToClose: true
+  closeOnScroll: true
+  closeOnVerticalDrag: true
+  mouseUsed: false
+  escKey: true
+  arrowKeys: true
+  history: true
+  errorMsg: '<div class="pswp__error-msg"><a href="%url%" target="_blank">The image</a> could not be loaded.</div>'
+  preload:
+    - 1
+    - 1
+  mainClass: null
+  focus: true
+  modal: true

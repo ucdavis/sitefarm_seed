@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.sf_focus_box
+    - field.storage.block_content.body
+  module:
+    - text
+id: block_content.sf_focus_box.body
+field_name: body
+entity_type: block_content
+bundle: sf_focus_box
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

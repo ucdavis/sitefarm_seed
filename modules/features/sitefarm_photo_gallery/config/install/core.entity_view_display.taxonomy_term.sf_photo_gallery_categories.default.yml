@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.sf_photo_gallery_categories.field_sf_brand_color
+    - taxonomy.vocabulary.sf_photo_gallery_categories
+  module:
+    - text
+id: taxonomy_term.sf_photo_gallery_categories.default
+targetEntityType: taxonomy_term
+bundle: sf_photo_gallery_categories
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_sf_brand_color: true

@@ -1,0 +1,37 @@
+sitefarm.admin_index:
+  path: '/admin/config/sitefarm'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'SiteFarm'
+  requirements:
+    _permission: 'administer site configuration'
+
+sitefarm.cache_clear_form:
+  path: '/admin/config/sitefarm/clearcache'
+  defaults:
+    _form: '\Drupal\sitefarm_simple_configuration\Form\CacheClearForm'
+    _title: 'Clear Cache'
+  requirements:
+    _permission: 'administer site configuration'
+  options:
+    _admin_route: TRUE
+
+sitefarm.restrict_configuration_pages:
+  path: '/admin/config/sitefarm/restrict-configuration'
+  defaults:
+    _form: '\Drupal\sitefarm_simple_configuration\Form\RestrictConfigurationPagesForm'
+    _title: 'Restrict Configuration Pages'
+  requirements:
+    _permission: 'administer core configuration'
+  options:
+    _admin_route: TRUE
+
+sitefarm.cas:
+  path: '/admin/config/sitefarm/cas'
+  defaults:
+    _form: '\Drupal\sitefarm_simple_configuration\Form\CasForm'
+    _title: 'CAS Settings'
+  requirements:
+    _permission: 'administer account settings'
+  options:
+    _admin_route: TRUE

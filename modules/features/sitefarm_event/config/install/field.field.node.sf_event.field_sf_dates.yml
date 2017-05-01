@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sf_dates
+    - node.type.sf_event
+  module:
+    - datetime_range
+id: node.sf_event.field_sf_dates
+field_name: field_sf_dates
+entity_type: node
+bundle: sf_event
+label: 'Event Date'
+description: 'Add the calendar date and time for the start and event. The time format may need to be in a 24 hour format in some browsers like Firefox or Safari. So <strong>01:00 PM</strong> would be <strong>13:00</strong>. The actual display to visitors on the site will be in a US standard 12 hour format such as mm-dd-yyyy 1pm.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

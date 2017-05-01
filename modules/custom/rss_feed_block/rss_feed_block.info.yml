@@ -1,0 +1,5 @@
+name: 'RSS Feed Block'
+description: 'Add a block which displays an RSS feed.'
+type: module
+core: 8.x
+package: Custom UCD

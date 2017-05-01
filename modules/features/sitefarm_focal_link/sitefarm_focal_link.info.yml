@@ -1,0 +1,13 @@
+name: 'Focal Link'
+description: 'Focal Link custom block type'
+type: module
+core: 8.x
+dependencies:
+  - block
+  - block_content
+  - field
+  - image
+  - link
+  - options
+  - sitefarm_core
+package: SiteFarm

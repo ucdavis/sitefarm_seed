@@ -1,0 +1,8 @@
+{
+  "name": "ucdavis/ck_media_link",
+  "type": "drupal-module",
+  "description": "Implements the CKEditor Media Link plugin",
+  "keywords": ["Drupal"],
+  "minimum-stability": "dev",
+  "require": { }
+}

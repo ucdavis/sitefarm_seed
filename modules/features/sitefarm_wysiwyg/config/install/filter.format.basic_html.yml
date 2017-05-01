@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ck_media_link
+    - editor
+    - url_embed
+name: 'Basic HTML'
+format: basic_html
+weight: 0
+filters:
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: true
+    weight: -10
+    settings:
+      allowed_html: '<em> <strong> <cite> <code> <ol start type class="list--multilevel list--outline"> <dl> <dt> <dd> <h4 id> <h5 id> <h6 id> <br> <span> <img data-caption data-align data-entity-uuid data-entity-type alt src height width> <hr> <s> <h2 id class="heading--underline heading--invert heading--invert-box"> <p class="text-align-left text-align-center text-align-right text-align-justify clear u-clear"> <blockquote cite class="pullquote u-width-half u-align-left u-align-right u-align--left u-width--half u-align--right"> <ul type class="list--flush list--arrow list--white-arrow list--bordered list--faq list--pipe list--simple list--l-column--2 list--l-column--3 list--l-column--4 list--l-column--5 l-column--2 l-column--3 l-column--4 l-column--5"> <li class="text-align-left text-align-center text-align-right"> <h3 id class="heading--auxiliary media-link__title wysiwyg-feature-block__title"> <div data-url class="alert alert--success alert--warning alert--error text-align-center text-align-right media-link__wrapper media-link__figure media-link__body media-link__content wysiwyg-feature-block__body"> <aside class="wysiwyg-feature-block u-align--right u-align--left u-width--half"> <drupal-url data-*> <a hreflang href name id data-entity-type data-entity-uuid class="btn--primary btn--lg btn--block btn--alt view-all"> <table class="table--hover table--bordered table--striped table--admin"> <caption> <tbody> <thead> <tfoot> <th> <td> <tr>'
+      filter_html_help: false
+      filter_html_nofollow: false
+  filter_align:
+    id: filter_align
+    provider: filter
+    status: true
+    weight: 7
+    settings: {  }
+  filter_caption:
+    id: filter_caption
+    provider: filter
+    status: true
+    weight: 8
+    settings: {  }
+  editor_file_reference:
+    id: editor_file_reference
+    provider: editor
+    status: true
+    weight: 11
+    settings: {  }
+  filter_media_link:
+    id: filter_media_link
+    provider: ck_media_link
+    status: true
+    weight: 0
+    settings: {  }
+  url_embed:
+    id: url_embed
+    provider: url_embed
+    status: true
+    weight: 0
+    settings:
+      enable_responsive: '1'

@@ -1,0 +1,8 @@
+name: 'Sitefarm Custom Social Links'
+description: 'Provides custom icon set for the social_media_links module.'
+core: 8.x
+package: Custom
+type: module
+
+dependencies:
+  - social_media_links

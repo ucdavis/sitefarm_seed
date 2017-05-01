@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sf_files
+    - node.type.sf_person
+  module:
+    - file
+id: node.sf_person.field_sf_files
+field_name: field_sf_files
+entity_type: node
+bundle: sf_person
+label: Documents
+description: 'You may attach files to this page which can be downloaded and viewed.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: files/person
+  file_extensions: 'txt zip xls xlsx doc docx pdf'
+  max_filesize: ''
+  description_field: true
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

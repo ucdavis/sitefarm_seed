@@ -1,0 +1,11 @@
+name: 'Hero Banner'
+description: 'A custom block for creating a large Hero Banner.'
+type: module
+core: 8.x
+dependencies:
+  - block_content
+  - field
+  - image
+  - link
+  - sitefarm_core
+package: SiteFarm

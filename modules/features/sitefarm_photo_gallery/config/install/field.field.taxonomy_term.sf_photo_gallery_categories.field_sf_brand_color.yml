@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_sf_brand_color
+    - taxonomy.vocabulary.sf_photo_gallery_categories
+  module:
+    - options
+id: taxonomy_term.sf_photo_gallery_categories.field_sf_brand_color
+field_name: field_sf_brand_color
+entity_type: taxonomy_term
+bundle: sf_photo_gallery_categories
+label: 'Brand Color'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

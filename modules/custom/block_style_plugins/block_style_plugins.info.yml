@@ -1,0 +1,9 @@
+name: Block Style Plugins
+type: module
+description: Plugin system for allowing modules or themes to add style configuration to blocks
+core: 8.x
+package: Styles
+
+dependencies:
+  - block
+  - block_content

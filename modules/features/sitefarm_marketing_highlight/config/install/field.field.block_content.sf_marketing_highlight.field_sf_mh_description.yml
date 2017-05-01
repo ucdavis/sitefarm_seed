@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.sf_marketing_highlight
+    - field.storage.block_content.field_sf_mh_description
+id: block_content.sf_marketing_highlight.field_sf_mh_description
+field_name: field_sf_mh_description
+entity_type: block_content
+bundle: sf_marketing_highlight
+label: Description
+description: 'Add some descriptive text to give further information to the viewer. In addition, it will allow you to add a Badge Label and Call to Action text.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Article Type'
+vid: sf_article_type
+description: 'The type of article like a News Article, Blog Article, or Press Release.'
+hierarchy: 0
+weight: 0

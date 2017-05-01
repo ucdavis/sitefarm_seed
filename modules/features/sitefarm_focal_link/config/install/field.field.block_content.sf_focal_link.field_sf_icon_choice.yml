@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.sf_focal_link
+    - field.storage.block_content.field_sf_icon_choice
+id: block_content.sf_focal_link.field_sf_icon_choice
+field_name: field_sf_icon_choice
+entity_type: block_content
+bundle: sf_focal_link
+label: 'Icon or Custom Image'
+description: 'Choose whether to select one of the default icons or to upload your own.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'Use Default Icons'
+  off_label: 'Use a Custom image'
+field_type: boolean

@@ -1,0 +1,4 @@
+bundle: sitefarm
+excluded:
+  - block.block.seven_views_block__sf_persons_content_related_back_to_person_block_1
+required: true

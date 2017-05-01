@@ -1,0 +1,17 @@
+rss_feed_block:
+  version: VERSION
+  js:
+    js/rss_feed.js: {}
+  dependencies:
+    - core/jquery
+    - rss_feed_block/vue
+
+vue:
+  version: VERSION
+  js:
+    //cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js: {type: external, minified: true}
+
+vue.dev:
+  version: VERSION
+  js:
+    //cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js: {type: external, minified: false}

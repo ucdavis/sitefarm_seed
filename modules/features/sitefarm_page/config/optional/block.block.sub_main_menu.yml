@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - ctools
+    - system
+id: sub_main_menu
+theme: sitefarm_one
+region: sidebar_second
+weight: -4
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Sub Main Menu'
+  provider: system
+  label_display: '0'
+  level: 2
+  depth: 0
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      sf_page: sf_page
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

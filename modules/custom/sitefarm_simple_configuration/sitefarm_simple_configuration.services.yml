@@ -1,0 +1,6 @@
+services:
+  sitefarm_simple_configuration.route_subscriber:
+    class: Drupal\sitefarm_simple_configuration\Routing\RouteSubscriber
+    arguments: ["@config.factory"]
+    tags:
+      - { name: event_subscriber }

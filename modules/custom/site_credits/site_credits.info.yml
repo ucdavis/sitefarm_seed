@@ -1,0 +1,5 @@
+name: Site Credits
+type: module
+description: Display a block of site credits info.
+core: 8.x
+package: Custom UCD

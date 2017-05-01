@@ -1,0 +1,26 @@
+name: 'Photo Gallery'
+description: 'Provides Photo Gallery content type and related configuration. Create a multi-image gallery of photos.'
+type: module
+core: 8.x
+dependencies:
+  - block
+  - block_content
+  - field
+  - file
+  - focal_point
+  - image
+  - menu_ui
+  - node
+  - options
+  - path
+  - pathauto
+  - photoswipe
+  - sharemessage
+  - sitefarm_core
+  - system
+  - taxonomy
+  - text
+  - user
+  - views
+version: 8.x-1.0-beta1
+package: SiteFarm

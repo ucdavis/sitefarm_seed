@@ -1,0 +1,7 @@
+name: CkEditor Feature Box
+type: module
+description: Implements the CKEditor Feature Box widget plugin
+core: 8.x
+package: CKEditor
+dependencies:
+  - ckeditor

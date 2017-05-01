@@ -1,0 +1,64 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ *
+ * For the ID form_block.
+ */
+function sitefarm_hero_banner_form_block_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Get the Sitefarm forms helper service
+  $form_helper = \Drupal::service('sf.block_form_helpers');
+  $bundle = $form_helper->getBlockContentBundle($form_state);
+
+  if ($bundle == 'sf_hero_banner') {
+    $form_helper->hideBlockTitleCheckbox($form);
+  }
+}
+
+/**
+ * Implements hook_preprocess_block()
+ */
+function sitefarm_hero_banner_preprocess_block(&$variables) {
+  // Exit if this is not a Hero Banner custom block
+  if ($variables['base_plugin_id'] !== 'block_content' || $variables['content']['#block_content']->bundle() !== 'sf_hero_banner') {
+    return;
+  }
+
+  // Get the Block Content Entity
+  $block = $variables['content']['#block_content'];
+
+  // Format the video embed url based on a normal web url
+  if (!empty($block->field_sf_hb_video_button->value)) {
+
+    $url = $block->field_sf_hb_video_button->value;
+//    $url = https://player.vimeo.com/video/79504673
+//    $url = https://www.youtube.com/embed/PAwB_t_iM7U
+
+    // Strip the ID off
+    $id = substr($url, strrpos($url, '/') + 1);
+
+    // Create the embed url with the correct video ID
+    $embed_url = FALSE;
+    if (strpos($url, 'youtu') > 0) {
+      $embed_url = 'https://www.youtube.com/embed/' . $id;
+    } elseif (strpos($url, 'vimeo') > 0) {
+      $embed_url = 'https://player.vimeo.com/video/' . $id;
+    }
+
+    if ($embed_url) {
+      $variables['video_embed_url'] = $embed_url;
+    }
+  }
+
+  // If there is only an image then set a variable telling the template
+  if (empty($block->field_sf_title->value)
+    && empty($block->field_sf_hb_video_button->value)
+    && empty($block->field_sf_hb_sub_title->value)
+    && empty($block->field_sf_hb_link->value)
+  ) {
+    $variables['image_only'] = TRUE;
+  }
+
+}

@@ -1,0 +1,60 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function sitefarm_person_form_alter(&$form, &$form_state, $form_id) {
+  // Move Node Edit fields into the advanced tabs group
+  $advanced_tabs = \Drupal::service('sf.advanced_tabs')->loadForm($form);
+
+  // Move the Hide from Lists field to the Options group
+  $advanced_tabs->moveField('field_hide_from_lists', 'options');
+  // Move the Person Type field to the Categorization group
+  $advanced_tabs->moveField('field_sf_person_type', 'categorizing');
+  $form = $advanced_tabs->save();
+
+  // Alter the 'Add another item' text on person reference fields
+  if (isset($form['field_sf_person_reference']['widget']['add_more']['#value'])) {
+    $form['field_sf_person_reference']['widget']['add_more']['#value'] = t('Add another person');
+  }
+}
+
+/**
+ * hook_form_BASE_FORM_ID_alter() for the node_form.
+ */
+function sitefarm_person_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Get the node entity from the form
+  $entity = $form_state->getFormObject()->getEntity();
+
+  // Hide the node title and set default stub
+  if ($entity->bundle() == 'sf_person') {
+    $form['title']['#type'] = 'hidden';
+    $form['title']['widget'][0]['value']['#default_value'] = 'default stub';
+  }
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function sitefarm_person_entity_presave(EntityInterface $entity) {
+  // Hide and autogenerate the title on Person nodes
+  if ($entity->bundle() == 'sf_person') {
+    // Get data that the new title will be built from
+    $title_data = [
+      'perfix' => $entity->field_sf_name_prefix->value,
+      'first' => $entity->field_sf_first_name->value,
+      'last' => $entity->field_sf_last_name->value,
+      'creds' => $entity->field_sf_credentials->value,
+    ];
+
+    // Remove empty values and convert to string
+    $title_data = array_filter($title_data);
+    $title = implode(' ', $title_data);
+
+    // Set the new title
+    $entity->setTitle($title);
+  }
+}

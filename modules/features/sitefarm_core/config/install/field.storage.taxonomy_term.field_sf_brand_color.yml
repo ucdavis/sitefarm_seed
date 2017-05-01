@@ -1,0 +1,68 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - taxonomy
+id: taxonomy_term.field_sf_brand_color
+field_name: field_sf_brand_color
+entity_type: taxonomy_term
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: unitrans-red
+      label: 'Unitrans Red'
+    -
+      value: western-redbud
+      label: 'Western Redbud'
+    -
+      value: california-poppy
+      label: 'California Poppy'
+    -
+      value: golden-lupine
+      label: 'Golden Lupine'
+    -
+      value: sunny-grass
+      label: 'Sunny Grass'
+    -
+      value: sky-blue
+      label: 'Blue Sky'
+    -
+      value: rec-pool-blue
+      label: 'Rec Pool Blue'
+    -
+      value: wine-grape
+      label: 'Wine Grape'
+    -
+      value: mu-brick
+      label: 'MU Brick'
+    -
+      value: hart-hall-stucco
+      label: 'Hart Hall Stucco'
+    -
+      value: sage-green
+      label: 'Sage Green'
+    -
+      value: evergreen
+      label: Evergreen
+    -
+      value: winter-sky-gray
+      label: 'Winter Sky Gray'
+    -
+      value: centennial-walk-gray
+      label: 'Centennial Walk Gray'
+    -
+      value: cork-oak
+      label: 'Cork Oak'
+    -
+      value: south-hall-brown
+      label: 'South Hall Brown'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

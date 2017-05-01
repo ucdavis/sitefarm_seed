@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Restricted HTML'
+format: restricted_html
+weight: 0
+filters:
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: true
+    weight: -10
+    settings:
+      allowed_html: '<a hreflang href> <em> <strong> <ul> <ol> <li> <p> <br>'
+      filter_html_help: false
+      filter_html_nofollow: true
+  filter_url:
+    id: filter_url
+    provider: filter
+    status: true
+    weight: 0
+    settings:
+      filter_url_length: 72
+  filter_htmlcorrector:
+    id: filter_htmlcorrector
+    provider: filter
+    status: true
+    weight: 10
+    settings: {  }

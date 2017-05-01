@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Article Categories'
+vid: sf_article_category
+description: 'This is a taxonomy of article categories to organize the articles on your site.'
+hierarchy: 0
+weight: 0

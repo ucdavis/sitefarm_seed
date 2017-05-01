@@ -1,0 +1,11 @@
+/* Style Operations buttons which have been locked */
+.locked.dropbutton-action {
+  display: block;
+  padding: 4px 2.5em 4px 4em;
+  background: #eeeeea url(../images/lock-icon.svg) no-repeat 2em center;
+  border: 2px solid #e0e0d8;
+  border-radius: 20em;
+  color: #898989;
+  font-weight: 600;
+  text-align: center;
+}

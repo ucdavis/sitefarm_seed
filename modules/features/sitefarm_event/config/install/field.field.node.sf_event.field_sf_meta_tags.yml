@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sf_meta_tags
+    - node.type.sf_event
+  module:
+    - metatag
+id: node.sf_event.field_sf_meta_tags
+field_name: field_sf_meta_tags
+entity_type: node
+bundle: sf_event
+label: 'Meta Tags'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 'a:1:{s:5:"title";s:34:"[current-page:title] | [site:name]";}'
+default_value_callback: ''
+settings: {  }
+field_type: metatag

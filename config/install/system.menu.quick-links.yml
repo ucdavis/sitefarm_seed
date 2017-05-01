@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: quick-links
+label: 'Quick Links'
+description: 'Convenient links to common pages'
+locked: false

@@ -1,0 +1,99 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Revert the Photo Gallery feature image styles
+ */
+function sitefarm_photo_gallery_update_8101(&$sandbox) {
+  $messages = array();
+
+  $revert_list = array(
+    'node.sf_photo_gallery.listing',
+    'node.sf_photo_gallery.teaser',
+    'node.sf_photo_gallery.poster',
+    'node.sf_photo_gallery.default'
+  );
+
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('features.config_update');
+
+  // Revert the image styles
+  foreach ($revert_list as $item) {
+    $config_revert->revert('entity_view_display', $item);
+  }
+
+  $messages[] = t('The Photo Gallery image styles use better styles.');
+
+  return implode("\n", $messages);
+}
+
+/**
+ * Revert the Photo Gallery form display to hide "Promoted" field.
+ */
+function sitefarm_photo_gallery_update_8102(&$sandbox) {
+  $messages = array();
+
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('features.config_update');
+  $config_revert->revert('entity_form_display', 'node.sf_photo_gallery.default');
+
+  $messages[] = t('"Promoted to front page" is now hidden on the Photo Gallery form.');
+
+  return implode("\n", $messages);
+}
+
+/**
+ * Set the block view for related photo galleries to be hidden when empty.
+ */
+function sitefarm_photo_gallery_update_8103(&$sandbox) {
+  $messages = array();
+
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('config_update.config_update');
+  // Revert the view.
+  $config_revert->revert('view', 'sf_photo_galleries_related_to_content');
+
+  $messages[] = t('Related Photo Galleries to Content view is now hidden when empty');
+
+  return implode('<br />', $messages);
+}
+
+/**
+ * Set the Photo Gallery permissions
+ */
+function sitefarm_photo_gallery_update_8104(&$sandbox) {
+  // Grant Contributor access.
+  $contributor = \Drupal\user\Entity\Role::load('contributor');
+  $contributor->grantPermission('create sf_photo_gallery content');
+  $contributor->grantPermission('delete own sf_photo_gallery content');
+  $contributor->grantPermission('edit own sf_photo_gallery content');
+  $contributor->save();
+
+  // Grant Editor access.
+  $editor = \Drupal\user\Entity\Role::load('editor');
+  $editor->grantPermission('create sf_photo_gallery content');
+  $editor->grantPermission('delete any sf_photo_gallery content');
+  $editor->grantPermission('delete own sf_photo_gallery content');
+  $editor->grantPermission('delete sf_photo_gallery revisions');
+  $editor->grantPermission('edit any sf_photo_gallery content');
+  $editor->grantPermission('edit own sf_photo_gallery content');
+  $editor->grantPermission('revert sf_photo_gallery revisions');
+  $editor->grantPermission('view sf_photo_gallery revisions');
+  $editor->save();
+
+}
+
+/**
+ * Reset the Photo Gallery Simple XML Sitemap config to default
+ */
+function sitefarm_photo_gallery_update_8105(&$sandbox) {
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('config_update.config_update');
+  $config_revert->revert('system.simple', 'simple_sitemap.bundle_settings.node.sf_photo_gallery');
+  $config_revert->revert('system.simple', 'simple_sitemap.bundle_settings.taxonomy_term.sf_photo_gallery_categories');
+
+  return t('Simple XML Sitemap Photo Gallery config updated.');
+}

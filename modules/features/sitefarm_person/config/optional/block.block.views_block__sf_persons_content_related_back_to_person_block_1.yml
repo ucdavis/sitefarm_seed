@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.sf_persons_content_related_back_to_person
+  module:
+    - ctools
+    - views
+id: views_block__sf_persons_content_related_back_to_person_block_1
+theme: sitefarm_one
+region: sidebar_second
+weight: -5
+provider: null
+plugin: 'views_block:sf_persons_content_related_back_to_person-block_1'
+settings:
+  id: 'views_block:sf_persons_content_related_back_to_person-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      sf_person: sf_person
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

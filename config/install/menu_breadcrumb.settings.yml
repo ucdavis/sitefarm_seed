@@ -1,0 +1,34 @@
+determine_menu: true
+disable_admin_page: true
+append_current_page: false
+current_page_as_link: false
+append_member_page: false
+member_page_as_link: false
+remove_home: false
+add_home: true
+home_as_site_name: false
+menu_breadcrumb_menus:
+  main:
+    enabled: '1'
+    weight: '-10'
+    taxattach: 0
+  admin:
+    weight: '0'
+    enabled: 0
+    taxattach: 0
+  footer:
+    weight: '0'
+    enabled: 0
+    taxattach: 0
+  quick-links:
+    weight: '0'
+    enabled: 0
+    taxattach: 0
+  tools:
+    weight: '0'
+    enabled: 0
+    taxattach: 0
+  account:
+    weight: '0'
+    enabled: 0
+    taxattach: 0

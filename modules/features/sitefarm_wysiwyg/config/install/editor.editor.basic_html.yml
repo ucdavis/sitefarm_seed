@@ -1,0 +1,101 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+  module:
+    - ckeditor
+    - editor_file
+third_party_settings:
+  editor_file:
+    status: true
+    scheme: public
+    directory: inline-files
+    extensions: 'txt zip xls xlsx doc docx pdf'
+format: basic_html
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Formatting
+          items:
+            - Bold
+            - Italic
+            - Strike
+            - '-'
+            - RemoveFormat
+        -
+          name: Linking
+          items:
+            - Link
+            - Unlink
+            - Anchor
+        -
+          name: 'Lists and Align'
+          items:
+            - BulletedList
+            - NumberedList
+            - '-'
+            - JustifyLeft
+            - JustifyCenter
+            - JustifyRight
+        -
+          name: Tools
+          items:
+            - Undo
+            - Redo
+            - Source
+        -
+          name: 'Full Screen'
+          items:
+            - Maximize
+      -
+        -
+          name: Styles
+          items:
+            - Styles
+        -
+          name: Media
+          items:
+            - DrupalImage
+            - DrupalFile
+            - url
+        -
+          name: 'Special Elements'
+          items:
+            - HorizontalRule
+            - Blockquote
+            - Table
+            - SpecialChar
+            - '-'
+        -
+          name: Widgets
+          items:
+            - media_link
+            - feature_block
+  plugins:
+    autosave:
+      enable: 1
+    language:
+      language_list: un
+    stylescombo:
+      styles: "p|Normal\r\nh2|Title\r\nh2.heading--underline|Title - Intro\r\nh3|Sub Title\r\nh3.heading--auxiliary|Sub Title - Auxiliary\r\nh4|Sub Title 2\r\nh5|Sub Title 3\r\np.u-clear|Clear Aligns\r\na.btn--primary|Button\r\na.btn--lg.btn--primary|Button - Large\r\na.btn--block.btn--primary|Button - Block\r\na.btn--alt|Button Alt\r\na.btn--alt.btn--lg|Button Alt - Large\r\na.btn--alt.btn--block|Button Alt - Block\r\na.view-all|more...\r\ndiv.alert|Alert\r\ndiv.alert.alert--success|Alert - Success\r\ndiv.alert.alert--warning|Alert - Warning\r\ndiv.alert.alert--error|Alert - Error\r\nblockquote.pullquote|Pullquote\r\nblockquote.pullquote.u-align--left.u-width--half|Pullquote - Left\r\nblockquote.pullquote.u-align--right.u-width--half|Pullquote - Right\r\nul.list--flush|Flush List\r\nul.list--arrow|Arrow List\r\nul.list--white-arrow|Arrow List - White\r\nul.list--bordered|Bordered List\r\nul.list--faq|FAQ List\r\nul.list--pipe|Pipe List\r\nul.list--simple|Simple List\r\nul.l-column--2|2 Columns\r\nul.l-column--3|3 Columns\r\nul.l-column--4|4 Columns\r\nul.l-column--5|5 Columns\r\nol.list--multilevel|Multilevel List\r\nol.list--outline|Outline List\r\ntable.table--hover|Table Hover\r\ntable.table--bordered|Table Bordered\r\ntable.table--striped|Table Striped\r\ntable.table--admin|Table Solid"
+    wordcount:
+      enable: 1
+      show_paragraphs: 0
+      show_word_count: 1
+      show_char_count: 1
+      count_spaces: 0
+      count_html: 0
+      max_words: '-1'
+      max_chars: '-1'
+image_upload:
+  status: true
+  scheme: public
+  directory: inline-images
+  max_size: '3 MB'
+  max_dimensions:
+    width: null
+    height: null

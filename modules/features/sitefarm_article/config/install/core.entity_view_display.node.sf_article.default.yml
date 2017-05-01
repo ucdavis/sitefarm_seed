@@ -1,0 +1,71 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.sf_article.body
+    - field.field.node.sf_article.field_sf_article_category
+    - field.field.node.sf_article.field_sf_article_type
+    - field.field.node.sf_article.field_sf_featured_status
+    - field.field.node.sf_article.field_sf_meta_tags
+    - field.field.node.sf_article.field_sf_person_reference
+    - field.field.node.sf_article.field_sf_primary_image
+    - field.field.node.sf_article.field_sf_related_photo_gallery
+    - field.field.node.sf_article.field_sf_tags
+    - node.type.sf_article
+  module:
+    - image
+    - metatag
+    - text
+    - user
+id: node.sf_article.default
+targetEntityType: node
+bundle: sf_article
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+  field_sf_article_category:
+    weight: 4
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_sf_meta_tags:
+    weight: 0
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+  field_sf_primary_image:
+    weight: 1
+    label: hidden
+    settings:
+      image_style: sf_landscape_16x9
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  field_sf_tags:
+    weight: 5
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  links:
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+  sharemessage__sf_social_share_buttons:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_sf_article_type: true
+  field_sf_featured_status: true
+  field_sf_person_reference: true
+  field_sf_related_photo_gallery: true

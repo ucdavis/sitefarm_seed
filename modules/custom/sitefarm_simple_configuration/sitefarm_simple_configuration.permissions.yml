@@ -1,0 +1,4 @@
+administer core configuration:
+  title: 'Administer Core Configuration'
+  description: 'Allow this user to administer system configuration not related to site building. This works in tandem with "administer site configuration"'
+  restrict access: TRUE

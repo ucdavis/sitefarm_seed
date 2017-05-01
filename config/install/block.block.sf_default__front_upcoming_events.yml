@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.sf_events_upcoming
+  module:
+    - block_style_plugins
+    - system
+    - views
+  theme:
+    - sitefarm_one
+third_party_settings:
+  block_style_plugins:
+    title_style:
+      title_style: panel--icon
+      title_icon: panel--icon-bullhorn
+id: sf_default__front_upcoming_events
+theme: sitefarm_one
+region: sidebar_first
+weight: -14
+provider: null
+plugin: 'views_block:sf_events_upcoming-block_1'
+settings:
+  id: 'views_block:sf_events_upcoming-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

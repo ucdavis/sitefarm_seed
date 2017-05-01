@@ -1,0 +1,4 @@
+bundle: sitefarm
+excluded:
+  - field.storage.block_content.field_sf_collapse
+required: true

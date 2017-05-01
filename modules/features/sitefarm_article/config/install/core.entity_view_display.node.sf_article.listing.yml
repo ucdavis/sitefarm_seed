@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.listing
+    - field.field.node.sf_article.body
+    - field.field.node.sf_article.field_sf_article_category
+    - field.field.node.sf_article.field_sf_article_type
+    - field.field.node.sf_article.field_sf_featured_status
+    - field.field.node.sf_article.field_sf_meta_tags
+    - field.field.node.sf_article.field_sf_person_reference
+    - field.field.node.sf_article.field_sf_primary_image
+    - field.field.node.sf_article.field_sf_related_photo_gallery
+    - field.field.node.sf_article.field_sf_tags
+    - node.type.sf_article
+  module:
+    - image
+    - user
+id: node.sf_article.listing
+targetEntityType: node
+bundle: sf_article
+mode: listing
+content:
+  field_sf_primary_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: sf_thumbnail
+      image_link: content
+    third_party_settings: {  }
+    type: image
+hidden:
+  body: true
+  field_sf_article_category: true
+  field_sf_article_type: true
+  field_sf_featured_status: true
+  field_sf_meta_tags: true
+  field_sf_person_reference: true
+  field_sf_related_photo_gallery: true
+  field_sf_tags: true
+  links: true
+  sharemessage__sf_social_share_buttons: true

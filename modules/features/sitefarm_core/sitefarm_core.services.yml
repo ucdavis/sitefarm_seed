@@ -1,0 +1,17 @@
+services:
+  sf.advanced_tabs:
+    class: Drupal\sitefarm_core\AdvancedTabsGroup
+    arguments: []
+
+  sf.block_form_helpers:
+    class: Drupal\sitefarm_core\BlockConfigFormHelpers
+    arguments: []
+
+  sf.block_content_generate_description:
+      class: Drupal\sitefarm_core\BlockContentGenerateDescription
+      arguments: ['@database', '@entity_type.bundle.info']
+
+  sf.route_subscriber:
+    class: Drupal\sitefarm_core\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.sf_hero_banner
+    - field.storage.block_content.field_sf_link
+  module:
+    - link
+id: block_content.sf_hero_banner.field_sf_link
+field_name: field_sf_link
+entity_type: block_content
+bundle: sf_hero_banner
+label: Link
+description: 'This will generate a Call To Action button on top of the main banner image.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

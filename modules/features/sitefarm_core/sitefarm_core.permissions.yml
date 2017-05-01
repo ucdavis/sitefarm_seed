@@ -1,0 +1,3 @@
+administer block content types:
+  title: 'Administer Block Content Types'
+  description: 'Allow this user to create, edit, and delete Block Content Types.'

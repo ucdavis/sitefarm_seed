@@ -1,0 +1,19 @@
+links:
+  -
+    path: /
+    priority: '1.0'
+  -
+    path: /blog
+    priority: '0.9'
+  -
+    path: /news
+    priority: '0.9'
+  -
+    path: /events
+    priority: '0.9'
+  -
+    path: /people
+    priority: '0.7'
+  -
+    path: /photo-galleries
+    priority: '0.7'

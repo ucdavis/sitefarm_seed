@@ -1,0 +1,46 @@
+page_title: Sitemap
+message:
+  value: ''
+  format: restricted_html
+show_front: false
+show_titles: true
+show_books: {  }
+books_expanded: true
+show_menus:
+  footer: footer
+  main: main
+  account: '0'
+  admin: '0'
+  tools: '0'
+show_menus_hidden: false
+show_vocabularies:
+  sf_article_category: sf_article_category
+  sf_article_type: sf_article_type
+  sf_event_type: sf_event_type
+  sf_person_type: sf_person_type
+  sf_photo_gallery_categories: sf_photo_gallery_categories
+  sf_tags: sf_tags
+  sf_branding: '0'
+show_description: false
+show_count: false
+vocabulary_depth: -1
+term_threshold: 0
+forum_threshold: -1
+rss_front: rss.xml
+show_rss_links: 0
+rss_taxonomy: -1
+css: false
+order:
+  front: -50
+  menus_account: -49
+  menus_admin: -48
+  menus_footer: -46
+  menus_main: -47
+  menus_tools: -45
+  vocabularies_sf_article_category: -44
+  vocabularies_sf_article_type: -43
+  vocabularies_sf_branding: -42
+  vocabularies_sf_event_type: -41
+  vocabularies_sf_person_type: -40
+  vocabularies_sf_photo_gallery_categories: -39
+  vocabularies_sf_tags: -38

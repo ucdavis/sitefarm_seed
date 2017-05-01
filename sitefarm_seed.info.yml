@@ -1,0 +1,103 @@
+name: SiteFarm Seed
+type: profile
+description: 'A fast and feature-rich Drupal base install profile.'
+# version: VERSION
+core: 8.x
+
+# Force the installation of this profile since it is a distribution
+distribution:
+  name: SiteFarm Seed
+
+# Required modules
+dependencies:
+  # core
+  - automated_cron
+  - block
+  - block_content
+  - block_place
+  - breakpoint
+  - ckeditor
+  - config
+  - contextual
+  - contact
+  - crop
+  - datetime_range
+  - dynamic_page_cache
+  - editor
+  - entity_reference
+  - field_ui
+  - file
+  - focal_point
+  - help
+  - history
+  - image
+  - link
+  - menu_link_content
+  - menu_ui
+  - node
+  - options
+  - page_cache
+  - path
+  - quickedit
+  - rdf
+  - search
+  - shortcut
+  - syslog
+  - taxonomy
+  - text
+  - toolbar
+  - tour
+  - url_embed
+  - views
+  - views_ui
+  # contrib
+  - anchor_link
+  - better_normalizers
+  - ctools
+  - ckwordcount
+  - default_content
+  - editor_file
+  - features
+  - google_analytics
+  - honeypot
+  - menu_block
+  - menu_breadcrumb
+  - metatag
+  - notification
+  - pathauto
+  - redirect
+  - redirect_404
+  - roleassign
+  - scheduled_updates
+  - simple_sitemap
+  - token
+  - trumba
+  - webform
+  - webform_ui
+  # Custom
+  - block_style_plugins
+  - site_credits
+  - ck_autosave
+  - ck_media_link
+  - ck_feature_block
+  - external_media_embed
+  - rss_feed_block
+  # SiteFarm
+  - sitefarm_core
+  - sitefarm_wysiwyg
+  - sitefarm_page
+  - sitefarm_person
+  - sitefarm_article
+  - sitefarm_event
+  - sitefarm_photo_gallery
+  - sitefarm_simple_configuration
+  - sitefarm_auth
+  # SiteFarm custom blocks
+  - sitefarm_basic_block
+  - sitefarm_focal_link
+  - sitefarm_focus_box
+  - sitefarm_marketing_highlight
+  - sitefarm_hero_banner
+
+themes:
+  - seven

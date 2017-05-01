@@ -1,0 +1,8 @@
+sitefarm_person.add_person_action:
+  route_name: node.add
+  route_parameters:
+        node_type: 'sf_person'
+  title: 'Add Person'
+  class: '\Drupal\sitefarm_person\Plugin\Menu\LocalAction\WithDestination'
+  appears_on:
+      - 'view.sf_person_admin.page_1'

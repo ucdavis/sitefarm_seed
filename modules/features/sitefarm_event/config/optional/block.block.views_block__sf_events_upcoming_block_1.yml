@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.sf_events_upcoming
+  module:
+    - node
+    - views
+id: views_block__sf_events_upcoming_block_1
+theme: sitefarm_one
+region: sidebar_second
+weight: -10
+provider: null
+plugin: 'views_block:sf_events_upcoming-block_1'
+settings:
+  id: 'views_block:sf_events_upcoming-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      sf_event: sf_event
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

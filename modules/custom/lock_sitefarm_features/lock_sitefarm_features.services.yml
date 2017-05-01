@@ -1,0 +1,10 @@
+services:
+  lock_sitefarm_features.route_subscriber:
+    class: Drupal\lock_sitefarm_features\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+
+  access_check.lock_sitefarm_features:
+    class: Drupal\lock_sitefarm_features\Access\LockFeatureAccess
+    tags:
+      - { name: access_check, applies_to: _lock_sitefarm_features }

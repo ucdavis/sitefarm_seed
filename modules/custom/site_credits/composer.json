@@ -1,0 +1,8 @@
+{
+  "name": "drupal/site_credits",
+  "type": "drupal-module",
+  "description": "Display a block of site credits info.",
+  "keywords": ["Drupal"],
+  "minimum-stability": "dev",
+  "require": { }
+}

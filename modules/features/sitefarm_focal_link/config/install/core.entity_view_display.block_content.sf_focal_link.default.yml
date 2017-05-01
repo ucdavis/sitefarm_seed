@@ -1,0 +1,54 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.sf_focal_link
+    - field.field.block_content.sf_focal_link.field_sf_icon_choice
+    - field.field.block_content.sf_focal_link.field_sf_image
+    - field.field.block_content.sf_focal_link.field_sf_link
+    - field.field.block_content.sf_focal_link.field_sf_title
+  module:
+    - image
+    - link
+    - options
+id: block_content.sf_focal_link.default
+targetEntityType: block_content
+bundle: sf_focal_link
+mode: default
+content:
+  field_sf_icon_choice:
+    weight: 2
+    label: hidden
+    settings:
+      format: boolean
+      format_custom_true: ''
+      format_custom_false: ''
+    third_party_settings: {  }
+    type: boolean
+  field_sf_image:
+    weight: 3
+    label: hidden
+    settings:
+      image_style: sf_focal_link
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  field_sf_link:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+  field_sf_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+hidden: {  }

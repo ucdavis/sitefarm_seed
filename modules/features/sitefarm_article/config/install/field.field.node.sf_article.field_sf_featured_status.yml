@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sf_featured_status
+    - node.type.sf_article
+id: node.sf_article.field_sf_featured_status
+field_name: field_sf_featured_status
+entity_type: node
+bundle: sf_article
+label: 'Feature Content'
+description: 'A style will be applied denoting its Feature status.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,63 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function sitefarm_photo_gallery_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Move Node Edit fields into the advanced tabs group
+  $advanced_tabs = \Drupal::service('sf.advanced_tabs')->loadForm($form);
+
+  // Move the Photo Gallery Category fields to the Categorization group
+  $advanced_tabs->moveField('field_sf_gallery_category', 'categorizing');
+  $form = $advanced_tabs->save();
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function sitefarm_photo_gallery_field_widget_image_image_form_alter(&$element, FormStateInterface $form_state, $form) {
+  // Add a new process function to change the title attribute of the photos.
+  if ($element['#field_name'] == 'field_sf_gallery_photo') {
+    $element['#process'][] = 'sitefarm_photo_gallery_image_widget_process';
+  }
+}
+
+/**
+ * Element #process callback function.
+ *
+ * Change Title attribute to say "Caption
+ *
+ * @see sitefarm_core_field_widget_image_image_form_alter()
+ */
+function sitefarm_photo_gallery_image_widget_process($element, FormStateInterface $form_state, $form) {
+  $element['title']['#title'] = t('Caption');
+  $element['title']['#description'] = '';
+
+  return $element;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function sitefarm_photo_gallery_theme() {
+  return [
+    'slideshow_main' => array(
+      'variables' => array(
+        'show_title' => NULL,
+        'title_full' => NULL,
+        'title_start' => NULL,
+        'title_end' => NULL,
+        'lazy_load' => NULL,
+        'slides' => NULL,
+      ),
+    ),
+    'slideshow_nav' => array(
+      'variables' => array(
+        'lazy_load' => NULL,
+        'slides' => NULL,
+      ),
+    )
+  ];
+}

@@ -1,0 +1,11 @@
+name: 'Focus Box'
+description: 'Custom Block for adding a Focus Box to call attention to an area of a webpage'
+type: module
+core: 8.x
+dependencies:
+  - block_content
+  - field
+  - image
+  - sitefarm_core
+  - text
+package: SiteFarm

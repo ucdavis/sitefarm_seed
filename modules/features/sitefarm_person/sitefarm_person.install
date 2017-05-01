@@ -1,0 +1,162 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Revert the Person feature teaser display
+ */
+function sitefarm_person_update_8101(&$sandbox) {
+  $messages = array();
+
+  // Install and uninstall modules and features
+  \Drupal::service('module_installer')->install(['sitefarm_summary']);
+  $messages[] = t('SiteFarm Summary module has been installed');
+
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('features.config_update');
+
+  // Revert the teaser display
+  $config_revert->revert('entity_view_display', 'node.sf_person.teaser');
+
+  $messages[] = t('The Person teaser view will now display Summary.');
+
+  return implode("\n", $messages);
+}
+
+/**
+ * Set the page view for grouped person results.
+ */
+function sitefarm_person_update_8102(&$sandbox) {
+  $messages = array();
+
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('config_update.config_update');
+  // Revert the view.
+  $config_revert->revert('view', 'sf_person_directory');
+
+  $messages[] = t('Person directory rows are grouped by type and sorted by term order.');
+
+  return implode('<br />', $messages);
+}
+
+/**
+ * Set the person admin view.
+ */
+function sitefarm_person_update_8103(&$sandbox) {
+  $messages = array();
+
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('config_update.config_update');
+  // Revert the view.
+  $config_revert->import('view', 'sf_person_admin');
+
+  $messages[] = t('Person content administrative view installed.');
+
+  return implode('<br />', $messages);
+}
+
+/**
+ * Changed the Person Type exposed filter from auto complete to drop down.
+ */
+function sitefarm_person_update_8104(&$sandbox) {
+  $messages = array();
+
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('config_update.config_update');
+  // Revert the view.
+  $config_revert->revert('view', 'sf_person_directory');
+
+  $messages[] = t('Changed person directories Type exposed filter to drop down.');
+
+  return implode('<br />', $messages);
+}
+
+/**
+ * Revert person url pathauto setting
+ */
+function sitefarm_person_update_8105(&$sandbox) {
+  $messages = array();
+
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('config_update.config_update');
+  $config_revert->revert('pathauto_pattern', 'sf_person');
+
+  $messages[] = t('Person updated pathauto links installed.');
+
+  return implode('<br />', $messages);
+}
+
+/**
+ * Change pager for person directory view to full pager
+ */
+function sitefarm_person_update_8106(&$sandbox) {
+  $messages = array();
+
+  $config_revert = \Drupal::service('config_update.config_update');
+  $config_revert->revert('view', 'sf_person_directory');
+
+  $messages[] = t('Person directory view updated.');
+
+  return implode('<br />', $messages);
+}
+
+/**
+ * Modify the Block display of the Person Directory view to not use exposed
+ * filters.
+ */
+function sitefarm_person_update_8107(&$sandbox) {
+  $messages = array();
+
+  $config_revert = \Drupal::service('config_update.config_update');
+  $config_revert->revert('view', 'sf_person_directory');
+
+  $messages[] = t('Person directory view block display updated.');
+
+  return implode('<br />', $messages);
+}
+
+/**
+ * Modify the Block display of the Person Directory view to not use exposed
+ * filters.
+ */
+function sitefarm_person_update_8108(&$sandbox) {
+  $messages = array();
+
+  $config_revert = \Drupal::service('config_update.config_update');
+  $config_revert->revert('view', 'sf_person_directory');
+
+  $messages[] = t('Person directory view block display removed.');
+
+  return implode('<br />', $messages);
+}
+
+/**
+ * Add the Featured Person View
+ */
+function sitefarm_person_update_8109(&$sandbox) {
+  $messages = array();
+
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('config_update.config_update');
+  // Revert the view.
+  $config_revert->import('view', 'sf_person_featured');
+
+  $messages[] = t('Featured Person view installed.');
+
+  return implode('<br />', $messages);
+}
+
+
+/**
+ * Reset the Person Simple XML Sitemap config to default
+ */
+function sitefarm_person_update_8110(&$sandbox) {
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('config_update.config_update');
+  $config_revert->revert('system.simple', 'simple_sitemap.bundle_settings.node.sf_person');
+  $config_revert->revert('system.simple', 'simple_sitemap.bundle_settings.taxonomy_term.sf_person_type');
+
+  return t('Simple XML Sitemap person config updated.');
+}

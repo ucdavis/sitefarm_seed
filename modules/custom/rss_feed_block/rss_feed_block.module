@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function rss_feed_block_theme() {
+  return [
+    'block__rss_feed_block' => array(
+      'render element' => 'elements',
+      'base hook' => 'block',
+    ),
+  ];
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function rss_feed_block_preprocess_block(&$variables) {
+  if ($variables['base_plugin_id'] == 'rss_feed_block') {
+    // Create a variable with the Block ID
+    $variables['block_id'] = $variables['elements']['#id'];
+
+    // Move each of the content variables to the top level
+    foreach ($variables['content'] as $name => $value) {
+      $variables[$name] = $value;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+restricted_routes:
+  - system.cron_settings
+  - system.performance_settings
+  - system.logging_settings
+  - system.file_system_settings
+  - system.image_toolkit_settings
+  - system.status
+  - dblog.overview
+  - cas.settings
+  - photoswipe.admin_settings
+  - simple_sitemap.settings
+  - acquia_connector.settings

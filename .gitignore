@@ -1,0 +1,31 @@
+.DS_Store
+bin/
+
+# Ignore the node modules folder (created by 'npm install').
+node_modules
+
+# Ignore Sass map files since they only work locally anyway
+*.css.map
+
+# Composer dependencies
+/vendor/
+
+# PhpUnit code coverage generated files
+tests/coverage
+
+# Ignore contrib modules, themes, and libraries
+/libraries/contrib/
+/modules/contrib/
+/themes/contrib/
+
+# don't add Drupal core in the event that composer sticks it in as a dependency
+/core/
+
+# Ignore any .git folders that might come in via composer
+/**/.git
+
+# Behat local config
+behat.yml
+
+# PhpUnit local config
+phpunit.xml

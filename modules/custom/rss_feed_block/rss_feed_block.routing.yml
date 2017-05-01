@@ -1,0 +1,6 @@
+rss_feed_block.proxy:
+  path: '/rss-feed-proxy'
+  defaults:
+    _controller: '\Drupal\rss_feed_block\Controllers\RssFeedProxyController::getFeed'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Add CAS Settings to list of restricted admin pages.
+ */
+function sitefarm_simple_configuration_update_8101(&$sandbox) {
+  $messages = array();
+
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('config_update.config_update');
+
+  // Revert restricted admin pages.
+  $config_revert->revert('system.simple', 'sitefarm_simple_configuration.settings');
+
+  return implode('<br />', $messages);
+}
+
+/**
+ * Add more pages to list of restricted admin pages.
+ */
+function sitefarm_simple_configuration_update_8102(&$sandbox) {
+  $messages = array();
+
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('config_update.config_update');
+
+  // Revert restricted admin pages.
+  $config_revert->revert('system.simple', 'sitefarm_simple_configuration.settings');
+
+  return implode('<br />', $messages);
+}

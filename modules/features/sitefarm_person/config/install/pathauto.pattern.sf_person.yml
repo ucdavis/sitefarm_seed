@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: sf_person
+label: Person
+type: 'canonical_entities:node'
+pattern: 'people/[node:field_sf_first_name]-[node:field_sf_last_name]'
+selection_criteria:
+  abd4e4c0-2675-49cd-97d7-ccb61b2b08f2:
+    id: node_type
+    bundles:
+      sf_person: sf_person
+    negate: false
+    context_mapping:
+      node: node
+    uuid: abd4e4c0-2675-49cd-97d7-ccb61b2b08f2
+selection_logic: and
+weight: -5
+relationships: {  }

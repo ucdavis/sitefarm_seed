@@ -1,0 +1,109 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.sf_event.body
+    - field.field.node.sf_event.field_sf_dates
+    - field.field.node.sf_event.field_sf_event_location
+    - field.field.node.sf_event.field_sf_event_map_link
+    - field.field.node.sf_event.field_sf_event_type
+    - field.field.node.sf_event.field_sf_featured_status
+    - field.field.node.sf_event.field_sf_files
+    - field.field.node.sf_event.field_sf_meta_tags
+    - field.field.node.sf_event.field_sf_person_reference
+    - field.field.node.sf_event.field_sf_primary_image
+    - field.field.node.sf_event.field_sf_tags
+    - node.type.sf_event
+  module:
+    - datetime_range
+    - file
+    - image
+    - link
+    - metatag
+    - text
+    - user
+id: node.sf_event.default
+targetEntityType: node
+bundle: sf_event
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+  field_sf_dates:
+    weight: 2
+    label: visually_hidden
+    settings:
+      separator: ' ~ '
+      show_time: '1'
+      show_day_name: '1'
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: daterange_merge
+  field_sf_event_location:
+    weight: 3
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_sf_event_map_link:
+    weight: 4
+    label: visually_hidden
+    settings:
+      trim_length: 80
+      target: _blank
+      url_only: false
+      url_plain: false
+      rel: '0'
+    third_party_settings: {  }
+    type: link
+  field_sf_event_type:
+    type: entity_reference_label
+    weight: 8
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_sf_files:
+    weight: 7
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: file_default
+  field_sf_meta_tags:
+    weight: 0
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+  field_sf_primary_image:
+    weight: 1
+    label: hidden
+    settings:
+      image_style: sf_landscape_16x9
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  field_sf_tags:
+    weight: 9
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  links:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+  sharemessage__sf_social_share_buttons:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_sf_featured_status: true
+  field_sf_person_reference: true

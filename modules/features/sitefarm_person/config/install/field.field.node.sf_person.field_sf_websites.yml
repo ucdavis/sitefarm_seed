@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sf_websites
+    - node.type.sf_person
+  module:
+    - link
+id: node.sf_person.field_sf_websites
+field_name: field_sf_websites
+entity_type: node
+bundle: sf_person
+label: Website
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

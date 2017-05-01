@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: sf_marketing_highlight_horizntl
+label: 'Marketing Highlight - Horizontal'
+revision: 1
+description: 'An "Horizontal" attention getting block which uses an image and is linked to some content.'

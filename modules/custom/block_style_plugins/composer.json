@@ -1,0 +1,8 @@
+{
+  "name": "drupal/block_style_plugins",
+  "type": "drupal-module",
+  "description": "Plugin system for allowing modules or themes to add style configuration to blocks",
+  "keywords": ["Drupal"],
+  "minimum-stability": "dev",
+  "require": { }
+}

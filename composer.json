@@ -1,5 +1,5 @@
 {
-  "name": "ucdavis/sitefarm-seed",
+  "name": "ucdavis/sitefarm_seed",
   "description": "Drupal 8 base profile for the SiteFarm platform",
   "type": "drupal-profile",
   "minimum-stability": "dev",
@@ -121,10 +121,6 @@
       "drupal/social_media_links": {
         "Fix errors when icons do not have descriptions": "https://www.drupal.org/files/issues/social_media_links-If_social_media_icon_has_no_description-1817760-1.patch"
       },
-      "drupal/webform": {
-        "Change rest.link_manager to hal.link_manager": "https://www.drupal.org/files/issues/webform_link_manager-2867556-2.patch"
-      }
-
     }
   }
 }

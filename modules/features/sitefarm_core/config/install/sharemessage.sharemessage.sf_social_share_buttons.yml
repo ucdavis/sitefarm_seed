@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies: {  }
+id: sf_social_share_buttons
+label: 'Universal Social Share Buttons'
+title: '[current-page:title]'
+message_long: '[node:body]'
+message_short: '[node:summary]'
+image_url: ''
+fallback_image: ''
+video_url: ''
+share_url: ''
+plugin: addthis
+enforce_usage: false
+settings: {  }
+extra_field_entity_type: node
+extra_field_bundles:
+  - sf_article
+  - sf_event
+  - sf_photo_gallery

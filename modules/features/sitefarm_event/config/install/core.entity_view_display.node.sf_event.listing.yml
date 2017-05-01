@@ -1,0 +1,63 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.listing
+    - field.field.node.sf_event.body
+    - field.field.node.sf_event.field_sf_dates
+    - field.field.node.sf_event.field_sf_event_location
+    - field.field.node.sf_event.field_sf_event_map_link
+    - field.field.node.sf_event.field_sf_event_type
+    - field.field.node.sf_event.field_sf_featured_status
+    - field.field.node.sf_event.field_sf_files
+    - field.field.node.sf_event.field_sf_meta_tags
+    - field.field.node.sf_event.field_sf_person_reference
+    - field.field.node.sf_event.field_sf_primary_image
+    - field.field.node.sf_event.field_sf_tags
+    - node.type.sf_event
+  module:
+    - datetime_range
+    - image
+    - user
+id: node.sf_event.listing
+targetEntityType: node
+bundle: sf_event
+mode: listing
+content:
+  field_sf_dates:
+    type: daterange_merge
+    weight: 1
+    label: hidden
+    settings:
+      separator: '~'
+      show_day_name: 0
+      show_time: 0
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+  field_sf_event_location:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_sf_primary_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: sf_thumbnail
+      image_link: content
+    third_party_settings: {  }
+    type: image
+hidden:
+  body: true
+  field_sf_event_map_link: true
+  field_sf_event_type: true
+  field_sf_featured_status: true
+  field_sf_files: true
+  field_sf_meta_tags: true
+  field_sf_person_reference: true
+  field_sf_tags: true
+  links: true
+  sharemessage__sf_social_share_buttons: true

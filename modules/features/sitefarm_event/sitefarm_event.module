@@ -1,0 +1,75 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function sitefarm_event_form_alter(&$form, &$form_state, $form_id) {
+  // Move Node Edit fields into the advanced tabs group
+  $advanced_tabs = \Drupal::service('sf.advanced_tabs')->loadForm($form);
+
+  // Move the Event Type field to the Categorization group
+  $advanced_tabs->moveField('field_sf_event_type', 'categorizing');
+  $form = $advanced_tabs->save();
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function sitefarm_event_element_info_alter(array &$types) {
+  $types['datetime']['#process'][] = '_sitefarm_event_sf_dates_format';
+  $types['datetime']['#element_validate'][] = '_sitefarm_event_sf_dates_validate';
+}
+
+/**
+ * Element process callback for datetime field_sf_dates.
+ */
+function _sitefarm_event_sf_dates_format(&$element, FormStateInterface $form_state, &$complete_form) {
+  if (isset($element['#id']) && ($element['#id'] == 'edit-field-sf-dates-0-value' || $element['#id'] == 'edit-field-sf-dates-0-end-value')) {
+    // Add a date placeholder
+    $element['date']['#attributes']['placeholder'] = 'yyyy-mm-dd';
+
+    // Remove seconds in browsers that support HTML5 type=time.
+    $element['time']['#attributes']['step'] = '60';
+    $element['time']['#attributes']['title'] = t('Time (e.g. @format)', [
+      '@format' => (new \DateTime())->format('H:i'),
+    ]);
+    $element['time']['#attributes']['placeholder'] = '13:00';
+
+    // Strip the seconds off the time
+    $element['time']['#value'] = substr($element['time']['#value'], 0, -3);
+  }
+
+  return $element;
+}
+
+/**
+ * Element process callback for datetime field_sf_dates validate.
+ */
+function _sitefarm_event_sf_dates_validate(&$element, FormStateInterface $form_state, &$complete_form) {
+  if (isset($element['#id']) && ($element['#id'] == 'edit-field-sf-dates-0-value' || $element['#id'] == 'edit-field-sf-dates-0-end-value')) {
+
+    // Get all errors
+    $errors = $form_state->getErrors();
+
+    // Get any errors for this field
+    $error = $form_state->getError($element);
+
+    if ($error && count($errors) == 1) {
+      // First remove existing errors
+      $form_state->clearErrors();
+
+      $string = $error->getUntranslatedString();
+      $arguments = $error->getArguments();
+
+      // Strip the seconds off the time
+      $arguments['%format'] = substr($arguments['%format'], 0, -3);
+
+      $form_state->setError($element, t($string, $arguments));
+    }
+
+  }
+
+  return $element;
+}

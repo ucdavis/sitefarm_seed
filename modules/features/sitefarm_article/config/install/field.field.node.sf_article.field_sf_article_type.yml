@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sf_article_type
+    - node.type.sf_article
+    - taxonomy.vocabulary.sf_article_type
+  content:
+    - 'taxonomy_term:sf_article_type:8538d79c-1245-4845-ae56-1919c8738249'
+id: node.sf_article.field_sf_article_type
+field_name: field_sf_article_type
+entity_type: node
+bundle: sf_article
+label: 'Article Type'
+description: 'Choose a classification for this article.'
+required: true
+translatable: false
+default_value:
+  -
+    target_uuid: 8538d79c-1245-4845-ae56-1919c8738249
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      sf_article_type: sf_article_type
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

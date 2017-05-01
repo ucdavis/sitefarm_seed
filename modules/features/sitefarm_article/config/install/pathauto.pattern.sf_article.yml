@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: sf_article
+label: Article
+type: 'canonical_entities:node'
+pattern: '[node:field_sf_article_type]/[node:title]'
+selection_criteria:
+  13a54291-655c-4790-b8ee-555a86fb2827:
+    id: node_type
+    bundles:
+      sf_article: sf_article
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 13a54291-655c-4790-b8ee-555a86fb2827
+selection_logic: and
+weight: -5
+relationships: {  }

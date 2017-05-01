@@ -1,0 +1,17 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ *
+ * For the ID form_block.
+ */
+function sitefarm_focus_box_form_block_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Get the Sitefarm forms helper service
+  $form_helper = \Drupal::service('sf.block_form_helpers');
+
+  if ($form_helper->getBlockContentBundle($form_state) == 'sf_focus_box') {
+    $form_helper->hideBlockTitleCheckbox($form);
+  }
+}

@@ -1,0 +1,62 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.sf_hero_banner
+    - field.field.block_content.sf_hero_banner.field_sf_hb_sub_title
+    - field.field.block_content.sf_hero_banner.field_sf_hb_video_button
+    - field.field.block_content.sf_hero_banner.field_sf_image
+    - field.field.block_content.sf_hero_banner.field_sf_link
+    - field.field.block_content.sf_hero_banner.field_sf_title
+    - image.style.thumbnail
+  module:
+    - image
+    - link
+id: block_content.sf_hero_banner.default
+targetEntityType: block_content
+bundle: sf_hero_banner
+mode: default
+content:
+  field_sf_hb_sub_title:
+    weight: 3
+    settings:
+      size: 120
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_sf_hb_video_button:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_sf_image:
+    weight: 1
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+  field_sf_link:
+    weight: 4
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+  field_sf_title:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  info:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

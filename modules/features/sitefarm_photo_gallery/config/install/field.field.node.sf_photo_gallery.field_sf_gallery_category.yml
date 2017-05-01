@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sf_gallery_category
+    - node.type.sf_photo_gallery
+    - taxonomy.vocabulary.sf_photo_gallery_categories
+id: node.sf_photo_gallery.field_sf_gallery_category
+field_name: field_sf_gallery_category
+entity_type: node
+bundle: sf_photo_gallery
+label: Category
+description: 'Optional: Select a category to which this gallery will be assigned. Used by your site when grouping galleries by specific topics.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      sf_photo_gallery_categories: sf_photo_gallery_categories
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

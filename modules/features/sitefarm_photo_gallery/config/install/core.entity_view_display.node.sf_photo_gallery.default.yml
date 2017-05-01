@@ -1,0 +1,56 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.sf_photo_gallery.body
+    - field.field.node.sf_photo_gallery.field_sf_gallery_category
+    - field.field.node.sf_photo_gallery.field_sf_gallery_photo
+    - field.field.node.sf_photo_gallery.field_sf_primary_image
+    - field.field.node.sf_photo_gallery.field_sf_tags
+    - node.type.sf_photo_gallery
+  module:
+    - photoswipe
+    - text
+    - user
+id: node.sf_photo_gallery.default
+targetEntityType: node
+bundle: sf_photo_gallery
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+  field_sf_gallery_category:
+    weight: 3
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_sf_gallery_photo:
+    weight: 2
+    label: visually_hidden
+    settings:
+      photoswipe_node_style: sf_gallery_thumbnail
+      photoswipe_image_style: sf_gallery_full
+      photoswipe_caption: title
+      photoswipe_view_mode: default
+    third_party_settings: {  }
+    type: photoswipe_field_formatter
+  field_sf_tags:
+    weight: 4
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  sharemessage__sf_social_share_buttons:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_sf_primary_image: true
+  links: true

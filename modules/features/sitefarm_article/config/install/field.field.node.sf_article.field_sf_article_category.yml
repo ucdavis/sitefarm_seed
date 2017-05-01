@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sf_article_category
+    - node.type.sf_article
+    - taxonomy.vocabulary.sf_article_category
+id: node.sf_article.field_sf_article_category
+field_name: field_sf_article_category
+entity_type: node
+bundle: sf_article
+label: Category
+description: 'Optional: Select a primary Category to which this article will be assigned. Used by your site when grouping articles by specific topics.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      sf_article_category: sf_article_category
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies: {  }
+id: contributor
+label: Contributor
+weight: -8
+is_admin: null
+permissions:
+  - 'access contextual links'
+  - 'view the administration theme'
+  - 'access toolbar'
+  - 'access tour'
+  - 'view own unpublished content'
+  - 'create sf_article content'
+  - 'delete own sf_article content'
+  - 'edit own sf_article content'
+  - 'create sf_page content'
+  - 'delete own sf_page content'
+  - 'edit own sf_page content'
+  - 'create sf_event content'
+  - 'delete own sf_event content'
+  - 'edit own sf_event content'
+  - 'create sf_person content'
+  - 'delete own sf_person content'
+  - 'edit own sf_person content'
+  - 'create sf_photo_gallery content'
+  - 'delete own sf_photo_gallery content'
+  - 'edit own sf_photo_gallery content'
+  - 'access content overview'
+  - 'create webform'
+  - 'delete own webform'
+  - 'edit own webform'
+  - 'add trumba spud blocks'

@@ -1,0 +1,21 @@
+name: 'Basic Page'
+description: 'Provides Basic Page content type and related configuration. A standard page to display content which will not change regularly like an "About Us" page.'
+type: module
+core: 8.x
+dependencies:
+  - block
+  - ctools
+  - field
+  - file
+  - image
+  - menu_ui
+  - metatag
+  - node
+  - path
+  - pathauto
+  - sitefarm_core
+  - sitefarm_custom_social_links
+  - system
+  - text
+  - user
+package: SiteFarm

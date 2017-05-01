@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: sf_event
+label: Event
+type: 'canonical_entities:node'
+pattern: 'events/[node:title]'
+selection_criteria:
+  da515c89-b532-486d-8afc-cbad8fb64634:
+    id: node_type
+    bundles:
+      sf_event: sf_event
+    negate: false
+    context_mapping:
+      node: node
+    uuid: da515c89-b532-486d-8afc-cbad8fb64634
+selection_logic: and
+weight: -5
+relationships: {  }

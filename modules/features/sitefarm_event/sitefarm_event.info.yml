@@ -1,0 +1,28 @@
+name: Event
+description: 'Provides Event content type and related configuration. Create an <em>event</em> which will be tied to a calendar date. '
+type: module
+core: 8.x
+dependencies:
+  - block
+  - ctools
+  - datetime
+  - datetime_range
+  - field
+  - file
+  - image
+  - link
+  - menu_ui
+  - metatag
+  - node
+  - options
+  - path
+  - pathauto
+  - sharemessage
+  - sitefarm_core
+  - sitefarm_person
+  - system
+  - taxonomy
+  - text
+  - user
+  - views
+package: SiteFarm

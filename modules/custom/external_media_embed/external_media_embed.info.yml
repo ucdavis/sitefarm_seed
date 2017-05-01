@@ -1,0 +1,7 @@
+name: 'External Media Embed'
+description: 'Embed a video or other third party media in a block via an embed URL.'
+type: module
+core: 8.x
+dependencies:
+  - url_embed
+package: Custom UCD

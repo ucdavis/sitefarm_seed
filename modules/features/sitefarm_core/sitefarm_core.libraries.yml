@@ -1,0 +1,15 @@
+sitefarm_core.ckeditor:
+  version: VERSION
+  css:
+    theme:
+      css/ckeditor.css: {}
+
+sitefarm_core.required_fields:
+  version: VERSION
+  js:
+    js/required_fields.js: {}
+
+sitefarm_core.blocks_path_visibility:
+  version: VERSION
+  js:
+    js/blocks_path_visibility.js: {}

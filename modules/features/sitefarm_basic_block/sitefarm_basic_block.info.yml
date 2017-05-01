@@ -1,0 +1,10 @@
+name: 'Basic Block'
+description: 'A Basic Block custom block content type'
+type: module
+core: 8.x
+dependencies:
+  - block_content
+  - field
+  - sitefarm_core
+  - text
+package: SiteFarm

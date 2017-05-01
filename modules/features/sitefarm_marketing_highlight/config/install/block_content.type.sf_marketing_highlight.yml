@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: sf_marketing_highlight
+label: 'Marketing Highlight'
+revision: 1
+description: 'An attention getting block which uses an image and is linked to some content.'

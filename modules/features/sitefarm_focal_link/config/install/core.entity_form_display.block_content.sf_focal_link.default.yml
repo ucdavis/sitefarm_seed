@@ -1,0 +1,53 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.sf_focal_link
+    - field.field.block_content.sf_focal_link.field_sf_icon_choice
+    - field.field.block_content.sf_focal_link.field_sf_image
+    - field.field.block_content.sf_focal_link.field_sf_link
+    - field.field.block_content.sf_focal_link.field_sf_title
+    - image.style.thumbnail
+  module:
+    - image
+    - link
+id: block_content.sf_focal_link.default
+targetEntityType: block_content
+bundle: sf_focal_link
+mode: default
+content:
+  field_sf_icon_choice:
+    weight: 3
+    settings:
+      display_label: false
+    third_party_settings: {  }
+    type: boolean_checkbox
+  field_sf_image:
+    weight: 4
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+  field_sf_link:
+    weight: 2
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+  field_sf_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  info:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

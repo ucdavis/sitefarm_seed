@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a Slideshow Photo Gallery navigation display.
+ *
+ * Available variables:
+ * - lazy_load: Boolean for whether the images should be progressivly downloaded.
+ * - slides: Array of thumbnail slides.
+ *
+ * @ingroup themeable
+ */
+#}
+{% if slides %}
+  <div class="slider-nav" role="toolbar">
+    {% for slide in slides %}
+      <div class="slideshow__item">
+        {% if lazy_load %}
+          <img data-lazy="{{ slide.src }}" alt="{{ slide.alt }}" />
+        {% else %}
+          {{ slide.image }}
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

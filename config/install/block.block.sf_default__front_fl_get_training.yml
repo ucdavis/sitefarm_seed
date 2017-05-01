@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:sf_focal_link:8138d79c-1105-1245-dr56-1919c8738249'
+  module:
+    - block_content
+    - block_style_plugins
+    - system
+  theme:
+    - sitefarm_one
+third_party_settings:
+  block_style_plugins:
+    brand_colors:
+      branding_color: category-brand--california-poppy
+    focal_link_icon:
+      focal_link_icon: focal-link__icon--jobs
+id: sf_default__front_fl_get_training
+theme: sitefarm_one
+region: sidebar_first
+weight: -11
+provider: null
+plugin: 'block_content:8138d79c-1105-1245-dr56-1919c8738249'
+settings:
+  id: 'block_content:8138d79c-1105-1245-dr56-1919c8738249'
+  label: 'Focal Link - Default Sitefarm Training'
+  provider: block_content
+  label_display: ''
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

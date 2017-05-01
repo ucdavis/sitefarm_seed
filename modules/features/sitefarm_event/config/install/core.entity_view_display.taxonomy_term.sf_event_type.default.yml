@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.sf_event_type.field_sf_brand_color
+    - taxonomy.vocabulary.sf_event_type
+  module:
+    - text
+id: taxonomy_term.sf_event_type.default
+targetEntityType: taxonomy_term
+bundle: sf_event_type
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_sf_brand_color: true

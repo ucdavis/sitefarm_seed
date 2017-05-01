@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.sf_hero_banner
+    - field.storage.block_content.field_sf_image
+  module:
+    - image
+id: block_content.sf_hero_banner.field_sf_image
+field_name: field_sf_image
+entity_type: block_content
+bundle: sf_hero_banner
+label: 'Primary Image'
+description: 'This image will be automatically cropped to 2000 x 770 pixels.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: images/hero_banner
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: image

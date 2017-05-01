@@ -1,0 +1,7 @@
+sitefarm_auth.login:
+  path: /login
+  defaults:
+      _controller: '\Drupal\sitefarm_auth\Controller\CasPageController::customPage'
+      _title_callback: '\Drupal\sitefarm_auth\Controller\CasPageController::getTitle'
+  requirements:
+      _permission: 'access content'

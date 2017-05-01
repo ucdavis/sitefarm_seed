@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a Slideshow Photo Gallery main display.
+ *
+ * Available variables:
+ * - show_title: Boolean for whether the title should be shown.
+ * - title_full: The full gallery title.
+ * - title_start: the first word if longer than 2 characters or else the first 2 words
+ * - title_end: The remaining text to the title
+ * - lazy_load: Boolean for whether the images should be progressivly downloaded.
+ * - slides: Array of image slides.
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="slideshow">
+  {% for slide in slides %}
+    <div class="slideshow__item">
+      {% if lazy_load %}
+        <img data-lazy="{{ slide.src }}" alt="{{ slide.alt }}" />
+      {% else %}
+        {{ slide.image }}
+      {% endif %}
+      {% if show_title or slide.caption %}
+        <div class="slideshow__text">
+          {% if show_title and loop.index == 1 %}
+            <div class="slideshow__title">
+              {% if title_start %}
+                <span class="slideshow__knockout">{{ title_start }}</span> {{ title_end }}
+              {% else %}
+                <span class="slideshow__knockout">{{ title_full }}</span>
+              {% endif %}
+            </div>
+          {% endif %}
+          {% if slide.caption %}
+            <div class="slideshow__caption">{{ slide.caption }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>

@@ -1,0 +1,8 @@
+{
+  "name": "ucdavis/ck_feature_block",
+  "type": "drupal-module",
+  "description": "Implements the CKEditor Feature Block plugin",
+  "keywords": ["Drupal"],
+  "minimum-stability": "dev",
+  "require": { }
+}

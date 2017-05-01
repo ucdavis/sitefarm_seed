@@ -1,0 +1,43 @@
+{% extends "block.html.twig" %}
+{#
+/**
+ * @file
+ * Default theme implementation for a RSS Feed block.
+ *
+ * Each branding element variable (logo, name, slogan) is only available if
+ * enabled in the block configuration.
+ *
+ * Available variables:
+ * - rss_url: URL of the RSS feed to be displayed.
+ * - items_count: The number of items to display.
+ * - feed_text: The style of body text.
+ * - text_cutoff: Number of characters of the body text to display.
+ *
+ * @ingroup themeable
+ */
+#}
+{% block content %}
+  <div class="rss-feed__wrapper">
+    <rss-feed block-id="{{ block_id }}" :count="{{ items_count }}" text="{{ feed_text }}" :cutoff="{{ text_cutoff }}" :more="{{ more_button }}"></rss-feed>
+  </div>
+
+  {# Add the Vue.js template using the 'raw' tag so that twig will not render double curly braces #}
+  {% raw %}
+  <template id="rss-feed-template">
+    <div class="rss-feed">
+      <ul class="rss-feed__list">
+        <li v-for="item in items" class="rss-feed__item">
+          <h3 v-if="item.link" class="rss-feed__title"><a :href="item.link">{{ item.title }}</a></h3>
+          <h3 v-else class="rss-feed__title">{{ item.title }}</h3>
+          <div v-if="item.description" class="rss-feed__body">
+            <p v-html="item.description"></p>
+          </div>
+        </li>
+      </ul>
+      <div v-if="more && countShowing < totalItems" class="rss-feed__more" @click="showMore">load more</div>
+    </div>
+  </template>
+  {% endraw %}
+
+  {{ content|without('rss_url', 'items_count', 'feed_text', 'text_cutoff', 'more_button') }}
+{% endblock %}

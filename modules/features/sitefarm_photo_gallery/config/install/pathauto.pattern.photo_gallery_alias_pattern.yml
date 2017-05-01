@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: photo_gallery_alias_pattern
+label: 'Photo Gallery'
+type: 'canonical_entities:node'
+pattern: 'photo-galleries/[node:title]'
+selection_criteria:
+  3af86f3b-8e0b-483a-bb6a-730bce2df6ed:
+    id: node_type
+    bundles:
+      sf_photo_gallery: sf_photo_gallery
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 3af86f3b-8e0b-483a-bb6a-730bce2df6ed
+selection_logic: and
+weight: -5
+relationships: {  }

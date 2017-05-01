@@ -1,0 +1,177 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\Component\Render\PlainTextOutput;
+
+/**
+ * Implements hook_user_insert().
+ *
+ * Any time a user is created programmatically, query ldap for the email address
+ * and if there's a match, add the appropriate cas id.
+ *
+ * While this DOES fire when a user is created via the admin/people/create form,
+ * the CAS Username value entered into the field is the one that takes precedent,
+ * even if it's empty.
+ */
+function sitefarm_auth_user_insert(Drupal\user\UserInterface $account) {
+  $mail = $account->getEmail();
+  if (preg_match('/(ucdavis.edu)$/', $account->getEmail())) {
+    $cas_user_manager = \Drupal::service('cas.user_manager');
+    $cas_name = $cas_user_manager->getCasUsernameForAccount($account->id());
+    if ($cas_name == FALSE) {
+      $connect = ldap_connect('ldap.ucdavis.edu');
+      $bind = ldap_bind($connect);
+      $result = ldap_search($connect, 'ou=people,dc=ucdavis,dc=edu', "(&(objectclass=person)(mail=$mail))");
+      $data = ldap_get_entries($connect, $result);
+      if (isset($data[0]['uid'][0])) {
+        $cas_user_manager->setCasUsernameForAccount($account, $data[0]['uid'][0]);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function sitefarm_auth_theme($existing, $type, $theme, $path) {
+  return [
+    'cas_login' => [
+      'render element' => 'customPage',
+      'path' => $path . '/templates',
+      'template' => 'cas-login',
+      'variables' => [
+        'links' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Add a link to login via CAS on the user login form.
+ */
+function sitefarm_auth_form_user_login_form_alter(&$form, FormStateInterface $form_state) {
+  $config = Drupal::config('cas.settings');
+
+  // Cached form must be busted if we alter CAS settings.
+  $form['#cache']['tags'] = array_merge($form['#cache']['tags'], $config->getCacheTags());
+
+  $enabled = $config->get('login_link_enabled');
+  if ($enabled) {
+    $url = new Url('sitefarm_auth.login', array(), array(
+      'attributes' => array(
+        'class' => array('cas-login-link'),
+      ),
+    ));
+
+    $form['cas_login_link'] = [
+      '#type' => 'link',
+      '#url' => $url,
+      '#title' => t('Go to the CAS log in page.'),
+      '#weight' => 200,
+    ];
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Add email configuration for CAS users to the user_admin_settings form
+ */
+function sitefarm_auth_form_user_admin_settings_alter(&$form, FormStateInterface $form_state) {
+  $mail_config = \Drupal::config('user.mail');
+
+  $form['email_admin_created_cas'] = [
+    '#type' => 'details',
+    '#title' => t('Welcome (new CAS user created by administrator)'),
+    '#description' => t('Edit the CAS user welcome email messages sent to new member accounts created by an administrator. The list of available tokens that can be used in e-mails is provided below.'),
+    '#group' => 'email',
+    '#weight' => -1,
+  ];
+  $form['email_admin_created_cas']['user_mail_cas_register_admin_created_subject'] = [
+    '#type' => 'textfield',
+    '#title' => t('Subject'),
+    '#default_value' => $mail_config->get('cas_register_admin_created.subject'),
+    '#maxlength' => 180
+  ];
+  $form['email_admin_created_cas']['user_mail_cas_register_admin_created_body'] = [
+    '#type' => 'textarea',
+    '#title' => t('Body'),
+    '#default_value' => $mail_config->get('cas_register_admin_created.body'),
+    '#rows' => 15,
+  ];
+
+  $form['#submit'][] = '_sitefarm_auth_user_admin_settings_submit';
+}
+
+/**
+ * Submit callback for the user_admin_settings form to add configuration for the
+ * CAS account emails notification
+ *
+ * @param $form
+ * @param FormStateInterface $form_state
+ */
+function _sitefarm_auth_user_admin_settings_submit(&$form, FormStateInterface $form_state) {
+  $mail_config = \Drupal::service('config.factory')->getEditable('user.mail');
+  $mail_config
+    ->set('cas_register_admin_created.body', $form_state->getValue('user_mail_cas_register_admin_created_body'))
+    ->set('cas_register_admin_created.subject', $form_state->getValue('user_mail_cas_register_admin_created_subject'))
+    ->save();
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function sitefarm_auth_form_user_register_form_alter(&$form, FormStateInterface $form_state) {
+  $form['#validate'][] = '_sitefarm_auth_form_user_register_validate';
+}
+
+/**
+ * Validate callback for the user_register_form form to add the CAS username to
+ * session
+ *
+ * Store the CAS username temporarily so that it can be used before the CAS
+ * module stores the username to the database.
+ *
+ * @param $form
+ * @param FormStateInterface $form_state
+ */
+function _sitefarm_auth_form_user_register_validate(&$form, FormStateInterface $form_state) {
+  $tempstore = \Drupal::service('user.private_tempstore')->get('sitefarm_auth');
+  $tempstore->set('cas_username', $form_state->getValue('cas_username'));
+}
+
+/**
+ * Implements hook_mail_alter().
+ */
+function sitefarm_auth_mail_alter(&$message) {
+  // Highjack the email for admin created accounts if it is a CAS user
+  if ($message['key'] == 'register_admin_created') {
+    // CAS ads the ID too late in the process, so we need to fetch the CAS
+    // username from the session
+    $tempstore = \Drupal::service('user.private_tempstore')->get('sitefarm_auth');
+    $cas_username = $tempstore->get('cas_username');
+    $tempstore->delete('cas_username');
+
+    // Highjack the message if a CAS username has been passed
+    if ($cas_username) {
+      $token_service = \Drupal::token();
+      $language_manager = \Drupal::languageManager();
+      $langcode = $message['langcode'];
+      $variables = array('user' => $message['params']['account']);
+
+      $language = \Drupal::languageManager()->getLanguage($message['params']['account']->getPreferredLangcode());
+      $original_language = $language_manager->getConfigOverrideLanguage();
+      $language_manager->setConfigOverrideLanguage($language);
+      $mail_config = \Drupal::config('user.mail');
+
+      $token_options = ['langcode' => $langcode, 'callback' => 'user_mail_tokens', 'clear' => TRUE];
+      $message['subject'] = PlainTextOutput::renderFromHtml($token_service->replace($mail_config->get('cas_register_admin_created.subject'), $variables, $token_options));
+      $message['body'][0] = $token_service->replace($mail_config->get('cas_register_admin_created.body'), $variables, $token_options);
+
+      $language_manager->setConfigOverrideLanguage($original_language);
+    }
+  }
+}

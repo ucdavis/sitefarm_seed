@@ -1,0 +1,5 @@
+lock_sitefarm_features.styles:
+  version: VERSION
+  css:
+    theme:
+      css/locked_styles.css: {}

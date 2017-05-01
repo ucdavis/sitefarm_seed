@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Event Category'
+vid: sf_event_type
+description: ''
+hierarchy: 0
+weight: 0

@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: sf_hero_banner
+label: 'Hero Banner'
+revision: 0
+description: 'Add a large banner image with some text and a call to action. This is something appropriate for the home page.'

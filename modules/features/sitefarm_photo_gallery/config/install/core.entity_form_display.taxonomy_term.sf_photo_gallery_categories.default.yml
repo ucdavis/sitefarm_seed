@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.sf_photo_gallery_categories.field_sf_brand_color
+    - taxonomy.vocabulary.sf_photo_gallery_categories
+  module:
+    - text
+id: taxonomy_term.sf_photo_gallery_categories.default
+targetEntityType: taxonomy_term
+bundle: sf_photo_gallery_categories
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 1
+    settings:
+      placeholder: ''
+      rows: 5
+    third_party_settings: {  }
+  field_sf_brand_color:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+  name:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  path: true

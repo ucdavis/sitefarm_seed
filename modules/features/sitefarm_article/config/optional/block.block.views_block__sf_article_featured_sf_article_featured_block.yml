@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.sf_article_featured
+  module:
+    - system
+    - views
+id: views_block__sf_article_featured_sf_article_featured_block
+theme: sitefarm_one
+region: content
+weight: -12
+provider: null
+plugin: 'views_block:sf_article_featured-sf_article_featured_block'
+settings:
+  id: 'views_block:sf_article_featured-sf_article_featured_block'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: /news
+    negate: false
+    context_mapping: {  }

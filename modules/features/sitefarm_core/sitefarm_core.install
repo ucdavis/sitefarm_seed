@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Sets variables and enables and disables modules
+ */
+function sitefarm_core_update_8101(&$sandbox) {
+  $messages = array();
+
+  // Install and uninstall modules and features
+  \Drupal::service('module_installer')->install(['syslog', 'sitefarm_hero_banner']);
+  $messages[] = t('syslog and sitefarm_hero_banner modules have been installed!');
+  \Drupal::service('module_installer')->uninstall(['dblog', 'auto_entitylabel']);
+  $messages[] = t('dblog and auto_entitylabel modules have been uninstalled!');
+
+  // Set Cron config
+  $config = \Drupal::service('config.factory')->getEditable('automated_cron.settings');
+  $config->set('interval', '0')
+    ->save();
+
+  // Set Page Cache config
+  $config = \Drupal::service('config.factory')->getEditable('system.performance');
+  $config->set('cache.page.max_age', '300')
+    ->save();
+
+  return implode("\n", $messages);
+}
+
+/**
+ * Disable the default Frontpage view and replace with a SiteFarm Frontpage view
+ */
+function sitefarm_core_update_8102(&$sandbox) {
+  $messages = array();
+
+  // Disable the Frontpage view
+  $config = \Drupal::service('config.factory')->getEditable('views.view.frontpage');
+  $config->set('status', FALSE)
+    ->save();
+
+  $messages[] = t('The default Frontpage view has been disabled');
+
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('config_update.config_update');
+
+  // Enable the new sitefarm frontpage view
+  $config_revert->import('view', 'sf_frontpage');
+
+  $messages[] = t('The new SiteFarm Frontpage has been enabled');
+
+  return implode("\n", $messages);
+}
+
+/**
+ * Add a permission to Site Builders for the new Administer Block Content Types
+ */
+function sitefarm_core_update_8103(&$sandbox) {
+  $messages = array();
+
+  // Set permission for site builder.
+  $config_factory = \Drupal::service('config.factory');
+  $config = $config_factory->getEditable('user.role.site_builder');
+  $permissions = $config->get('permissions');
+  $permissions[] = 'administer block content types';
+  $config->set('permissions', $permissions)
+    ->save();
+  $messages[] = t('Site Builder can now administer block content types.');
+
+  return implode("\n", $messages);
+}
+
+/**
+ * Reset the Tags Simple XML Sitemap config to default
+ */
+function sitefarm_core_update_8104(&$sandbox) {
+  /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
+  $config_revert = \Drupal::service('config_update.config_update');
+  $config_revert->revert('system.simple', 'simple_sitemap.bundle_settings.taxonomy_term.sf_tags');
+
+  return t('Simple XML Sitemap tags config updated.');
+}

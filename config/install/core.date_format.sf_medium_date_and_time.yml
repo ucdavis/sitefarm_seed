@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: sf_medium_date_and_time
+label: 'Medium Date and Time'
+locked: false
+pattern: 'F d, Y - g:ia'

@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Theme for Custom CAS Login page.
+ *
+ * Available variables:
+ * - links: Contains an array of links for login/logout and switching login pages.
+ * - links.button: The login/logout link.
+ * - links.change_login: The link to switch back and forth to Drupal login/user account.
+ *
+ */
+#}
+{%
+set title_class = 'heading--weighted-underline'
+%}
+{% block title %}
+  <h2{{ title_attributes.addClass(title_class) }}>
+    {% if not logged_in %}
+      Central Authentication Service(CAS)
+    {% else %}
+      You are currently logged in as {{ user.account.name }}
+    {% endif %}
+  </h2>
+{% endblock %}
+{% block content %}
+  {% if not logged_in %}
+    <p>Access this site using your UC Davis credentials.</p>
+  {% else %}
+    <p>Logging out will exit this user account.</p>
+  {% endif %}
+  {{ links.button }}
+  <hr>
+  {{ links.change_login }}
+{% endblock %}

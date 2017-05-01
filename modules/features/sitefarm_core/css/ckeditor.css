@@ -1,0 +1,30 @@
+/* Fix CkEditor Style Dropdown width */
+.cke.cke_combopanel {
+  min-width: 300px;
+  max-width: 600px;
+}
+
+.js .cke.cke_combopanel {
+  width: auto;
+}
+
+/* fix fieldset labels in the ckeditor dialog */
+.cke_dialog .cke_dialog_ui_fieldset > legend {
+  position: inherit;
+  top: 0;
+}
+
+/* Hide the second Anchor link ID select because it is redundant */
+.cke_dialog table[style*='width:260px;'] .cke_dialog_ui_hbox_last {
+  display: none;
+}
+
+/* Hide the CkEditor diff author row */
+.diff th.author {
+  display: none;
+}
+
+.cke_dialog_contents {
+  width: 100%;
+  min-width: 300px;
+}

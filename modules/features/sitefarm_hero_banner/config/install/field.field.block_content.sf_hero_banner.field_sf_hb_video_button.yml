@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.sf_hero_banner
+    - field.storage.block_content.field_sf_hb_video_button
+id: block_content.sf_hero_banner.field_sf_hb_video_button
+field_name: field_sf_hb_video_button
+entity_type: block_content
+bundle: sf_hero_banner
+label: 'Video Button'
+description: 'Add a Youtube or Vimeo video URL such as https://youtu.be/PAwB_t_iM7U or https://vimeo.com/79504673 to create a button which will play the video once clicked.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

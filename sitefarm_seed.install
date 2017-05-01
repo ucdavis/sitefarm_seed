@@ -1,0 +1,198 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the SiteFarm installation profile.
+ */
+
+use Drupal\user\Entity\User;
+use Drupal\shortcut\Entity\Shortcut;
+use Drupal\shortcut\Entity\ShortcutSet;
+use Symfony\Component\Yaml\Yaml;
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function sitefarm_seed_install() {
+  // Set the default theme.
+  _sitefarm_seed_setup_theme();
+
+  // Set the default shortcuts
+  _sitefarm_seed_setup_shortcuts();
+
+  // Set up default users
+  _sitefarm_seed_setup_users();
+
+  // Set up Menu items
+  _sitefarm_seed_setup_menus();
+}
+
+/**
+ * Set the default theme and other theme related settings.
+ */
+function _sitefarm_seed_setup_theme() {
+  // Set front page to "node".
+  \Drupal::configFactory()
+    ->getEditable('system.site')
+    ->set('page.front', '/node')
+    ->save(TRUE);
+
+  // Set the path to the logo, favicon and README file based on install
+  // directory
+  $sitefarm_seed_path = drupal_get_path('profile', 'sitefarm_seed');
+  \Drupal::configFactory()
+    ->getEditable('system.theme.global')
+    ->set('logo', [
+      'path' => $sitefarm_seed_path . '/sitefarm_logo.svg',
+      'url' => '',
+      'use_default' => FALSE,
+    ])
+    ->set('favicon', [
+      'mimetype' => 'image/vnd.microsoft.icon',
+      'path' =>  $sitefarm_seed_path . '/favicon.ico',
+      'url' => '',
+      'use_default' => FALSE,
+    ])
+    ->save(TRUE);
+}
+
+/**
+ * Set the default shortcuts.
+ */
+function _sitefarm_seed_setup_shortcuts() {
+  // Populate the default shortcut set.
+  Shortcut::create([
+    'shortcut_set' => 'default',
+    'title' => t('Add content'),
+    'weight' => -20,
+    'link' => ['uri' => 'internal:/node/add'],
+  ])->save();
+
+  Shortcut::create([
+    'shortcut_set' => 'default',
+    'title' => t('All content'),
+    'weight' => -19,
+    'link' => ['uri' => 'internal:/admin/content'],
+  ])->save();
+
+  Shortcut::create([
+    'shortcut_set' => 'default',
+    'title' => t('Main Menu'),
+    'weight' => -18,
+    'link' => ['uri' => 'internal:/admin/structure/menu/manage/main'],
+  ])->save();
+
+  Shortcut::create([
+    'shortcut_set' => 'default',
+    'title' => t('Taxonomy (Categories)'),
+    'weight' => -17,
+    'link' => ['uri' => 'internal:/admin/structure/taxonomy'],
+  ])->save();
+
+  Shortcut::create([
+    'shortcut_set' => 'default',
+    'title' => t('People'),
+    'weight' => -16,
+    'link' => ['uri' => 'internal:/admin/people'],
+  ])->save();
+
+  Shortcut::create([
+    'shortcut_set' => 'default',
+    'title' => t('Blocks'),
+    'weight' => -17,
+    'link' => ['uri' => 'internal:/admin/structure/block'],
+  ])->save();
+
+  Shortcut::create([
+    'shortcut_set' => 'default',
+    'title' => t('SiteFarm Config'),
+    'weight' => -15,
+    'link' => ['uri' => 'internal:/admin/config/sitefarm'],
+  ])->save();
+
+
+  // Developer Shortcut Set
+  Shortcut::create([
+    'shortcut_set' => 'development',
+    'title' => t('Add content'),
+    'weight' => -20,
+    'link' => ['uri' => 'internal:/node/add'],
+  ])->save();
+
+  Shortcut::create([
+    'shortcut_set' => 'development',
+    'title' => t('All content'),
+    'weight' => -19,
+    'link' => ['uri' => 'internal:/admin/content'],
+  ])->save();
+
+  Shortcut::create([
+    'shortcut_set' => 'development',
+    'title' => t('Content Types'),
+    'weight' => -18,
+    'link' => ['uri' => 'internal:/admin/structure/types'],
+  ])->save();
+
+  Shortcut::create([
+    'shortcut_set' => 'development',
+    'title' => t('Blocks'),
+    'weight' => -17,
+    'link' => ['uri' => 'internal:/admin/structure/block'],
+  ])->save();
+
+  Shortcut::create([
+    'shortcut_set' => 'development',
+    'title' => t('Views'),
+    'weight' => -16,
+    'link' => ['uri' => 'internal:/admin/structure/views'],
+  ])->save();
+
+  Shortcut::create([
+    'shortcut_set' => 'development',
+    'title' => t('Features'),
+    'weight' => -15,
+    'link' => ['uri' => 'internal:/admin/config/development/features'],
+  ])->save();
+
+  Shortcut::create([
+    'shortcut_set' => 'development',
+    'title' => t('Single Config Export'),
+    'weight' => -14,
+    'link' => ['uri' => 'internal:/admin/config/development/configuration/single/export'],
+  ])->save();
+
+  // Assign the Developer shortcuts to User 1
+  $account = User::load(1);
+  $shortcut_set = ShortcutSet::load('development');
+  \Drupal::entityTypeManager()
+    ->getStorage('shortcut_set')
+    ->assignUser($shortcut_set, $account);
+
+}
+
+/**
+ * Setup default roles and permissions
+ */
+function _sitefarm_seed_setup_users() {
+  // Assign user 1 the "administrator" role.
+  $user = User::load(1);
+  $user->roles[] = 'administrator';
+  $user->save();
+}
+
+/**
+ * Setup Menu links
+ */
+function _sitefarm_seed_setup_menus() {
+  // We install some menu links, so we have to rebuild the router, to ensure the
+  // menu links are valid.
+  \Drupal::service('router.builder')->rebuildIfNeeded();
+}
+
+
+/**
+ * Update hooks for regular updates are below
+ */

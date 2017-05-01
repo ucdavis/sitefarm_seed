@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.sf_focal_link
+    - field.storage.block_content.field_sf_title
+id: block_content.sf_focal_link.field_sf_title
+field_name: field_sf_title
+entity_type: block_content
+bundle: sf_focal_link
+label: Title
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

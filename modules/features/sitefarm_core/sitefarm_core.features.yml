@@ -1,0 +1,35 @@
+bundle: sitefarm
+excluded:
+  - core.entity_form_display.node.sf_page.default
+  - core.entity_form_display.node.sf_article.default
+  - core.entity_view_display.node.sf_article.teaser
+  - core.entity_view_display.node.sf_page.default
+  - core.entity_view_display.node.sf_page.teaser
+  - core.entity_view_display.node.sf_article.default
+  - core.entity_view_display.node.sf_article.listing
+  - core.entity_view_display.node.sf_page.listing
+  - field.field.node.sf_article.field_sf_primary_image
+  - field.field.node.sf_page.field_sf_featured_status
+  - field.field.node.sf_page.field_sf_files
+  - field.field.node.sf_page.field_sf_meta_tags
+  - field.field.node.sf_page.field_sf_primary_image
+  - field.field.node.sf_article.field_sf_tags
+  - field.field.node.sf_article.field_sf_featured_status
+  - field.field.node.sf_article.field_sf_meta_tags
+  - user.role.anonymous
+  - user.role.authenticated
+  - user.role.contributor
+  - user.role.editor
+  - user.role.site_manager
+  - user.role.administrator
+  - user.role.site_builder
+  - core.entity_view_mode.block.token
+  - core.entity_view_mode.block_content.token
+  - core.entity_view_mode.contact_message.token
+  - core.entity_view_mode.file.token
+  - core.entity_view_mode.node.token
+  - core.date_format.long
+  - core.date_format.medium
+  - core.date_format.sf_medium_date_and_time
+  - core.date_format.short
+required: true

@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sf_event_location
+    - node.type.sf_event
+id: node.sf_event.field_sf_event_location
+field_name: field_sf_event_location
+entity_type: node
+bundle: sf_event
+label: Location
+description: 'Ex. Address, building and room number'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

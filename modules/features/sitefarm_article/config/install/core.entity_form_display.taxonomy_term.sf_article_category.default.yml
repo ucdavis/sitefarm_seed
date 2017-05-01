@@ -1,0 +1,49 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.sf_article_category.field_sf_brand_color
+    - field.field.taxonomy_term.sf_article_category.field_sf_primary_image
+    - image.style.thumbnail
+    - taxonomy.vocabulary.sf_article_category
+  module:
+    - image
+    - path
+    - text
+id: taxonomy_term.sf_article_category.default
+targetEntityType: taxonomy_term
+bundle: sf_article_category
+mode: default
+content:
+  description:
+    type: text_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_sf_brand_color:
+    weight: 31
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+  field_sf_primary_image:
+    weight: 32
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+  name:
+    type: string_textfield
+    weight: -5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

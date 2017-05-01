@@ -1,0 +1,34 @@
+sitefarm.admin_index:
+  title: 'SiteFarm'
+  route_name: sitefarm.admin_index
+  description: 'SiteFarm'
+  parent: system.admin_config
+
+sitefarm.cache_clear_form:
+  title: 'Clear Cache'
+  route_name: sitefarm.cache_clear_form
+  description: 'Clear the site Cache.'
+  parent: sitefarm.admin_index
+  weight: 99
+
+sitefarm.metatag_frontpage:
+  title: 'Frontpage SEO'
+  route_name: entity.metatag_defaults.edit_form
+  route_parameters:
+    metatag_defaults: front
+  description: 'Configure Search Engine Optimization options for the Home page.'
+  parent: sitefarm.admin_index
+  weight: 99
+
+sitefarm.fix_broken_links:
+  title: 'Fix Broken Page Links'
+  route_name: redirect_404.fix_404
+  description: 'Fix Broken 404 Page Links by adding redirects.'
+  parent: sitefarm.admin_index
+  weight: 99
+
+sitefarm.cas:
+  title: 'CAS Settings'
+  route_name: sitefarm.cas
+  description: 'Configure CAS settings.'
+  parent: sitefarm.admin_index

@@ -1,0 +1,27 @@
+name: Core
+description: 'Provides core components required by other features.'
+type: module
+core: 8.x
+dependencies:
+  - address
+  - block_content
+  - field
+  - file
+  - image
+  - link
+  - lock_sitefarm_features
+  - metatag
+  - node
+  - options
+  - path
+  - pathauto
+  - sharemessage
+  - sitemap
+  - taxonomy
+  - telephone
+  - text
+  - views
+package: SiteFarm
+
+libraries:
+  - sitefarm_core.ckeditor

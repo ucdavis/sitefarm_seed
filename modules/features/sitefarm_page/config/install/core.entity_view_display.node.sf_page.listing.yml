@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.listing
+    - field.field.node.sf_page.body
+    - field.field.node.sf_page.field_sf_branding
+    - field.field.node.sf_page.field_sf_featured_status
+    - field.field.node.sf_page.field_sf_files
+    - field.field.node.sf_page.field_sf_meta_tags
+    - field.field.node.sf_page.field_sf_primary_image
+    - field.field.node.sf_page.field_sf_tags
+    - node.type.sf_page
+  module:
+    - image
+    - user
+id: node.sf_page.listing
+targetEntityType: node
+bundle: sf_page
+mode: listing
+content:
+  field_sf_primary_image:
+    type: image
+    weight: 0
+    label: hidden
+    settings:
+      image_style: sf_thumbnail
+      image_link: content
+    third_party_settings: {  }
+hidden:
+  body: true
+  field_sf_branding: true
+  field_sf_featured_status: true
+  field_sf_files: true
+  field_sf_meta_tags: true
+  field_sf_tags: true
+  links: true

@@ -1,0 +1,125 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.sf_person.body
+    - field.field.node.sf_person.field_hide_from_lists
+    - field.field.node.sf_person.field_sf_address
+    - field.field.node.sf_person.field_sf_credentials
+    - field.field.node.sf_person.field_sf_emails
+    - field.field.node.sf_person.field_sf_featured_status
+    - field.field.node.sf_person.field_sf_files
+    - field.field.node.sf_person.field_sf_first_name
+    - field.field.node.sf_person.field_sf_last_name
+    - field.field.node.sf_person.field_sf_meta_tags
+    - field.field.node.sf_person.field_sf_name_prefix
+    - field.field.node.sf_person.field_sf_office_hours
+    - field.field.node.sf_person.field_sf_office_location
+    - field.field.node.sf_person.field_sf_person_type
+    - field.field.node.sf_person.field_sf_phone_numbers
+    - field.field.node.sf_person.field_sf_position_title
+    - field.field.node.sf_person.field_sf_primary_image
+    - field.field.node.sf_person.field_sf_tags
+    - field.field.node.sf_person.field_sf_unit
+    - field.field.node.sf_person.field_sf_websites
+    - node.type.sf_person
+  module:
+    - address
+    - image
+    - link
+    - sitefarm_summary
+    - telephone
+    - user
+id: node.sf_person.teaser
+targetEntityType: node
+bundle: sf_person
+mode: teaser
+content:
+  body:
+    type: sitefarm_summary
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_sf_address:
+    type: address_plain
+    weight: 5
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+  field_sf_emails:
+    type: email_mailto
+    weight: 8
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_sf_office_hours:
+    type: basic_string
+    weight: 6
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+  field_sf_office_location:
+    type: string
+    weight: 4
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_sf_phone_numbers:
+    type: telephone_link
+    weight: 7
+    label: hidden
+    settings:
+      title: ''
+    third_party_settings: {  }
+  field_sf_position_title:
+    type: string
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_sf_primary_image:
+    type: image
+    weight: 0
+    label: hidden
+    settings:
+      image_style: sf_thumbnail
+      image_link: content
+    third_party_settings: {  }
+  field_sf_unit:
+    type: string
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_sf_websites:
+    type: link
+    weight: 9
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  links:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_hide_from_lists: true
+  field_sf_credentials: true
+  field_sf_featured_status: true
+  field_sf_files: true
+  field_sf_first_name: true
+  field_sf_last_name: true
+  field_sf_meta_tags: true
+  field_sf_name_prefix: true
+  field_sf_person_type: true
+  field_sf_tags: true
+  langcode: true

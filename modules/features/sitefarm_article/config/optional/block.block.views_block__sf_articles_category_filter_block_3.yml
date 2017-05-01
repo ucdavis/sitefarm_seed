@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.sf_articles_category_filter
+  module:
+    - system
+    - views
+id: views_block__sf_articles_category_filter_block_3
+theme: sitefarm_one
+region: sidebar_second
+weight: -5
+provider: null
+plugin: 'views_block:sf_articles_category_filter-block_3'
+settings:
+  id: 'views_block:sf_articles_category_filter-block_3'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: '/articles/*'
+    negate: false
+    context_mapping: {  }
