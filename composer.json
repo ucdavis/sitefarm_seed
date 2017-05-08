@@ -120,7 +120,7 @@
       },
       "drupal/social_media_links": {
         "Fix errors when icons do not have descriptions": "https://www.drupal.org/files/issues/social_media_links-If_social_media_icon_has_no_description-1817760-1.patch"
-      },
+      }
     }
   }
 }
