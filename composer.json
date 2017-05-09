@@ -109,9 +109,6 @@
         "Profile Inheritance": "https://www.drupal.org/files/issues/1356276-319.patch",
         "multiple image upload dimension fix": "https://www.drupal.org/files/issues/multiple_upload_at_once-2644468-66.patch"
       },
-      "drupal/better_normalizers": {
-        "Get rid of rest dependency after 8.3 core released": "https://www.drupal.org/files/issues/get_rid_of_rest-2851712-2.patch"
-      },
       "drupal/photoswipe": {
         "php error: Render context is empty": "https://www.drupal.org/files/issues/render_context_empty-2824022-4.patch"
       },
