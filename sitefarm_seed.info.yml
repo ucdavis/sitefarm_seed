@@ -4,10 +4,6 @@ description: 'A fast and feature-rich Drupal base install profile.'
 # version: VERSION
 core: 8.x
 
-# Force the installation of this profile since it is a distribution
-distribution:
-  name: SiteFarm Seed
-
 # Required modules
 dependencies:
   # core
