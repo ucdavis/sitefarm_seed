@@ -26,9 +26,3 @@ sitefarm.fix_broken_links:
   description: 'Fix Broken 404 Page Links by adding redirects.'
   parent: sitefarm.admin_index
   weight: 99
-
-sitefarm.cas:
-  title: 'CAS Settings'
-  route_name: sitefarm.cas
-  description: 'Configure CAS settings.'
-  parent: sitefarm.admin_index

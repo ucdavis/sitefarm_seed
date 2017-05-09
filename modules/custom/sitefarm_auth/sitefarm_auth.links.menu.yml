@@ -1,5 +1,0 @@
-sitefarm_auth.admin:
-  title: 'CAS Login'
-  description: 'Log in using you CAS authentication'
-  route_name: cas.login
-  weight: 0

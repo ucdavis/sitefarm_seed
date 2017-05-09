@@ -87,7 +87,6 @@ dependencies:
   - sitefarm_event
   - sitefarm_photo_gallery
   - sitefarm_simple_configuration
-  - sitefarm_auth
   # SiteFarm custom blocks
   - sitefarm_basic_block
   - sitefarm_focal_link

@@ -1,9 +1,0 @@
-name: Auth
-description: 'CAS login for users. Provides a custom login page for CAS users at /login.'
-type: module
-core: 8.x
-dependencies:
-  - cas
-  - externalauth
-version: 8.x-1.0-dev
-package: SiteFarm

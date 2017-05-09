@@ -25,13 +25,3 @@ sitefarm.restrict_configuration_pages:
     _permission: 'administer core configuration'
   options:
     _admin_route: TRUE
-
-sitefarm.cas:
-  path: '/admin/config/sitefarm/cas'
-  defaults:
-    _form: '\Drupal\sitefarm_simple_configuration\Form\CasForm'
-    _title: 'CAS Settings'
-  requirements:
-    _permission: 'administer account settings'
-  options:
-    _admin_route: TRUE
