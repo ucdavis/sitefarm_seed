@@ -106,7 +106,7 @@
     "patches": {
       "drupal/core": {
         "datetime-range views enhancements": "https://www.drupal.org/files/issues/improve_the_views-2786577-28.patch",
-        "Profile Inheritance": "https://www.drupal.org/files/issues/1356276-319.patch",
+        "Profile Inheritance": "https://www.drupal.org/files/issues/1356276-327-8.4.x.patch",
         "multiple image upload dimension fix": "https://www.drupal.org/files/issues/multiple_upload_at_once-2644468-66.patch"
       },
       "drupal/photoswipe": {
