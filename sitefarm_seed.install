@@ -7,7 +7,6 @@
 use Drupal\user\Entity\User;
 use Drupal\shortcut\Entity\Shortcut;
 use Drupal\shortcut\Entity\ShortcutSet;
-use Symfony\Component\Yaml\Yaml;
 
 /**
  * Implements hook_install().
