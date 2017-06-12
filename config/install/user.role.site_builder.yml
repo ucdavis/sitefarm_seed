@@ -58,5 +58,3 @@ permissions:
   - 'edit webform assets'
   - 'edit any webform'
   - 'edit webform source'
-  - 'add trumba spud blocks'
-  - 'administer trumba configuration'

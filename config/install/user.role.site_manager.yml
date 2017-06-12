@@ -52,5 +52,3 @@ permissions:
   - 'edit any webform'
   - 'edit own webform'
   - 'view any webform submission'
-  - 'add trumba spud blocks'
-  - 'administer trumba configuration'

@@ -1,6 +1,3 @@
-cas_register_admin_created:
-  body: "[user:display-name],\n\nA site administrator at [site:name] has created an account for you. You may now log in by clicking this link or copying and pasting it into your browser:\n\n[site:url]login\n\nOnce on the page, click the \"Log In\" button and use your UC Davis CAS credentials to log in.\n\n--  [site:name] team"
-  subject: 'An administrator created an account for you at [site:name]'
 cancel_confirm:
   body: "[user:display-name],\n\nA request to cancel your account has been made at [site:name].\n\nYou may now cancel your account on [site:url-brief] by clicking this link or copying and pasting it into your browser:\n\n[user:cancel-url]\n\nNOTE: The cancellation of your account is not reversible.\n\nThis link expires in one day and nothing will happen if it is not used.\n\n--  [site:name] team"
   subject: 'Account cancellation request for [user:display-name] at [site:name]'
