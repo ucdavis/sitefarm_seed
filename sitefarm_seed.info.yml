@@ -78,6 +78,7 @@ dependencies:
   - rss_feed_block
   # SiteFarm
   - sitefarm_core
+  - sitefarm_image_styles
   - sitefarm_wysiwyg
   - sitefarm_page
   - sitefarm_person
