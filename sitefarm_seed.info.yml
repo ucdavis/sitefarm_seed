@@ -64,10 +64,8 @@ dependencies:
   - redirect
   - redirect_404
   - roleassign
-  - scheduled_updates
   - simple_sitemap
   - token
-  - trumba
   - webform
   - webform_ui
   # Custom
