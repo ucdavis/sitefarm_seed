@@ -1,10 +1,10 @@
-name: sf_slideshow_full
-label: 'Slideshow Full'
 langcode: en
 status: true
 dependencies:
   module:
     - focal_point
+name: sf_slideshow_full
+label: 'Slideshow Full'
 effects:
   sf_slideshow_full_focal_point_scale_and_crop:
     uuid: sf_slideshow_full_focal_point_scale_and_crop

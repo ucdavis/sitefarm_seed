@@ -1,8 +1,8 @@
-name: sf_large_width
-label: 'Large Width (1000px)'
 langcode: en
 status: true
 dependencies: {  }
+name: sf_large_width
+label: 'Large Width (1000px)'
 effects:
   sf_large_width_scale:
     uuid: sf_large_width_scale

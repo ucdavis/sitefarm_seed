@@ -1,8 +1,8 @@
-name: sf_gallery_full
-label: 'Gallery Full'
 langcode: en
 status: true
 dependencies: {  }
+name: sf_gallery_full
+label: 'Gallery Full'
 effects:
   sf_gallery_full_image_scale:
     uuid: sf_gallery_full_image_scale

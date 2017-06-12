@@ -1,10 +1,10 @@
-name: sf_profile
-label: Profile
 langcode: en
 status: true
 dependencies:
   module:
     - focal_point
+name: sf_profile
+label: Profile
 effects:
   sf_profile_focal_point_scale_and_crop:
     uuid: sf_profile_focal_point_scale_and_crop

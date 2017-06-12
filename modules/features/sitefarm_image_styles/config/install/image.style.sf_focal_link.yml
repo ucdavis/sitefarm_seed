@@ -1,10 +1,10 @@
-name: sf_focal_link
-label: 'Focal Link'
 langcode: en
 status: true
 dependencies:
   module:
     - focal_point
+name: sf_focal_link
+label: 'Focal Link'
 effects:
   sf_focal_link_focal_point_scale_and_crop:
     uuid: sf_focal_link_focal_point_scale_and_crop

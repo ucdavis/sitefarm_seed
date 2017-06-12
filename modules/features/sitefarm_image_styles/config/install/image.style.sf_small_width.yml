@@ -1,8 +1,8 @@
-name: sf_small_width
-label: 'Small Width (200px)'
 langcode: en
 status: true
 dependencies: {  }
+name: sf_small_width
+label: 'Small Width (200px)'
 effects:
   sf_small_width_scale:
     uuid: sf_small_width_scale

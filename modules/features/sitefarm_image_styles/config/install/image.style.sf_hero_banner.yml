@@ -1,10 +1,10 @@
-name: sf_hero_banner
-label: 'Hero Banner'
 langcode: en
 status: true
 dependencies:
   module:
     - focal_point
+name: sf_hero_banner
+label: 'Hero Banner'
 effects:
   sf_hero_banner_focal_point_scale_and_crop:
     uuid: sf_hero_banner_focal_point_scale_and_crop

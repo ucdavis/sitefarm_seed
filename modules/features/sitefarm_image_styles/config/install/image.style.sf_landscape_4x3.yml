@@ -1,10 +1,10 @@
-name: sf_landscape_4x3
-label: 'Landscape 4x3'
 langcode: en
 status: true
 dependencies:
   module:
     - focal_point
+name: sf_landscape_4x3
+label: 'Landscape 4x3'
 effects:
   sf_landscape_4x3_focal_point_scale_and_crop:
     uuid: sf_landscape_4x3_focal_point_scale_and_crop

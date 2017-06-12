@@ -1,8 +1,8 @@
-name: sf_medium_width
-label: 'Medium Width (500px)'
 langcode: en
 status: true
 dependencies: {  }
+name: sf_medium_width
+label: 'Medium Width (500px)'
 effects:
   sf_medium_width_scale:
     uuid: sf_medium_width_scale
