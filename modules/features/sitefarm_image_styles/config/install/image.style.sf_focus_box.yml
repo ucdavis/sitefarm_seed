@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: sf_focus_box
+label: 'Focus Box'
+effects:
+  sf_focus_box_focal_point_scale_and_crop:
+    uuid: sf_focus_focal_point_scale_and_crop
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 1000
+      height: 380

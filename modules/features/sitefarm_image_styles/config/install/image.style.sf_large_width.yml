@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: sf_large_width
+label: 'Large Width (1000px)'
+effects:
+  sf_large_width_scale:
+    uuid: sf_large_width_scale
+    id: image_scale
+    weight: 1
+    data:
+      width: 1000
+      height: null
+      upscale: false

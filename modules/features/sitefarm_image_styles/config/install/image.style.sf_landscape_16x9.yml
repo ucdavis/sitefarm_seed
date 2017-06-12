@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: sf_landscape_16x9
+label: 'Landscape 16x9'
+effects:
+  sf_landscape_16x9_focal_point_scale_and_crop:
+    uuid: sf_landscape_16x9_focal_point_scale_and_crop
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1280
+      height: 720

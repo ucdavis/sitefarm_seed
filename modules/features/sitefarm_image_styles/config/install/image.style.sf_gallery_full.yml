@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: sf_gallery_full
+label: 'Gallery Full'
+effects:
+  sf_gallery_full_image_scale:
+    uuid: sf_gallery_full_image_scale
+    id: image_scale
+    weight: 1
+    data:
+      width: 2000
+      height: 2000
+      upscale: false

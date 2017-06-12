@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: sf_hero_banner
+label: 'Hero Banner'
+effects:
+  sf_hero_banner_focal_point_scale_and_crop:
+    uuid: sf_hero_banner_focal_point_scale_and_crop
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 2000
+      height: 770

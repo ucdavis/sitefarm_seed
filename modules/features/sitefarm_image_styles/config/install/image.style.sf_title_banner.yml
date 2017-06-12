@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: sf_title_banner
+label: 'Title Banner'
+effects:
+  sf_title_banner_focal_point_scale_and_crop:
+    uuid: sf_title_banner_focal_point_scale_and_crop
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 2000
+      height: 460

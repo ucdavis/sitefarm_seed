@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: sf_slideshow_thumbnail
+label: 'Slideshow Thumbnail'
+effects:
+  sf_slideshow_thumbnail_focal_point_scale_and_crop:
+    uuid: sf_slideshow_thumbnail_focal_point_scale_and_crop
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 320
+      height: 180

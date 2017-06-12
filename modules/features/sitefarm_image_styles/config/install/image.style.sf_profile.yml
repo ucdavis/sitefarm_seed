@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: sf_profile
+label: Profile
+effects:
+  sf_profile_focal_point_scale_and_crop:
+    uuid: sf_profile_focal_point_scale_and_crop
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 520
+      height: 580
