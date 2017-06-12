@@ -20,10 +20,6 @@ menu_breadcrumb_menus:
     weight: '0'
     enabled: 0
     taxattach: 0
-  quick-links:
-    weight: '0'
-    enabled: 0
-    taxattach: 0
   tools:
     weight: '0'
     enabled: 0

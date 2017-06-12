@@ -30,4 +30,3 @@ permissions:
   - 'create webform'
   - 'delete own webform'
   - 'edit own webform'
-  - 'add trumba spud blocks'
