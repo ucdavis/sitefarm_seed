@@ -23,7 +23,6 @@ function sitefarm_core_form_alter(&$form, FormStateInterface $form_state, $form_
 
   // Move the tags and branding fields to the Categorization group
   $advanced_tabs->moveField('field_sf_tags', 'categorizing');
-  $advanced_tabs->moveField('field_sf_branding', 'categorizing');
   $form = $advanced_tabs->save();
 
   // Alter the 'Add another item' text on the Email field
@@ -110,11 +109,6 @@ function sitefarm_core_form_block_form_alter(&$form, FormStateInterface $form_st
     $form['visibility'] = array('request_path' => $form['visibility']['request_path']) + $form['visibility'];
     // Move the visibility tabs back to the top so that everything below it renders
     $form['visibility'] = array('visibility_tabs' => $form['visibility']['visibility_tabs']) + $form['visibility'];
-  }
-
-  // Default the Search block title to disabled
-  if ($block_plugin->getBaseId() == 'search_form_block') {
-    $form_helper->unCheckBlockTitle($form, $form_state);
   }
 }
 
@@ -242,75 +236,6 @@ function sitefarm_core_toolbar_alter(&$items) {
       $items['block_place']['tab']['#url'] = $new_url;
     }
   }
-
-  // Remove the Acquia Connector notice nagging in the toolbar
-  if (isset($items['acquia_connector'])) {
-    unset($items['acquia_connector']);
-  }
-}
-
-/**
- * Implements hook_preprocess_status_messages().
- */
-function sitefarm_core_preprocess_status_messages(array &$variables) {
-  // Delete Acquia Connector warning messages
-  $message_count = count($variables['message_list']);
-  $warning_count = 0;
-  $acquia_connector_warning = FALSE;
-
-  if (isset($variables['message_list']['warning'])) {
-    $warning_count = count($variables['message_list']['warning']);
-
-    foreach ($variables['message_list']['warning'] as $key => $value) {
-      if (is_object($value) && strpos($value->__toString(), 'Acquia Subscription')) {
-        $acquia_connector_warning = TRUE;
-        if ($warning_count == 1) {
-          unset($variables['message_list']['warning']);
-        }
-        else {
-          unset($variables['message_list']['warning'][$key]);
-        }
-      }
-    }
-  }
-
-  // Remove this message alert if the only message is a acquia message
-  if ($message_count == 1 && $warning_count == 1 && $acquia_connector_warning) {
-    unset($variables['message_list']);
-  }
-}
-
-/**
- * Implements hook_page_attachments_alter().
- */
-function sitefarm_core_page_attachments_alter(array &$attachments) {
-  if (preg_match("/^.*\.ucdavis\.edu$/", $_SERVER["HTTP_HOST"])) {
-    // Only on *.ucdavis.edu sites
-    $ga_inject =
-      "ga('create', 'UA-398023-53', 'auto', 'globalTracker');" .
-      "ga('globalTracker.send', 'pageview');" .
-      "ga('create', 'UA-75813690-2', 'auto', 'globalTrackerSiteFarm');" .
-      "ga('globalTrackerSiteFarm.send', 'pageview');";
-    if (!preg_match("/^UA-/", \Drupal::config('google_analytics.settings')->get('account'))) {
-      // Add a GA attachment since one doesn't already exist.
-      $attachments['#attached']['html_head'][] = [
-        0 => [
-          '#value' => '(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("set", "anonymizeIp", true);' . $ga_inject,
-          '#tag' => 'script',
-        ],
-        1 => 'google_analytics_tracking_script',
-      ];
-    }
-    else {
-      // GA attachment already exists. Inject the SiteFarm and StratComm GA IDs.
-      foreach ($attachments['#attached']['html_head'] as $key => $attachment) {
-        if (in_array('google_analytics_tracking_script', $attachment)) {
-          $attachments['#attached']['html_head'][$key][0]['#value'] .= $ga_inject;
-          break;
-        }
-      }
-    }
-  }
 }
 
 /**
@@ -318,21 +243,11 @@ function sitefarm_core_page_attachments_alter(array &$attachments) {
  */
 function sitefarm_core_themes_installed(array $theme_list) {
   // Each theme needs the ability to override image styles so that they can
-  // match the style for the custom theme. In addition, subthemes of
-  // sitefarm_one may want to alter an image style. This searches for any
-  // sitefarm image style config in a newly installed theme by looking for a
-  // prefix of "sf_".
+  // match the style for the custom theme. In addition, subthemes may want to
+  // alter an image style. This searches for any sitefarm image style config in
+  // a newly installed theme by looking for a prefix of "sf_".
 
-  // Exit if this is the first time the sitefarm_one is installed during install
-  if (in_array('sitefarm_one', $theme_list)) {
-    $new_config = \Drupal::config('image.style.sf_focal_link')->isNew();
-
-    if ($new_config) {
-      return;
-    }
-  }
-
-  // Loop through each of the newly installed theme
+  // Loop through each of the newly installed themes
   foreach ($theme_list as $theme_name) {
     // Exit if the theme does not have config
     $theme_config_path = DRUPAL_ROOT . base_path() . drupal_get_path('theme', $theme_name) . '/config/optional';
@@ -371,32 +286,4 @@ function sitefarm_core_themes_uninstalled(array $themes) {
   // datetime_range_field_views_data()
   // (line 14 of core/modules/datetime_range/datetime_range.views.inc).
   drupal_flush_all_caches();
-}
-
-/**
- * Implements hook_preprocess_block().
- */
-function sitefarm_core_preprocess_block(&$variables) {
-
-  // Add some Sitefarm specific help text to the Help page block.
-  if ($variables['base_plugin_id'] == 'help_block' && isset($variables['content'][0]['#markup'])) {
-    $markup = $variables['content'][0]['#markup'];
-
-    $custom = <<<EOT
-
-<h2>SiteFarm Resources</h2>
-<p><strong>Training for everyone:</strong><br>
-<a href="http://sitefarm.ucdavis.edu/training/all">http://sitefarm.ucdavis.edu/training/all</a></p>
-<p><strong>Training for managers:</strong><br>
-<a href="http://sitefarm.ucdavis.edu/training/managers">http://sitefarm.ucdavis.edu/training/managers</a></p>
-<p>&nbsp;</p>
-
-EOT;
-
-    // Only do this to the Help "Getting Started" block
-    if (strpos($markup, 'Getting Started')) {
-      $variables['content'][0]['#markup'] = $custom . $markup;
-    }
-  }
-
 }
