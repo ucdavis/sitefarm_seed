@@ -1,0 +1,15 @@
+name: sf_thumbnail
+label: Thumbnail
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+effects:
+  sf_thumbnail_focal_point_scale_and_crop:
+    uuid: sf_thumbnail_focal_point_scale_and_crop
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 135
+      height: 135

@@ -1,0 +1,7 @@
+name: 'Image Styles'
+description: 'Base Image styles for SiteFarm features.'
+type: module
+core: 8.x
+dependencies:
+  - image
+package: SiteFarm
