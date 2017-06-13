@@ -73,9 +73,9 @@ class LockFeatureAccess implements AccessInterface {
    * @var array
    */
   protected $lockedTextFormats = array(
-    'basic_html',
-    'restricted_html',
-    'full_html',
+    'sf_basic_html',
+    'sf_restricted_html',
+    'sf_full_html',
     'plain_text',
   );
 

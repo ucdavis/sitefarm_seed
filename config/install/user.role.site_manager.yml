@@ -10,7 +10,7 @@ permissions:
   - 'administer blocks'
   - 'access contextual links'
   - 'access files overview'
-  - 'use text format full_html'
+  - 'use text format sf_full_html'
   - 'administer google analytics'
   - 'administer honeypot'
   - 'access content overview'

@@ -1,7 +1,7 @@
 page_title: Sitemap
 message:
   value: ''
-  format: restricted_html
+  format: sf_restricted_html
 show_front: false
 show_titles: true
 show_books: {  }

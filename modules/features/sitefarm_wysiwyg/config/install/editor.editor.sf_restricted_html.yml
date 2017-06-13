@@ -2,10 +2,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - filter.format.restricted_html
+    - filter.format.sf_restricted_html
   module:
     - ckeditor
-format: restricted_html
+format: sf_restricted_html
 editor: ckeditor
 settings:
   toolbar:

@@ -561,7 +561,7 @@ display:
           tokenize: false
           content:
             value: 'There are currently no blog posts to display.'
-            format: basic_html
+            format: sf_basic_html
           plugin_id: text
     cache_metadata:
       max-age: -1
@@ -656,7 +656,7 @@ display:
           tokenize: false
           content:
             value: 'There are no results for this term.'
-            format: basic_html
+            format: sf_basic_html
           plugin_id: text
     cache_metadata:
       max-age: -1

@@ -557,7 +557,7 @@ display:
           tokenize: false
           content:
             value: 'There are currently no news posts to display.'
-            format: basic_html
+            format: sf_basic_html
           plugin_id: text
       defaults:
         empty: false
@@ -667,7 +667,7 @@ display:
           tokenize: false
           content:
             value: 'There are no results for this term.'
-            format: basic_html
+            format: sf_basic_html
           plugin_id: text
     cache_metadata:
       max-age: -1

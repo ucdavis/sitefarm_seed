@@ -523,7 +523,7 @@ display:
           tokenize: false
           content:
             value: 'No results matched the name or keywords entered.'
-            format: basic_html
+            format: sf_basic_html
           plugin_id: text
       relationships:
         field_sf_person_type:

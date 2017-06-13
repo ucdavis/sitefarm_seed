@@ -6,7 +6,7 @@ dependencies:
     - editor
     - url_embed
 name: 'Basic HTML'
-format: basic_html
+format: sf_basic_html
 weight: 0
 filters:
   filter_html:

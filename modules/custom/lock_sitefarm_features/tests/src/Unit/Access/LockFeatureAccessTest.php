@@ -39,7 +39,7 @@ class LockFeatureAccessTest extends UnitTestCase {
     $parameters = [
       'node_type' => 'sf_page',
       'block_content_type' => 'sf_basic',
-      'filter_format' => 'basic_html',
+      'filter_format' => 'sf_basic_html',
       'pathauto_pattern' => 'sf_page',
       'taxonomy_vocabulary' => 'sf_tags',
       'view' => 'sf_articles_recent',
@@ -82,7 +82,7 @@ class LockFeatureAccessTest extends UnitTestCase {
    */
   public function testGetLockedTextFormats() {
     $return = $this->access->getLockedTextFormats();
-    $this->assertContains('basic_html', $return);
+    $this->assertContains('sf_basic_html', $return);
   }
 
   /**
