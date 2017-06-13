@@ -76,7 +76,7 @@ class LockFeatureAccess implements AccessInterface {
     'sf_basic_html',
     'sf_restricted_html',
     'sf_full_html',
-    'plain_text',
+    'sf_plain_text',
   );
 
   /**
