@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.sf_event.field_sf_featured_status
     - field.field.node.sf_event.field_sf_files
     - field.field.node.sf_event.field_sf_meta_tags
-    - field.field.node.sf_event.field_sf_person_reference
     - field.field.node.sf_event.field_sf_primary_image
     - field.field.node.sf_event.field_sf_tags
     - node.type.sf_event
@@ -75,7 +74,6 @@ hidden:
   field_sf_featured_status: true
   field_sf_files: true
   field_sf_meta_tags: true
-  field_sf_person_reference: true
   field_sf_tags: true
   links: true
   sharemessage__sf_social_share_buttons: true
