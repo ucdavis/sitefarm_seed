@@ -4,7 +4,13 @@ namespace Drupal\Tests\site_credits\Unit\Plugin\Block;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\site_credits\Plugin\Block\SiteCreditsBlock;
+use Drupal\Core\DependencyInjection\ContainerBuilder;
+use Drupal\Core\Access\AccessManagerInterface;
 
+/**
+ * @coversDefaultClass \Drupal\site_credits\Plugin\Block\SiteCreditsBlock
+ * @group site_credits
+ */
 class SiteCreditsBlockTest extends UnitTestCase
 {
 
@@ -156,6 +162,82 @@ class SiteCreditsBlockTest extends UnitTestCase
     );
 
     $this->assertEquals($expectedBuild, $this->plugin->build());
+  }
+
+  /**
+   * Tests blockForm().
+   */
+  public function testBlockForm() {
+    // Set up the Service Container
+    $access_manager = $this->prophesize(AccessManagerInterface::CLASS);
+    $access_manager->checkNamedRoute("system.theme_settings_theme", ["theme" => null], null)->willReturn(TRUE);
+    $access_manager->checkNamedRoute("system.site_information_settings", [], null)->willReturn(TRUE);
+    $container = new ContainerBuilder();
+    $container->set('access_manager', $access_manager->reveal());
+    \Drupal::setContainer($container);
+
+    // Default config
+    $form = [];
+    $return = $this->plugin->blockForm($form, $this->formState);
+
+    $this->assertTrue($return['display']['use_site_logo']['#default_value']);
+    $this->assertTrue($return['display']['use_site_name']['#default_value']);
+    $this->assertTrue($return['display']['use_site_slogan']['#default_value']);
+    $this->assertTrue($return['display']['use_site_credit_info']['#default_value']);
+
+    $this->assertEquals('link', $return['display']['use_site_logo']['#description']['#type']);
+    $this->assertEquals('link', $return['display']['use_site_name']['#description']['#type']);
+    $this->assertEquals('link', $return['display']['use_site_slogan']['#description']['#type']);
+    $this->assertEquals('link', $return['display']['use_site_credit_info']['#description']['#type']);
+
+    // Altered config
+    $this->plugin->setConfiguration([
+      'use_site_logo' => FALSE,
+      'use_site_name' => FALSE,
+      'use_site_slogan' => FALSE,
+      'use_site_credit_info' => FALSE
+    ]);
+    $return = $this->plugin->blockForm($form, $this->formState);
+
+    $this->assertFalse($return['display']['use_site_logo']['#default_value']);
+    $this->assertFalse($return['display']['use_site_name']['#default_value']);
+    $this->assertFalse($return['display']['use_site_slogan']['#default_value']);
+    $this->assertFalse($return['display']['use_site_credit_info']['#default_value']);
+  }
+
+  /**
+   * Tests Block Form Access Denied to change theme and config settings
+   *
+   * @covers ::blockForm()
+   */
+  public function testBlockFormSettingAccessDenied() {
+    // Set up the Service Container
+    $access_manager = $this->prophesize(AccessManagerInterface::CLASS);
+    $access_manager->checkNamedRoute("system.theme_settings_theme", ["theme" => null], null)->willReturn(FALSE);
+    $access_manager->checkNamedRoute("system.site_information_settings", [], null)->willReturn(FALSE);
+    $container = new ContainerBuilder();
+    $container->set('access_manager', $access_manager->reveal());
+    \Drupal::setContainer($container);
+
+    // Access Denied to change theme and config settings
+    $form = [];
+    $return = $this->plugin->blockForm($form, $this->formState);
+    $this->assertEquals(
+      'Defined on the Theme Settings page. You do not have the appropriate permissions to change the site logo.',
+      $return['display']['use_site_logo']['#description']
+    );
+    $this->assertEquals(
+      'Defined on the Site Information page. You do not have the appropriate permissions to change the site name.',
+      $return['display']['use_site_name']['#description']
+    );
+    $this->assertEquals(
+      'Defined on the Site Information page. You do not have the appropriate permissions to change the site slogan.',
+      $return['display']['use_site_slogan']['#description']
+    );
+    $this->assertEquals(
+      'Defined on the Site Information page. You do not have the appropriate permissions to change the site credits information.',
+      $return['display']['use_site_credit_info']['#description']
+    );
   }
 
 }

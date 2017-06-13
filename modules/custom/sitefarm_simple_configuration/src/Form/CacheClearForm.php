@@ -14,6 +14,8 @@ class CacheClearForm extends ConfigFormBase {
 
   /**
    * {@inheritdoc}
+   *
+   * @codeCoverageIgnore
    */
   protected function getEditableConfigNames() {
     return [];
@@ -53,6 +55,15 @@ class CacheClearForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $this->clearCaches();
+  }
+
+  /**
+   * Clear all Drupal caches and set a message
+   *
+   * @codeCoverageIgnore
+   */
+  protected function clearCaches() {
     drupal_flush_all_caches();
     drupal_set_message($this->t('Caches cleared.'));
   }

@@ -5,9 +5,13 @@ namespace Drupal\Tests\sitefarm_summary\Plugin\Field\FieldFormatter;
 use Drupal\Tests\UnitTestCase;
 use Drupal\sitefarm_summary\Plugin\Field\FieldFormatter\SitefarmSummary;
 use Drupal\Core\Field\FieldDefinitionInterface;
-use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Field\FieldItemList;
+use Drupal\Core\TypedData\DataDefinitionInterface;
 
-
+/**
+ * @coversDefaultClass \Drupal\sitefarm_summary\Plugin\Field\FieldFormatter\SitefarmSummary
+ * @group sitefarm_summary
+ */
 class SitefarmSummaryTest extends UnitTestCase
 {
   /**
@@ -61,22 +65,26 @@ class SitefarmSummaryTest extends UnitTestCase
   public function testViewElements()
   {
     $expected = [
-      '#type' => 'markup',
-      '#markup' => 'summary text',
+      'test_field' => [
+        '#type' => 'markup',
+        '#markup' => 'summary text',
+      ]
     ];
 
     $item = new \stdClass();
-    $item->summary = 'summary test';
+    $item->summary = 'summary text';
 
-    $items = $this->prophesize(FieldItemListInterface::CLASS);
-//    $items->rewind()->willReturn([]);
-//    $items->valid()->willReturn(TRUE);
-//    $items->current()->willReturn($item);
-//    $items->key()->willReturn(0);
-//    $items->next()->willReturn(0);
+    $definition = $this->prophesize(DataDefinitionInterface::CLASS);
+    $items = new FieldItemList($definition->reveal());
 
-    // TODO: figure out how to mock the iterator. For now just expect an empty array
-    $this->assertArrayEquals([], $this->plugin->viewElements($items->reveal(), 'en'));
+    // Use reflection to alter the protected $items->list
+    $reflectionObject = new \ReflectionObject($items);
+    $property = $reflectionObject->getProperty('list');
+    $property->setAccessible(true);
+    $property->setValue($items, ['test_field' => $item]);
+
+    $return = $this->plugin->viewElements($items, 'en');
+    $this->assertArrayEquals($expected, $return);
   }
 
 }
