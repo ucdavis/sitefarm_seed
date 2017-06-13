@@ -8,8 +8,8 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Cache\Cache;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\node\Entity\Node;
-use Drupal\image\Entity\ImageStyle;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Render\Renderer;
 
 /**
  * Provides a 'SlideshowGalleryBlock' block.
@@ -30,6 +30,20 @@ class SlideshowGalleryBlock extends BlockBase implements ContainerFactoryPluginI
   protected $configFactory;
 
   /**
+   * Instance of the Entity Type Manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * Instance of the Renderer service.
+   *
+   * @var \Drupal\Core\Render\Renderer
+   */
+  protected $renderer;
+
+  /**
    * Creates a SlideshowGalleryBlock instance.
    *
    * @param array $configuration
@@ -40,10 +54,14 @@ class SlideshowGalleryBlock extends BlockBase implements ContainerFactoryPluginI
    *   The plugin implementation definition.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The factory for configuration objects.
+   * @param EntityTypeManagerInterface $entityTypeManager
+   * @param Renderer $renderer
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entityTypeManager, Renderer $renderer) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->configFactory = $config_factory;
+    $this->entityTypeManager = $entityTypeManager;
+    $this->renderer = $renderer;
   }
 
   /**
@@ -54,7 +72,9 @@ class SlideshowGalleryBlock extends BlockBase implements ContainerFactoryPluginI
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('config.factory')
+      $container->get('config.factory'),
+      $container->get('entity_type.manager'),
+      $container->get('renderer')
     );
   }
 
@@ -78,7 +98,7 @@ class SlideshowGalleryBlock extends BlockBase implements ContainerFactoryPluginI
     // Fetch the default node
     $node = FALSE;
     if (isset($this->configuration['gallery'])) {
-      $node = Node::load($this->configuration['gallery']);
+      $node = $this->entityTypeManager->getStorage('node')->load($this->configuration['gallery']);
     }
 
     $form['display'] = array(
@@ -134,15 +154,12 @@ class SlideshowGalleryBlock extends BlockBase implements ContainerFactoryPluginI
    * {@inheritdoc}
    */
   public function build() {
-    // Renderer for cache busting
-    $renderer = \Drupal::service('renderer');
-
     // Get the config for this block
     $config = $this->getConfiguration();
 
     // Fetch the photo gallery node
     $nid = $config['gallery'];
-    $node = Node::load($nid);
+    $node = $this->entityTypeManager->getStorage('node')->load($nid);
 
     // Return empty if there is no node attached (something went wrong)
     if (!$node) {
@@ -156,8 +173,8 @@ class SlideshowGalleryBlock extends BlockBase implements ContainerFactoryPluginI
     $props = $field->getValue();
     $slides = $field->referencedEntities();
 
-    $style_full = ImageStyle::load('sf_slideshow_full');
-    $style_thumb = ImageStyle::load('sf_slideshow_thumbnail');
+    $style_full = $this->entityTypeManager->getStorage('image_style')->load('sf_slideshow_full');
+    $style_thumb = $this->entityTypeManager->getStorage('image_style')->load('sf_slideshow_thumbnail');
 
     $slides_main = [];
     $slides_nav = [];
@@ -177,7 +194,7 @@ class SlideshowGalleryBlock extends BlockBase implements ContainerFactoryPluginI
 
       // Add the file entity to the cache dependencies.
       // This will clear our cache when this entity updates.
-      $renderer->addCacheableDependency($image_build, $file);
+      $this->renderer->addCacheableDependency($image_build, $file);
 
       $slides_main[] = [
         'image' => $image_build,
@@ -191,7 +208,7 @@ class SlideshowGalleryBlock extends BlockBase implements ContainerFactoryPluginI
         $thumb_build = $image_build;
         $thumb_build['#style_name'] = 'sf_slideshow_thumbnail';
 
-        $renderer->addCacheableDependency($thumb_build, $file);
+        $this->renderer->addCacheableDependency($thumb_build, $file);
 
         $slides_nav[] = [
           'image' => $thumb_build,

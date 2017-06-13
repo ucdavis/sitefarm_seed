@@ -133,7 +133,7 @@ class BlockContentGenerateDescription {
     $words = preg_split('/\s+/', $clean_text);
 
     foreach ($words as $word) {
-      $prefix .= $word[0];
+      $prefix .= strtoupper($word[0]);
     }
 
     return $prefix;

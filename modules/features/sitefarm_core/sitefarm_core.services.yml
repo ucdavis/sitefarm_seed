@@ -5,7 +5,7 @@ services:
 
   sf.block_form_helpers:
     class: Drupal\sitefarm_core\BlockConfigFormHelpers
-    arguments: []
+    arguments: ['@entity.repository']
 
   sf.block_content_generate_description:
       class: Drupal\sitefarm_core\BlockContentGenerateDescription

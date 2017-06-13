@@ -30,8 +30,8 @@ class DateRangeMergeFormatter extends DateTimeDefaultFormatter {
    */
   public static function defaultSettings() {
     return [
-      'show_day_name' => '1',
-      'show_time' => '1',
+      'show_day_name' => TRUE,
+      'show_time' => TRUE,
       'separator' => ' ~ ',
     ] + parent::defaultSettings();
   }

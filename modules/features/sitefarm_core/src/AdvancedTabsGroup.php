@@ -2,6 +2,8 @@
 
 namespace Drupal\sitefarm_core;
 
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+
 /**
  * Class AdvancedTabsGroup.
  *
@@ -10,18 +12,13 @@ namespace Drupal\sitefarm_core;
  * @package Drupal\sitefarm_core
  */
 class AdvancedTabsGroup implements AdvancedTabsGroupInterface {
+  // Ensure we have the ability to use string translation $this->t().
+  use StringTranslationTrait;
 
   /**
    * @var $form
    */
   protected $form;
-
-  /**
-   * Constructor.
-   */
-  public function __construct() {
-
-  }
 
   /**
    * {@inheritdoc}
@@ -48,7 +45,7 @@ class AdvancedTabsGroup implements AdvancedTabsGroupInterface {
     // Create the new group
     $this->form[$machine_name] = array(
       '#type' => 'details',
-      '#title' => t($title),
+      '#title' => $this->t($title),
       '#group' => 'advanced',
       '#weight' => $weight,
       '#optional' => TRUE,
