@@ -2,7 +2,6 @@
 
 namespace Drupal\sitefarm_core\Hooks;
 
-use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\sitefarm_core\BlockConfigFormHelpers;
 
 /**
@@ -13,8 +12,6 @@ use Drupal\sitefarm_core\BlockConfigFormHelpers;
  * @package Drupal\sitefarm_core\Hooks
  */
 class BlockFormAlter {
-  // Ensure we have the ability to use string translation $this->t().
-  use StringTranslationTrait;
 
   /**
    * The advanced tabs group service.

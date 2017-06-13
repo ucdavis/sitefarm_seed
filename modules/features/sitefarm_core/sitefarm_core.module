@@ -43,22 +43,21 @@ function sitefarm_core_form_alter(&$form, FormStateInterface $form_state, $form_
  * hook_form_BASE_FORM_ID_alter() for the node_form.
  */
 function sitefarm_core_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Fetch Helper services
+  $node_helper = \Drupal::service('sf.hooks.node_form_alter');
+
   // Remove the menu 'Weight' field so that it doesn't confuse people
-  if (isset($form['menu'])) {
-    $form['menu']['link']['weight']['#access'] = FALSE;
-  }
+  $node_helper->removeMenuWeight($form);
 
   // Change the Meta Tags label to 'SEO'
-  if (isset($form['field_sf_meta_tags'])) {
-    $form['field_sf_meta_tags']['widget'][0]['#title'] = 'SEO';
-  }
+  $node_helper->setMetaTagsTitle($form, 'SEO');
 
   // Attach javascript to ensure that required javascript fields don't go under
   // the admin toolbar
-  $form['#attached']['library'][] = 'sitefarm_core/sitefarm_core.required_fields';
+  $node_helper->attachToolbarHidingPreventionJs($form);
 
   // Add a label to the sidebar
-  $form['advanced']['#prefix'] = '<h2>' . t('Additional Options') . '</h2>';
+  $node_helper->addTitleToSidebar($form, 'Additional Options');
 }
 
 /**
