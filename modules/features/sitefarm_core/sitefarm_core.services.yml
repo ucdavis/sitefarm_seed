@@ -8,10 +8,18 @@ services:
     arguments: ['@entity.repository']
 
   sf.block_content_generate_description:
-      class: Drupal\sitefarm_core\BlockContentGenerateDescription
-      arguments: ['@database', '@entity_type.bundle.info']
+    class: Drupal\sitefarm_core\BlockContentGenerateDescription
+    arguments: ['@database', '@entity_type.bundle.info']
 
   sf.route_subscriber:
     class: Drupal\sitefarm_core\Routing\RouteSubscriber
     tags:
       - { name: event_subscriber }
+
+  sf.hooks.form_alter:
+    class: Drupal\sitefarm_core\Hooks\FormAlter
+    arguments: ['@sf.advanced_tabs']
+
+  sf.hooks.block_form_alter:
+    class: Drupal\sitefarm_core\Hooks\BlockFormAlter
+    arguments: ['@sf.block_form_helpers']

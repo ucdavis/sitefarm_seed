@@ -12,37 +12,31 @@ use Drupal\Core\Database\Query\Condition;
  * Implements hook_form_alter().
  */
 function sitefarm_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  // Move Node Edit fields into the advanced tabs group
-  $advanced_tabs = \Drupal::service('sf.advanced_tabs')->loadForm($form);
+  // Fetch Helper services
+  $helper = \Drupal::service('sf.hooks.form_alter');
+  $block_helper = \Drupal::service('sf.hooks.block_form_alter');
 
   // Move the Feature Content field to the Promotion Options group
-  $advanced_tabs->moveField('field_sf_featured_status', 'options');
+  $helper->moveFeaturedToOptionsGroup($form);
 
   // Create a Categorizing tray for types with taxonomy references
-  $advanced_tabs->createGroup('categorizing', 'Categorizing', 94);
+  $helper->createCategorizingGroup($form);
 
   // Move the tags and branding fields to the Categorization group
-  $advanced_tabs->moveField('field_sf_tags', 'categorizing');
-  $form = $advanced_tabs->save();
+  $helper->moveTagsToCategorizingGroup($form);
 
   // Alter the 'Add another item' text on the Email field
-  if (isset($form['field_sf_emails']['widget']['add_more']['#value'])) {
-    $form['field_sf_emails']['widget']['add_more']['#value'] = t('Add another email');
-  }
+  $helper->setAddAnotherItemLabel($form, 'field_sf_emails', 'Add another email');
+
   // Alter the 'Add another item' text on the Phone Number field
-  if (isset($form['field_sf_phone_numbers']['widget']['add_more']['#value'])) {
-    $form['field_sf_phone_numbers']['widget']['add_more']['#value'] = t('Add another phone number');
-  }
+  $helper->setAddAnotherItemLabel($form, 'field_sf_phone_numbers', 'Add another phone number');
+
   // Alter the 'Add another item' text on the Website field
-  if (isset($form['field_sf_websites']['widget']['add_more']['#value'])) {
-    $form['field_sf_websites']['widget']['add_more']['#value'] = t('Add another Website');
-  }
+  $helper->setAddAnotherItemLabel($form, 'field_sf_websites', 'Add another Website');
 
   // Add javascript to check the url path and populate the path visibility with
-  // the current page if using
-  if ($form_id == 'block_form') {
-    $form['#attached']['library'][] = 'sitefarm_core/sitefarm_core.blocks_path_visibility';
-  }
+  // the current page if using the Place Block module
+  $block_helper->attachPlaceBlockVisibilityJs($form, $form_id);
 }
 
 /**
@@ -83,33 +77,14 @@ function sitefarm_core_form_block_content_form_alter(&$form, FormStateInterface 
  * For the ID form_block.
  */
 function sitefarm_core_form_block_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  // Get the Sitefarm forms helper service
-  $form_helper = \Drupal::service('sf.block_form_helpers');
-  $block_plugin = $form_helper->getBlockEntityPlugin($form_state);
+  // Fetch Helper services
+  $block_helper = \Drupal::service('sf.hooks.block_form_alter');
 
   // Hide the following visibility options
-  $hide = [
-    'entity_bundle:block_content',
-    'entity_bundle:contact_message',
-    'entity_bundle:crop',
-    'entity_bundle:redirect',
-    'entity_bundle:scheduled_update',
-    'entity_bundle:shortcut',
-    'entity_bundle:menu_link_content',
-    'node_type',
-  ];
-
-  foreach ($hide as $name) {
-    unset($form['visibility'][$name]);
-  }
+  $block_helper->hideVisibilityOptions($form);
 
   // Move the path visibility to the top
-  if (isset($form['visibility']['request_path'])) {
-    // Move the path to the top of the array
-    $form['visibility'] = array('request_path' => $form['visibility']['request_path']) + $form['visibility'];
-    // Move the visibility tabs back to the top so that everything below it renders
-    $form['visibility'] = array('visibility_tabs' => $form['visibility']['visibility_tabs']) + $form['visibility'];
-  }
+  $block_helper->movePathVisibilityToTop($form);
 }
 
 /**
