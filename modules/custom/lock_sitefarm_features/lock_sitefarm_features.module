@@ -16,7 +16,7 @@ function lock_sitefarm_features_element_info_alter(array &$info) {
  * Implements hook_entity_operation_alter().
  */
 function lock_sitefarm_features_entity_operation_alter(array &$operations, EntityInterface $entity) {
-  $lock = new LockFeatureAccess();
+  $lock = \Drupal::service('access_check.lock_sitefarm_features');
   $entity_type = $entity->getEntityTypeId();
 
   if (\Drupal::currentUser()->id() != 1) {
