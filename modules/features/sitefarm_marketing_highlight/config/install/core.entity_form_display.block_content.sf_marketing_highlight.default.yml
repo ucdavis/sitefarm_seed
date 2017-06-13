@@ -5,7 +5,6 @@ dependencies:
     - block_content.type.sf_marketing_highlight
     - field.field.block_content.sf_marketing_highlight.field_sf_image
     - field.field.block_content.sf_marketing_highlight.field_sf_link
-    - field.field.block_content.sf_marketing_highlight.field_sf_mh_badge_label
     - field.field.block_content.sf_marketing_highlight.field_sf_mh_call_to_action
     - field.field.block_content.sf_marketing_highlight.field_sf_mh_description
     - field.field.block_content.sf_marketing_highlight.field_sf_title
@@ -32,13 +31,6 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
-  field_sf_mh_badge_label:
-    weight: 6
-    settings:
-      size: 15
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
   field_sf_mh_call_to_action:
     weight: 5
     settings:
