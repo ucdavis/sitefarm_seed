@@ -7,7 +7,7 @@ weight: -10
 is_admin: false
 permissions:
   - 'access content'
-  - 'use text format restricted_html'
+  - 'use text format sf_restricted_html'
   - 'access site-wide contact form'
   - 'search content'
   - 'access sitemap'

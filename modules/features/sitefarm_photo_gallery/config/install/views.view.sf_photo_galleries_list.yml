@@ -359,7 +359,7 @@ display:
           tokenize: false
           content:
             value: 'Sorry, no galleries have been added yet.'
-            format: basic_html
+            format: sf_basic_html
           plugin_id: text
       relationships: {  }
       arguments:
@@ -654,7 +654,7 @@ display:
           tokenize: false
           content:
             value: 'Sorry, no galleries have been added to this category.'
-            format: basic_html
+            format: sf_basic_html
           plugin_id: text
     cache_metadata:
       max-age: -1

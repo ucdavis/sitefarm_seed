@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - filter.format.basic_html
+    - filter.format.sf_basic_html
   module:
     - ckeditor
     - editor_file
@@ -12,7 +12,7 @@ third_party_settings:
     scheme: public
     directory: inline-files
     extensions: 'txt zip xls xlsx doc docx pdf'
-format: basic_html
+format: sf_basic_html
 editor: ckeditor
 settings:
   toolbar:

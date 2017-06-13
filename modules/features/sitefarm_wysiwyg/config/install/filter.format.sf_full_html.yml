@@ -4,7 +4,7 @@ dependencies:
   module:
     - editor
 name: 'Full HTML'
-format: full_html
+format: sf_full_html
 weight: 1
 filters:
   filter_align:

@@ -211,13 +211,13 @@ function sitefarm_core_node_view(array &$build, EntityInterface $entity, EntityV
     && isset($build['body']['#formatter'])
     && $build['body']['#formatter'] == 'text_summary_or_trimmed'
   ) {
-    $build['body'][0]['#format'] = 'restricted_html';
+    $build['body'][0]['#format'] = 'sf_restricted_html';
   }
 
   // Strip Poster view mode html and use plain text filter
   if ($view_mode == 'poster' && isset($build['body'][0]['#format'])) {
     $build['body'][0]['#text'] = strip_tags($build['body'][0]['#text']);
-    $build['body'][0]['#format'] = 'plain_text';
+    $build['body'][0]['#format'] = 'sf_plain_text';
   }
 }
 

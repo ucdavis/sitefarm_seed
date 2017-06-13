@@ -22,7 +22,7 @@ Feature: SiteFarm Feature Lock
   Scenario: SiteFarm Text Formats should be locked
     Given I am at "admin/config/content/formats"
     Then I should see "Locked" in the "Admin Content" region
-    Given I am on "admin/config/content/formats/manage/basic_html"
+    Given I am on "admin/config/content/formats/manage/sf_basic_html"
     Then I should get a "403" HTTP response
 
   @api

@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies: {  }
 name: 'Plain text'
-format: plain_text
+format: sf_plain_text
 weight: 10
 filters:
   filter_html_escape:

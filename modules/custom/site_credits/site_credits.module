@@ -30,8 +30,8 @@ function site_credits_form_alter(&$form, FormStateInterface $form_state, $form_i
     $form['site_information']['credit_info'] = array(
       '#type' => 'text_format',
       '#title' => t('Site Credit Information'),
-      '#format' => 'basic_html',
-      '#allowed_formats' => ['basic_html'],
+      '#format' => 'sf_basic_html',
+      '#allowed_formats' => ['sf_basic_html'],
       '#description' => t('Place this site\'s credit information such as address, phone, and email address.'),
       '#default_value' => $config->get('credit_info') ? $config->get('credit_info')['value'] : '',
       '#weight' => 1,
