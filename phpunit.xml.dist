@@ -27,4 +27,9 @@
     <log type="coverage-html" target="./tests/coverage" lowUpperBound="35"
          highLowerBound="70"/>
   </logging>
+  <!--
+  <php>
+    <ini name="display_errors" value="true"/>
+  </php>
+  -->
 </phpunit>

@@ -74,43 +74,37 @@ class SiteCreditsBlock extends BlockBase implements ContainerFactoryPluginInterf
   public function blockForm($form, FormStateInterface $form_state) {
     $form = parent::blockForm($form, $form_state);
 
+    $site_logo_description = $this->t('Defined on the Theme Settings page. You do not have the appropriate permissions to change the site logo.');
+    $site_name_description = $this->t('Defined on the Site Information page. You do not have the appropriate permissions to change the site name.');
+    $site_slogan_description = $this->t('Defined on the Site Information page. You do not have the appropriate permissions to change the site slogan.');
+    $site_info_description = $this->t('Defined on the Site Information page. You do not have the appropriate permissions to change the site credits information.');
+
     // Get the theme.
     $theme = $form_state->get('block_theme');
 
-    // Get permissions.
-    $url_system_theme_settings = new Url('system.theme_settings');
+    // Provide a link to the Theme Settings page
+    // if the user has access to administer themes.
     $url_system_theme_settings_theme = new Url('system.theme_settings_theme', array('theme' => $theme));
+    if ($url_system_theme_settings_theme->access()) {
+      $site_logo_description = [
+        '#type' => 'link',
+        '#title' => $this->t('Defined on the Theme Settings page.'),
+        '#url' => $url_system_theme_settings_theme,
+      ];
+    }
 
-    if ($url_system_theme_settings->access() && $url_system_theme_settings_theme->access()) {
-      // Provide links to the Appearance Settings and Theme Settings pages
-      // if the user has access to administer themes.
-      $site_logo_description = $this->t('Defined on the <a href=":appearance">Appearance Settings</a> or <a href=":theme">Theme Settings</a> page.', array(
-        ':appearance' => $url_system_theme_settings->toString(),
-        ':theme' => $url_system_theme_settings_theme->toString(),
-      ));
-    }
-    else {
-      // Explain that the user does not have access to the Appearance and Theme
-      // Settings pages.
-      $site_logo_description = $this->t('Defined on the Appearance or Theme Settings page. You do not have the appropriate permissions to change the site logo.');
-    }
+    // Provide link to Site Information page if the user has access to
+    // administer site configuration.
     $url_system_site_information_settings = new Url('system.site_information_settings');
     if ($url_system_site_information_settings->access()) {
-      // Get paths to settings pages.
-      $site_information_url = $url_system_site_information_settings->toString();
-
-      // Provide link to Site Information page if the user has access to
-      // administer site configuration.
-      $site_name_description = $this->t('Defined on the <a href=":information">Site Information</a> page.', array(':information' => $site_information_url));
-      $site_slogan_description = $this->t('Defined on the <a href=":information">Site Information</a> page.', array(':information' => $site_information_url));
-      $site_info_description = $this->t('Defined on the <a href=":information">Site Information</a> page.', array(':information' => $site_information_url));
-    }
-    else {
-      // Explain that the user does not have access to the Site Information
-      // page.
-      $site_name_description = $this->t('Defined on the Site Information page. You do not have the appropriate permissions to change the site logo.');
-      $site_slogan_description = $this->t('Defined on the Site Information page. You do not have the appropriate permissions to change the site logo.');
-      $site_info_description = $this->t('Defined on the Site Information page. You do not have the appropriate permissions to change the site logo.');
+      $site_information_link = [
+        '#type' => 'link',
+        '#title' => $this->t('Defined on the Site Information page.'),
+        '#url' => $url_system_site_information_settings,
+      ];
+      $site_name_description = $site_information_link;
+      $site_slogan_description = $site_information_link;
+      $site_info_description = $site_information_link;
     }
 
     $form['display'] = array(

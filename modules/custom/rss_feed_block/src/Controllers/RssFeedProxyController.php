@@ -5,10 +5,12 @@ namespace Drupal\rss_feed_block\Controllers;
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\block\Entity\Block;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 
 /**
  * This is a proxy for fetching RSS Feeds due to not being able to fetch via
@@ -20,17 +22,46 @@ class RssFeedProxyController extends ControllerBase {
   use StringTranslationTrait;
 
   /**
+   * @var \GuzzleHttp\ClientInterface
+   */
+  protected $client;
+
+  /**
+   * Instance of the Entity Type Manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * RssFeedProxyController constructor.
+   * @param \GuzzleHttp\ClientInterface $client
+   */
+  public function __construct(ClientInterface $client, EntityTypeManagerInterface $entityTypeManager) {
+    $this->client = $client;
+    $this->entityTypeManager = $entityTypeManager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('http_client'),
+      $container->get('entity_type.manager')
+    );
+  }
+
+  /**
    * Return an XML document to send to an Ajax request.
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   The currently processing request.
    *
-   * @return \Symfony\Component\HttpFoundation\Response
+   * @return \Symfony\Component\HttpFoundation\Response $response
    *   An XML Response with the returned url's data.
    */
   public function getFeed(Request $request) {
-    // Create a Guzzle client
-    $client = new Client();
     // Create a Response object
     $response = new Response();
 
@@ -45,7 +76,7 @@ class RssFeedProxyController extends ControllerBase {
 
     try {
       // Fetch the data with Guzzle
-      $guzzle = $client->get($url);
+      $guzzle = $this->client->get($url);
       $data = $guzzle->getBody();
 
       // Replace "entry" tags with "item" to standardize
@@ -74,7 +105,7 @@ class RssFeedProxyController extends ControllerBase {
     $block_id = $request->request->get('id');
 
     // Load the block instance based on the ID
-    $block = Block::load($block_id);
+    $block = $this->entityTypeManager->getStorage('block')->load($block_id);
 
     if ($block) {
       // Fetch the RSS URL that was set in the configuration

@@ -3,6 +3,7 @@
 namespace Drupal\lock_sitefarm_features\Access;
 
 use Drupal\Core\Routing\Access\AccessInterface;
+use Drupal\Core\Extension\ThemeHandler;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Access\AccessResult;
@@ -13,6 +14,11 @@ use Drupal\Core\Access\AccessResult;
 class LockFeatureAccess implements AccessInterface {
 
   /**
+   * @var \Drupal\Core\Extension\ThemeHandler $themeHandler
+   */
+  protected $themeHandler;
+
+  /**
    * @var \Drupal\Core\Routing\RouteMatchInterface $route_match
    */
   protected $routeMatch;
@@ -21,6 +27,18 @@ class LockFeatureAccess implements AccessInterface {
    * @var \Drupal\Core\Session\AccountInterface $account
    */
   protected $account;
+
+  /**
+   * LockFeatureAccess constructor.
+   *
+   * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
+   *   The parametrized route
+   * @param \Drupal\Core\Extension\ThemeHandler $theme_handler
+   */
+  public function __construct(RouteMatchInterface $route_match, ThemeHandler $theme_handler) {
+    $this->routeMatch = $route_match;
+    $this->themeHandler = $theme_handler;
+  }
 
   /**
    * Content Types which should be restricted
@@ -139,14 +157,12 @@ class LockFeatureAccess implements AccessInterface {
   /**
    * A custom access check.
    *
-   * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
-   *   The parametrized route
+   *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Run access checks for this account.
    * @return AccessResult
    */
-  public function access(RouteMatchInterface $route_match, AccountInterface $account) {
-    $this->routeMatch = $route_match;
+  public function access(AccountInterface $account) {
     $this->account = $account;
 
     // Default to restricting access
@@ -235,7 +251,7 @@ class LockFeatureAccess implements AccessInterface {
 
     // Only restrict image styles if we are using the SiteFarm One theme
     if ($this->routeMatch->getParameter('image_style')) {
-      $theme = \Drupal::service('theme_handler')->getDefault();
+      $theme = $this->themeHandler->getDefault();
       if ($theme == 'sitefarm_one') {
         $restricted = $this->isLockedEntity('image_style', 'lockedImageStyles');
       }
@@ -259,10 +275,10 @@ class LockFeatureAccess implements AccessInterface {
    * @return bool
    */
   public function isLockedEntity($parameter, $property) {
-    // Get the node type
-    $node_type = $this->routeMatch->getRawParameter($parameter);
+    // Get the entity type
+    $entity_type = $this->routeMatch->getRawParameter($parameter);
 
-    if (in_array($node_type, $this->$property)) {
+    if (in_array($entity_type, $this->$property)) {
       return TRUE;
     }
 
