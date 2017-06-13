@@ -7,9 +7,7 @@ dependencies:
     - field.field.node.sf_article.field_sf_article_type
     - field.field.node.sf_article.field_sf_featured_status
     - field.field.node.sf_article.field_sf_meta_tags
-    - field.field.node.sf_article.field_sf_person_reference
     - field.field.node.sf_article.field_sf_primary_image
-    - field.field.node.sf_article.field_sf_related_photo_gallery
     - field.field.node.sf_article.field_sf_tags
     - image.style.thumbnail
     - node.type.sf_article
@@ -57,14 +55,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: metatag_firehose
-  field_sf_person_reference:
-    weight: 12
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
   field_sf_primary_image:
     weight: 6
     settings:
@@ -72,14 +62,6 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
-  field_sf_related_photo_gallery:
-    weight: 26
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
   field_sf_tags:
     weight: 9
     settings:

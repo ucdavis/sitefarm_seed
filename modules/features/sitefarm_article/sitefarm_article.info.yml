@@ -15,8 +15,6 @@ dependencies:
   - pathauto
   - sharemessage
   - sitefarm_core
-  - sitefarm_person
-  - sitefarm_photo_gallery
   - system
   - taxonomy
   - text
