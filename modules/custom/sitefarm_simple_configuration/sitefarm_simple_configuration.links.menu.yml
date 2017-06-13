@@ -26,3 +26,10 @@ sitefarm.fix_broken_links:
   description: 'Fix Broken 404 Page Links by adding redirects.'
   parent: sitefarm.admin_index
   weight: 99
+
+sitefarm.restrict_configuration_pages:
+  title: 'Restrict Configuration Pages'
+  route_name: sitefarm.restrict_configuration_pages
+  description: 'Alter the configuration pages which should be hidden from Site Managers.'
+  parent: sitefarm.admin_index
+  weight: 100
