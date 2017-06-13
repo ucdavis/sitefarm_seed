@@ -27,3 +27,7 @@ services:
   sf.hooks.node_form_alter:
     class: Drupal\sitefarm_core\Hooks\NodeFormAlter
     arguments: []
+
+  sf.hooks.views_alter:
+    class: Drupal\sitefarm_core\Hooks\ViewsAlter
+    arguments: []

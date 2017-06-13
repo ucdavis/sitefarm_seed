@@ -6,7 +6,6 @@ use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Url;
-use Drupal\Core\Database\Query\Condition;
 
 /**
  * Implements hook_form_alter().
@@ -91,18 +90,8 @@ function sitefarm_core_form_block_form_alter(&$form, FormStateInterface $form_st
  */
 function sitefarm_core_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
   // Hide users who have the administrator role on admin "people" display
-  if ($view->id() == 'user_admin_people' && roleassign_restrict_access()) {
-    // Create a Condition object so that we can check if a role is set or not
-    // even available. Regular authenticated users do not get a user role.
-    $or_condition = new Condition('OR');
-
-    $query->addTable('user__roles');
-    $query->addWhere(0, $or_condition
-      ->condition('user__roles.roles_target_id', 'administrator', '<>')
-      ->condition('user__roles.roles_target_id', 'administrator', 'IS NULL')
-    );
-    $query->distinct = TRUE;
-  }
+  \Drupal::service('sf.hooks.views_alter')
+    ->hideAdministratorsOnPeopleDisplay($view, $query);
 }
 
 /**
@@ -174,7 +163,6 @@ function sitefarm_core_focal_point_widget_process($element, FormStateInterface $
 
   return $element;
 }
-
 
 /**
  * Implements hook_ENTITY_TYPE_view().
