@@ -9,7 +9,7 @@ field_name: field_sf_mh_description
 entity_type: block_content
 bundle: sf_marketing_highlight
 label: Description
-description: 'Add some descriptive text to give further information to the viewer. In addition, it will allow you to add a Badge Label and Call to Action text.'
+description: 'Add some descriptive text to give further information to the viewer. In addition, it will allow you to add a Call to Action text.'
 required: false
 translatable: false
 default_value: {  }
