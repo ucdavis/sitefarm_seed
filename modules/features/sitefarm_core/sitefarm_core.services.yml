@@ -28,6 +28,10 @@ services:
     class: Drupal\sitefarm_core\Hooks\NodeFormAlter
     arguments: []
 
+  sf.hooks.node_display:
+    class: Drupal\sitefarm_core\Hooks\NodeDisplay
+    arguments: []
+
   sf.hooks.views_alter:
     class: Drupal\sitefarm_core\Hooks\ViewsAlter
     arguments: []

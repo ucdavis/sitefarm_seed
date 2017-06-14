@@ -131,19 +131,14 @@ function sitefarm_core_field_widget_image_image_form_alter(&$element, FormStateI
  * Implements hook_ENTITY_TYPE_view().
  */
 function sitefarm_core_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  // Fetch Helper services
+  $node_helper = \Drupal::service('sf.hooks.widget_alter');
+
   // Use the Restricted text format for teasers on a body field
-  if ($view_mode == 'teaser'
-    && isset($build['body']['#formatter'])
-    && $build['body']['#formatter'] == 'text_summary_or_trimmed'
-  ) {
-    $build['body'][0]['#format'] = 'sf_restricted_html';
-  }
+  $node_helper->forceRestrictedHtmlOnTeasers($build, $view_mode);
 
   // Strip Poster view mode html and use plain text filter
-  if ($view_mode == 'poster' && isset($build['body'][0]['#format'])) {
-    $build['body'][0]['#text'] = strip_tags($build['body'][0]['#text']);
-    $build['body'][0]['#format'] = 'sf_plain_text';
-  }
+  $node_helper->forcePlainTextOnPoster($build, $view_mode);
 }
 
 /**
