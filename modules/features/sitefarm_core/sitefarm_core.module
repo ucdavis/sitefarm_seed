@@ -5,7 +5,6 @@ use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
-use Drupal\Core\Url;
 
 /**
  * Implements hook_form_alter().
@@ -13,7 +12,7 @@ use Drupal\Core\Url;
 function sitefarm_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Fetch Helper services
   $helper = \Drupal::service('sf.hooks.form_alter');
-  $block_helper = \Drupal::service('sf.hooks.block_form_alter');
+  $block_helper = \Drupal::service('sf.hooks.block_place');
 
   // Move the Feature Content field to the Promotion Options group
   $helper->moveFeaturedToOptionsGroup($form);
@@ -35,7 +34,7 @@ function sitefarm_core_form_alter(&$form, FormStateInterface $form_state, $form_
 
   // Add javascript to check the url path and populate the path visibility with
   // the current page if using the Place Block module
-  $block_helper->attachPlaceBlockVisibilityJs($form, $form_id);
+  $block_helper->attachBlockVisibilityJs($form, $form_id);
 }
 
 /**
@@ -146,16 +145,8 @@ function sitefarm_core_node_view(array &$build, EntityInterface $entity, EntityV
  */
 function sitefarm_core_toolbar_alter(&$items) {
   // Fix the url of the Place Block link on the front page so that it works
-  if (isset($items['block_place'])) {
-    $options = $items['block_place']['tab']['#url']->getOptions();
-
-    $is_front = \Drupal::service('path.matcher')->isFrontPage();
-
-    if ($is_front) {
-      $new_url = Url::fromRoute('<front>', [], $options);
-      $items['block_place']['tab']['#url'] = $new_url;
-    }
-  }
+  \Drupal::service('sf.hooks.block_place')
+    ->fixFrontPageLink($items);
 }
 
 /**

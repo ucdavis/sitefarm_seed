@@ -29,19 +29,6 @@ class BlockFormAlter {
   }
 
   /**
-   * Add javascript to check the url path and populate the path visibility with
-   * the current page if using the Place Block module
-   *
-   * @param $form
-   * @param $form_id
-   */
-  public function attachPlaceBlockVisibilityJs(&$form, $form_id) {
-    if ($form_id == 'block_form') {
-      $form['#attached']['library'][] = 'sitefarm_core/sitefarm_core.blocks_path_visibility';
-    }
-  }
-
-  /**
    * Hide visibility options on the block instance configuration page
    *
    * @param $form

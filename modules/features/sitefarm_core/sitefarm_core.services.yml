@@ -39,3 +39,7 @@ services:
   sf.hooks.widget_alter:
     class: Drupal\sitefarm_core\Hooks\WidgetAlter
     arguments: []
+
+  sf.hooks.block_place:
+    class: Drupal\sitefarm_core\Hooks\BlockPlace
+    arguments: ['@path.matcher']
