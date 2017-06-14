@@ -157,35 +157,8 @@ function sitefarm_core_themes_installed(array $theme_list) {
   // match the style for the custom theme. In addition, subthemes may want to
   // alter an image style. This searches for any sitefarm image style config in
   // a newly installed theme by looking for a prefix of "sf_".
-
-  // Loop through each of the newly installed themes
-  foreach ($theme_list as $theme_name) {
-    // Exit if the theme does not have config
-    $theme_config_path = DRUPAL_ROOT . base_path() . drupal_get_path('theme', $theme_name) . '/config/optional';
-    if (!file_exists($theme_config_path)) {
-      continue;
-    }
-
-    // Get all config files
-    $config_files = scandir($theme_config_path);
-    $image_style_files = preg_grep('/image\.style\.sf_/', $config_files);
-
-    // If the new theme has SiteFarm image styles we want to revert to them
-    if ($image_style_files) {
-      $revert_styles = preg_replace('/^image\.style\.(sf_[^\.]+)\.yml$/', '$1', $image_style_files);
-
-      /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
-      $config_revert = \Drupal::service('config_update.config_update');
-
-      // Revert the image styles in the sitefarm_one theme
-      foreach ($revert_styles as $image_style) {
-        $config_revert->revert('image_style', $image_style);
-      }
-    }
-  }
-
-  // Flush all caches on theme install to fix multiple errors
-  drupal_flush_all_caches();
+  \Drupal::service('sf.hooks.themes')
+    ->revertSitefarmImageStylesOnInstall($theme_list);
 }
 
 /**
@@ -196,5 +169,6 @@ function sitefarm_core_themes_uninstalled(array $themes) {
   // Error: Call to undefined function _datetime_type_field_views_data() in
   // datetime_range_field_views_data()
   // (line 14 of core/modules/datetime_range/datetime_range.views.inc).
-  drupal_flush_all_caches();
+  \Drupal::service('sf.hooks.themes')
+    ->flushAllCaches();
 }

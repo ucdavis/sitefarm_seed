@@ -43,3 +43,7 @@ services:
   sf.hooks.block_place:
     class: Drupal\sitefarm_core\Hooks\BlockPlace
     arguments: ['@path.matcher']
+
+  sf.hooks.themes:
+    class: Drupal\sitefarm_core\Hooks\Themes
+    arguments: ['@config_update.config_update']
