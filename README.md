@@ -56,7 +56,7 @@ $ /path/to/MYPROJECT/vendor/bin/behat
 
 Or run one test by name:
 ```
-$ /path/to/MYPROJECT/vendor/bin/behat features/featurename.feature
+$ /path/to/MYPROJECT/vendor/bin/behat tests/features/featurename.feature
 ```
 
 ## Grouping with Tags

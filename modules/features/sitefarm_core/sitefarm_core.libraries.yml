@@ -1,9 +1,3 @@
-sitefarm_core.ckeditor:
-  version: VERSION
-  css:
-    theme:
-      css/ckeditor.css: {}
-
 sitefarm_core.required_fields:
   version: VERSION
   js:
