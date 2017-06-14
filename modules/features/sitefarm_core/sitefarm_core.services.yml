@@ -31,3 +31,7 @@ services:
   sf.hooks.views_alter:
     class: Drupal\sitefarm_core\Hooks\ViewsAlter
     arguments: []
+
+  sf.hooks.widget_alter:
+    class: Drupal\sitefarm_core\Hooks\WidgetAlter
+    arguments: []

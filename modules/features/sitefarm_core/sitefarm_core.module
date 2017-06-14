@@ -107,61 +107,24 @@ function sitefarm_core_element_info_alter(array &$info) {
  * Implements hook_field_widget_form_alter().
  */
 function sitefarm_core_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
-  if (isset($element['#title']) && $element['#title'] == 'Body') {
-    $element['summary']['#description']= t('Enter text you would like to use as a brief, custom teaser OR leave blank and the system will use a trimmed segment of the body text instead.');
-  }
+  // Set the help text of the Body Summary field
+  $help_text = 'Enter text you would like to use as a brief, custom teaser OR leave blank and the system will use a trimmed segment of the body text instead.';
+  \Drupal::service('sf.hooks.widget_alter')
+    ->setBodyFieldHelpText($element, $help_text);
 }
 
 /**
  * Implements hook_field_widget_WIDGET_TYPE_form_alter().
  */
 function sitefarm_core_field_widget_image_image_form_alter(&$element, FormStateInterface $form_state, $form) {
+  // Fetch Helper services
+  $widget_helper = \Drupal::service('sf.hooks.widget_alter');
+
   // Add a new process function to change the title attribute of the primary image.
-  if ($element['#field_name'] == 'field_sf_primary_image') {
-    $element['#process'][] = 'sitefarm_core_primary_image_widget_process';
-  }
+  $widget_helper->setPrimaryImageTitleText($element);
 
   // Add custom help text to focal_point UI.
-  foreach ($element['#process'] as $process) {
-    if (is_array($process) && in_array('Drupal\focal_point\Plugin\Field\FieldWidget\FocalPointImageWidget', $process)) {
-      $element['#process'][] = 'sitefarm_core_focal_point_widget_process';
-    }
-  }
-}
-
-/**
- * Element #process callback function.
- *
- * Change Title attribute to say "Caption
- *
- * @see sitefarm_core_field_widget_image_image_form_alter()
- */
-function sitefarm_core_primary_image_widget_process($element, FormStateInterface $form_state, $form) {
-  $element['title']['#title'] = t('Caption');
-  $element['title']['#description'] = '';
-
-  return $element;
-}
-
-/**
- * Element #process callback function.
- *
- * Add a description of focal point usage
- *
- * @see sitefarm_core_field_widget_image_image_form_alter()
- */
-function sitefarm_core_focal_point_widget_process($element, FormStateInterface $form_state, $form) {
-  if ($element['alt']['#access']) {
-    $element['focal_point_how'] = array(
-      '#markup' => '<p><strong>' .
-        t('What\'s the plus sign for? ') . '</strong>' .
-        t('Wherever the crosshair is placed is guaranteed to be in any cropped image.')
-        . '</p>',
-      '#weight' => $element['alt']['#weight'] - 1,
-    );
-  }
-
-  return $element;
+  $widget_helper->setFocalPointHelpText($element);
 }
 
 /**
