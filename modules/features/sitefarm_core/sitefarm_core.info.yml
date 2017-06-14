@@ -22,6 +22,3 @@ dependencies:
   - text
   - views
 package: SiteFarm
-
-libraries:
-  - sitefarm_core.ckeditor

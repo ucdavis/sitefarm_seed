@@ -10,3 +10,6 @@ dependencies:
   - filter
   - url_embed
 package: SiteFarm
+
+libraries:
+  - sitefarm_wysiwyg.ckeditor

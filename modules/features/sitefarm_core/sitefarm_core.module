@@ -94,15 +94,6 @@ function sitefarm_core_views_query_alter(ViewExecutable $view, QueryPluginBase $
 }
 
 /**
- * Implements hook_element_info_alter().
- */
-function sitefarm_core_element_info_alter(array &$info) {
-  if (isset($info['textarea'])) {
-    $info['textarea']['#attached']['library'][] = 'sitefarm_core/sitefarm_core.ckeditor';
-  }
-}
-
-/**
  * Implements hook_field_widget_form_alter().
  */
 function sitefarm_core_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
