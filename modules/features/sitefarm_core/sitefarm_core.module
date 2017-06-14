@@ -5,66 +5,57 @@ use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
-use Drupal\Core\Url;
-use Drupal\Core\Database\Query\Condition;
 
 /**
  * Implements hook_form_alter().
  */
 function sitefarm_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  // Move Node Edit fields into the advanced tabs group
-  $advanced_tabs = \Drupal::service('sf.advanced_tabs')->loadForm($form);
+  // Fetch Helper services
+  $helper = \Drupal::service('sf.hooks.form_alter');
+  $block_helper = \Drupal::service('sf.hooks.block_place');
 
   // Move the Feature Content field to the Promotion Options group
-  $advanced_tabs->moveField('field_sf_featured_status', 'options');
+  $helper->moveFeaturedToOptionsGroup($form);
 
   // Create a Categorizing tray for types with taxonomy references
-  $advanced_tabs->createGroup('categorizing', 'Categorizing', 94);
+  $helper->createCategorizingGroup($form);
 
   // Move the tags and branding fields to the Categorization group
-  $advanced_tabs->moveField('field_sf_tags', 'categorizing');
-  $form = $advanced_tabs->save();
+  $helper->moveTagsToCategorizingGroup($form);
 
   // Alter the 'Add another item' text on the Email field
-  if (isset($form['field_sf_emails']['widget']['add_more']['#value'])) {
-    $form['field_sf_emails']['widget']['add_more']['#value'] = t('Add another email');
-  }
+  $helper->setAddAnotherItemLabel($form, 'field_sf_emails', 'Add another email');
+
   // Alter the 'Add another item' text on the Phone Number field
-  if (isset($form['field_sf_phone_numbers']['widget']['add_more']['#value'])) {
-    $form['field_sf_phone_numbers']['widget']['add_more']['#value'] = t('Add another phone number');
-  }
+  $helper->setAddAnotherItemLabel($form, 'field_sf_phone_numbers', 'Add another phone number');
+
   // Alter the 'Add another item' text on the Website field
-  if (isset($form['field_sf_websites']['widget']['add_more']['#value'])) {
-    $form['field_sf_websites']['widget']['add_more']['#value'] = t('Add another Website');
-  }
+  $helper->setAddAnotherItemLabel($form, 'field_sf_websites', 'Add another Website');
 
   // Add javascript to check the url path and populate the path visibility with
-  // the current page if using
-  if ($form_id == 'block_form') {
-    $form['#attached']['library'][] = 'sitefarm_core/sitefarm_core.blocks_path_visibility';
-  }
+  // the current page if using the Place Block module
+  $block_helper->attachBlockVisibilityJs($form, $form_id);
 }
 
 /**
  * hook_form_BASE_FORM_ID_alter() for the node_form.
  */
 function sitefarm_core_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Fetch Helper services
+  $node_helper = \Drupal::service('sf.hooks.node_form_alter');
+
   // Remove the menu 'Weight' field so that it doesn't confuse people
-  if (isset($form['menu'])) {
-    $form['menu']['link']['weight']['#access'] = FALSE;
-  }
+  $node_helper->removeMenuWeight($form);
 
   // Change the Meta Tags label to 'SEO'
-  if (isset($form['field_sf_meta_tags'])) {
-    $form['field_sf_meta_tags']['widget'][0]['#title'] = 'SEO';
-  }
+  $node_helper->setMetaTagsTitle($form, 'SEO');
 
   // Attach javascript to ensure that required javascript fields don't go under
   // the admin toolbar
-  $form['#attached']['library'][] = 'sitefarm_core/sitefarm_core.required_fields';
+  $node_helper->attachToolbarHidingPreventionJs($form);
 
   // Add a label to the sidebar
-  $form['advanced']['#prefix'] = '<h2>' . t('Additional Options') . '</h2>';
+  $node_helper->addTitleToSidebar($form, 'Additional Options');
 }
 
 /**
@@ -83,33 +74,14 @@ function sitefarm_core_form_block_content_form_alter(&$form, FormStateInterface 
  * For the ID form_block.
  */
 function sitefarm_core_form_block_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  // Get the Sitefarm forms helper service
-  $form_helper = \Drupal::service('sf.block_form_helpers');
-  $block_plugin = $form_helper->getBlockEntityPlugin($form_state);
+  // Fetch Helper services
+  $block_helper = \Drupal::service('sf.hooks.block_form_alter');
 
   // Hide the following visibility options
-  $hide = [
-    'entity_bundle:block_content',
-    'entity_bundle:contact_message',
-    'entity_bundle:crop',
-    'entity_bundle:redirect',
-    'entity_bundle:scheduled_update',
-    'entity_bundle:shortcut',
-    'entity_bundle:menu_link_content',
-    'node_type',
-  ];
-
-  foreach ($hide as $name) {
-    unset($form['visibility'][$name]);
-  }
+  $block_helper->hideVisibilityOptions($form);
 
   // Move the path visibility to the top
-  if (isset($form['visibility']['request_path'])) {
-    // Move the path to the top of the array
-    $form['visibility'] = array('request_path' => $form['visibility']['request_path']) + $form['visibility'];
-    // Move the visibility tabs back to the top so that everything below it renders
-    $form['visibility'] = array('visibility_tabs' => $form['visibility']['visibility_tabs']) + $form['visibility'];
-  }
+  $block_helper->movePathVisibilityToTop($form);
 }
 
 /**
@@ -117,18 +89,8 @@ function sitefarm_core_form_block_form_alter(&$form, FormStateInterface $form_st
  */
 function sitefarm_core_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
   // Hide users who have the administrator role on admin "people" display
-  if ($view->id() == 'user_admin_people' && roleassign_restrict_access()) {
-    // Create a Condition object so that we can check if a role is set or not
-    // even available. Regular authenticated users do not get a user role.
-    $or_condition = new Condition('OR');
-
-    $query->addTable('user__roles');
-    $query->addWhere(0, $or_condition
-      ->condition('user__roles.roles_target_id', 'administrator', '<>')
-      ->condition('user__roles.roles_target_id', 'administrator', 'IS NULL')
-    );
-    $query->distinct = TRUE;
-  }
+  \Drupal::service('sf.hooks.views_alter')
+    ->hideAdministratorsOnPeopleDisplay($view, $query);
 }
 
 /**
@@ -144,81 +106,38 @@ function sitefarm_core_element_info_alter(array &$info) {
  * Implements hook_field_widget_form_alter().
  */
 function sitefarm_core_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
-  if (isset($element['#title']) && $element['#title'] == 'Body') {
-    $element['summary']['#description']= t('Enter text you would like to use as a brief, custom teaser OR leave blank and the system will use a trimmed segment of the body text instead.');
-  }
+  // Set the help text of the Body Summary field
+  $help_text = 'Enter text you would like to use as a brief, custom teaser OR leave blank and the system will use a trimmed segment of the body text instead.';
+  \Drupal::service('sf.hooks.widget_alter')
+    ->setBodyFieldHelpText($element, $help_text);
 }
 
 /**
  * Implements hook_field_widget_WIDGET_TYPE_form_alter().
  */
 function sitefarm_core_field_widget_image_image_form_alter(&$element, FormStateInterface $form_state, $form) {
+  // Fetch Helper services
+  $widget_helper = \Drupal::service('sf.hooks.widget_alter');
+
   // Add a new process function to change the title attribute of the primary image.
-  if ($element['#field_name'] == 'field_sf_primary_image') {
-    $element['#process'][] = 'sitefarm_core_primary_image_widget_process';
-  }
+  $widget_helper->setPrimaryImageTitleText($element);
 
   // Add custom help text to focal_point UI.
-  foreach ($element['#process'] as $process) {
-    if (is_array($process) && in_array('Drupal\focal_point\Plugin\Field\FieldWidget\FocalPointImageWidget', $process)) {
-      $element['#process'][] = 'sitefarm_core_focal_point_widget_process';
-    }
-  }
+  $widget_helper->setFocalPointHelpText($element);
 }
-
-/**
- * Element #process callback function.
- *
- * Change Title attribute to say "Caption
- *
- * @see sitefarm_core_field_widget_image_image_form_alter()
- */
-function sitefarm_core_primary_image_widget_process($element, FormStateInterface $form_state, $form) {
-  $element['title']['#title'] = t('Caption');
-  $element['title']['#description'] = '';
-
-  return $element;
-}
-
-/**
- * Element #process callback function.
- *
- * Add a description of focal point usage
- *
- * @see sitefarm_core_field_widget_image_image_form_alter()
- */
-function sitefarm_core_focal_point_widget_process($element, FormStateInterface $form_state, $form) {
-  if ($element['alt']['#access']) {
-    $element['focal_point_how'] = array(
-      '#markup' => '<p><strong>' .
-        t('What\'s the plus sign for? ') . '</strong>' .
-        t('Wherever the crosshair is placed is guaranteed to be in any cropped image.')
-        . '</p>',
-      '#weight' => $element['alt']['#weight'] - 1,
-    );
-  }
-
-  return $element;
-}
-
 
 /**
  * Implements hook_ENTITY_TYPE_view().
  */
 function sitefarm_core_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  // Fetch Helper services
+  $node_helper = \Drupal::service('sf.hooks.widget_alter');
+
   // Use the Restricted text format for teasers on a body field
-  if ($view_mode == 'teaser'
-    && isset($build['body']['#formatter'])
-    && $build['body']['#formatter'] == 'text_summary_or_trimmed'
-  ) {
-    $build['body'][0]['#format'] = 'sf_restricted_html';
-  }
+  $node_helper->forceRestrictedHtmlOnTeasers($build, $view_mode);
 
   // Strip Poster view mode html and use plain text filter
-  if ($view_mode == 'poster' && isset($build['body'][0]['#format'])) {
-    $build['body'][0]['#text'] = strip_tags($build['body'][0]['#text']);
-    $build['body'][0]['#format'] = 'sf_plain_text';
-  }
+  $node_helper->forcePlainTextOnPoster($build, $view_mode);
 }
 
 /**
@@ -226,16 +145,8 @@ function sitefarm_core_node_view(array &$build, EntityInterface $entity, EntityV
  */
 function sitefarm_core_toolbar_alter(&$items) {
   // Fix the url of the Place Block link on the front page so that it works
-  if (isset($items['block_place'])) {
-    $options = $items['block_place']['tab']['#url']->getOptions();
-
-    $is_front = \Drupal::service('path.matcher')->isFrontPage();
-
-    if ($is_front) {
-      $new_url = Url::fromRoute('<front>', [], $options);
-      $items['block_place']['tab']['#url'] = $new_url;
-    }
-  }
+  \Drupal::service('sf.hooks.block_place')
+    ->fixFrontPageLink($items);
 }
 
 /**
@@ -246,35 +157,8 @@ function sitefarm_core_themes_installed(array $theme_list) {
   // match the style for the custom theme. In addition, subthemes may want to
   // alter an image style. This searches for any sitefarm image style config in
   // a newly installed theme by looking for a prefix of "sf_".
-
-  // Loop through each of the newly installed themes
-  foreach ($theme_list as $theme_name) {
-    // Exit if the theme does not have config
-    $theme_config_path = DRUPAL_ROOT . base_path() . drupal_get_path('theme', $theme_name) . '/config/optional';
-    if (!file_exists($theme_config_path)) {
-      continue;
-    }
-
-    // Get all config files
-    $config_files = scandir($theme_config_path);
-    $image_style_files = preg_grep('/image\.style\.sf_/', $config_files);
-
-    // If the new theme has SiteFarm image styles we want to revert to them
-    if ($image_style_files) {
-      $revert_styles = preg_replace('/^image\.style\.(sf_[^\.]+)\.yml$/', '$1', $image_style_files);
-
-      /** @var \Drupal\config_update\ConfigRevertInterface $config_revert */
-      $config_revert = \Drupal::service('config_update.config_update');
-
-      // Revert the image styles in the sitefarm_one theme
-      foreach ($revert_styles as $image_style) {
-        $config_revert->revert('image_style', $image_style);
-      }
-    }
-  }
-
-  // Flush all caches on theme install to fix multiple errors
-  drupal_flush_all_caches();
+  \Drupal::service('sf.hooks.themes')
+    ->revertSitefarmImageStylesOnInstall($theme_list);
 }
 
 /**
@@ -285,5 +169,6 @@ function sitefarm_core_themes_uninstalled(array $themes) {
   // Error: Call to undefined function _datetime_type_field_views_data() in
   // datetime_range_field_views_data()
   // (line 14 of core/modules/datetime_range/datetime_range.views.inc).
-  drupal_flush_all_caches();
+  \Drupal::service('sf.hooks.themes')
+    ->flushAllCaches();
 }
