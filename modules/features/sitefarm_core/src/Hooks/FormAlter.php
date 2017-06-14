@@ -40,7 +40,7 @@ class FormAlter {
   public function moveFeaturedToOptionsGroup(&$form) {
     $advanced_tabs = $this->advancedTabsGroup->loadForm($form);
     $advanced_tabs->moveField('field_sf_featured_status', 'options');
-    return $advanced_tabs->save();
+    $form = $advanced_tabs->save();
   }
 
   /**
@@ -52,7 +52,7 @@ class FormAlter {
   public function createCategorizingGroup(&$form) {
     $advanced_tabs = $this->advancedTabsGroup->loadForm($form);
     $advanced_tabs->createGroup('categorizing', 'Categorizing', 94);
-    return $advanced_tabs->save();
+    $form = $advanced_tabs->save();
   }
 
   /**
@@ -64,7 +64,7 @@ class FormAlter {
   public function moveTagsToCategorizingGroup(&$form) {
     $advanced_tabs = $this->advancedTabsGroup->loadForm($form);
     $advanced_tabs->moveField('field_sf_tags', 'categorizing');
-    return $advanced_tabs->save();
+    $form = $advanced_tabs->save();
   }
 
   /**
