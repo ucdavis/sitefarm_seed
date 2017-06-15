@@ -9,7 +9,7 @@ use Drupal\sitefarm_core\Hooks\BlockFormAlter;
  * @coversDefaultClass \Drupal\sitefarm_core\Hooks\BlockFormAlter
  * @group sitefarm_core_hooks
  */
-class AdvancedTabsGroupTest extends UnitTestCase {
+class BlockFormAlterTest extends UnitTestCase {
 
   /**
    * @var \Drupal\sitefarm_core\Hooks\BlockFormAlter
