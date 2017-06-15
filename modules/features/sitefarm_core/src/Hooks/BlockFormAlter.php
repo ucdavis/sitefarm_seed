@@ -2,8 +2,6 @@
 
 namespace Drupal\sitefarm_core\Hooks;
 
-use Drupal\sitefarm_core\BlockConfigFormHelpers;
-
 /**
  * Class BlockFormAlter.
  *
@@ -12,21 +10,6 @@ use Drupal\sitefarm_core\BlockConfigFormHelpers;
  * @package Drupal\sitefarm_core\Hooks
  */
 class BlockFormAlter {
-
-  /**
-   * The advanced tabs group service.
-   *
-   * @var \Drupal\sitefarm_core\BlockConfigFormHelpers
-   */
-  protected $blockConfigFormHelpers;
-
-  /**
-   * BlockFormAlter constructor.
-   * @param \Drupal\sitefarm_core\BlockConfigFormHelpers $blockConfigFormHelpers
-   */
-  public function __construct(BlockConfigFormHelpers $blockConfigFormHelpers) {
-    $this->blockConfigFormHelpers = $blockConfigFormHelpers;
-  }
 
   /**
    * Hide visibility options on the block instance configuration page
