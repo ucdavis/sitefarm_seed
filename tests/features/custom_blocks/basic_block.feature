@@ -19,13 +19,13 @@ Feature: A User should create a Basic Block custom block
       And I press "Save"
     Then I should see the success message "Basic block Test Basic Block has been created"
     When I fill in "Title" with "Basic Block"
-      And I select "First Sidebar" from "Region"
+      And I select "Sidebar first" from "Region"
       And I press "Save block"
     Then I should see the success message "The block configuration has been saved."
     When I am on the homepage
     Then I should see "Basic Block" in the "Sidebar First Region"
       And I should see "This is Basic" in the "Sidebar First Region"
-      And I should see the '.o-box' element in the "Sidebar First Region"
+      And I should see the '.block' element in the "Sidebar First Region"
     Given I delete the most recent custom block
     Then I should see the success message "The custom block Test Basic Block has been deleted."
 
@@ -40,7 +40,7 @@ Feature: A User should create a Basic Block custom block
     When I fill in "Title" with "Title Icon Block"
       And I select "Icon" from "third_party_settings[block_style_plugins][title_style][title_style]"
       And I select "Mustang" from "third_party_settings[block_style_plugins][title_style][title_icon]"
-      And I select "First Sidebar" from "Region"
+      And I select "Sidebar first" from "Region"
       And I press "Save block"
     Then I should see the success message "The block configuration has been saved."
     When I am on the homepage
@@ -61,14 +61,14 @@ Feature: A User should create a Basic Block custom block
     When I fill in "Title" with "Brand Block"
       And I check the box "Color this box with a Branding Color"
       And I select "Unitrans Red" from "third_party_settings[block_style_plugins][brand_colors][branding_color]"
-      And I select "First Sidebar" from "Region"
+      And I select "Sidebar first" from "Region"
       And I press "Save block"
     Then I should see the success message "The block configuration has been saved."
     When I am on the homepage
     Then I should see "Brand Block" in the ".brand-textbox" element
       And I should see "This is Branded" in the ".brand-textbox" element
       And I should see "This is Branded" in the ".category-brand--unitrans-red" element
-      And I should not see the '.o-box' element in the "Sidebar First Region"
+      And I should not see the '.block' element in the "Sidebar First Region"
     Given I delete the most recent custom block
     Then I should see the success message "The custom block Test Brand Block has been deleted."
 
@@ -82,13 +82,13 @@ Feature: A User should create a Basic Block custom block
     Then I should see the success message "Basic block Test Collapse Block has been created"
     When I fill in "Title" with "Collapse Block"
       And I check the box "Collapse this block"
-      And I select "First Sidebar" from "Region"
+      And I select "Sidebar first" from "Region"
       And I press "Save block"
     Then I should see the success message "The block configuration has been saved."
     When I am on the homepage
     Then I should see "Collapse Block" in the ".collapse__title" element
       And I should see "This is Collapsed" in the ".collapse__content" element
-      And I should not see the '.o-box' element in the "Sidebar First Region"
+      And I should not see the '.block' element in the "Sidebar First Region"
     Given I delete the most recent custom block
     Then I should see the success message "The custom block Test Collapse Block has been deleted."
 
@@ -101,7 +101,7 @@ Feature: A User should create a Basic Block custom block
     Then I should see the success message "Basic block Test Sibling Block has been created"
     When I fill in "Title" with "Sibling Block"
     And I select "1/2 Column" from "third_party_settings[block_style_plugins][sibling_grid][sibling_grid]"
-      And I select "First Sidebar" from "Region"
+      And I select "Sidebar first" from "Region"
       And I press "Save block"
     Then I should see the success message "The block configuration has been saved."
     When I am on the homepage
