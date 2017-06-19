@@ -46,10 +46,6 @@ class NodeFormAlterTest extends UnitTestCase {
    * Tests setMetaTagsTitle() method
    */
   public function testSetMetaTagsTitle() {
-    if (isset($form['field_sf_meta_tags'])) {
-      $form['field_sf_meta_tags']['widget'][0]['#title'] = $this->t($title);
-    }
-
     $form = [];
     $title = 'this is a title';
     $this->helper->setMetaTagsTitle($form, $title);

@@ -24,7 +24,7 @@ class WidgetAlter {
    */
   public function setBodyFieldHelpText(&$element, $text) {
     if (isset($element['#title']) && $element['#title'] == 'Body') {
-      $element['summary']['#description']= $this->t($text);
+      $element['summary']['#description'] = $this->t($text);
     }
   }
 
@@ -35,7 +35,7 @@ class WidgetAlter {
    * @param $element
    */
   public function setPrimaryImageTitleText(&$element) {
-    if ($element['#field_name'] == 'field_sf_primary_image') {
+    if (isset($element['#field_name']) && $element['#field_name'] == 'field_sf_primary_image') {
       $element['#process'][] = [$this, 'primaryImageTitleProcess'];
     }
   }
@@ -63,6 +63,11 @@ class WidgetAlter {
    * @param $element
    */
   public function setFocalPointHelpText(&$element) {
+    // Exit early if there is no process key
+    if (!isset($element['#process'])) {
+      return;
+    }
+
     foreach ($element['#process'] as $process) {
       if (is_array($process) && in_array('Drupal\focal_point\Plugin\Field\FieldWidget\FocalPointImageWidget', $process)) {
         $element['#process'][] = [$this, 'focalPointHelpProcess'];
@@ -82,7 +87,7 @@ class WidgetAlter {
    * @return mixed
    */
   public function focalPointHelpProcess($element, FormStateInterface $form_state, $form) {
-    if ($element['alt']['#access']) {
+    if (isset($element['alt']['#access']) && $element['alt']['#access']) {
       $element['focal_point_how'] = array(
         '#markup' => '<p><strong>' .
           $this->t('What\'s the plus sign for? ') . '</strong>' .
