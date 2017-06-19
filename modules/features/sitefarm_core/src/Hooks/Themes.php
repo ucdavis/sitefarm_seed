@@ -68,6 +68,8 @@ class Themes {
 
   /**
    * Wrapper method for the procedural drupal_flush_all_caches().
+   *
+   * @codeCoverageIgnore
    */
   public function flushAllCaches() {
     drupal_flush_all_caches();
@@ -78,6 +80,8 @@ class Themes {
    *
    * @param $theme_name
    * @return string
+   *
+   * @codeCoverageIgnore
    */
   protected function getThemePath($theme_name) {
     return DRUPAL_ROOT . base_path() . drupal_get_path('theme', $theme_name);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\sitefarm_summary\Plugin\Field\FieldFormatter;
+namespace Drupal\Tests\sitefarm_summary\Unit\Plugin\Field\FieldFormatter;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\sitefarm_summary\Plugin\Field\FieldFormatter\SitefarmSummary;

@@ -8,7 +8,7 @@ use Drupal\Core\Path\PathMatcher;
 use Drupal\Core\Url;
 
 /**
- * @coversDefaultClass \Drupal\sitefarm_core\Hooks\BlockPlace
+ * @coversDefaultClass \Drupal\sitefarm_core\Unit\Hooks\BlockPlace
  * @group sitefarm_core_hooks
  */
 class BlockPlaceTest extends UnitTestCase {

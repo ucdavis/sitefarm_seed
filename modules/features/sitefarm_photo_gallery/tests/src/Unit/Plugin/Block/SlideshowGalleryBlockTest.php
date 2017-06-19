@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\sitefarm_photo_gallery\Plugin\Block;
+namespace Drupal\Tests\sitefarm_photo_gallery\Unit\Plugin\Block;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\sitefarm_photo_gallery\Plugin\Block\SlideshowGalleryBlock;

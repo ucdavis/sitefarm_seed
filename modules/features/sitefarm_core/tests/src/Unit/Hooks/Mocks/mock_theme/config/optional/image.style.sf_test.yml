@@ -1,0 +1,15 @@
+name: sf_focal_link
+label: 'Focal Link'
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+effects:
+  sf_focal_link_focal_point_scale_and_crop:
+    uuid: sf_focal_link_focal_point_scale_and_crop
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 120
+      height: 120

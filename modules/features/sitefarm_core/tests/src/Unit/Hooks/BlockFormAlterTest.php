@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\sitefarm_core\Hooks;
+namespace Drupal\Tests\sitefarm_core\Unit\Hooks;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\sitefarm_core\Hooks\BlockFormAlter;

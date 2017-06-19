@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\sitefarm_core;
+namespace Drupal\Tests\sitefarm_core\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\sitefarm_core\BlockContentGenerateDescription;
