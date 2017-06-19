@@ -22,7 +22,7 @@ Feature: Taxonomy Terms
       And I press "Delete"
     Then I should see "Deleted term Testing Term"
 
-  @api @javascript @local_files @current
+  @api @javascript @local_files
   Scenario: A Primary image should be available to upload.
     When I attach the file "test_16x9.png" to "files[field_sf_primary_image_0]"
       And I wait for AJAX to finish
