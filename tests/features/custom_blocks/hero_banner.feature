@@ -26,10 +26,10 @@ Feature: A User should create a Hero Banner custom block
     Then I should see the success message "The block configuration has been saved."
     When I am on the homepage
     Then I should see "Title Text" in the "Content"
-      And I should see the ".hero-banner" element in the "Content" region
+      And I should see the "#block-hbtitletext" element in the "Content" region
       And I should see an image in the "Content" region
       And I should see "Sub Title Text"
-      And I should see the link "Play Video" in the "Content" region
+      And I should see "https://youtu.be/12345" in the "Content"
       And I should see the link "Call to Action" in the "Content" region
     Given I delete the most recent custom block
     Then I should see the success message "The custom block HB: Title Text has been deleted."
