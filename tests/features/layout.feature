@@ -15,7 +15,7 @@ Feature: Layout and Block placement
     When I visit "/user"
     Then I should see a ".l-davis" element
 
-  @api @local
+  @api
   Scenario: Check that the correct layout class is added for a right hand sidebar
     Given a block "system_powered_by_block" is in the "sidebar_second" region
     When I visit "/user"

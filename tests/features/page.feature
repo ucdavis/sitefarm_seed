@@ -122,7 +122,7 @@ Feature: Basic Page Content Type
     Then I should see a ".form-item-menu-menu-parent" element
       And I should not see a ".form-item-menu-weight" element
 
-  @api @local
+  @api
   Scenario: Basic Pages should have a default layout
     When I fill in the following:
       | Body  | Body text     |
