@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\sitefarm_person\Plugin\Menu\LocalAction;
+namespace Drupal\Tests\sitefarm_person\Unit\Plugin\Menu\LocalAction;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\sitefarm_person\Plugin\Menu\LocalAction\WithDestination;
