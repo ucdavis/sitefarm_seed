@@ -22,13 +22,13 @@ Feature: A User should create a Focus Box custom block
       And I press "Save"
     Then I should see the success message "Focus Box FB: Focus Box has been created"
     When I fill in "Title" with "Block Focus Box"
-      And I select "First Sidebar" from "Region"
+      And I select "Sidebar first" from "Region"
       And I press "Save block"
     Then I should see the success message "The block configuration has been saved."
     When I am on the homepage
     Then I should see "Focus Box" in the "Sidebar First Region"
-      And I should see the ".focus-box" element in the "Sidebar First Region"
+      And I should see the "#block-fbfocusbox" element in the "Sidebar First Region"
       And I should see an image in the "Sidebar First Region"
-      And I should see "This is a body" in the ".focus-box__body" element
+      And I should see "This is a body" in the "#block-fbfocusbox .field--name-body" element
     Given I delete the most recent custom block
     Then I should see the success message "The custom block FB: Focus Box has been deleted."

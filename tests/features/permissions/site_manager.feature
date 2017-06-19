@@ -54,8 +54,6 @@ Feature: SiteFarm Site Manager Permissions
     Then I should get a "403" HTTP response
     Given I am on "admin/config/services/sharemessage"
     Then I should get a "403" HTTP response
-    Given I am on "admin/config/people/cas"
-    Then I should get a "403" HTTP response
 
   @api
   Scenario: Configuration pages that should be accessible by Site Manager
