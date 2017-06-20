@@ -10,6 +10,7 @@ Feature: A User should create an article
       | News          |
       | Test Category |
       | Second Term   |
+      | Blog          |
     Then I visit "node/add/sf_article"
       And I fill in the following:
         | Title | Testing title |
@@ -81,7 +82,6 @@ Feature: A User should create an article
     When I visit "node/add/sf_article"
       And I fill in the following:
         | Title | Testing title |
-      And the "field_sf_article_type" select should be set to "News"
       And I select "Blog" from "field_sf_article_type"
       And I press "Save and publish"
     When I click "Edit"
