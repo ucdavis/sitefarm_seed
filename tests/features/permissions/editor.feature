@@ -95,7 +95,7 @@ Feature: SiteFarm Editor Permissions
     Given I am on "node/add/sf_photo_gallery"
     Then I should get a "200" HTTP response
 
-  @api @current
+  @api
   Scenario: Unpublished nodes should be accessible by Editor
     Given "sf_page" content:
       | title       | status |
