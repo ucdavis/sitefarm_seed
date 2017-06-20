@@ -95,11 +95,9 @@ Feature: A User should create an article
 
   @api @javascript
   Scenario: Social share buttons on an Article
-    Given "sf_article" content:
-      | title      |
-      | Social Article |
-    When I visit "news/social-article"
-      And I break
+    Given I press "Categorizing"
+      And I select "News" from "field_sf_article_type"
+    When I press "Save and publish"
     Then I should see a ".at-icon-facebook" element
       And I should see a ".at-icon-twitter" element
       And I should see a ".at-icon-google_plusone_share" element
