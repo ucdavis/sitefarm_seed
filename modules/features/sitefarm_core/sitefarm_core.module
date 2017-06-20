@@ -122,7 +122,7 @@ function sitefarm_core_field_widget_image_image_form_alter(&$element, FormStateI
  */
 function sitefarm_core_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
   // Fetch Helper services
-  $node_helper = \Drupal::service('sf.hooks.widget_alter');
+  $node_helper = \Drupal::service('sf.hooks.node_display');
 
   // Use the Restricted text format for teasers on a body field
   $node_helper->forceRestrictedHtmlOnTeasers($build, $view_mode);
