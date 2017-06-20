@@ -1,3 +1,4 @@
+@current
 Feature: A User should see lists of articles
   In order to see articles
   As an Anonymous visitor
@@ -26,17 +27,17 @@ Feature: A User should see lists of articles
         | Second Blog    | Views Cat 2               | Views Tag     | Blog                  |
         | Third Blog     | Views Category            | Views Tag 2   | Blog                  |
 
-  @api
-  Scenario: Related Articles should appear on articles when having categories in common
-    Given a block "views_block:sf_articles_related-block_1" is in the "sidebar_second" region
-      And I am viewing a "sf_article" content:
-        | title                     | Current Article |
-        | field_sf_article_category | Views Category  |
-    Then I should see "First Article" in the "Sidebar Second Region"
-      And I break
-      And I should see "Third Article" in the "Sidebar Second Region"
-      And I should not see "Second Article" in the "Sidebar Second Region"
-      And I should not see "Current Article" in the "Sidebar Second Region"
+#  @api
+#  Scenario: Related Articles should appear on articles when having categories in common
+#    Given a block "views_block:sf_articles_related-block_1" is in the "sidebar_second" region
+#      And I am viewing a "sf_article" content:
+#        | title                     | Current Article |
+#        | field_sf_article_category | Views Category  |
+#    Then I should see "First Article" in the "Sidebar Second Region"
+#      And I break
+#      And I should see "Third Article" in the "Sidebar Second Region"
+#      And I should not see "Second Article" in the "Sidebar Second Region"
+#      And I should not see "Current Article" in the "Sidebar Second Region"
 
   @api
   Scenario: Related Articles should appear on articles when having tags in common
@@ -58,53 +59,53 @@ Feature: A User should see lists of articles
       And I should see "Third Article" in the "Sidebar First Region"
       And I should see the ".node--view-mode-listing" element in the "Sidebar First Region"
 
-  @api
-  Scenario: Latest news showing in the content region of the News page
-    Given I am on "/news"
-    Then I should see "First Article" in the "Content" region
-      And I should see "Second Article" in the "Content" region
-      And I should see "Third Article" in the "Content" region
-      And I should see the ".node--view-mode-teaser" element in the "Content" region
-
-  @api
-  Scenario: Latest blog posts showing in the content region of the Blog page
-    Given I am on "/blog"
-    Then I should see "First Blog" in the "Content" region
-      And I should see "Second Blog" in the "Content" region
-      And I should see "Third Blog" in the "Content" region
-      And I should see the ".node--view-mode-teaser" element in the "Content" region
-
-  @api
-  Scenario: Latest news block showing in the content region
-    Given a block "views_block:sf_articles_latest_news-block_1" is in the "content" region
-    When I am on the homepage
-    Then I should see "First Article" in the "Content" region
-      And I should see "Second Article" in the "Content" region
-      And I should see "Third Article" in the "Content" region
-      And I should see the ".node--view-mode-teaser" element in the "Content" region
-
-  @api
-  Scenario: Latest Blog posts block showing in the content region
-    Given a block "views_block:sf_articles_latest_blog-block_1" is in the "content" region
-    When I am on the homepage
-    Then I should see "First Blog" in the "Content" region
-      And I should see "Second Blog" in the "Content" region
-      And I should see "Third Blog" in the "Content" region
-      And I should see the ".node--view-mode-teaser" element in the "Content" region
-
-  @api @javascript @chrome
-  Scenario: Latest news is available as an RSS feed
-    When I am on "news.rss"
-    Then I should see "First Article"
-      And I should see "Second Article"
-      And I should see "Third Article"
-
-  @api @javascript @chrome
-  Scenario: Latest Blog posts are available as an RSS feed
-    When I am on "blog.rss"
-    Then I should see "First Blog"
-      And I should see "Second Blog"
-      And I should see "Third Blog"
+#  @api
+#  Scenario: Latest news showing in the content region of the News page
+#    Given I am on "/news"
+#    Then I should see "First Article" in the "Content" region
+#      And I should see "Second Article" in the "Content" region
+#      And I should see "Third Article" in the "Content" region
+#      And I should see the ".node--view-mode-teaser" element in the "Content" region
+#
+#  @api
+#  Scenario: Latest blog posts showing in the content region of the Blog page
+#    Given I am on "/blog"
+#    Then I should see "First Blog" in the "Content" region
+#      And I should see "Second Blog" in the "Content" region
+#      And I should see "Third Blog" in the "Content" region
+#      And I should see the ".node--view-mode-teaser" element in the "Content" region
+#
+#  @api
+#  Scenario: Latest news block showing in the content region
+#    Given a block "views_block:sf_articles_latest_news-block_1" is in the "content" region
+#    When I am on the homepage
+#    Then I should see "First Article" in the "Content" region
+#      And I should see "Second Article" in the "Content" region
+#      And I should see "Third Article" in the "Content" region
+#      And I should see the ".node--view-mode-teaser" element in the "Content" region
+#
+#  @api
+#  Scenario: Latest Blog posts block showing in the content region
+#    Given a block "views_block:sf_articles_latest_blog-block_1" is in the "content" region
+#    When I am on the homepage
+#    Then I should see "First Blog" in the "Content" region
+#      And I should see "Second Blog" in the "Content" region
+#      And I should see "Third Blog" in the "Content" region
+#      And I should see the ".node--view-mode-teaser" element in the "Content" region
+#
+#  @api @javascript @chrome
+#  Scenario: Latest news is available as an RSS feed
+#    When I am on "news.rss"
+#    Then I should see "First Article"
+#      And I should see "Second Article"
+#      And I should see "Third Article"
+#
+#  @api @javascript @chrome
+#  Scenario: Latest Blog posts are available as an RSS feed
+#    When I am on "blog.rss"
+#    Then I should see "First Blog"
+#      And I should see "Second Blog"
+#      And I should see "Third Blog"
 
   @api
   Scenario: Article Categories show in a block that can filter to show news in a selected category
