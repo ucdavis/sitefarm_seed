@@ -1,4 +1,3 @@
-@current
 Feature: A User should see lists of articles
   In order to see articles
   As an Anonymous visitor
@@ -27,17 +26,17 @@ Feature: A User should see lists of articles
         | Second Blog    | Views Cat 2               | Views Tag     | Blog                  |
         | Third Blog     | Views Category            | Views Tag 2   | Blog                  |
 
-#  @api
-#  Scenario: Related Articles should appear on articles when having categories in common
-#    Given a block "views_block:sf_articles_related-block_1" is in the "sidebar_second" region
-#      And I am viewing a "sf_article" content:
-#        | title                     | Current Article |
-#        | field_sf_article_category | Views Category  |
-#    Then I should see "First Article" in the "Sidebar Second Region"
-#      And I break
-#      And I should see "Third Article" in the "Sidebar Second Region"
-#      And I should not see "Second Article" in the "Sidebar Second Region"
-#      And I should not see "Current Article" in the "Sidebar Second Region"
+  @api
+  Scenario: Related Articles should appear on articles when having categories in common
+    Given a block "views_block:sf_articles_related-block_1" is in the "sidebar_second" region
+      And I am viewing a "sf_article" content:
+        | title                     | Current Article |
+        | field_sf_article_category | Views Category  |
+    Then I should see "First Article" in the "Sidebar Second Region"
+      And I break
+      And I should see "Third Article" in the "Sidebar Second Region"
+      And I should not see "Second Article" in the "Sidebar Second Region"
+      And I should not see "Current Article" in the "Sidebar Second Region"
 
   @api
   Scenario: Related Articles should appear on articles when having tags in common
@@ -106,36 +105,36 @@ Feature: A User should see lists of articles
 #    Then I should see "First Blog"
 #      And I should see "Second Blog"
 #      And I should see "Third Blog"
-
-  @api
-  Scenario: Article Categories show in a block that can filter to show news in a selected category
-    When I am on "/news"
-      And I click "Views Category"
-    Then I should see the ".category-filter" element in the "Sidebar Second Region"
-      And I should see "Views Category" in the ".category-filter__list-item--active" element
-      And I should see "First Article" in the "Content" region
-      And I should see "Third Article" in the "Content" region
-      And I should not see "Second Article" in the "Content" region
-    When I click "Views Cat 2" in the "Sidebar Second Region"
-    Then I should see "Views Cat 2" in the ".category-filter__list-item--active" element
-      And I should see "Second Article" in the "Content" region
-      And I should not see "First Article" in the "Content" region
-      And I should not see "Third Article" in the "Content" region
-
-  @api
-  Scenario: Article Categories show in a block that can filter to show Blog posts in a selected category
-    When I am on "/blog"
-      And I click "Views Category"
-    Then I should see the ".category-filter" element in the "Sidebar Second Region"
-      And I should see "Views Category" in the ".category-filter__list-item--active" element
-      And I should see "First Article" in the "Content" region
-      And I should see "Third Article" in the "Content" region
-      And I should not see "Second Article" in the "Content" region
-    When I click "Views Cat 2" in the "Sidebar Second Region"
-    Then I should see "Views Cat 2" in the ".category-filter__list-item--active" element
-      And I should see "Second Article" in the "Content" region
-      And I should not see "First Article" in the "Content" region
-      And I should not see "Third Article" in the "Content" region
+#
+#  @api
+#  Scenario: Article Categories show in a block that can filter to show news in a selected category
+#    When I am on "/news"
+#      And I click "Views Category"
+#    Then I should see the ".category-filter" element in the "Sidebar Second Region"
+#      And I should see "Views Category" in the ".category-filter__list-item--active" element
+#      And I should see "First Article" in the "Content" region
+#      And I should see "Third Article" in the "Content" region
+#      And I should not see "Second Article" in the "Content" region
+#    When I click "Views Cat 2" in the "Sidebar Second Region"
+#    Then I should see "Views Cat 2" in the ".category-filter__list-item--active" element
+#      And I should see "Second Article" in the "Content" region
+#      And I should not see "First Article" in the "Content" region
+#      And I should not see "Third Article" in the "Content" region
+#
+#  @api
+#  Scenario: Article Categories show in a block that can filter to show Blog posts in a selected category
+#    When I am on "/blog"
+#      And I click "Views Category"
+#    Then I should see the ".category-filter" element in the "Sidebar Second Region"
+#      And I should see "Views Category" in the ".category-filter__list-item--active" element
+#      And I should see "First Article" in the "Content" region
+#      And I should see "Third Article" in the "Content" region
+#      And I should not see "Second Article" in the "Content" region
+#    When I click "Views Cat 2" in the "Sidebar Second Region"
+#    Then I should see "Views Cat 2" in the ".category-filter__list-item--active" element
+#      And I should see "Second Article" in the "Content" region
+#      And I should not see "First Article" in the "Content" region
+#      And I should not see "Third Article" in the "Content" region
 
   @api
   Scenario: The title on the News page should be "News"
