@@ -5,7 +5,13 @@ Feature: A User should create an article
 
   Background:
     Given I am logged in as a user with the "administrator" role
-      And I visit "node/add/sf_article"
+    Given "sf_article_type" terms:
+      | name          |
+      | News          |
+      | Test Category |
+      | Second Term   |
+      | Blog          |
+    Then I visit "node/add/sf_article"
       And I fill in the following:
         | Title | Testing title |
 
@@ -23,8 +29,9 @@ Feature: A User should create an article
 
   @api
   Scenario: Ensure that the article Create New Revision is checked.
+    Given I select "News" from "field_sf_article_type"
     When I press "Save and publish"
-      And I click "Edit"
+    And I click "Edit"
     Then the "revision" checkbox should be checked
 
   @api
@@ -34,8 +41,9 @@ Feature: A User should create an article
 
   @api
   Scenario: A url alias should be auto generated for Articles.
+    Given I select "News" from "field_sf_article_type"
     When I press "Save and publish"
-    Then I should see "Testing title" in the "Page Title" region
+    Then I should see "Testing title" in the "Content" region
       And I should be on "news/testing-title"
 
   @api @javascript @local_files
@@ -46,14 +54,17 @@ Feature: A User should create an article
       And I should see "What's the plus sign for?"
     When I fill in "field_sf_primary_image[0][alt]" with "alt text"
       And I fill in "field_sf_primary_image[0][title]" with "title text"
+      And I press "Categorizing"
+      And I select "News" from "field_sf_article_type"
       And I press "Save and publish"
     Then I should see an image in the "Content" region
       And I should see the image alt "alt text" in the "Content" region
-      And I should see "title text" in the "Content" region
+      And I should see the "img[title='title text']" element in the "Content" region
 
   @api
   Scenario: Tags added to an Article
     When I fill in "field_sf_tags[target_id]" with "Tag Test, Tag Test 2"
+      And I select "News" from "field_sf_article_type"
       And I press "Save and publish"
     Then I should see the link "Tag Test" in the "Content" region
       And I should see the link "Tag Test 2" in the "Content" region
@@ -67,6 +78,7 @@ Feature: A User should create an article
     When I visit "node/add/sf_article"
       And I fill in the following:
         | Title | Testing title |
+      And I select "News" from "field_sf_article_type"
       And I select "Test Category" from "field_sf_article_category"
       And I press "Save and publish"
     Then I should see the link "Test Category"
@@ -76,27 +88,16 @@ Feature: A User should create an article
     When I visit "node/add/sf_article"
       And I fill in the following:
         | Title | Testing title |
-      And the "field_sf_article_type" select should be set to "News"
       And I select "Blog" from "field_sf_article_type"
       And I press "Save and publish"
     When I click "Edit"
     Then the "field_sf_article_type" select should be set to "Blog"
 
-  @api
-  Scenario: Articles should have a default layout
-    When I fill in the following:
-      | Body  | Body text |
-      And I press "Save and publish"
-    Then I should see a ".l-davis-flipped" element
-      And I should see "Testing title" in the "Page Title Region"
-      And I should see the ".breadcrumbs" element in the "Pre Content Region"
-
   @api @javascript
   Scenario: Social share buttons on an Article
-    Given "sf_article" content:
-      | title      |
-      | Social Article |
-    When I visit "news/social-article"
+    Given I press "Categorizing"
+      And I select "News" from "field_sf_article_type"
+    When I press "Save and publish"
     Then I should see a ".at-icon-facebook" element
       And I should see a ".at-icon-twitter" element
       And I should see a ".at-icon-google_plusone_share" element
@@ -110,6 +111,8 @@ Feature: A User should create an article
       And I wait for AJAX to finish
       And I select the radio button "Right"
       And I press "OK"
+      And I press "Categorizing"
+      And I select "News" from "field_sf_article_type"
       And I press "Save and publish"
     Then I should see "Title" in the "aside.wysiwyg-feature-block .wysiwyg-feature-block__title" element in the "Content" region
     When I visit "news/"

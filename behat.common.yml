@@ -39,7 +39,7 @@ default:
         Featured Top Region: ".region-featured-top"
         Breadcrumb Region: ".region-breadcrumb"
         Sidebar First Region: ".region-sidebar-first"
-        Content Region: ".region-breadcrumb"
+        Content Region: ".region-content"
         Sidebar Second Region: ".region-sidebar-second"
         Featured Bottom First Region: ".region-featured-bottom-first"
         Featured Bottom Second Region: ".region-featured-bottom-second"
