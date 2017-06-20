@@ -54,6 +54,7 @@ Feature: A User should create an article
   @api
   Scenario: Tags added to an Article
     When I fill in "field_sf_tags[target_id]" with "Tag Test, Tag Test 2"
+      And I select "News" from "field_sf_article_type"
       And I press "Save and publish"
     Then I should see the link "Tag Test" in the "Content" region
       And I should see the link "Tag Test 2" in the "Content" region
