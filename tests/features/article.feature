@@ -91,22 +91,24 @@ Feature: A User should create an article
   Scenario: Articles should have a default layout
     When I fill in the following:
       | Body  | Body text |
+      And I select "Blog" from "field_sf_article_type"
       And I press "Save and publish"
-    Then I should see a ".l-davis-flipped" element
-      And I should see "Testing title" in the "Page Title Region"
-      And I should see the ".breadcrumbs" element in the "Pre Content Region"
+    Then I should see a ".layout-main" element
+      And I should see "Testing title" in the "Content Region"
+      And I should see the ".breadcrumb" element in the "Breadcrumb Region"
 
-  @api @javascript
-  Scenario: Social share buttons on an Article
-    Given "sf_article" content:
-      | title      |
-      | Social Article |
-    When I visit "news/social-article"
-    Then I should see a ".at-icon-facebook" element
-      And I should see a ".at-icon-twitter" element
-      And I should see a ".at-icon-google_plusone_share" element
-      And I should see a ".at-icon-email" element
-      And I should see a ".at-icon-addthis" element
+#  @api @javascript
+#  Scenario: Social share buttons on an Article
+#    Given "sf_article" content:
+#      | title      |
+#      | Social Article |
+#    When I visit "news/social-article"
+#      And I break
+#    Then I should see a ".at-icon-facebook" element
+#      And I should see a ".at-icon-twitter" element
+#      And I should see a ".at-icon-google_plusone_share" element
+#      And I should see a ".at-icon-email" element
+#      And I should see a ".at-icon-addthis" element
 
   @api @javascript
   Scenario: Article teasers should strip html from the body summary
@@ -115,6 +117,8 @@ Feature: A User should create an article
       And I wait for AJAX to finish
       And I select the radio button "Right"
       And I press "OK"
+      And I press "Categorizing"
+      And I select "News" from "field_sf_article_type"
       And I press "Save and publish"
     Then I should see "Title" in the "aside.wysiwyg-feature-block .wysiwyg-feature-block__title" element in the "Content" region
     When I visit "news/"
