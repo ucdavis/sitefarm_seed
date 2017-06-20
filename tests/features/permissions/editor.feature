@@ -95,10 +95,13 @@ Feature: SiteFarm Editor Permissions
     Given I am on "node/add/sf_photo_gallery"
     Then I should get a "200" HTTP response
 
-  @api
+  @api @current
   Scenario: Unpublished nodes should be accessible by Editor
-    Given default nodes are unpublished
-      And I am on "node/1"
+    Given "sf_page" content:
+      | title       | status |
+      | Test Page   | 0      |
+      | Test Page 2 | 0      |
+      And I am on "test-page"
     Then I should get a "200" HTTP response
-    Given I am on "node/2"
+    Given I am on "test-page-2"
     Then I should get a "200" HTTP response
