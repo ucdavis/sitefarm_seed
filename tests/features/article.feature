@@ -5,7 +5,10 @@ Feature: A User should create an article
 
   Background:
     Given I am logged in as a user with the "administrator" role
-      And I visit "node/add/sf_article"
+    Given "sf_article_type" terms:
+      | name          |
+      | News |
+    Then I visit "node/add/sf_article"
       And I fill in the following:
         | Title | Testing title |
 
@@ -22,20 +25,15 @@ Feature: A User should create an article
     Then I should not see a "input[name='promote[value]']" element
 
   @api
-  Scenario: Ensure that the article Create New Revision is checked.
-    When I press "Save and publish"
-      And I click "Edit"
-    Then the "revision" checkbox should be checked
-
-  @api
   Scenario: Ensure that meta tag fields are present on Articles.
     Then I should see a "input[name='field_sf_meta_tags[0][basic][title]']" element
     And I should see a "textarea[name='field_sf_meta_tags[0][basic][description]']" element
 
-  @api
+  @api @current
   Scenario: A url alias should be auto generated for Articles.
+    Given I select "News" from "field_sf_article_type"
     When I press "Save and publish"
-    Then I should see "Testing title" in the "Page Title" region
+    Then I should see "Testing title" in the "Content" region
       And I should be on "news/testing-title"
 
   @api @javascript @local_files
