@@ -17,6 +17,7 @@ Feature: A User should create a Marketing Highlight - Horizontal  custom block
       And I fill in "field_sf_image[0][alt]" with "alt text"
       And I press "Save"
     Then I should see the success message "Marketing Highlight - Horizontal MHH: Marketing Highlight - Horizontal has been created"
+    Given the Administration Toolbar is hidden
     When I fill in "Title" with "Block Marketing Highlight - Horizontal"
       And I select "Sidebar first" from "Region"
       And I press "Save block"
