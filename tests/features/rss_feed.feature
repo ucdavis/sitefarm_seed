@@ -5,7 +5,7 @@ Feature: A User should see a RSS Feed block
 
   Background:
     Given I am logged in as a user with the "administrator" role
-    And I visit "admin/structure/block/add/rss_feed_block/sitefarm_one?region=sidebar_first"
+    And I visit "admin/structure/block/add/rss_feed_block/bartik?region=sidebar_first"
 
   @api
   Scenario: Add a RSS Feed block to the first sidebar region

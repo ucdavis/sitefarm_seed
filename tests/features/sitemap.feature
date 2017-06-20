@@ -11,16 +11,14 @@ Feature: A User should see a sitemap
     Given I visit "sitemap"
     Then I should see "Main navigation" in the "Content" region
       And I should see "Home" in the "Content" region
-      And I should see "Blog" in the "Content" region
-      And I should see "News" in the "Content" region
-      And I should see "Events" in the "Content" region
-      And I should see "People" in the "Content" region
-      And I should see "Galleries" in the "Content" region
       And I should not see "Tags" in the "Content" region
 
   @api
   Scenario: Taxonomy links appear
     Given I am logged in as a user with the "administrator" role
+      And "sf_article_type" terms:
+        | name          |
+        | Test Type |
       And "sf_article_category" terms:
         | name          |
         | Test Category |
@@ -28,12 +26,13 @@ Feature: A User should see a sitemap
       And I fill in the following:
         | Title                    | Testing title        |
         | field_sf_tags[target_id] | Tag Test, Tag Test 2 |
+      And I select "Test Type" from "field_sf_article_type"
       And I select "Test Category" from "field_sf_article_category"
       And I press "Save and publish"
       And I visit "sitemap"
     Then I should see "Article Categories" in the "Content" region
       And I should see "Test Category" in the "Content" region
       And I should see "Article Type" in the "Content" region
-      And I should see "News" in the "Content" region
+      And I should see "Test Type" in the "Content" region
       And I should see "Tag Test" in the "Content" region
       And I should see "Tag Test 2" in the "Content" region

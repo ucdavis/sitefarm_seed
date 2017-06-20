@@ -24,7 +24,7 @@ Feature: A User should create a Focal Link custom block
     Given I delete the most recent custom block
     Then I should see the success message "The custom block FL: Focal Link has been deleted."
 
-  @api @javascript @local_files @local @current
+  @api @javascript @local_files @local
   Scenario: Add a Focal link with an uploaded photo for the icon
     When I fill in the following:
       | Title | Focal Link 2        |

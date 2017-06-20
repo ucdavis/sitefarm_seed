@@ -42,12 +42,12 @@ Feature: SiteFarm Feature Lock
     Given I am on "admin/config/search/path/patterns/sf_page"
     Then I should get a "403" HTTP response
 
-  @api
-  Scenario: SiteFarm Image Styles should be locked
-    Given I am at "admin/config/media/image-styles"
-    Then I should see "Flush" in the "Admin Content" region
-    Given I am on "admin/config/media/image-styles/manage/sf_thumbnail"
-    Then I should get a "403" HTTP response
+#  @api
+#  Scenario: SiteFarm Image Styles should be locked
+#    Given I am at "admin/config/media/image-styles"
+#    Then I should see "Flush" in the "Admin Content" region
+#    Given I am on "admin/config/media/image-styles/manage/sf_thumbnail"
+#    Then I should get a "403" HTTP response
 
   @api
   Scenario: SiteFarm Views should be locked

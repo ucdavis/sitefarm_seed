@@ -108,24 +108,6 @@ Feature: Event Content Type
       And I press "Save and publish"
     Then I should see the link "Location for the event" in the "Content" region
 
-  @api
-  Scenario: Person references from an Event
-    Given "sf_person" content:
-      | title     | field_sf_first_name | field_sf_last_name |
-      | John Test | John                | Test               |
-    When I visit "node/add/sf_event"
-      And I fill in the following:
-        | Title                                   | Testing title |
-        | field_sf_dates[0][value][date]          | 2016-06-01    |
-        | field_sf_dates[0][value][time]          | 05:06:22      |
-        | field_sf_dates[0][end_value][date]      | 2016-06-01    |
-        | field_sf_dates[0][end_value][time]      | 06:06:22      |
-        | field_sf_person_reference[0][target_id] | John Test     |
-      And I press "Save and publish"
-    Then I should not see "John Test" in the "Content" region
-    When I click "Edit"
-    Then the "field_sf_person_reference[0][target_id]" autocomplete field should contain "John Test"
-
   @api @javascript
   Scenario: Social share buttons on Event
     Given "sf_event" content:

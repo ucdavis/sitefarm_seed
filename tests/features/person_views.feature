@@ -10,25 +10,12 @@ Feature: A User should see lists of content about a Person
       | John Test | John                | Test               |
       | Jane Test | Jane                | Test               |
       | Davis Dan | Davis               | Dan                |
-    And "sf_article" content:
-        | title          | field_sf_person_reference |
-        | First Article  | John Test                 |
-        | Second Article | Davis Dan                 |
-        | Third Article  | John Test                 |
-
-  @api
-  Scenario: Content related back to this person should appear in second sidebar as listings
-    Given I am at "/people/john-test"
-    Then I should see "First Article" in the "Sidebar Second Region"
-      And I should see "Third Article" in the "Sidebar Second Region"
-      And I should not see "Second Article" in the "Sidebar Second Region"
-      And I should see the ".vm-listing" element in the "Sidebar Second Region"
 
   @api
   Scenario: Person Directory with Exposed Filter block
-    Given I am at "/people"
-    Then I should see the ".vm-teaser" element in the "Content" region
-      And I should see "Filter Results" in the "Sidebar First Region"
+    Given a block "views_exposed_filter_block:sf_person_directory-page_1" is in the "sidebar_first" region
+      And I am at "/people"
+    Then I should see the ".node--view-mode-teaser" element in the "Content" region
       And I should see "First Name" in the "Sidebar First Region"
       And I should see "Last Name" in the "Sidebar First Region"
       And I should see "Position Title" in the "Sidebar First Region"

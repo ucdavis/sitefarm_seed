@@ -84,7 +84,8 @@ Feature: CkEditor buttons and functionality
       And I should see "Sub Title" in the "h3" element in the "Content" region
       And I should see "Sub Title - Auxiliary" in the "h3.heading--auxiliary" element in the "Content" region
       And I should see "Sub Title 2" in the "h4" element in the "Content" region
-      And I should see "Sub Title 3" in the "h5" element in the "Content" region
+      # This needs to be Uppercase due to Bartik's style on an h5
+      And I should see "SUB TITLE 3" in the "h5" element in the "Content" region
 
   @api @javascript
   Scenario: Block paragraph styles for CKEditor
