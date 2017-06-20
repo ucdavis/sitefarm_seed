@@ -5,7 +5,7 @@ Feature: A User should create an External Media Embed block
 
   Background:
     Given I am logged in as a user with the "administrator" role
-      And I visit "admin/structure/block/add/external_media_embed_block/sitefarm_one?region=sidebar_first"
+      And I visit "admin/structure/block/add/external_media_embed_block/bartik?region=sidebar_first"
 
   @api @javascript
   Scenario: Add an External Media Embed block to the first sidebar region
