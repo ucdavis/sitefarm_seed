@@ -29,7 +29,7 @@ Feature: A User should create an article
     Then I should see a "input[name='field_sf_meta_tags[0][basic][title]']" element
     And I should see a "textarea[name='field_sf_meta_tags[0][basic][description]']" element
 
-  @api @current
+  @api
   Scenario: A url alias should be auto generated for Articles.
     Given I select "News" from "field_sf_article_type"
     When I press "Save and publish"
@@ -44,10 +44,12 @@ Feature: A User should create an article
       And I should see "What's the plus sign for?"
     When I fill in "field_sf_primary_image[0][alt]" with "alt text"
       And I fill in "field_sf_primary_image[0][title]" with "title text"
+      And I press "Categorizing"
+      And I select "News" from "field_sf_article_type"
       And I press "Save and publish"
     Then I should see an image in the "Content" region
       And I should see the image alt "alt text" in the "Content" region
-      And I should see "title text" in the "Content" region
+      And I should see the "img[title='title text']" element in the "Content" region
 
   @api
   Scenario: Tags added to an Article
