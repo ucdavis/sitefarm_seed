@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function sitefarm_wysiwyg_element_info_alter(array &$info) {
+  if (isset($info['textarea'])) {
+    $info['textarea']['#attached']['library'][] = 'sitefarm_wysiwyg/sitefarm_wysiwyg.ckeditor';
+  }
+}

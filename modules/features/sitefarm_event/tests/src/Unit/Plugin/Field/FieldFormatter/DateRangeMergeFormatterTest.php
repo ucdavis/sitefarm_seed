@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\sitefarm_event\Plugin\Field\FieldFormatter;
+namespace Drupal\Tests\sitefarm_event\Unit\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Tests\UnitTestCase;

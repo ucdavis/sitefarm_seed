@@ -26,7 +26,7 @@ Feature: A User should see lists of events
     Then I should not see "First Event" in the "Sidebar First Region"
       And I should see "Second Event" in the "Sidebar First Region"
       And I should see "Third Event" in the "Sidebar First Region"
-      And I should see the ".vm-listing" element in the "Sidebar First Region"
+      And I should see the ".node--view-mode-listing" element in the "Sidebar First Region"
 
   @api
   Scenario: Events Listing Page showing in the content region
@@ -34,7 +34,7 @@ Feature: A User should see lists of events
     Then I should not see "First Event" in the "Content" region
       And I should see "Second Event" in the "Content" region
       And I should see "Third Event" in the "Content" region
-      And I should see the ".vm-teaser" element in the "Content" region
+      And I should see the ".node--view-mode-teaser" element in the "Content" region
 
   @api
   Scenario: Events Listing Block (duplicate of page) showing on the home page
@@ -43,10 +43,11 @@ Feature: A User should see lists of events
     Then I should not see "First Event" in the "Sidebar First Region"
       And I should see "Second Event" in the "Sidebar First Region"
       And I should see "Third Event" in the "Sidebar First Region"
-      And I should see the ".vm-teaser" element in the "Sidebar First Region"
+      And I should see the ".node--view-mode-teaser" element in the "Sidebar First Region"
 
   @api
   Scenario: Event Type categories show in a block that can be filtered to show events in a selected category
+    Given a block "views_block:sf_events_category_filter-block_1" is in the "sidebar_second" region
     When I am on "/events"
       And I click "Views Category"
     Then I should see the ".category-filter" element in the "Sidebar Second Region"
@@ -54,16 +55,17 @@ Feature: A User should see lists of events
       And I should not see "Second Article" in the "Content" region
       And I should not see "First Event" in the "Content" region
     When I click "Views Cat 2" in the "Sidebar Second Region"
-    Then I should see "Views Cat 2" in the ".category-filter__list-item--active" element
-      And I should see "Second Event" in the "Content" region
+    Then I should see "Second Event" in the "Content" region
       And I should not see "First Event" in the "Content" region
       And I should not see "Third Event" in the "Content" region
 
   @api
   Scenario: Event Exposed Filter should appear in the sidebar
-    Given default nodes are unpublished
+    Given a block "views_exposed_filter_block:sf_events_listing-page_1" is in the "sidebar_first" region
+      And default nodes are unpublished
     When I am on "/events"
-    Then I should see "Filter Results" in the "Sidebar First Region"
+    Then I should see "Title" in the "Sidebar First Region"
+      And I should see "Date Range Start" in the "Sidebar First Region"
     When I fill in "title" with "Second"
       And I press "Apply Filter"
     Then I should see "Second Event" in the "Content" region

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\site_credits;
+namespace Drupal\Tests\site_credits\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\site_credits\SiteInformation;

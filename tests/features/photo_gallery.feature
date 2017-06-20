@@ -9,13 +9,13 @@ Feature: Photo Gallery Content Type
         | Test Category |
         | Second Term   |
     When I visit "node/add/sf_photo_gallery"
-    And I fill in the following:
-      | Title | Gallery Name |
-    And I attach the file "test_16x9.png" to "files[field_sf_gallery_photo_0][]"
-    And I attach the file "test_16x9.png" to "files[field_sf_primary_image_0]"
+      And I fill in the following:
+        | Title | Gallery Name |
+      And I attach the file "test_16x9.png" to "files[field_sf_gallery_photo_0][]"
+      And I attach the file "test_16x9.png" to "files[field_sf_primary_image_0]"
     When I press "Save and publish"
-    And I fill in "field_sf_gallery_photo[0][alt]" with "alt text"
-    And I fill in "field_sf_primary_image[0][alt]" with "alt text"
+      And I fill in "field_sf_gallery_photo[0][alt]" with "alt text"
+      And I fill in "field_sf_primary_image[0][alt]" with "alt text"
 
   @api
   Scenario: Make sure that the photo gallery type provided by SiteFarm at installation is present.
@@ -28,14 +28,14 @@ Feature: Photo Gallery Content Type
       | Social Photo Gallery |
     When I visit "photo-galleries/social-photo-gallery"
     Then I should see a ".at-icon-facebook" element
-    And I should see a ".at-icon-twitter" element
-    And I should see a ".at-icon-google_plusone_share" element
-    And I should see a ".at-icon-email" element
-    And I should see a ".at-icon-addthis" element
+      And I should see a ".at-icon-twitter" element
+      And I should see a ".at-icon-google_plusone_share" element
+      And I should see a ".at-icon-email" element
+      And I should see a ".at-icon-addthis" element
 
   @api @javascript
   Scenario: Title attribute field on photo field should be labeled as Caption instead
-    And I wait for AJAX to finish
+    Given I wait for AJAX to finish
     Then I should see "Caption" in the ".form-item-field-sf-gallery-photo-0-title" element
     Then I should see "Caption" in the ".form-item-field-sf-primary-image-0-title" element
 
@@ -51,7 +51,7 @@ Feature: Photo Gallery Content Type
 
   @api @javascript
   Scenario: Ensure that the custom help text is shown.
-    And I wait for AJAX to finish
+    Given I wait for AJAX to finish
     Then I should see "What's the plus sign for?"
 
   @api
@@ -59,6 +59,7 @@ Feature: Photo Gallery Content Type
     When I select "Test Category" from "field_sf_gallery_category"
       And I press "Save and publish"
     Then I should see the link "Test Category"
+    Given a block "views_block:sf_photo_gallery_category_filter-block_1" is in the "sidebar_second" region
     When I visit "photo-galleries"
     Then I should see "Filter by Category" in the "Sidebar Second Region"
       And I should see the link "Test Category" in the "Sidebar Second Region"
@@ -68,32 +69,15 @@ Feature: Photo Gallery Content Type
   Scenario: Photo Galleries poster displays
     Given I wait for AJAX to finish
     When I fill in "field_sf_gallery_photo[0][alt]" with "alt text"
-    And I fill in "field_sf_primary_image[0][alt]" with "alt text"
-    And I press "Save and publish"
+      And I fill in "field_sf_primary_image[0][alt]" with "alt text"
+      And I press "Save and publish"
     When I visit "photo-galleries"
-    Then I should see a ".poster-list" element
-    And I should see a ".vm-poster__icon" element
-    And I should see a ".vm-poster__body-text" element
-    And I should see "Gallery Name" in the ".vm-poster__title" element
-
-  @api @javascript
-  Scenario: Related Photo Galleries field on Article content type should display
-    Given I wait for AJAX to finish
-    When I fill in "field_sf_gallery_photo[0][alt]" with "alt text"
-    And I fill in "field_sf_primary_image[0][alt]" with "alt text"
-    And I press "Save and publish"
-    When I visit "node/add/sf_article"
-    And I fill in the following:
-      | Title | Testing title |
-      | Related Photo Gallery (value 1) | Gallery Name |
-    And I press "Save and publish"
-    Then I should see "Related Photo Galleries" in the "Sidebar Second Region"
-      And I should see the link "Gallery Name" in the "Sidebar Second Region"
+    Then I should see "Gallery Name" in the ".node--view-mode-poster" element
 
   @api
   Scenario: Slideshow Photo Gallery block added to a region
-      And I press "Save and publish"
-    When I visit "admin/structure/block/add/slideshow_gallery_block/sitefarm_one?region=sidebar_first"
+    When I press "Save and publish"
+      And I visit "admin/structure/block/add/slideshow_gallery_block/bartik?region=sidebar_first"
       And I reference "node" "Gallery Name" in "Gallery Title"
       And the "settings[display][show_title]" checkbox should be checked
       And the "settings[display][lazy_load]" checkbox should be checked
