@@ -28,6 +28,13 @@ Feature: A User should create an article
     Then I should not see a "input[name='promote[value]']" element
 
   @api
+  Scenario: Ensure that the article Create New Revision is checked.
+    Given I select "News" from "field_sf_article_type"
+    When I press "Save and publish"
+    And I click "Edit"
+    Then the "revision" checkbox should be checked
+
+  @api
   Scenario: Ensure that meta tag fields are present on Articles.
     Then I should see a "input[name='field_sf_meta_tags[0][basic][title]']" element
     And I should see a "textarea[name='field_sf_meta_tags[0][basic][description]']" element
@@ -74,7 +81,6 @@ Feature: A User should create an article
       And I select "News" from "field_sf_article_type"
       And I select "Test Category" from "field_sf_article_category"
       And I press "Save and publish"
-      And show last response
     Then I should see the link "Test Category"
 
   @api
@@ -87,28 +93,18 @@ Feature: A User should create an article
     When I click "Edit"
     Then the "field_sf_article_type" select should be set to "Blog"
 
-  @api
-  Scenario: Articles should have a default layout
-    When I fill in the following:
-      | Body  | Body text |
-      And I select "Blog" from "field_sf_article_type"
-      And I press "Save and publish"
-    Then I should see a ".layout-main" element
-      And I should see "Testing title" in the "Content Region"
-      And I should see the ".breadcrumb" element in the "Breadcrumb Region"
-
-#  @api @javascript
-#  Scenario: Social share buttons on an Article
-#    Given "sf_article" content:
-#      | title      |
-#      | Social Article |
-#    When I visit "news/social-article"
-#      And I break
-#    Then I should see a ".at-icon-facebook" element
-#      And I should see a ".at-icon-twitter" element
-#      And I should see a ".at-icon-google_plusone_share" element
-#      And I should see a ".at-icon-email" element
-#      And I should see a ".at-icon-addthis" element
+  @api @javascript
+  Scenario: Social share buttons on an Article
+    Given "sf_article" content:
+      | title      |
+      | Social Article |
+    When I visit "news/social-article"
+      And I break
+    Then I should see a ".at-icon-facebook" element
+      And I should see a ".at-icon-twitter" element
+      And I should see a ".at-icon-google_plusone_share" element
+      And I should see a ".at-icon-email" element
+      And I should see a ".at-icon-addthis" element
 
   @api @javascript
   Scenario: Article teasers should strip html from the body summary
