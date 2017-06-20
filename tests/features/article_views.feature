@@ -32,6 +32,7 @@ Feature: A User should see lists of articles
       And I am viewing a "sf_article" content:
         | title                     | Current Article |
         | field_sf_article_category | Views Category  |
+        | field_sf_article_type     | News            |
     Then I should see "First Article" in the "Sidebar Second Region"
       And I should see "Third Article" in the "Sidebar Second Region"
       And I should not see "Second Article" in the "Sidebar Second Region"
@@ -41,8 +42,9 @@ Feature: A User should see lists of articles
   Scenario: Related Articles should appear on articles when having tags in common
     Given a block "views_block:sf_articles_related-block_1" is in the "sidebar_second" region
       And I am viewing a "sf_article" content:
-        | title         | Current Article |
-        | field_sf_tags | Views Tag       |
+        | title                 | Current Article |
+        | field_sf_tags         | Views Tag       |
+        | field_sf_article_type | News            |
     Then I should see "First Article" in the "Sidebar Second Region"
       And I should see "Second Article" in the "Sidebar Second Region"
       And I should not see "Third Article" in the "Sidebar Second Region"
