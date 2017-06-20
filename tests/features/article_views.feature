@@ -33,7 +33,6 @@ Feature: A User should see lists of articles
         | title                     | Current Article |
         | field_sf_article_category | Views Category  |
     Then I should see "First Article" in the "Sidebar Second Region"
-      And I break
       And I should see "Third Article" in the "Sidebar Second Region"
       And I should not see "Second Article" in the "Sidebar Second Region"
       And I should not see "Current Article" in the "Sidebar Second Region"
