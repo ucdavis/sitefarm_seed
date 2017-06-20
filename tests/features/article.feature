@@ -7,7 +7,9 @@ Feature: A User should create an article
     Given I am logged in as a user with the "administrator" role
     Given "sf_article_type" terms:
       | name          |
-      | News |
+      | News          |
+      | Test Category |
+      | Second Term   |
     Then I visit "node/add/sf_article"
       And I fill in the following:
         | Title | Testing title |
@@ -68,8 +70,10 @@ Feature: A User should create an article
     When I visit "node/add/sf_article"
       And I fill in the following:
         | Title | Testing title |
+      And I select "News" from "field_sf_article_type"
       And I select "Test Category" from "field_sf_article_category"
       And I press "Save and publish"
+      And show last response
     Then I should see the link "Test Category"
 
   @api
