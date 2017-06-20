@@ -44,8 +44,7 @@ Feature: Basic Page Content Type
       And I should see "What's the plus sign for?"
     When I fill in "field_sf_primary_image[0][alt]" with "alt text"
       And I press "Save and publish"
-    Then I should see an image in the "Page Title" region
-      And I should see the image alt "alt text" in the "Page Title" region
+    Then I should see the success message "Basic Page Testing title has been created."
 
   @api @javascript
   Scenario: Basic pages should be able to go into the Main Menu
@@ -54,20 +53,7 @@ Feature: Basic Page Content Type
       And I check the box "Provide a menu link"
       And I select "<Main navigation>" from "menu[menu_parent]"
       And I press "Save and publish"
-#   Need uppercase title due to the theme forcing this style
-    Then I should see "TESTING TITLE" in the "Navigation Region"
-
-  @api
-  Scenario: Page Titles should change color based on the Branding Term selected.
-    Given "sf_branding" terms:
-      | name          | field_sf_brand_color |
-      | Test Category | Evergreen         |
-    When I visit "node/add/sf_page"
-      And I fill in the following:
-        | Title | Testing title |
-      And I select "Test Category" from "field_sf_branding"
-      And I press "Save and publish"
-    Then I should see the ".category-brand--evergreen" element in the "Page Title"
+    Then I should see "Testing title" in the "Primary Menu Region"
 
   @api @javascript
   Scenario: Multiple file attachements to Basic Pages
@@ -82,6 +68,7 @@ Feature: Basic Page Content Type
   @api @javascript
   Scenario: Sub Pages should show up in a sidebar sub-nav menu
     Given the Administration Toolbar is hidden
+      And a block "system_menu_block:main" is in the "sidebar_second" region
     When I press "Menu settings"
       And I check the box "Provide a menu link"
       And I select "<Main navigation>" from "menu[menu_parent]"
@@ -97,24 +84,6 @@ Feature: Basic Page Content Type
     Then I should see the link "Sub Page" in the "Sidebar Second Region" region
 
   @api @javascript
-  Scenario: Main menu should show children pages already expanded
-    Given the Administration Toolbar is hidden
-    When I press "Menu settings"
-      And I check the box "Provide a menu link"
-      And I select "<Main navigation>" from "menu[menu_parent]"
-      And I press "Save and publish"
-      And I visit "node/add/sf_page"
-      And the Administration Toolbar is hidden
-      And I fill in the following:
-        | Title | Sub Page |
-      And I press "Menu settings"
-      And I check the box "Provide a menu link"
-      And I select "-- Testing title" from "menu[menu_parent]"
-      And I press "Save and publish"
-    Then I should see the link "Testing title" in the "Navigation Region"
-      And I should see "Testing title" in the ".menu-item--expanded" element
-
-  @api @javascript
   Scenario: Main menu should not show a menu weight field
     Given the Administration Toolbar is hidden
     When I press "Menu settings"
@@ -123,27 +92,9 @@ Feature: Basic Page Content Type
       And I should not see a ".form-item-menu-weight" element
 
   @api
-  Scenario: Basic Pages should have a default layout
-    When I fill in the following:
-      | Body  | Body text     |
-      And I press "Save and publish"
-    Then I should see a ".l-davis-flipped" element
-      And I should see "Testing title" in the "Page Title Region"
-      And I should see the ".breadcrumbs" element in the "Pre Content Region"
-
-  @api
   Scenario: Tags added to an Page
     When I fill in "field_sf_tags[target_id]" with "Tag Test, Tag Test 2"
       And I press "Save and publish"
     Then I should see the link "Tag Test"
     When I click "Edit"
     Then the "field_sf_tags[target_id]" autocomplete field should contain "Tag Test, Tag Test 2"
-
-  @api
-  Scenario: Social Follow block added to Sitefarm Page
-    Given "sf_page" content:
-      | title      |
-      | Social Follow |
-    When I visit "social-follow"
-    Then I should see the text "Social Follow"
-      And I should see a ".social-follow" element
