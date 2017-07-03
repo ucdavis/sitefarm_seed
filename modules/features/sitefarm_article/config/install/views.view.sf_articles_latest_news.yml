@@ -572,7 +572,7 @@ display:
           admin_label: ''
           empty: true
           tokenize: false
-          content: '<h2 class="panel__title">Latest News</h2>'
+          content: '<h2>Latest News</h2>'
           plugin_id: text_custom
     cache_metadata:
       max-age: -1

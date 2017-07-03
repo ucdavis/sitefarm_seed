@@ -531,7 +531,6 @@ display:
           element_label_class: ''
           element_label_colon: false
           element_wrapper_type: div
-          element_wrapper_class: gallery__item
           element_default_classes: false
           empty: ''
           hide_empty: false
@@ -734,7 +733,6 @@ display:
           element_label_class: ''
           element_label_colon: false
           element_wrapper_type: div
-          element_wrapper_class: gallery__item
           element_default_classes: false
           empty: ''
           hide_empty: false
