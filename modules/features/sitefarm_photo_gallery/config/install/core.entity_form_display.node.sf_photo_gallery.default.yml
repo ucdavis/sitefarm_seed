@@ -4,7 +4,7 @@ dependencies:
   config:
     - field.field.node.sf_photo_gallery.body
     - field.field.node.sf_photo_gallery.field_sf_gallery_category
-    - field.field.node.sf_photo_gallery.field_sf_gallery_photo
+    - field.field.node.sf_photo_gallery.field_sf_gallery_photos
     - field.field.node.sf_photo_gallery.field_sf_primary_image
     - field.field.node.sf_photo_gallery.field_sf_tags
     - image.style.thumbnail
@@ -36,7 +36,7 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
-  field_sf_gallery_photo:
+  field_sf_gallery_photos:
     weight: 8
     settings:
       progress_indicator: throbber

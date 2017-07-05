@@ -5,7 +5,7 @@ dependencies:
     - core.entity_view_mode.node.poster
     - field.field.node.sf_photo_gallery.body
     - field.field.node.sf_photo_gallery.field_sf_gallery_category
-    - field.field.node.sf_photo_gallery.field_sf_gallery_photo
+    - field.field.node.sf_photo_gallery.field_sf_gallery_photos
     - field.field.node.sf_photo_gallery.field_sf_primary_image
     - field.field.node.sf_photo_gallery.field_sf_tags
     - node.type.sf_photo_gallery
@@ -35,7 +35,7 @@ content:
     type: image
 hidden:
   field_sf_gallery_category: true
-  field_sf_gallery_photo: true
+  field_sf_gallery_photos: true
   field_sf_tags: true
   links: true
   sharemessage__sf_social_share_buttons: true

@@ -169,7 +169,7 @@ class SlideshowGalleryBlock extends BlockBase implements ContainerFactoryPluginI
     $title = $node->getTitle();
 
     // Slides
-    $field = $node->field_sf_gallery_photo;
+    $field = $node->field_sf_gallery_photos;
     $props = $field->getValue();
     $slides = $field->referencedEntities();
 
