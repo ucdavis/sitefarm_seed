@@ -19,7 +19,7 @@ steps:
   - name: Run PhpUnit
     plugin: Script
     script:
-      - cd $SRC_DIR/sitefarm-distro-template/docroot/profiles/sitefarm_seed
+      - cd $SRC_DIR/sitefarm-distro-template/web/profiles/sitefarm_seed
       - $SRC_DIR/sitefarm-distro-template/vendor/bin/phpunit --colors="always"
   - name: Drupal site setup
     plugin: Drupal
@@ -51,3 +51,9 @@ steps:
       - cd /var/www/html/profiles/sitefarm_seed
       - $SRC_DIR/sitefarm-distro-template/vendor/bin/behat --profile probo --tags "@javascript" --colors
       - disown
+  - name: Post to Slack
+    plugin: Script
+    script: |
+      echo "PULL_REQUEST_LINK: $PULL_REQUEST_LINK\nPULL_REQUEST_NAME: $PULL_REQUEST_NAME\nBUILD_ID: $BUILD_ID\nBUILD_DOMAIN: $BUILD_DOMAIN"
+      SLACK="<$PULL_REQUEST_LINK|Pull request $PULL_REQUEST_NAME> has finished building.\n<https://app.probo.ci/#/dashboard/build/$BUILD_ID|Review the build> and <$BUILD_DOMAIN|view the site>"
+      curl -X POST --data-urlencode "payload={\"username\": \"Probo.CI Bot\", \"text\": \"$SLACK\", \"icon_emoji\": \":proboci:\"}" https://hooks.slack.com/services/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
