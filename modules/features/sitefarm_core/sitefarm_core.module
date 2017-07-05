@@ -7,6 +7,16 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 
 /**
+ * Implements hook_preprocess_HOOK() for html.html.twig.
+ */
+function sitefarm_core_preprocess_html(array &$variables) {
+  // The metatag module ads a pipe to the meta title before it gets to the theme
+  // In some cases it will have a prefixed pipe on the home page. Remove it.
+  $helper = \Drupal::service('sf.hooks.preprocess');
+  $helper->fixMetatagFrontTitle($variables);
+}
+
+/**
  * Implements hook_form_alter().
  */
 function sitefarm_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
