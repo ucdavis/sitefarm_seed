@@ -3,8 +3,8 @@ status: true
 dependencies:
   module:
     - node
-id: node.field_sf_related_photo_gallery
-field_name: field_sf_related_photo_gallery
+id: node.field_sf_photo_gallery_reference
+field_name: field_sf_photo_gallery_reference
 entity_type: node
 type: entity_reference
 settings:
