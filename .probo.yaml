@@ -1,7 +1,7 @@
 image: proboci/ubuntu-14.04-lamp:php-7.1
 assets:
   - probossh.tar.gz
-  - sitefarm_local.patch
+  - sitefarm_seed_local.patch
 steps:
   - name: Import SSH Keys
     command: 'tar -C $HOME/.ssh -zxvf $ASSET_DIR/probossh.tar.gz ; ls -al $HOME/.ssh'
