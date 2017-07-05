@@ -51,3 +51,7 @@ steps:
       - cd /var/www/html/profiles/sitefarm_seed
       - $SRC_DIR/sitefarm-distro-template/vendor/bin/behat --profile probo --tags "@javascript" --colors
       - disown
+  - name: Post to Slack
+    plugin: Script
+    script:
+      - curl -X POST --data-urlencode 'payload={"username": "Probo.CI Bot", "text": "<$PULL_REQUEST_LINK|Pull request $PULL_REQUEST_NAME> has finished building. <https://app.probo.ci/#/dashboard/build/$BUILD_ID|Review the build>", "icon_emoji": ":proboci:"}' https://hooks.slack.com/services/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
