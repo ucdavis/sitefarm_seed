@@ -57,11 +57,9 @@ display:
         type: html_list
         options:
           grouping: {  }
-          row_class: 'category-filter__list-item category-brand--{{ field_sf_brand_color }}'
           default_row_class: false
           type: ul
           wrapper_class: ''
-          class: category-filter
       row:
         type: fields
       fields:

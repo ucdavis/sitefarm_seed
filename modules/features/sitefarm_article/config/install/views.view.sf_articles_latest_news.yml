@@ -562,18 +562,6 @@ display:
       defaults:
         empty: false
         header: false
-      header:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content: '<h2 class="panel__title">Latest News</h2>'
-          plugin_id: text_custom
     cache_metadata:
       max-age: -1
       contexts:
