@@ -3,13 +3,6 @@ assets:
   - probossh.tar.gz
   - sitefarm_seed_local.patch
 steps:
-  - name: Post to Slack
-    plugin: Script
-    script: |
-      PR_NAME=$(echo "$PULL_REQUEST_NAME" | tr -d '"')
-      echo "PULL_REQUEST_LINK: $PULL_REQUEST_LINK\nPR_NAME: $PR_NAME\nBUILD_ID: $BUILD_ID\nBUILD_DOMAIN: $BUILD_DOMAIN"
-      SLACK="PR <$PULL_REQUEST_LINK|$PR_NAME> has finished building.\n<https://app.probo.ci/#/dashboard/build/$BUILD_ID|Review> the build on Probo\n<$BUILD_DOMAIN/user|Log in> to the fully-built site (username: admin, password: probo)"
-      curl -X POST --data-urlencode "payload={\"channel\": \"@shawn\", \"username\": \"Probo.CI Bot\", \"text\": \"$SLACK\", \"icon_emoji\": \":proboci:\"}" https://hooks.slack.com/services/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
   - name: Import SSH Keys
     command: 'tar -C $HOME/.ssh -zxvf $ASSET_DIR/probossh.tar.gz ; ls -al $HOME/.ssh'
   - name: Build Drupal
@@ -58,3 +51,10 @@ steps:
       - cd /var/www/html/profiles/sitefarm_seed
       - $SRC_DIR/sitefarm-distro-template/vendor/bin/behat --profile probo --tags "@javascript" --colors
       - disown
+  - name: Post to Slack
+    plugin: Script
+    script: |
+      PR_NAME=$(echo "$PULL_REQUEST_NAME" | tr -d '"')
+      echo "PULL_REQUEST_LINK: $PULL_REQUEST_LINK\nPR_NAME: $PR_NAME\nBUILD_ID: $BUILD_ID\nBUILD_DOMAIN: $BUILD_DOMAIN"
+      SLACK="PR <$PULL_REQUEST_LINK|$PR_NAME> has finished building.\n<https://app.probo.ci/#/dashboard/build/$BUILD_ID|Review> the build on Probo\n<$BUILD_DOMAIN/user|Log in> to the fully-built site (username: admin, password: probo)"
+      curl -X POST --data-urlencode "payload={\"username\": \"Probo.CI Bot\", \"text\": \"$SLACK\", \"icon_emoji\": \":proboci:\"}" https://hooks.slack.com/services/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
