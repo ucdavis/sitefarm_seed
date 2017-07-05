@@ -132,7 +132,7 @@ display:
           id: delta
           table: node__field_sf_gallery_photo
           field: delta
-          relationship: reverse__node__field_sf_related_photo_gallery
+          relationship: reverse__node__field_sf_photo_gallery_reference
           group_type: group
           admin_label: ''
           order: ASC
@@ -145,13 +145,13 @@ display:
       footer: {  }
       empty: {  }
       relationships:
-        reverse__node__field_sf_related_photo_gallery:
-          id: reverse__node__field_sf_related_photo_gallery
+        reverse__node__field_sf_photo_gallery_reference:
+          id: reverse__node__field_sf_photo_gallery_reference
           table: node_field_data
-          field: reverse__node__field_sf_related_photo_gallery
+          field: reverse__node__field_sf_photo_gallery_reference
           relationship: none
           group_type: group
-          admin_label: field_sf_related_photo_gallery
+          admin_label: field_sf_photo_gallery_reference
           required: true
           entity_type: node
           plugin_id: entity_reverse
@@ -160,7 +160,7 @@ display:
           id: nid
           table: node_field_data
           field: nid
-          relationship: reverse__node__field_sf_related_photo_gallery
+          relationship: reverse__node__field_sf_photo_gallery_reference
           group_type: group
           admin_label: 'Node ID of the content Referencing the Galleries'
           default_action: default
