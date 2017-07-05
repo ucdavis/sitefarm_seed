@@ -3,7 +3,7 @@ status: true
 dependencies:
   module:
     - node
-id: photo_gallery_alias_pattern
+id: sf_photo_gallery
 label: 'Photo Gallery'
 type: 'canonical_entities:node'
 pattern: 'photo-galleries/[node:title]'

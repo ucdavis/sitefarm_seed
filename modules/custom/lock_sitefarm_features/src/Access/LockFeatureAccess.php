@@ -107,7 +107,6 @@ class LockFeatureAccess implements AccessInterface {
     'sf_photo_gallery',
     'sf_article_category_terms',
     'default_taxonomy',
-    'photo_gallery_alias_pattern',
   );
 
   /**
