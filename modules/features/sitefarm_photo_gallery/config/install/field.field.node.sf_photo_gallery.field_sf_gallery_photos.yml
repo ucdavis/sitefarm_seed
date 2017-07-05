@@ -2,12 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_sf_gallery_photo
+    - field.storage.node.field_sf_gallery_photos
     - node.type.sf_photo_gallery
   module:
     - image
-id: node.sf_photo_gallery.field_sf_gallery_photo
-field_name: field_sf_gallery_photo
+id: node.sf_photo_gallery.field_sf_gallery_photos
+field_name: field_sf_gallery_photos
 entity_type: node
 bundle: sf_photo_gallery
 label: Photo(s)

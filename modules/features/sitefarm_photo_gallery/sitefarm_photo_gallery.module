@@ -19,7 +19,7 @@ function sitefarm_photo_gallery_form_alter(&$form, FormStateInterface $form_stat
  */
 function sitefarm_photo_gallery_field_widget_image_image_form_alter(&$element, FormStateInterface $form_state, $form) {
   // Add a new process function to change the title attribute of the photos.
-  if ($element['#field_name'] == 'field_sf_gallery_photo') {
+  if ($element['#field_name'] == 'field_sf_gallery_photos') {
     $element['#process'][] = 'sitefarm_photo_gallery_image_widget_process';
   }
 }

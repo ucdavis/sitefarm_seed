@@ -185,7 +185,7 @@ class SlideshowGalleryBlockTest extends UnitTestCase
     // Use reflection to alter the protected $node->values
     $property = $reflectionObject->getProperty('values');
     $property->setAccessible(true);
-    $property->setValue($node_rendered, ['field_sf_gallery_photo' => $field->reveal()]);
+    $property->setValue($node_rendered, ['field_sf_gallery_photos' => $field->reveal()]);
 
     $image_style = $this->prophesize(ImageStyle::CLASS);
     $image_style->buildUrl('fileuri')->willReturn('image_src');

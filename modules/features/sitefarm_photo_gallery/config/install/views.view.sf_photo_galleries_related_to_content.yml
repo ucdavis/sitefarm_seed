@@ -130,7 +130,7 @@ display:
       sorts:
         delta:
           id: delta
-          table: node__field_sf_gallery_photo
+          table: node__field_sf_gallery_photos
           field: delta
           relationship: reverse__node__field_sf_photo_gallery_reference
           group_type: group

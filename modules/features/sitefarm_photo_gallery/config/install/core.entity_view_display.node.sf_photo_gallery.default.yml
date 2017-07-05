@@ -4,7 +4,7 @@ dependencies:
   config:
     - field.field.node.sf_photo_gallery.body
     - field.field.node.sf_photo_gallery.field_sf_gallery_category
-    - field.field.node.sf_photo_gallery.field_sf_gallery_photo
+    - field.field.node.sf_photo_gallery.field_sf_gallery_photos
     - field.field.node.sf_photo_gallery.field_sf_primary_image
     - field.field.node.sf_photo_gallery.field_sf_tags
     - node.type.sf_photo_gallery
@@ -30,7 +30,7 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
-  field_sf_gallery_photo:
+  field_sf_gallery_photos:
     weight: 2
     label: visually_hidden
     settings:
