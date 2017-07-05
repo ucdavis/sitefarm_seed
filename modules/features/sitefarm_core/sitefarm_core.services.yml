@@ -32,6 +32,10 @@ services:
     class: Drupal\sitefarm_core\Hooks\NodeDisplay
     arguments: []
 
+  sf.hooks.preprocess:
+    class: Drupal\sitefarm_core\Hooks\Preprocess
+    arguments: ['@module_handler']
+
   sf.hooks.views_alter:
     class: Drupal\sitefarm_core\Hooks\ViewsAlter
     arguments: []
