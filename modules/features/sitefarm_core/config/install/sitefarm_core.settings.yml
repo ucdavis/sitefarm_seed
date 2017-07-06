@@ -1,0 +1,9 @@
+block_visibility_hidden:
+  - 'entity_bundle:block_content'
+  - 'entity_bundle:contact_message'
+  - 'entity_bundle:crop'
+  - 'entity_bundle:redirect'
+  - 'entity_bundle:scheduled_update'
+  - 'entity_bundle:shortcut'
+  - 'entity_bundle:menu_link_content'
+  - 'node_type'

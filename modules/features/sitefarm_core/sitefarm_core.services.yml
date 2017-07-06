@@ -22,7 +22,7 @@ services:
 
   sf.hooks.block_form_alter:
     class: Drupal\sitefarm_core\Hooks\BlockFormAlter
-    arguments: []
+    arguments: ["@config.factory"]
 
   sf.hooks.node_form_alter:
     class: Drupal\sitefarm_core\Hooks\NodeFormAlter
