@@ -3,7 +3,7 @@
 namespace Drupal\sitefarm_seed;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Extension\ModuleInstaller;
+use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -25,7 +25,7 @@ class ProfileInstall {
   /**
    * Instance of the Module Installer service.
    *
-   * @var \Drupal\Core\Extension\ModuleInstaller
+   * @var \Drupal\Core\Extension\ModuleInstallerInterface
    */
   protected $moduleInstaller;
 
@@ -33,9 +33,9 @@ class ProfileInstall {
    * ProfileInstall constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
-   * @param \Drupal\Core\Extension\ModuleInstaller $moduleInstaller
+   * @param \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, ModuleInstaller $moduleInstaller) {
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, ModuleInstallerInterface $moduleInstaller) {
     $this->entityTypeManager = $entityTypeManager;
     $this->moduleInstaller = $moduleInstaller;
   }

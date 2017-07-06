@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\sitefarm_seed\Unit;
 
+use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Tests\UnitTestCase;
 use Drupal\sitefarm_seed\ProfileInstall;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -19,6 +20,13 @@ class ProfileInstallTest extends UnitTestCase {
   protected $entityTypeManager;
 
   /**
+   * Instance of the Module Installer service.
+   *
+   * @var \Drupal\Core\Extension\ModuleInstallerInterface
+   */
+  protected $moduleInstaller;
+
+  /**
    * @var \Drupal\sitefarm_seed\ProfileInstall
    */
   protected $helper;
@@ -31,7 +39,12 @@ class ProfileInstallTest extends UnitTestCase {
 
     $this->entityTypeManager = $this->prophesize(EntityTypeManagerInterface::CLASS);
 
-    $this->helper = new ProfileInstall($this->entityTypeManager->reveal());
+    $this->moduleInstaller = $this->prophesize(ModuleInstallerInterface::CLASS);
+
+    $this->helper = new ProfileInstall(
+      $this->entityTypeManager->reveal(),
+      $this->moduleInstaller->reveal()
+    );
   }
 
   /**
