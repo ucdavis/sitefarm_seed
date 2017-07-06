@@ -7,6 +7,7 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\sitefarm_seed\ProfileInstall;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Prophecy\Argument;
 
 /**
  * @coversDefaultClass \Drupal\sitefarm_seed\ProfileInstall
@@ -91,6 +92,14 @@ class ProfileInstallTest extends UnitTestCase {
     $this->helper->useMailInContactForm($form);
     $this->assertInstanceOf('Drupal\sitefarm_seed\ProfileInstall', $form['#submit'][0][0]);
     $this->assertEquals('useMailInContactFormSubmit', $form['#submit'][0][1]);
+  }
+
+  /**
+   * Test the defaultContentModuleCleanup() method
+   */
+  public function testDefaultContentModuleCleanup() {
+    $this->moduleInstaller->uninstall(Argument::any())->shouldBeCalled();
+    $this->helper->defaultContentModuleCleanup();
   }
 
 }
