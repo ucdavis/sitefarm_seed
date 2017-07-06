@@ -3,6 +3,7 @@
 namespace Drupal\sitefarm_seed;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Extension\ModuleInstaller;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -22,12 +23,21 @@ class ProfileInstall {
   protected $entityTypeManager;
 
   /**
+   * Instance of the Module Installer service.
+   *
+   * @var \Drupal\Core\Extension\ModuleInstaller
+   */
+  protected $moduleInstaller;
+
+  /**
    * ProfileInstall constructor.
    *
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   * @param \Drupal\Core\Extension\ModuleInstaller $moduleInstaller
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, ModuleInstaller $moduleInstaller) {
     $this->entityTypeManager = $entityTypeManager;
+    $this->moduleInstaller = $moduleInstaller;
   }
 
   /**
@@ -80,6 +90,8 @@ class ProfileInstall {
 
   /**
    * Clear all 'notification' type messages that may have been set.
+   *
+   * @codeCoverageIgnore
    */
   public function clearMessages() {
     drupal_get_messages('status', TRUE);
@@ -91,7 +103,7 @@ class ProfileInstall {
    * Uninstall module used for site install but not needed for day to day.
    */
   public function defaultContentModuleCleanup() {
-    \Drupal::service('module_installer')->uninstall([
+    $this->moduleInstaller->uninstall([
       'default_content',
       'rest',
       'hal',

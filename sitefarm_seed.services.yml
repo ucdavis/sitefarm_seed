@@ -1,4 +1,4 @@
 services:
   sitefarm_seed.profile_install:
     class: Drupal\sitefarm_seed\ProfileInstall
-    arguments: ['@entity_type.manager']
+    arguments: ['@entity_type.manager', '@module_installer']
