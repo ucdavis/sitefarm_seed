@@ -56,8 +56,10 @@ class ProfileInstall {
    * Use site mail for the contact form
    *
    * @see useMailInContactFormSubmit()
+   *
+   * @param array $form
    */
-  public function useMailInContactForm() {
+  public function useMailInContactForm(&$form) {
     $form['#submit'][] = [$this, 'useMailInContactFormSubmit'];
   }
 
