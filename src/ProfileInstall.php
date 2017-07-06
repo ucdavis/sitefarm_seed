@@ -10,7 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * Helper utility to break out profile install procedural code in hooks
  *
- * @package Drupal\sitefarm
+ * @package Drupal\sitefarm_seed
  */
 class ProfileInstall {
 
