@@ -2,7 +2,7 @@
 
 namespace Drupal\sitefarm_seed;
 
-use Drupal\contact\Entity\ContactForm;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -13,6 +13,22 @@ use Drupal\Core\Form\FormStateInterface;
  * @package Drupal\sitefarm
  */
 class ProfileInstall {
+
+  /**
+   * Instance of the Entity Type Manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * ProfileInstall constructor.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
+    $this->entityTypeManager = $entityTypeManager;
+  }
 
   /**
    * Set defaults and hide the region settings
@@ -55,7 +71,9 @@ class ProfileInstall {
    */
   public function useMailInContactFormSubmit(array $form, FormStateInterface $form_state) {
     $site_mail = $form_state->getValue('site_mail');
-    ContactForm::load('feedback')->setRecipients([$site_mail])->trustData()->save();
+    /** @var \Drupal\contact\Entity\ContactForm $contact_form */
+    $contact_form = $this->entityTypeManager->getStorage('contact_form');
+    $contact_form->load('feedback')->setRecipients([$site_mail])->trustData()->save();
   }
 
   /**
