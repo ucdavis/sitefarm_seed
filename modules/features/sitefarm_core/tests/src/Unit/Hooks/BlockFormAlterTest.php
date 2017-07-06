@@ -12,6 +12,11 @@ use Drupal\sitefarm_core\Hooks\BlockFormAlter;
 class BlockFormAlterTest extends UnitTestCase {
 
   /**
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
    * @var \Drupal\sitefarm_core\Hooks\BlockFormAlter
    */
   protected $helper;
@@ -22,7 +27,22 @@ class BlockFormAlterTest extends UnitTestCase {
   protected function setUp() {
     parent::setUp();
 
-    $this->helper = new BlockFormAlter();
+    $this->configFactory = $this->getConfigFactoryStub([
+      'sitefarm_core.settings' => [
+        'block_visibility_hidden' => [
+          'entity_bundle:block_content',
+          'entity_bundle:contact_message',
+          'entity_bundle:crop',
+          'entity_bundle:redirect',
+          'entity_bundle:scheduled_update',
+          'entity_bundle:shortcut',
+          'entity_bundle:menu_link_content',
+          'node_type',
+        ],
+      ]
+    ]);
+
+    $this->helper = new BlockFormAlter($this->configFactory);
   }
 
   /**

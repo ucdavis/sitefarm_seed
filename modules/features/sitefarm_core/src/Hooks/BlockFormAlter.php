@@ -2,6 +2,8 @@
 
 namespace Drupal\sitefarm_core\Hooks;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
+
 /**
  * Class BlockFormAlter.
  *
@@ -12,6 +14,21 @@ namespace Drupal\sitefarm_core\Hooks;
 class BlockFormAlter {
 
   /**
+   * @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   */
+  protected $configFactory;
+
+  /**
+   * Constructor.
+   *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   Config Factory service.
+   */
+  public function __construct(ConfigFactoryInterface $configFactory) {
+    $this->configFactory = $configFactory;
+  }
+
+  /**
    * Hide visibility options on the block instance configuration page
    *
    * @param $form
@@ -20,16 +37,9 @@ class BlockFormAlter {
   public function hideVisibilityOptions(&$form, $hide = []) {
     // Hide the following visibility options
     if (empty($hide)) {
-      $hide = [
-        'entity_bundle:block_content',
-        'entity_bundle:contact_message',
-        'entity_bundle:crop',
-        'entity_bundle:redirect',
-        'entity_bundle:scheduled_update',
-        'entity_bundle:shortcut',
-        'entity_bundle:menu_link_content',
-        'node_type',
-      ];
+      $hide = $this->configFactory
+        ->get('sitefarm_core.settings')
+        ->get('block_visibility_hidden');
     }
 
     foreach ($hide as $name) {
