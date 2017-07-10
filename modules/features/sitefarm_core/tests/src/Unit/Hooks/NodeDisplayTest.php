@@ -179,21 +179,62 @@ class NodeDisplayTest extends UnitTestCase {
 
   /**
    * Tests addFeaturedStatus method
+   *
+   * @dataProvider addFeaturedStatusProvider
    */
-  public function testAddFeaturedStatus() {
+  public function testAddFeaturedStatus($featured_status, $view_mode, $expected) {
     $variables = [];
-    $variables['featured_status'] = "1";
-    $variables['view_mode'] = 'teaser';
+    $variables['view_mode'] = $view_mode;
+
+    // Mock the magic public property chain $node->field_sf_featured_status->value;
+    $value_class = new \stdClass();
+    $value_class->value = $featured_status;
 
     $node = $this->prophesize(Node::CLASS);
     $test_node = $node->reveal();
-    $test_node->set('field_sf_featured_status', "1");
+    if ($featured_status) {
+      $test_node->field_sf_featured_status = $value_class;
+    }
     $variables['node'] = $test_node;
 
     $this->helper->addFeaturedStatus($variables);
 
-    $expected = "1";
-    $this->assertEquals($expected, $variables['featured_status']);
+    // Set up a return variable that looks for the newly set featured status
+    $return = (isset($variables['featured_status'])) ? $variables['featured_status'] : NULL;
+
+    $this->assertEquals($expected, $return);
   }
 
+  /**
+   * Provider for testAddFeaturedStatus()
+   */
+  public function addFeaturedStatusProvider() {
+    return [
+      [
+        1,
+        'teaser',
+        1
+      ],
+      [
+        1,
+        'full',
+        NULL
+      ],
+      [
+        0,
+        'full',
+        NULL
+      ],
+      [
+        0,
+        'teaser',
+        0
+      ],
+      [
+        NULL,
+        'teaser',
+        NULL
+      ],
+    ];
+  }
 }
