@@ -11,10 +11,10 @@ Feature: Photo Gallery Content Type
     When I visit "node/add/sf_photo_gallery"
       And I fill in the following:
         | Title | Gallery Name |
-      And I attach the file "test_16x9.png" to "files[field_sf_gallery_photo_0][]"
+      And I attach the file "test_16x9.png" to "files[field_sf_gallery_photos_0][]"
       And I attach the file "test_16x9.png" to "files[field_sf_primary_image_0]"
     When I press "Save and publish"
-      And I fill in "field_sf_gallery_photo[0][alt]" with "alt text"
+      And I fill in "field_sf_gallery_photos[0][alt]" with "alt text"
       And I fill in "field_sf_primary_image[0][alt]" with "alt text"
 
   @api
