@@ -183,7 +183,7 @@ class NodeDisplayTest extends UnitTestCase {
     $variables = [];
     $variables['featured_status'] = "1";
     $variables['view_mode'] = 'teaser';
-    $this->helper->fixMetatagFrontTitle($variables);
+    $this->helper->addFeaturedStatus($variables);
 
     $expected = "1";
     $this->assertEquals($expected, $variables['featured_status']);
