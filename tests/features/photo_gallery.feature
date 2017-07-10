@@ -36,7 +36,7 @@ Feature: Photo Gallery Content Type
   @api @javascript
   Scenario: Title attribute field on photo field should be labeled as Caption instead
     Given I wait for AJAX to finish
-    Then I should see "Caption" in the ".form-item-field-sf-gallery-photo-0-title" element
+    Then I should see "Caption" in the ".form-item-field-sf-gallery-photos-0-title" element
     Then I should see "Caption" in the ".form-item-field-sf-primary-image-0-title" element
 
   @api
@@ -68,7 +68,7 @@ Feature: Photo Gallery Content Type
   @api @javascript
   Scenario: Photo Galleries poster displays
     Given I wait for AJAX to finish
-    When I fill in "field_sf_gallery_photo[0][alt]" with "alt text"
+    When I fill in "field_sf_gallery_photos[0][alt]" with "alt text"
       And I fill in "field_sf_primary_image[0][alt]" with "alt text"
       And I press "Save and publish"
     When I visit "photo-galleries"
