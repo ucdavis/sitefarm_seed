@@ -1,72 +1,59 @@
+image: proboci/ubuntu-14.04-lamp:php-7.1
 assets:
   - probossh.tar.gz
-  - sitefarm_local.patch
+  - sitefarm_seed_local.patch
 steps:
-  - name: Add php7
-    plugin: Script
-    script: |
-      echo 'exit 0' > /usr/sbin/policy-rc.d
-      apt-get update
-      apt-get install -y software-properties-common language-pack-en-base
-      LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php
-      apt-get update
-      DEBIAN_FRONTEND=noninteractive apt-get install -y php7.0 libapache2-mod-php7.0 php7.0-gd php7.0-curl php7.0-json php7.0-mbstring php7.0-mysql php7.0-mcrypt php7.0-imagick php7.0-dev php7.0-gmp php7.0-xml php7.0-bcmath php7.0-redis php7.0-uploadprogress php7.0-soap php7.0-pgsql php7.0-ldap php7.0-yaml
-      cp /etc/php5/mods-available/general_settings.ini /etc/php/7.0/apache2/conf.d/20-general_settings.ini
-      echo 'memory_limit=-1' > /etc/php/7.0/cli/conf.d/30-cli_memory_limit.ini
-      a2dismod php5
-      a2enmod php7.0
-      a2enmod mpm_prefork
-      apache2ctl graceful
-  - name: opcache
-    plugin: Script
-    script: |
-      echo 'opcache.enable=1' >> /etc/php/7.0/mods-available/opcache.ini
-      echo 'opcache.enable_cli=1' >> /etc/php/7.0/mods-available/opcache.ini
-      echo 'opcache.memory_consumption=192' >> /etc/php/7.0/mods-available/opcache.ini
-      echo 'opcache.interned_strings_buffer=16' >> /etc/php/7.0/mods-available/opcache.ini
-      echo 'opcache.max_accelerated_files=3907' >> /etc/php/7.0/mods-available/opcache.ini
-      echo 'opcache.validate_timestamps=0' >> /etc/php/7.0/mods-available/opcache.ini
-      echo 'opcache.fast_shutdown=1' >> /etc/php/7.0/mods-available/opcache.ini
-      apache2ctl graceful
   - name: Import SSH Keys
     command: 'tar -C $HOME/.ssh -zxvf $ASSET_DIR/probossh.tar.gz ; ls -al $HOME/.ssh'
   - name: Build Drupal
     plugin: Script
     script:
-      - cp -r $SRC_DIR /sitefarm ; mv /sitefarm $SRC_DIR/sitefarm
-      - cd $SRC_DIR/sitefarm ; git init ; git config user.email "robot@probo.ci" ; git config user.name "Probo CI" ; git add -A ; git commit -m "$COMMIT_REF" -q
-      - cd $SRC_DIR ; git clone --branch 8dev git@bitbucket.org:ietwebdev/sitefarm-acquia.git
-      - cd sitefarm-acquia ; composer self-update ; composer global update
+      - cp -r $SRC_DIR /sitefarm_seed ; mv /sitefarm_seed $SRC_DIR/sitefarm_seed
+      - cd $SRC_DIR/sitefarm_seed ; git init ; git config user.email "robot@probo.ci" ; git config user.name "Probo CI" ; git add -A ; git commit -m "$COMMIT_REF" -q
+      - if [ $(git ls-remote --heads git@github.com:ucdavis/sitefarm-distro-template.git $BRANCH_NAME | wc -l) = 1 ]; then BRANCH="$BRANCH_NAME"; else BRANCH=master; fi
+      - cd $SRC_DIR ; git clone --branch $BRANCH git@github.com:ucdavis/sitefarm-distro-template.git
+      - cd sitefarm-distro-template ; composer self-update ; composer global update
       - composer install --ansi
-      - git apply $ASSET_DIR/sitefarm_local.patch
-      - composer require "ucdavis/sitefarm:dev-master" --ansi
-      - composer require "ucdavis/sitefarm_one:dev-8dev" --ansi
+      - git apply $ASSET_DIR/sitefarm_seed_local.patch
+      - composer require "ucdavis/sitefarm_seed:dev-master" --ansi
   - name: Run PhpUnit
     plugin: Script
     script:
-      - cd $SRC_DIR/sitefarm-acquia/docroot/profiles/sitefarm
-      - $SRC_DIR/sitefarm-acquia/vendor/bin/phpunit --colors="always"
+      - cd $SRC_DIR/sitefarm-distro-template/web/profiles/sitefarm_seed
+      - $SRC_DIR/sitefarm-distro-template/vendor/bin/phpunit --colors="always"
   - name: Drupal site setup
     plugin: Drupal
     drupalVersion: 8
-    subDirectory: sitefarm-acquia/docroot
+    subDirectory: sitefarm-distro-template/web
     runInstall: true
-    profileName: sitefarm
-    installArgs: '--site-name="Testing SiteFarm on Probo" --account-pass=probo --account-mail=wdtest@ucdavis.edu'
+    profileName: sitefarm_subprofile
+    installArgs: '--site-name="Testing SiteFarm Seed on Probo" --account-pass=probo --account-mail=wdtest@ucdavis.edu'
   - name: Fix files directory permissions
     command: 'chown -R www-data:www-data /var/www/html/sites/default/files'
   - name: Run Behat NoJS
     plugin: Script
     script:
-      - cp $SRC_DIR/sitefarm-acquia/behat.probo.yml /var/www/html/profiles/sitefarm/behat.yml
-      - cd /var/www/html/profiles/sitefarm
-      - $SRC_DIR/sitefarm-acquia/vendor/bin/behat --profile probo --tags "~@javascript" --colors
-  - name: Run behat js tests
+      - cd /var/www/html/profiles/sitefarm_seed
+      - cp behat.probo.yml behat.yml
+      - $SRC_DIR/sitefarm-distro-template/vendor/bin/behat --profile probo --tags "~@javascript" --colors
+  - name: Run Behat JS
     plugin: Script
     script:
-      - wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.0.jar > /dev/null 2>&1
-      - apt-get install xvfb -y
-      - xvfb-run java -jar selenium-server-standalone-2.53.0.jar > /dev/null 2>&1 & sleep 5
-      - cd /var/www/html/profiles/sitefarm
-      - $SRC_DIR/sitefarm-acquia/vendor/bin/behat --profile probo --tags "@javascript" --colors
+      - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+      - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+      - sudo apt-get -qq update
+      - sudo apt-get -qq install google-chrome-stable -y --force-yes > /dev/null 2>&1
+      - which google-chrome
+      - wget http://chromedriver.storage.googleapis.com/2.30/chromedriver_linux64.zip > /dev/null 2>&1
+      - sudo unzip chromedriver_linux64.zip -d /usr/bin
+      - wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar > /dev/null 2>&1
+      - xvfb-run java -jar selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/bin/chromedriver" > /dev/null 2>&1 & sleep 5
+      - cd /var/www/html/profiles/sitefarm_seed
+      - $SRC_DIR/sitefarm-distro-template/vendor/bin/behat --profile probo --tags "@javascript" --colors
       - disown
+  - name: Post to Slack
+    plugin: Script
+    script: |
+      PR_NAME=$(echo "$PULL_REQUEST_NAME" | tr -d '"')
+      SLACK="PR <$PULL_REQUEST_LINK|$PR_NAME> has finished building.\n<https://app.probo.ci/#/dashboard/build/$BUILD_ID|Review> the build on Probo\n<$BUILD_DOMAIN/user|Log in> to the fully-built site (username: admin, password: probo)"
+      curl -X POST --data-urlencode "payload={\"username\": \"Probo.CI Bot\", \"text\": \"$SLACK\", \"icon_emoji\": \":proboci:\"}" https://hooks.slack.com/services/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
