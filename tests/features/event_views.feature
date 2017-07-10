@@ -50,7 +50,7 @@ Feature: A User should see lists of events
     Given a block "views_block:sf_events_category_filter-block_1" is in the "sidebar_second" region
     When I am on "/events"
       And I click "Views Category"
-    Then I should see the ".category-filter" element in the "Sidebar Second Region"
+    Then I should see the ".view-sf-events-category-filter" element in the "Sidebar Second Region"
       And I should see "Third Event" in the "Content" region
       And I should not see "Second Article" in the "Content" region
       And I should not see "First Event" in the "Content" region
