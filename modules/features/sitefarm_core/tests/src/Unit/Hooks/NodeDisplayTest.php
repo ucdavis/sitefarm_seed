@@ -4,6 +4,7 @@ namespace Drupal\Tests\sitefarm_core\Unit\Hooks;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\sitefarm_core\Hooks\NodeDisplay;
+use Drupal\node\Entity\Node;
 
 /**
  * @coversDefaultClass \Drupal\sitefarm_core\Hooks\NodeDisplay
@@ -183,6 +184,12 @@ class NodeDisplayTest extends UnitTestCase {
     $variables = [];
     $variables['featured_status'] = "1";
     $variables['view_mode'] = 'teaser';
+
+    $node = $this->prophesize(Node::CLASS);
+    $test_node = $node->reveal();
+    $test_node->set('field_sf_featured_status', "1");
+    $variables['node'] = $test_node;
+
     $this->helper->addFeaturedStatus($variables);
 
     $expected = "1";
