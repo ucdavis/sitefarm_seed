@@ -144,12 +144,6 @@ Feature: A User should see lists of articles
     Then I should see the text "News" in the "Page Title" region
 
   @api
-  Scenario: The title for Latest News section should be "Latest News"
-    Given I am an anonymous user
-      And I visit "news"
-    Then I should see the text "Latest News" in the "Content" region
-
-  @api
   Scenario: If an image is not uploaded no featured article block should show up on the News page
     Given I am logged in as a user with the "administrator" role
       And a block "views_block:sf_article_featured-sf_article_featured_block" is in the "content" region
