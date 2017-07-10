@@ -176,4 +176,17 @@ class NodeDisplayTest extends UnitTestCase {
     ];
   }
 
+  /**
+   * Tests addFeaturedStatus method
+   */
+  public function testAddFeaturedStatus() {
+    $variables = [];
+    $variables['featured_status'] = "1";
+    $variables['view_mode'] = 'teaser';
+    $this->helper->fixMetatagFrontTitle($variables);
+
+    $expected = "1";
+    $this->assertEquals($expected, $variables['featured_status']);
+  }
+
 }
