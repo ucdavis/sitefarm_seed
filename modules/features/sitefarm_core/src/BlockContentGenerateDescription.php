@@ -52,15 +52,20 @@ class BlockContentGenerateDescription {
    * @param array $form
    */
   public function createFromTitle(array &$form) {
-    if (isset($form['field_sf_title'])) {
-      $form['info']['widget'][0]['value']['#type'] = 'hidden';
+    $config = \Drupal::config('sitefarm_core.settings');
+    $autogen_title = $config->get('generate_custom_block_title');
 
-      // Check if the block description is empty
-      $default_value = $form['info']['widget'][0]['value']['#default_value'];
-      if (empty($default_value)) {
-        $form['#validate'][] = [$this, 'createDescription'];
-        // Add a placeholder so the title will validate
-        $form['info']['widget'][0]['value']['#default_value'] = 'block_title_placeholder';
+    if ($autogen_title) {
+      if (isset($form['field_sf_title'])) {
+        $form['info']['widget'][0]['value']['#type'] = 'hidden';
+
+        // Check if the block description is empty
+        $default_value = $form['info']['widget'][0]['value']['#default_value'];
+        if (empty($default_value)) {
+          $form['#validate'][] = [$this, 'createDescription'];
+          // Add a placeholder so the title will validate
+          $form['info']['widget'][0]['value']['#default_value'] = 'block_title_placeholder';
+        }
       }
     }
   }
