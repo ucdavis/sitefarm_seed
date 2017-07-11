@@ -2,6 +2,7 @@
 
 namespace Drupal\lock_sitefarm_features\Access;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Routing\Access\AccessInterface;
 use Drupal\Core\Extension\ThemeHandler;
 use Drupal\Core\Session\AccountInterface;
@@ -12,6 +13,11 @@ use Drupal\Core\Access\AccessResult;
  * Checks access for displaying configuration translation page.
  */
 class LockFeatureAccess implements AccessInterface {
+
+  /**
+   * @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   */
+  protected $configFactory;
 
   /**
    * @var \Drupal\Core\Extension\ThemeHandler $themeHandler
@@ -31,11 +37,14 @@ class LockFeatureAccess implements AccessInterface {
   /**
    * LockFeatureAccess constructor.
    *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   Config Factory service.
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
    *   The parametrized route
    * @param \Drupal\Core\Extension\ThemeHandler $theme_handler
    */
-  public function __construct(RouteMatchInterface $route_match, ThemeHandler $theme_handler) {
+  public function __construct(ConfigFactoryInterface $configFactory, RouteMatchInterface $route_match, ThemeHandler $theme_handler) {
+    $this->configFactory = $configFactory;
     $this->routeMatch = $route_match;
     $this->themeHandler = $theme_handler;
   }
@@ -257,7 +266,7 @@ class LockFeatureAccess implements AccessInterface {
     }
 
     // Field Storage (if not already restricted by something else)
-    if ($this->routeMatch->getParameter('field_config') || !$restricted) {
+    if (!$restricted && $this->routeMatch->getParameter('field_config')) {
       $restricted = $this->isLockedFieldStorage();
     }
 
@@ -277,7 +286,7 @@ class LockFeatureAccess implements AccessInterface {
     // Get the entity type
     $entity_type = $this->routeMatch->getRawParameter($parameter);
 
-    if (in_array($entity_type, $this->$property)) {
+    if ($this->matchesLockedPattern($entity_type) || in_array($entity_type, $this->$property)) {
       return TRUE;
     }
 
@@ -304,17 +313,46 @@ class LockFeatureAccess implements AccessInterface {
     $route = $this->routeMatch->getRouteName();
 
     if (strpos($route, 'storage_edit_form') !== FALSE) {
-      // expression to match a field storage config - node.test.field_sf_primary_image
-      $regex = '/field_sf_/';
 
       // Get field config argument
       $field = $this->routeMatch->getParameter('field_config');
 
-      if (preg_match($regex, $field)) {
+      $patterns = $this->configFactory
+        ->get('lock_sitefarm_features.settings')
+        ->get('locked_prefix_patterns');
+
+      foreach ($patterns as $pattern) {
+        // expression to match a field storage config - node.test.field_sf_primary_image
+        $regex = '/field_' . $pattern . '/';
+
+        if (preg_match($regex, $field)) {
+          return TRUE;
+        }
+      }
+    }
+
+    return FALSE;
+  }
+
+  /**
+   * Determine if a value passed in matches prefix patterns which should be
+   * locked.
+   *
+   * @param $entity_name
+   * @return bool
+   */
+  public function matchesLockedPattern($entity_name) {
+    $patterns = $this->configFactory
+      ->get('lock_sitefarm_features.settings')
+      ->get('locked_prefix_patterns');
+
+    foreach ($patterns as $pattern) {
+      if (preg_match('/^' . $pattern . '/', $entity_name)) {
         return TRUE;
       }
     }
 
     return FALSE;
   }
+
 }

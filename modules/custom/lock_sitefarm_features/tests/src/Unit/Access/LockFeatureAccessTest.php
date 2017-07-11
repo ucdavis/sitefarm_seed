@@ -16,6 +16,13 @@ use Prophecy\Argument;
 class LockFeatureAccessTest extends UnitTestCase {
 
   /**
+   * The mocked config factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactory|\PHPUnit_Framework_MockObject_MockObject
+   */
+  protected $configFactory;
+
+  /**
    * @var \Drupal\lock_sitefarm_features\Access\LockFeatureAccess $access
    */
   protected $access;
@@ -45,6 +52,16 @@ class LockFeatureAccessTest extends UnitTestCase {
       'view' => 'sf_articles_recent',
     ];
 
+    // Stub config
+    $this->configFactory = $this->getConfigFactoryStub([
+      'lock_sitefarm_features.settings' => [
+        'locked_prefix_patterns' => [
+          'sf_',
+          'test_',
+        ],
+      ],
+    ]);
+
     $this->routeMatch = $this->prophesize(RouteMatchInterface::CLASS);
     $this->routeMatch->getParameter(Argument::any())->willReturn(FALSE);
 
@@ -58,7 +75,11 @@ class LockFeatureAccessTest extends UnitTestCase {
     $theme_handler = $this->prophesize(ThemeHandler::CLASS);
     $theme_handler->getDefault()->willReturn('sitefarm_one');
 
-    $this->access = new LockFeatureAccess($this->routeMatch->reveal(), $theme_handler->reveal());
+    $this->access = new LockFeatureAccess(
+      $this->configFactory,
+      $this->routeMatch->reveal(),
+      $theme_handler->reveal()
+    );
   }
 
   /**
