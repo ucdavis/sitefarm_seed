@@ -2,6 +2,7 @@
 
 namespace Drupal\sitefarm_core;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
@@ -17,6 +18,13 @@ use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 class BlockContentGenerateDescription {
   // Prevent errors when ajax is used to submit the form
   use DependencySerializationTrait;
+
+  /**
+   * Stores the configuration factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
 
   /**
    * The database connection.
@@ -41,9 +49,10 @@ class BlockContentGenerateDescription {
    * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
    *   The entity type bundle info.
    */
-  public function __construct(Connection $connection, EntityTypeBundleInfoInterface $entity_type_bundle_info) {
+  public function __construct(Connection $connection, EntityTypeBundleInfoInterface $entity_type_bundle_info, ConfigFactoryInterface $configFactory) {
     $this->database = $connection;
     $this->entityTypeBundleInfo = $entity_type_bundle_info;
+    $this->configFactory = $configFactory;
   }
 
   /**
@@ -52,7 +61,7 @@ class BlockContentGenerateDescription {
    * @param array $form
    */
   public function createFromTitle(array &$form) {
-    $config = \Drupal::config('sitefarm_core.settings');
+    $config = $this->configFactory->get('sitefarm_core.settings');
     $autogen_title = $config->get('generate_custom_block_title');
 
     if ($autogen_title) {
