@@ -25,3 +25,13 @@ sitefarm.restrict_configuration_pages:
     _permission: 'administer core configuration'
   options:
     _admin_route: TRUE
+
+sitefarm.customize_block_types:
+  path: '/admin/config/sitefarm/customize-block-types'
+  defaults:
+    _form: '\Drupal\sitefarm_simple_configuration\Form\CustomBlockTypesForm'
+    _title: 'Configure Customized Block Types'
+  requirements:
+    _permission: 'administer core configuration'
+  options:
+    _admin_route: TRUE
