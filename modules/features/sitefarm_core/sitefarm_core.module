@@ -17,6 +17,15 @@ function sitefarm_core_preprocess_html(array &$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for node.html.twig.
+ */
+function sitefarm_core_preprocess_node(array &$variables) {
+  // Add featured status from the field_sf_featured_status field
+  $helper = \Drupal::service('sf.hooks.node_display');
+  $helper->addFeaturedStatus($variables);
+}
+
+/**
  * Implements hook_form_alter().
  */
 function sitefarm_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
