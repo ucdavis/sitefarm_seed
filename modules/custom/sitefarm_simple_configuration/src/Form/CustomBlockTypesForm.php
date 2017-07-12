@@ -14,8 +14,6 @@ class CustomBlockTypesForm extends ConfigFormBase {
 
   /**
    * {@inheritdoc}
-   *
-   * @codeCoverageIgnore
    */
   protected function getEditableConfigNames() {
     return [];
@@ -44,13 +42,6 @@ class CustomBlockTypesForm extends ConfigFormBase {
     );
 
     return $form;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    parent::validateForm($form, $form_state);
   }
 
   /**
