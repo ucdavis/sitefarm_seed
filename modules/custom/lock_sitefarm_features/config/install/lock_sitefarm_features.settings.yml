@@ -1,0 +1,12 @@
+# Add a prefix to the array of restricted prefixes to automatically lock down
+# anything with a machine name that begins with it.
+locked_prefix_patterns:
+  - sf_
+# Add entity bundles types into an array to lock down specific entities
+locked_node_types: []
+locked_block_content_types: []
+locked_filter_formats: []
+locked_pathauto_patterns: []
+locked_taxonomy_vocabularies: []
+locked_views: []
+locked_image_styles: []

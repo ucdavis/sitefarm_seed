@@ -1,7 +1,6 @@
 <?php
 
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\lock_sitefarm_features\Access\LockFeatureAccess;
 
 /**
  * Implements hook_element_info_alter().
@@ -27,27 +26,12 @@ function lock_sitefarm_features_entity_operation_alter(array &$operations, Entit
       $lock->getLockedPathautoPatterns()
     );
 
-    // Completely lock entity operations
-    if (in_array($entity->id(), $locked_entities) && $entity_type !== 'image_style') {
-      $operations = [
-        'locked' => [
-          'title' => t('Locked')
-        ]
-      ];
-    }
-
-    // Partially lock Taxonomy, but still leave listing and adding terms
-    if (in_array($entity->id(), $lock->getLockedTaxonomy())) {
-      foreach ($operations as $key => $value) {
-        if ($key != 'list' && $key != 'add') {
-          unset($operations[$key]);
-        }
-      }
-    }
-
     // Lock down Image styles except for the Flush operation
     $theme = \Drupal::service('theme_handler')->getDefault();
-    if ($theme == 'sitefarm_one' && in_array($entity->id(), $lock->getLockedImageStyles()) && ($entity_type == 'image_style')) {
+    if ($entity_type == 'image_style'
+      && $theme == 'sitefarm_one'
+      && ($lock->matchesLockedPattern($entity->id()) || in_array($entity->id(), $lock->getLockedImageStyles()))
+    ) {
       foreach ($operations as $key => $value) {
         if ($key != 'flush') {
           unset($operations[$key]);
@@ -56,9 +40,31 @@ function lock_sitefarm_features_entity_operation_alter(array &$operations, Entit
     }
 
     // Partially lock Taxonomy, but still leave listing and adding terms
-    if (in_array($entity->id(), $lock->getLockedViews())) {
+    elseif ($entity_type == 'taxonomy_vocabulary'
+      && ($lock->matchesLockedPattern($entity->id()) || in_array($entity->id(), $lock->getLockedTaxonomy()))
+    ) {
+      foreach ($operations as $key => $value) {
+        if ($key != 'list' && $key != 'add') {
+          unset($operations[$key]);
+        }
+      }
+    }
+
+    // Partially lock Views, but still leave duplicating and disabling
+    elseif ($entity_type == 'view'
+      && ($lock->matchesLockedPattern($entity->id()) || in_array($entity->id(), $lock->getLockedViews()))
+    ) {
       unset($operations['edit']);
       unset($operations['delete']);
+    }
+
+    // Completely lock entity operations
+    elseif ($lock->matchesLockedPattern($entity->id()) || in_array($entity->id(), $locked_entities)) {
+      $operations = [
+        'locked' => [
+          'title' => t('Locked')
+        ]
+      ];
     }
   }
 
