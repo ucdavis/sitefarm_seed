@@ -59,6 +59,27 @@ class LockFeatureAccessTest extends UnitTestCase {
           'sf_',
           'test_',
         ],
+        'locked_node_types' => [
+          'sf_page',
+        ],
+        'locked_block_content_types' => [
+          'sf_basic',
+        ],
+        'locked_filter_formats' => [
+          'sf_basic_html',
+        ],
+        'locked_pathauto_patterns' => [
+          'sf_page',
+        ],
+        'locked_taxonomy_vocabularies' => [
+          'sf_tags',
+        ],
+        'locked_views' => [
+          'sf_articles_recent',
+        ],
+        'locked_image_styles' => [
+          'sf_thumbnail',
+        ],
       ],
     ]);
 
