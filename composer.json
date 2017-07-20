@@ -56,6 +56,7 @@
     "drupal/address": "1.*",
     "drupal/anchor_link": "1.*",
     "drupal/better_normalizers": "dev-1.x",
+    "drupal/block_style_plugins": "1.*",
     "drupal/ckwordcount": "1.*",
     "drupal/config_update": "1.*",
     "drupal/crop": "1.*",

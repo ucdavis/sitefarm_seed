@@ -49,6 +49,7 @@ dependencies:
   # contrib
   - anchor_link
   - better_normalizers
+  - block_style_plugins
   - ctools
   - ckwordcount
   - default_content
@@ -69,7 +70,6 @@ dependencies:
   - webform
   - webform_ui
   # Custom
-  - block_style_plugins
   - site_credits
   - ck_autosave
   - ck_media_link
