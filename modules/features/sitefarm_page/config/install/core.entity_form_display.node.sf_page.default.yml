@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - field.field.node.sf_page.body
-    - field.field.node.sf_page.field_sf_branding
     - field.field.node.sf_page.field_sf_featured_status
     - field.field.node.sf_page.field_sf_files
     - field.field.node.sf_page.field_sf_meta_tags
@@ -35,11 +34,6 @@ content:
     weight: 2
     settings: {  }
     third_party_settings: {  }
-  field_sf_branding:
-    weight: 26
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
   field_sf_featured_status:
     weight: 7
     settings:

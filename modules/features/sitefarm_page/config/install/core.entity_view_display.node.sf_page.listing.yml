@@ -4,7 +4,6 @@ dependencies:
   config:
     - core.entity_view_mode.node.listing
     - field.field.node.sf_page.body
-    - field.field.node.sf_page.field_sf_branding
     - field.field.node.sf_page.field_sf_featured_status
     - field.field.node.sf_page.field_sf_files
     - field.field.node.sf_page.field_sf_meta_tags
@@ -29,7 +28,6 @@ content:
     third_party_settings: {  }
 hidden:
   body: true
-  field_sf_branding: true
   field_sf_featured_status: true
   field_sf_files: true
   field_sf_meta_tags: true
