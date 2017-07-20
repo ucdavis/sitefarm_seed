@@ -1,22 +1,25 @@
+uuid: 326d236f-5a1b-4531-83a6-0858af695e38
 langcode: en
 status: true
 dependencies:
   module:
     - ctools
     - taxonomy
+_core:
+  default_config_hash: 0HD7l5KchNKfiZnDzeqrFE8NjaB_2paNpJ8dX0i49Tg
 id: sf_article_category_terms
 label: 'Article Category Terms'
 type: 'canonical_entities:taxonomy_term'
-pattern: 'articles/[term:name]'
+pattern: 'article-category/[term:name]'
 selection_criteria:
-  e4d424b6-715d-44fe-8df5-3e0c33c3a8b0:
+  77352fcd-ba7c-461d-afe7-c2d280bbae8c:
     id: 'entity_bundle:taxonomy_term'
     bundles:
       sf_article_category: sf_article_category
     negate: false
     context_mapping:
       taxonomy_term: taxonomy_term
-    uuid: e4d424b6-715d-44fe-8df5-3e0c33c3a8b0
+    uuid: 77352fcd-ba7c-461d-afe7-c2d280bbae8c
 selection_logic: and
 weight: -5
 relationships: {  }

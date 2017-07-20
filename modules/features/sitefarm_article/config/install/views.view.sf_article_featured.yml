@@ -1,3 +1,4 @@
+uuid: 04a8b7f8-653b-40ae-9a52-8daa5f984143
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
   module:
     - node
     - user
+_core:
+  default_config_hash: XxHPZiH6QAP1rTSkOxNdI80YH4Cpqe5mJm6c-zX86k4
 id: sf_article_featured
 label: 'Article Featured'
 module: views

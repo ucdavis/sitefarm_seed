@@ -1,3 +1,4 @@
+uuid: e71df15a-2061-4b05-b571-37cfb1b52e1c
 langcode: en
 status: true
 dependencies:
@@ -10,6 +11,8 @@ dependencies:
     - image
     - path
     - text
+_core:
+  default_config_hash: tW89zpjS8OT3UYC1pAdmKPSrfY95DQQ6ohYngBa_Gos
 id: taxonomy_term.sf_article_category.default
 targetEntityType: taxonomy_term
 bundle: sf_article_category
@@ -22,11 +25,13 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
   field_sf_brand_color:
     weight: 31
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
   field_sf_primary_image:
     weight: 32
     settings:
@@ -34,6 +39,7 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
+    region: content
   name:
     type: string_textfield
     weight: -5
@@ -41,9 +47,11 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
   path:
     type: path
     weight: 30
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden: {  }

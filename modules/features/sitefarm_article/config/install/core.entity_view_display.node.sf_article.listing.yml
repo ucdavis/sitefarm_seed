@@ -1,3 +1,4 @@
+uuid: 6b35358c-ba47-4db6-93df-c07ec29f6ec0
 langcode: en
 status: true
 dependencies:
@@ -14,6 +15,8 @@ dependencies:
   module:
     - image
     - user
+_core:
+  default_config_hash: ZsqbHDphu-KOXJ9IXAa-pv7gpRXWYxEdtY2-M23jFPE
 id: node.sf_article.listing
 targetEntityType: node
 bundle: sf_article
@@ -27,6 +30,7 @@ content:
       image_link: content
     third_party_settings: {  }
     type: image
+    region: content
 hidden:
   body: true
   field_sf_article_category: true

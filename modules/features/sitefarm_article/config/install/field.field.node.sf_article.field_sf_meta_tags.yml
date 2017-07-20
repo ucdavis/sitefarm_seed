@@ -1,3 +1,4 @@
+uuid: 9dc303cf-256b-4d84-abcc-b267c22a2546
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - node.type.sf_article
   module:
     - metatag
+_core:
+  default_config_hash: a8UkGsGXcsE8msooviG7vFtYxMPyYHNHdA9jIhnLW9k
 id: node.sf_article.field_sf_meta_tags
 field_name: field_sf_meta_tags
 entity_type: node

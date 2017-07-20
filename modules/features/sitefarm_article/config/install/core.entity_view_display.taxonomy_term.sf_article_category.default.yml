@@ -1,3 +1,4 @@
+uuid: b2139a51-59ef-4e0a-a424-da6859e59dc9
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
     - taxonomy.vocabulary.sf_article_category
   module:
     - text
+_core:
+  default_config_hash: KyIJ2LrK4cOe4ef9NmTzaKdBV3QUSo20nJgysssM3hY
 id: taxonomy_term.sf_article_category.default
 targetEntityType: taxonomy_term
 bundle: sf_article_category
@@ -18,6 +21,7 @@ content:
     weight: 0
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden:
   field_sf_brand_color: true
   field_sf_primary_image: true

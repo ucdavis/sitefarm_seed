@@ -1,3 +1,4 @@
+uuid: 3bb8e7fd-d4bf-42ea-92e9-9684d2d9a2a5
 langcode: en
 status: true
 dependencies:
@@ -5,6 +6,8 @@ dependencies:
     - field.storage.node.field_sf_tags
     - node.type.sf_article
     - taxonomy.vocabulary.sf_tags
+_core:
+  default_config_hash: aTkaf8UiK2R7xo63COqruStRe-gKDXNqyh42QCntbu8
 id: node.sf_article.field_sf_tags
 field_name: field_sf_tags
 entity_type: node

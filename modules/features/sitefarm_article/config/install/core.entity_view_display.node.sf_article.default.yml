@@ -1,3 +1,4 @@
+uuid: 5b4b85ae-10f6-45da-8eb9-3f94b503374a
 langcode: en
 status: true
 dependencies:
@@ -15,6 +16,8 @@ dependencies:
     - metatag
     - text
     - user
+_core:
+  default_config_hash: srLWMbMAaTK07jKoF9VdqKlUhxZ4POHlNA-Boho3LOU
 id: node.sf_article.default
 targetEntityType: node
 bundle: sf_article
@@ -26,6 +29,7 @@ content:
     weight: 3
     settings: {  }
     third_party_settings: {  }
+    region: content
   field_sf_article_category:
     weight: 4
     label: above
@@ -33,12 +37,14 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
   field_sf_meta_tags:
     weight: 0
     label: above
     settings: {  }
     third_party_settings: {  }
     type: metatag_empty_formatter
+    region: content
   field_sf_primary_image:
     weight: 1
     label: hidden
@@ -47,6 +53,7 @@ content:
       image_link: ''
     third_party_settings: {  }
     type: image
+    region: content
   field_sf_tags:
     weight: 5
     label: above
@@ -54,14 +61,17 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
   links:
     weight: 6
     settings: {  }
     third_party_settings: {  }
+    region: content
   sharemessage__sf_social_share_buttons:
     weight: 2
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden:
   field_sf_article_type: true
   field_sf_featured_status: true

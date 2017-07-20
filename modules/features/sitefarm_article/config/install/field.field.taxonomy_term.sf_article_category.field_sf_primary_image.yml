@@ -1,3 +1,4 @@
+uuid: 57ac3d70-8079-41bb-bd6a-ee41c7fd6b78
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - taxonomy.vocabulary.sf_article_category
   module:
     - image
+_core:
+  default_config_hash: ThjKMIlxFWAskcljtRHQnSC6dWoJXQ2uSGjM9hFfQfk
 id: taxonomy_term.sf_article_category.field_sf_primary_image
 field_name: field_sf_primary_image
 entity_type: taxonomy_term
