@@ -28,3 +28,14 @@ types. This means that by reusing these existing fields all that is needed is
 config for field instances.
 
 ![Screenshot of reusing entity reference dropdown](images/reuse-entity-reference-fields.png)
+
+The `core.entity_form_display.node.sf_article.default.yml` adds both of the
+new field instances to the edit form so that an editor can add references to the
+appropriate content.
+
+Based on the example config, the fields will not be displayed on the node's
+display. This is intended so that the content can be displayed in blocks.
+
+Creating an article `/node/add/sf_article` will now show the new fields.
+
+![Screenshot of Article add form with new reference fields](images/form-showing-new-reference-fields.png)
