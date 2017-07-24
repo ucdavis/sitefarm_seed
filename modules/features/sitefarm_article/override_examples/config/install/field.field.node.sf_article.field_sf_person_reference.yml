@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sf_person_reference
+    - node.type.sf_article
+    - node.type.sf_person
+id: node.sf_article.field_sf_person_reference
+field_name: field_sf_person_reference
+entity_type: node
+bundle: sf_article
+label: 'Person Reference'
+description: 'Add a person who is associated with this article. As you type an autocomplete dropdown will show matching people already saved on the site.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      sf_person: sf_person
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
