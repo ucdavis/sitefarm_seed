@@ -7,3 +7,23 @@ sitefarm_core.blocks_path_visibility:
   version: VERSION
   js:
     js/blocks_path_visibility.js: {}
+
+vue:
+  remote: https://github.com/vuejs/vue
+  version: 2.4.0
+  license:
+    name: MIT
+    url: https://github.com/vuejs/vue/blob/dev/LICENSE
+    gpl-compatible: true
+  js:
+    //cdnjs.cloudflare.com/ajax/libs/vue/2.4.0/vue.min.js: {type: external, minified: true}
+
+vue.dev:
+  remote: https://github.com/vuejs/vue
+  version: 2.4.0
+  license:
+    name: MIT
+    url: https://github.com/vuejs/vue/blob/dev/LICENSE
+    gpl-compatible: true
+  js:
+    //cdnjs.cloudflare.com/ajax/libs/vue/2.4.0/vue.js: {type: external, minified: false}

@@ -39,4 +39,17 @@ class NodeDisplay {
       $build['body'][0]['#format'] = 'sf_plain_text';
     }
   }
+
+  /**
+   * Add featured status to nodes for Teaser view mode
+   * @param array $variables
+   */
+  public function addFeaturedStatus(array &$variables) {
+    $node = $variables['node'];
+
+    // Pass a Featured Status to Teasers
+    if ($variables['view_mode'] == 'teaser' && $node->field_sf_featured_status) {
+      $variables['featured_status'] = $node->field_sf_featured_status->value;
+    }
+  }
 }

@@ -4,6 +4,7 @@ namespace Drupal\Tests\sitefarm_core\Unit\Hooks;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\sitefarm_core\Hooks\NodeDisplay;
+use Drupal\node\Entity\Node;
 
 /**
  * @coversDefaultClass \Drupal\sitefarm_core\Hooks\NodeDisplay
@@ -176,4 +177,64 @@ class NodeDisplayTest extends UnitTestCase {
     ];
   }
 
+  /**
+   * Tests addFeaturedStatus method
+   *
+   * @dataProvider addFeaturedStatusProvider
+   */
+  public function testAddFeaturedStatus($featured_status, $view_mode, $expected) {
+    $variables = [];
+    $variables['view_mode'] = $view_mode;
+
+    // Mock the magic public property chain $node->field_sf_featured_status->value;
+    $value_class = new \stdClass();
+    $value_class->value = $featured_status;
+
+    $node = $this->prophesize(Node::CLASS);
+    $test_node = $node->reveal();
+    if ($featured_status) {
+      $test_node->field_sf_featured_status = $value_class;
+    }
+    $variables['node'] = $test_node;
+
+    $this->helper->addFeaturedStatus($variables);
+
+    // Set up a return variable that looks for the newly set featured status
+    $return = (isset($variables['featured_status'])) ? $variables['featured_status'] : NULL;
+
+    $this->assertEquals($expected, $return);
+  }
+
+  /**
+   * Provider for testAddFeaturedStatus()
+   */
+  public function addFeaturedStatusProvider() {
+    return [
+      [
+        1,
+        'teaser',
+        1
+      ],
+      [
+        1,
+        'full',
+        NULL
+      ],
+      [
+        0,
+        'full',
+        NULL
+      ],
+      [
+        0,
+        'teaser',
+        0
+      ],
+      [
+        NULL,
+        'teaser',
+        NULL
+      ],
+    ];
+  }
 }

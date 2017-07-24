@@ -2,6 +2,7 @@
 
 namespace Drupal\lock_sitefarm_features\Access;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Routing\Access\AccessInterface;
 use Drupal\Core\Extension\ThemeHandler;
 use Drupal\Core\Session\AccountInterface;
@@ -12,6 +13,11 @@ use Drupal\Core\Access\AccessResult;
  * Checks access for displaying configuration translation page.
  */
 class LockFeatureAccess implements AccessInterface {
+
+  /**
+   * @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   */
+  protected $configFactory;
 
   /**
    * @var \Drupal\Core\Extension\ThemeHandler $themeHandler
@@ -31,11 +37,14 @@ class LockFeatureAccess implements AccessInterface {
   /**
    * LockFeatureAccess constructor.
    *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   Config Factory service.
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
    *   The parametrized route
    * @param \Drupal\Core\Extension\ThemeHandler $theme_handler
    */
-  public function __construct(RouteMatchInterface $route_match, ThemeHandler $theme_handler) {
+  public function __construct(ConfigFactoryInterface $configFactory, RouteMatchInterface $route_match, ThemeHandler $theme_handler) {
+    $this->configFactory = $configFactory;
     $this->routeMatch = $route_match;
     $this->themeHandler = $theme_handler;
   }
@@ -45,113 +54,49 @@ class LockFeatureAccess implements AccessInterface {
    *
    * @var array
    */
-  protected $lockedNodeTypes = array(
-    'sf_article',
-    'sf_event',
-    'sf_page',
-    'sf_person',
-    'sf_photo_gallery',
-  );
+  protected $lockedNodeTypes = [];
 
   /**
    * Block Types which should be restricted
    *
    * @var array
    */
-  protected $lockedBlockTypes = array(
-    'sf_basic',
-    'sf_focal_link',
-    'sf_focus_box',
-    'sf_hero_banner',
-    'sf_marketing_highlight',
-    'sf_marketing_highlight_horizntl',
-  );
+  protected $lockedBlockTypes = [];
 
   /**
    * Text Formats which should be restricted
    *
    * @var array
    */
-  protected $lockedTextFormats = array(
-    'sf_basic_html',
-    'sf_restricted_html',
-    'sf_full_html',
-    'sf_plain_text',
-  );
+  protected $lockedTextFormats = [];
 
   /**
    * Taxonomy Vocabularies which should be restricted
    *
    * @var array
    */
-  protected $lockedTaxonomy = array(
-    'sf_article_category',
-    'sf_article_type',
-    'sf_branding',
-    'sf_event_type',
-    'sf_person_type',
-    'sf_photo_gallery_categories',
-    'sf_tags',
-  );
+  protected $lockedTaxonomy = [];
 
   /**
    * Pathauto Patterns which should be restricted
    *
    * @var array
    */
-  protected $lockedPathautoPatterns = array(
-    'sf_article',
-    'sf_event',
-    'sf_page',
-    'sf_person',
-    'sf_photo_gallery',
-    'sf_article_category_terms',
-    'default_taxonomy',
-  );
+  protected $lockedPathautoPatterns = [];
 
   /**
    * Image Styles which should be restricted
    *
    * @var array
    */
-  protected $lockedImageStyles = array(
-    'sf_focal_link',
-    'sf_focus_box',
-    'sf_gallery_full',
-    'sf_gallery_thumbnail',
-    'sf_hero_banner',
-    'sf_landscape_4x3',
-    'sf_landscape_16x9',
-    'sf_medium_width',
-    'sf_profile',
-    'sf_slideshow_full',
-    'sf_slideshow_thumbnail',
-    'sf_small_width',
-    'sf_thumbnail',
-    'sf_title_banner',
-    'sf_focal_point_cropped_landscape_16x9',
-    'focal_point_thumbnail',
-    'sf_large_width',
-  );
+  protected $lockedImageStyles = [];
 
   /**
    * Views which should be restricted
    *
    * @var array
    */
-  protected $lockedViews = array(
-    'sf_articles_category_filter',
-    'sf_articles_latest_news',
-    'sf_articles_recent',
-    'sf_articles_related',
-    'sf_events_category_filter',
-    'sf_events_listing',
-    'sf_events_upcoming',
-    'sf_person_directory',
-    'sf_persons_content_related_back_to_person',
-    'sf_persons_related_to_content',
-    'sf_photo_galleries_list',
-  );
+  protected $lockedViews = [];
 
   /**
    * A custom access check.
@@ -178,6 +123,10 @@ class LockFeatureAccess implements AccessInterface {
    * @return array
    */
   public function getLockedNodeTypes() {
+    $this->lockedNodeTypes = $this->configFactory
+      ->get('lock_sitefarm_features.settings')
+      ->get('locked_node_types');
+
     return $this->lockedNodeTypes;
   }
 
@@ -185,6 +134,10 @@ class LockFeatureAccess implements AccessInterface {
    * @return array
    */
   public function getLockedBlockTypes() {
+    $this->lockedBlockTypes = $this->configFactory
+      ->get('lock_sitefarm_features.settings')
+      ->get('locked_block_content_types');
+
     return $this->lockedBlockTypes;
   }
 
@@ -192,6 +145,10 @@ class LockFeatureAccess implements AccessInterface {
    * @return array
    */
   public function getLockedTextFormats() {
+    $this->lockedTextFormats = $this->configFactory
+      ->get('lock_sitefarm_features.settings')
+      ->get('locked_filter_formats');
+
     return $this->lockedTextFormats;
   }
 
@@ -199,6 +156,10 @@ class LockFeatureAccess implements AccessInterface {
    * @return array
    */
   public function getLockedTaxonomy() {
+    $this->lockedTaxonomy = $this->configFactory
+      ->get('lock_sitefarm_features.settings')
+      ->get('locked_taxonomy_vocabularies');
+
     return $this->lockedTaxonomy;
   }
 
@@ -206,6 +167,10 @@ class LockFeatureAccess implements AccessInterface {
    * @return array
    */
   public function getLockedPathautoPatterns() {
+    $this->lockedPathautoPatterns = $this->configFactory
+      ->get('lock_sitefarm_features.settings')
+      ->get('locked_pathauto_patterns');
+
     return $this->lockedPathautoPatterns;
   }
 
@@ -213,6 +178,10 @@ class LockFeatureAccess implements AccessInterface {
    * @return array
    */
   public function getLockedImageStyles() {
+    $this->lockedImageStyles = $this->configFactory
+      ->get('lock_sitefarm_features.settings')
+      ->get('locked_image_styles');
+
     return $this->lockedImageStyles;
   }
 
@@ -220,6 +189,10 @@ class LockFeatureAccess implements AccessInterface {
    * @return array
    */
   public function getLockedViews() {
+    $this->lockedViews = $this->configFactory
+      ->get('lock_sitefarm_features.settings')
+      ->get('locked_views');
+
     return $this->lockedViews;
   }
 
@@ -257,7 +230,7 @@ class LockFeatureAccess implements AccessInterface {
     }
 
     // Field Storage (if not already restricted by something else)
-    if ($this->routeMatch->getParameter('field_config') || !$restricted) {
+    if (!$restricted && $this->routeMatch->getParameter('field_config')) {
       $restricted = $this->isLockedFieldStorage();
     }
 
@@ -277,7 +250,7 @@ class LockFeatureAccess implements AccessInterface {
     // Get the entity type
     $entity_type = $this->routeMatch->getRawParameter($parameter);
 
-    if (in_array($entity_type, $this->$property)) {
+    if ($this->matchesLockedPattern($entity_type) || in_array($entity_type, $this->$property)) {
       return TRUE;
     }
 
@@ -304,17 +277,46 @@ class LockFeatureAccess implements AccessInterface {
     $route = $this->routeMatch->getRouteName();
 
     if (strpos($route, 'storage_edit_form') !== FALSE) {
-      // expression to match a field storage config - node.test.field_sf_primary_image
-      $regex = '/field_sf_/';
 
       // Get field config argument
       $field = $this->routeMatch->getParameter('field_config');
 
-      if (preg_match($regex, $field)) {
+      $patterns = $this->configFactory
+        ->get('lock_sitefarm_features.settings')
+        ->get('locked_prefix_patterns');
+
+      foreach ($patterns as $pattern) {
+        // expression to match a field storage config - node.test.field_sf_primary_image
+        $regex = '/field_' . $pattern . '/';
+
+        if (preg_match($regex, $field)) {
+          return TRUE;
+        }
+      }
+    }
+
+    return FALSE;
+  }
+
+  /**
+   * Determine if a value passed in matches prefix patterns which should be
+   * locked.
+   *
+   * @param $entity_name
+   * @return bool
+   */
+  public function matchesLockedPattern($entity_name) {
+    $patterns = $this->configFactory
+      ->get('lock_sitefarm_features.settings')
+      ->get('locked_prefix_patterns');
+
+    foreach ($patterns as $pattern) {
+      if (preg_match('/^' . $pattern . '/', $entity_name)) {
         return TRUE;
       }
     }
 
     return FALSE;
   }
+
 }

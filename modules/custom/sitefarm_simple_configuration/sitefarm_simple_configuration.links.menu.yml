@@ -33,3 +33,10 @@ sitefarm.restrict_configuration_pages:
   description: 'Alter the configuration pages which should be hidden from Site Managers.'
   parent: sitefarm.admin_index
   weight: 100
+
+sitefarm.customize_block_types:
+  title: 'Configure Custom Block Types'
+  route_name: sitefarm.customize_block_types
+  description: 'Administer configurations for custom block types.'
+  parent: sitefarm.admin_index
+  weight: 101
