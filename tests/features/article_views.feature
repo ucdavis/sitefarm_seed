@@ -102,35 +102,31 @@ Feature: A User should see lists of articles
       And I should see "Second Blog"
       And I should see "Third Blog"
 
-#  @api
-#  Scenario: Article Categories show in a block that can filter to show news in a selected category
-#    When I am on "/news"
-#      And I click "Views Category"
-#    Then I should see the ".category-filter" element in the "Sidebar Second Region"
-#      And I should see "Views Category" in the ".category-filter__list-item--active" element
-#      And I should see "First Article" in the "Content" region
-#      And I should see "Third Article" in the "Content" region
-#      And I should not see "Second Article" in the "Content" region
-#    When I click "Views Cat 2" in the "Sidebar Second Region"
-#    Then I should see "Views Cat 2" in the ".category-filter__list-item--active" element
-#      And I should see "Second Article" in the "Content" region
-#      And I should not see "First Article" in the "Content" region
-#      And I should not see "Third Article" in the "Content" region
-#
-#  @api
-#  Scenario: Article Categories show in a block that can filter to show Blog posts in a selected category
-#    When I am on "/blog"
-#      And I click "Views Category"
-#    Then I should see the ".category-filter" element in the "Sidebar Second Region"
-#      And I should see "Views Category" in the ".category-filter__list-item--active" element
-#      And I should see "First Article" in the "Content" region
-#      And I should see "Third Article" in the "Content" region
-#      And I should not see "Second Article" in the "Content" region
-#    When I click "Views Cat 2" in the "Sidebar Second Region"
-#    Then I should see "Views Cat 2" in the ".category-filter__list-item--active" element
-#      And I should see "Second Article" in the "Content" region
-#      And I should not see "First Article" in the "Content" region
-#      And I should not see "Third Article" in the "Content" region
+  @api
+  Scenario: Article Types show in a block that can filter to show articles in a selected category
+    Given a block "views_block:sf_article_filter-block_1" is in the "sidebar_first" region
+    When I am on "/articles"
+    Then I should see "Filter by Article Type" in the "Sidebar First Region"
+      And I should see "Blog" in the ".views-field-field-sf-article-type" element
+      And I should see "First Article" in the "Content" region
+      And I should see "Third Article" in the "Content" region
+    When I click "Blog" in the "Sidebar First Region"
+    Then I should see "First Blog" in the "Content" region
+      And I should see "Second Blog" in the "Content" region
+      And I should not see "First Article" in the "Content" region
+
+  @api
+  Scenario: Article Categories show in a block that can filter to show Blog posts in a selected category
+    Given a block "views_block:sf_article_filter-block_2" is in the "sidebar_first" region
+    When I am on "/articles/blog"
+    Then I should see "Filter by Blog Category" in the "Sidebar First Region"
+      And I should see "First Blog" in the "Content" region
+      And I should see "Second Blog" in the "Content" region
+      And I should see "Third Blog" in the "Content" region
+    When I click "Views Cat 2" in the "Sidebar First Region"
+      And I should see "Second Blog" in the "Content" region
+      And I should not see "First Blog" in the "Content" region
+      And I should not see "Third Blog" in the "Content" region
 
   @api
   Scenario: The title on the News page should be "Recent News Articles"
