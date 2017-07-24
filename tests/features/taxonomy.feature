@@ -14,7 +14,7 @@ Feature: Taxonomy Terms
   @api
   Scenario: A url alias should be auto generated for Terms.
     When I press "Save"
-      And I visit "articles/testing-term"
+      And I visit "article-category/testing-term"
     Then I should see "Testing Term" in the "Page Title" region
     # Clean up by deleting the term
     When I click "Edit"
@@ -30,7 +30,7 @@ Feature: Taxonomy Terms
       And I press "Save"
     Then I should see the success message "Testing Term"
     # Clean up by deleting the term
-    When I visit "articles/testing-term"
+    When I visit "article-category/testing-term"
       And I click "Edit"
       And I click "Delete"
       And I press "Delete"

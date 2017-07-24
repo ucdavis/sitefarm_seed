@@ -3,9 +3,13 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.listing
+    - core.entity_view_mode.node.teaser
     - node.type.sf_article
+    - taxonomy.vocabulary.sf_article_category
+    - taxonomy.vocabulary.sf_article_type
   module:
     - node
+    - taxonomy
     - user
 id: sf_articles_recent
 label: 'Articles Recent'
@@ -168,11 +172,12 @@ display:
   block_1:
     display_plugin: block
     id: block_1
-    display_title: Block
+    display_title: 'Recent Articles Block'
     position: 1
     display_options:
       display_extenders: {  }
       block_hide_empty: true
+      display_description: ''
     cache_metadata:
       max-age: -1
       contexts:
@@ -184,7 +189,7 @@ display:
   feed_1:
     display_plugin: feed
     id: feed_1
-    display_title: Feed
+    display_title: 'Recent Articles Feed'
     position: 2
     display_options:
       display_extenders: {  }
@@ -195,11 +200,726 @@ display:
       displays:
         block_1: block_1
         default: '0'
+        page_1: '0'
+      display_description: ''
+      enabled: true
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  feed_2:
+    display_plugin: feed
+    id: feed_2
+    display_title: 'Feed: Article Type and Category'
+    position: 3
+    display_options:
+      display_extenders: {  }
+      row:
+        type: node_rss
+        options: {  }
+      path: articles/%article_type/%article_category/feed.rss
+      pager:
+        type: full
+        options:
+          items_per_page: 20
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: '‹ Previous'
+            next: 'Next ›'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      defaults:
+        pager: false
+        relationships: false
+        arguments: false
+        empty: false
+      relationships:
+        field_sf_article_category:
+          id: field_sf_article_category
+          table: node__field_sf_article_category
+          field: field_sf_article_category
+          relationship: none
+          group_type: group
+          admin_label: 'Article Category'
+          required: false
+          plugin_id: standard
+        field_sf_article_type:
+          id: field_sf_article_type
+          table: node__field_sf_article_type
+          field: field_sf_article_type
+          relationship: none
+          group_type: group
+          admin_label: 'Article Type'
+          required: false
+          plugin_id: standard
+      arguments:
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_sf_article_type
+          group_type: group
+          admin_label: ''
+          default_action: ignore
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: true
+          title: 'Recent {{ arguments.name|title }} Articles'
+          default_argument_type: fixed
+          default_argument_options:
+            argument: ''
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: true
+          validate:
+            type: taxonomy_term_name
+            fail: empty
+          validate_options:
+            bundles:
+              sf_article_type: sf_article_type
+            operation: view
+            transform: true
+            access: false
+          glossary: false
+          limit: 0
+          case: ucwords
+          path_case: lower
+          transform_dash: true
+          break_phrase: false
+          add_table: false
+          require_value: false
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        name_1:
+          id: name_1
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_sf_article_category
+          group_type: group
+          admin_label: ''
+          default_action: ignore
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: true
+          title: 'Recent {{ arguments.name_1|title}} {{ arguments.name|title }} Articles'
+          default_argument_type: fixed
+          default_argument_options:
+            argument: ''
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: true
+          validate:
+            type: taxonomy_term_name
+            fail: empty
+          validate_options:
+            bundles:
+              sf_article_category: sf_article_category
+            operation: view
+            transform: true
+            access: false
+          glossary: false
+          limit: 0
+          case: ucwords
+          path_case: lower
+          transform_dash: true
+          break_phrase: false
+          add_table: false
+          require_value: false
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'Sorry, there are no articles available with this type or category.'
+            format: sf_basic_html
+          plugin_id: text
+      display_description: ''
+      enabled: true
+      displays:
+        default: '0'
+        block_1: '0'
+        page_1: '0'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  feed_3:
+    display_plugin: feed
+    id: feed_3
+    display_title: 'Feed: Article Type'
+    position: 4
+    display_options:
+      display_extenders: {  }
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: teaser
+      path: articles/%taxonomy_term/feed.rss
+      pager:
+        type: full
+        options:
+          items_per_page: 20
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: '‹ Previous'
+            next: 'Next ›'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      defaults:
+        pager: false
+        relationships: false
+        arguments: false
+        empty: false
+        style: false
+        row: false
+      relationships:
+        field_sf_article_type:
+          id: field_sf_article_type
+          table: node__field_sf_article_type
+          field: field_sf_article_type
+          relationship: none
+          group_type: group
+          admin_label: 'Article Type'
+          required: false
+          plugin_id: standard
+      arguments:
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_sf_article_type
+          group_type: group
+          admin_label: ''
+          default_action: ignore
+          exception:
+            value: all
+            title_enable: true
+            title: ''
+          title_enable: true
+          title: 'Recent {{ arguments.name }} Articles'
+          default_argument_type: fixed
+          default_argument_options:
+            argument: all
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: true
+          validate:
+            type: taxonomy_term_name
+            fail: empty
+          validate_options:
+            bundles:
+              sf_article_type: sf_article_type
+            operation: view
+            transform: true
+            access: false
+          glossary: false
+          limit: 0
+          case: ucwords
+          path_case: lower
+          transform_dash: true
+          break_phrase: false
+          add_table: false
+          require_value: false
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'Sorry, there are no articles available with this type or category.'
+            format: sf_basic_html
+          plugin_id: text
+      display_description: ''
+      enabled: true
+      style:
+        type: default
+        options:
+          row_class: ''
+          default_row_class: false
+          uses_fields: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  page_1:
+    display_plugin: page
+    id: page_1
+    display_title: 'Page: Article Type and Category'
+    position: 4
+    display_options:
+      display_extenders: {  }
+      path: articles/%article_type/%article_category
+      pager:
+        type: full
+        options:
+          items_per_page: 20
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: '‹ Previous'
+            next: 'Next ›'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      defaults:
+        pager: false
+        relationships: false
+        arguments: false
+        empty: false
+        style: false
+        row: false
+      relationships:
+        field_sf_article_category:
+          id: field_sf_article_category
+          table: node__field_sf_article_category
+          field: field_sf_article_category
+          relationship: none
+          group_type: group
+          admin_label: 'Article Category'
+          required: false
+          plugin_id: standard
+        field_sf_article_type:
+          id: field_sf_article_type
+          table: node__field_sf_article_type
+          field: field_sf_article_type
+          relationship: none
+          group_type: group
+          admin_label: 'Article Type'
+          required: false
+          plugin_id: standard
+      arguments:
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_sf_article_type
+          group_type: group
+          admin_label: ''
+          default_action: ignore
+          exception:
+            value: all
+            title_enable: true
+            title: ''
+          title_enable: true
+          title: 'Recent {{ arguments.name|title }} Articles'
+          default_argument_type: fixed
+          default_argument_options:
+            argument: all
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: true
+          validate:
+            type: taxonomy_term_name
+            fail: empty
+          validate_options:
+            bundles:
+              sf_article_type: sf_article_type
+            operation: view
+            transform: true
+            access: false
+          glossary: false
+          limit: 0
+          case: ucwords
+          path_case: lower
+          transform_dash: true
+          break_phrase: false
+          add_table: false
+          require_value: false
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        name_1:
+          id: name_1
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_sf_article_category
+          group_type: group
+          admin_label: ''
+          default_action: ignore
+          exception:
+            value: all
+            title_enable: true
+            title: ''
+          title_enable: true
+          title: 'Recent {{ arguments.name_1|title}} {{ arguments.name|title }} Articles'
+          default_argument_type: fixed
+          default_argument_options:
+            argument: all
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: true
+          validate:
+            type: taxonomy_term_name
+            fail: empty
+          validate_options:
+            bundles:
+              sf_article_category: sf_article_category
+            operation: view
+            transform: true
+            access: false
+          glossary: false
+          limit: 0
+          case: ucwords
+          path_case: lower
+          transform_dash: true
+          break_phrase: false
+          add_table: false
+          require_value: false
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'Sorry, there are no articles available with this type or category.'
+            format: sf_basic_html
+          plugin_id: text
+      display_description: ''
+      enabled: true
+      style:
+        type: default
+        options:
+          row_class: ''
+          default_row_class: false
+          uses_fields: false
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: teaser
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  page_2:
+    display_plugin: page
+    id: page_2
+    display_title: 'Article Type Page'
+    position: 4
+    display_options:
+      display_extenders: {  }
+      path: articles/%taxonomy_term
+      pager:
+        type: full
+        options:
+          items_per_page: 20
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: '‹ Previous'
+            next: 'Next ›'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      defaults:
+        pager: false
+        relationships: false
+        arguments: false
+        empty: false
+        style: false
+        row: false
+      relationships:
+        field_sf_article_type:
+          id: field_sf_article_type
+          table: node__field_sf_article_type
+          field: field_sf_article_type
+          relationship: none
+          group_type: group
+          admin_label: 'Article Type'
+          required: false
+          plugin_id: standard
+      arguments:
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_sf_article_type
+          group_type: group
+          admin_label: ''
+          default_action: ignore
+          exception:
+            value: all
+            title_enable: true
+            title: ''
+          title_enable: true
+          title: 'Recent {{ arguments.name|title }} Articles'
+          default_argument_type: fixed
+          default_argument_options:
+            argument: all
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: true
+          validate:
+            type: taxonomy_term_name
+            fail: empty
+          validate_options:
+            bundles:
+              sf_article_type: sf_article_type
+            operation: view
+            transform: true
+            access: false
+          glossary: false
+          limit: 0
+          case: ucwords
+          path_case: lower
+          transform_dash: true
+          break_phrase: false
+          add_table: false
+          require_value: false
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'Sorry, there are no articles available with this type or category.'
+            format: sf_basic_html
+          plugin_id: text
+      display_description: ''
+      enabled: true
+      style:
+        type: default
+        options:
+          row_class: ''
+          default_row_class: false
+          uses_fields: false
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: teaser
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  page_3:
+    display_plugin: page
+    id: page_3
+    display_title: 'All Articles Page'
+    position: 4
+    display_options:
+      display_extenders: {  }
+      path: articles
+      pager:
+        type: full
+        options:
+          items_per_page: 20
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: '‹ Previous'
+            next: 'Next ›'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      defaults:
+        pager: false
+        relationships: false
+        arguments: false
+        empty: false
+        style: false
+        row: false
+        title: false
+      relationships: {  }
+      arguments: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'Sorry, there are no articles available at this time.'
+            format: sf_basic_html
+          plugin_id: text
+      display_description: ''
+      enabled: true
+      style:
+        type: default
+        options:
+          row_class: ''
+          default_row_class: false
+          uses_fields: false
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: teaser
+      title: Articles
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }

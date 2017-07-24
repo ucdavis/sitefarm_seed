@@ -9,6 +9,7 @@ Feature: A User should see lists of articles
         | name |
         | News |
         | Blog |
+        | Views Type |
       And "sf_article_category" terms:
         | name           |
         | Views Category |
@@ -22,6 +23,7 @@ Feature: A User should see lists of articles
         | First Article  | Views Category            | Views Tag     | News                  |
         | Second Article | Views Cat 2               | Views Tag     | News                  |
         | Third Article  | Views Category            | Views Tag 2   | News                  |
+        | Fourth Article | Views Category            | Views Tag 2   | Views Type            |
         | First Blog     | Views Category            | Views Tag     | Blog                  |
         | Second Blog    | Views Cat 2               | Views Tag     | Blog                  |
         | Third Blog     | Views Category            | Views Tag 2   | Blog                  |
@@ -59,89 +61,78 @@ Feature: A User should see lists of articles
       And I should see "Third Article" in the "Sidebar First Region"
       And I should see the ".node--view-mode-listing" element in the "Sidebar First Region"
 
-#  @api
-#  Scenario: Latest news showing in the content region of the News page
-#    Given I am on "/news"
-#    Then I should see "First Article" in the "Content" region
-#      And I should see "Second Article" in the "Content" region
-#      And I should see "Third Article" in the "Content" region
-#      And I should see the ".node--view-mode-teaser" element in the "Content" region
-#
-#  @api
-#  Scenario: Latest blog posts showing in the content region of the Blog page
-#    Given I am on "/blog"
-#    Then I should see "First Blog" in the "Content" region
-#      And I should see "Second Blog" in the "Content" region
-#      And I should see "Third Blog" in the "Content" region
-#      And I should see the ".node--view-mode-teaser" element in the "Content" region
-#
-#  @api
-#  Scenario: Latest news block showing in the content region
-#    Given a block "views_block:sf_articles_latest_news-block_1" is in the "content" region
-#    When I am on the homepage
-#    Then I should see "First Article" in the "Content" region
-#      And I should see "Second Article" in the "Content" region
-#      And I should see "Third Article" in the "Content" region
-#      And I should see the ".node--view-mode-teaser" element in the "Content" region
-#
-#  @api
-#  Scenario: Latest Blog posts block showing in the content region
-#    Given a block "views_block:sf_articles_latest_blog-block_1" is in the "content" region
-#    When I am on the homepage
-#    Then I should see "First Blog" in the "Content" region
-#      And I should see "Second Blog" in the "Content" region
-#      And I should see "Third Blog" in the "Content" region
-#      And I should see the ".node--view-mode-teaser" element in the "Content" region
-#
-#  @api @javascript @chrome
-#  Scenario: Latest news is available as an RSS feed
-#    When I am on "news.rss"
-#    Then I should see "First Article"
-#      And I should see "Second Article"
-#      And I should see "Third Article"
-#
-#  @api @javascript @chrome
-#  Scenario: Latest Blog posts are available as an RSS feed
-#    When I am on "blog.rss"
-#    Then I should see "First Blog"
-#      And I should see "Second Blog"
-#      And I should see "Third Blog"
-#
-#  @api
-#  Scenario: Article Categories show in a block that can filter to show news in a selected category
-#    When I am on "/news"
-#      And I click "Views Category"
-#    Then I should see the ".category-filter" element in the "Sidebar Second Region"
-#      And I should see "Views Category" in the ".category-filter__list-item--active" element
-#      And I should see "First Article" in the "Content" region
-#      And I should see "Third Article" in the "Content" region
-#      And I should not see "Second Article" in the "Content" region
-#    When I click "Views Cat 2" in the "Sidebar Second Region"
-#    Then I should see "Views Cat 2" in the ".category-filter__list-item--active" element
-#      And I should see "Second Article" in the "Content" region
-#      And I should not see "First Article" in the "Content" region
-#      And I should not see "Third Article" in the "Content" region
-#
-#  @api
-#  Scenario: Article Categories show in a block that can filter to show Blog posts in a selected category
-#    When I am on "/blog"
-#      And I click "Views Category"
-#    Then I should see the ".category-filter" element in the "Sidebar Second Region"
-#      And I should see "Views Category" in the ".category-filter__list-item--active" element
-#      And I should see "First Article" in the "Content" region
-#      And I should see "Third Article" in the "Content" region
-#      And I should not see "Second Article" in the "Content" region
-#    When I click "Views Cat 2" in the "Sidebar Second Region"
-#    Then I should see "Views Cat 2" in the ".category-filter__list-item--active" element
-#      And I should see "Second Article" in the "Content" region
-#      And I should not see "First Article" in the "Content" region
-#      And I should not see "Third Article" in the "Content" region
+  @api
+  Scenario: Articles are showing in the content region of the Articles page
+    Given I am on "/articles"
+    Then I should see "First Article" in the "Content" region
+      And I should see "Second Article" in the "Content" region
+      And I should see "Third Article" in the "Content" region
+      And I should see the ".node--view-mode-teaser" element in the "Content" region
 
   @api
-  Scenario: The title on the News page should be "News"
+  Scenario: Latest blog posts showing in the content region of the Blog page
+    Given I am on "/articles/blog"
+    Then I should see "First Blog" in the "Content" region
+      And I should see "Second Blog" in the "Content" region
+      And I should see "Third Blog" in the "Content" region
+      And I should see the ".node--view-mode-teaser" element in the "Content" region
+
+  @api
+  Scenario: Articles filtered by type and category that have spaces in their names are showing in the content region
+    Given I am on "/articles/views-type/views-category"
+    Then I should see "Fourth Article" in the "Content" region
+    And I should see the ".node--view-mode-teaser" element in the "Content" region
+
+  @api @javascript
+  Scenario: Articles filtered by type and category that have spaces in their names are available as an RSS feed
+    When I am on "/articles/views-type/views-category/feed.rss"
+    Then I should see "Fourth Article"
+
+  @api @javascript
+  Scenario: Latest articles are available as an RSS feed
+    When I am on "articles.rss"
+    Then I should see "First Article"
+      And I should see "Second Article"
+      And I should see "Third Article"
+
+  @api @javascript
+  Scenario: Latest blog articles are available as an RSS feed
+    When I am on "articles/blog/feed.rss"
+    Then I should see "First Blog"
+      And I should see "Second Blog"
+      And I should see "Third Blog"
+
+  @api
+  Scenario: Article Types show in a block that can filter to show articles in a selected category
+    Given a block "views_block:sf_article_filter-block_1" is in the "sidebar_first" region
+    When I am on "/articles"
+    Then I should see "Filter by Article Type" in the "Sidebar First Region"
+      And I should see "Blog" in the ".views-field-field-sf-article-type" element
+      And I should see "First Article" in the "Content" region
+      And I should see "Third Article" in the "Content" region
+    When I click "Blog" in the "Sidebar First Region"
+    Then I should see "First Blog" in the "Content" region
+      And I should see "Second Blog" in the "Content" region
+      And I should not see "First Article" in the "Content" region
+
+  @api
+  Scenario: Article Categories show in a block that can filter to show Blog posts in a selected category
+    Given a block "views_block:sf_article_filter-block_2" is in the "sidebar_first" region
+    When I am on "/articles/blog"
+    Then I should see "Filter by Blog Category" in the "Sidebar First Region"
+      And I should see "First Blog" in the "Content" region
+      And I should see "Second Blog" in the "Content" region
+      And I should see "Third Blog" in the "Content" region
+    When I click "Views Cat 2" in the "Sidebar First Region"
+      And I should see "Second Blog" in the "Content" region
+      And I should not see "First Blog" in the "Content" region
+      And I should not see "Third Blog" in the "Content" region
+
+  @api
+  Scenario: The title on the News page should be "Recent News Articles"
     Given I am an anonymous user
-      And I visit "news"
-    Then I should see the text "News" in the "Page Title" region
+      And I visit "/articles/news"
+    Then I should see the text "Recent News Articles" in the "Page Title" region
 
   @api
   Scenario: If an image is not uploaded no featured article block should show up on the News page
@@ -154,7 +145,7 @@ Feature: A User should see lists of articles
       And I check the box "field_sf_featured_status[value]"
       And I press "Save and publish"
       And I am an anonymous user
-    When I visit "/news"
+    When I visit "/articles/news"
     Then I should not see the ".block-views-blocksf-article-featured-sf-article-featured-block" element in the "Content" region
 
   @api @javascript

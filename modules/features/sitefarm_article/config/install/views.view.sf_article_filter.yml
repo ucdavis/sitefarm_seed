@@ -1,0 +1,534 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sf_article_type
+    - field.storage.taxonomy_term.field_sf_brand_color
+    - node.type.sf_article
+    - taxonomy.vocabulary.sf_article_type
+  module:
+    - node
+    - options
+    - taxonomy
+    - user
+id: sf_article_filter
+label: 'Article Filter'
+module: views
+description: ''
+tag: ''
+base_table: node_field_data
+base_field: nid
+core: 8.x
+display:
+  default:
+    display_plugin: default
+    id: default
+    display_title: Master
+    position: 0
+    display_options:
+      access:
+        type: perm
+        options:
+          perm: 'access content'
+      cache:
+        type: tag
+        options: {  }
+      query:
+        type: views_query
+        options:
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_comment: ''
+          query_tags: {  }
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Apply
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      pager:
+        type: none
+        options:
+          items_per_page: null
+          offset: 0
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: false
+      row:
+        type: fields
+      fields:
+        field_sf_article_type:
+          id: field_sf_article_type
+          table: node__field_sf_article_type
+          field: field_sf_article_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: true
+            path: 'articles/{{ field_sf_article_type|lower }}'
+            absolute: false
+            external: false
+            replace_spaces: true
+            path_case: lower
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          value:
+            sf_article: sf_article
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+      sorts:
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_sf_article_type
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: standard
+      title: 'Filter by Article Category'
+      header: {  }
+      footer: {  }
+      empty: {  }
+      relationships:
+        field_sf_article_type:
+          id: field_sf_article_type
+          table: node__field_sf_article_type
+          field: field_sf_article_type
+          relationship: none
+          group_type: group
+          admin_label: 'field_sf_article_type: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_sf_article_category:
+          id: field_sf_article_category
+          table: node__field_sf_article_category
+          field: field_sf_article_category
+          plugin_id: standard
+      arguments: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_sf_article_type'
+  block_1:
+    display_plugin: block
+    id: block_1
+    display_title: 'Type Filter'
+    position: 1
+    display_options:
+      display_extenders: {  }
+      display_description: 'Navigation to filter articles by their related terms from the Article Type taxonomy.'
+      block_hide_empty: true
+      title: 'Filter by Article Type'
+      defaults:
+        title: false
+        relationships: false
+        group_by: false
+        sorts: false
+      relationships:
+        field_sf_article_type:
+          id: field_sf_article_type
+          table: node__field_sf_article_type
+          field: field_sf_article_type
+          relationship: none
+          group_type: group
+          admin_label: 'Article Type'
+          required: true
+          plugin_id: standard
+      group_by: true
+      sorts:
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_sf_article_type
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: standard
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_sf_article_type'
+  block_2:
+    display_plugin: block
+    id: block_2
+    display_title: 'Category Filter'
+    position: 1
+    display_options:
+      display_extenders: {  }
+      display_description: 'Navigation to filter articles that have been filtered by type by their related terms from the Article Category taxonomy'
+      block_hide_empty: true
+      relationships:
+        field_sf_article_type:
+          id: field_sf_article_type
+          table: node__field_sf_article_type
+          field: field_sf_article_type
+          relationship: none
+          group_type: group
+          admin_label: 'Article Type'
+          required: true
+          plugin_id: standard
+        field_sf_article_category:
+          id: field_sf_article_category
+          table: node__field_sf_article_category
+          field: field_sf_article_category
+          relationship: none
+          group_type: group
+          admin_label: 'Article Category'
+          required: true
+          plugin_id: standard
+      defaults:
+        relationships: false
+        arguments: false
+        fields: false
+        filters: false
+        filter_groups: false
+        group_by: false
+      arguments:
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_sf_article_type
+          group_type: group
+          admin_label: ''
+          default_action: default
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: true
+          title: 'Filter by {{ arguments.name }} Category'
+          default_argument_type: raw
+          default_argument_options:
+            index: 1
+            use_alias: false
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: true
+          validate:
+            type: taxonomy_term_name
+            fail: 'not found'
+          validate_options:
+            bundles:
+              sf_article_type: sf_article_type
+            operation: view
+            transform: true
+            access: false
+          glossary: false
+          limit: 0
+          case: ucfirst
+          path_case: lower
+          transform_dash: false
+          break_phrase: false
+          add_table: false
+          require_value: false
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+      fields:
+        field_sf_brand_color:
+          id: field_sf_brand_color
+          table: taxonomy_term__field_sf_brand_color
+          field: field_sf_brand_color
+          relationship: field_sf_article_category
+          group_type: group
+          admin_label: 'Brand Color'
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: true
+          empty_zero: true
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_key
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_sf_article_category
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: true
+            path: 'articles/{{ arguments.name|lower }}/{{ name|lower }}'
+            absolute: false
+            external: false
+            replace_spaces: true
+            path_case: lower
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: '{{ field_sf_brand_color }}'
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: true
+          empty_zero: true
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          convert_spaces: false
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: term_name
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          value:
+            sf_article: sf_article
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_sf_article_type
+          group_type: group
+          admin_label: ''
+          operator: 'not empty'
+          value: ''
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      group_by: true
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.taxonomy_term.field_sf_brand_color'

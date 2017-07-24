@@ -27,6 +27,7 @@ content:
       image_style: ''
       image_link: content
     third_party_settings: {  }
+    region: content
 hidden:
   body: true
   field_sf_article_category: true
