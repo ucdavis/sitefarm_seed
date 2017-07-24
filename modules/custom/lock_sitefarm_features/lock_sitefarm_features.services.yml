@@ -6,6 +6,6 @@ services:
 
   access_check.lock_sitefarm_features:
     class: Drupal\lock_sitefarm_features\Access\LockFeatureAccess
-    arguments: ["@current_route_match", "@theme_handler"]
+    arguments: ["@config.factory", "@current_route_match", "@theme_handler"]
     tags:
       - { name: access_check, applies_to: _lock_sitefarm_features }

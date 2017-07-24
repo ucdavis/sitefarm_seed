@@ -20,7 +20,6 @@ show_vocabularies:
   sf_person_type: sf_person_type
   sf_photo_gallery_categories: sf_photo_gallery_categories
   sf_tags: sf_tags
-  sf_branding: '0'
 show_description: false
 show_count: false
 vocabulary_depth: -1
@@ -39,7 +38,6 @@ order:
   menus_tools: -45
   vocabularies_sf_article_category: -44
   vocabularies_sf_article_type: -43
-  vocabularies_sf_branding: -42
   vocabularies_sf_event_type: -41
   vocabularies_sf_person_type: -40
   vocabularies_sf_photo_gallery_categories: -39

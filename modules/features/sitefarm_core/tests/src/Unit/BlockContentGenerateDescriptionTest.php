@@ -20,6 +20,13 @@ use Drupal\block_content\Entity\BlockContent;
 class BlockContentGenerateDescriptionTest extends UnitTestCase
 {
   /**
+   * Stores the configuration factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
    * The database connection.
    *
    * @var \Drupal\Core\Database\Connection
@@ -51,6 +58,14 @@ class BlockContentGenerateDescriptionTest extends UnitTestCase
   protected function setUp() {
     parent::setUp();
 
+    $this->configFactory = $this->getConfigFactoryStub(
+      [
+        'sitefarm_core.settings' => [
+          'generate_custom_block_title' => 1
+        ]
+      ]
+    );
+
     $this->statement = $this->prophesize(StatementInterface::CLASS);
     $this->statement->fetchField()->willReturn(FALSE);
 
@@ -65,7 +80,7 @@ class BlockContentGenerateDescriptionTest extends UnitTestCase
 
     $this->entityTypeBundleInfo = $this->prophesize(EntityTypeBundleInfoInterface::CLASS);
 
-    $this->helperObj = new BlockContentGenerateDescription($this->database->reveal(), $this->entityTypeBundleInfo->reveal());
+    $this->helperObj = new BlockContentGenerateDescription($this->database->reveal(), $this->entityTypeBundleInfo->reveal(), $this->configFactory);
   }
 
   /**
@@ -81,6 +96,29 @@ class BlockContentGenerateDescriptionTest extends UnitTestCase
     $this->assertEquals('createDescription', $form['#validate'][0][1]);
     $this->assertEquals('hidden', $form['info']['widget'][0]['value']['#type']);
     $this->assertEquals('block_title_placeholder', $form['info']['widget'][0]['value']['#default_value']);
+  }
+
+  /**
+   * Tests the createFromTitle method
+   */
+  public function testCreateFromTitleIsDisabled() {
+    $this->configFactory = $this->getConfigFactoryStub(
+      [
+        'sitefarm_core.settings' => [
+          'generate_custom_block_title' => 0
+        ]
+      ]
+    );
+
+    $generator = new BlockContentGenerateDescription($this->database->reveal(), $this->entityTypeBundleInfo->reveal(), $this->configFactory);
+
+    $form = ['field_sf_title' => 'test'];
+
+    $generator->createFromTitle($form);
+
+    $expected = ['field_sf_title' => 'test'];
+
+    $this->assertArrayEquals($expected, $form);
   }
 
 

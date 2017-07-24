@@ -9,7 +9,7 @@ services:
 
   sf.block_content_generate_description:
     class: Drupal\sitefarm_core\BlockContentGenerateDescription
-    arguments: ['@database', '@entity_type.bundle.info']
+    arguments: ['@database', '@entity_type.bundle.info', '@config.factory']
 
   sf.route_subscriber:
     class: Drupal\sitefarm_core\Routing\RouteSubscriber

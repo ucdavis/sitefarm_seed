@@ -11,10 +11,10 @@ Feature: Photo Gallery Content Type
     When I visit "node/add/sf_photo_gallery"
       And I fill in the following:
         | Title | Gallery Name |
-      And I attach the file "test_16x9.png" to "files[field_sf_gallery_photo_0][]"
+      And I attach the file "test_16x9.png" to "files[field_sf_gallery_photos_0][]"
       And I attach the file "test_16x9.png" to "files[field_sf_primary_image_0]"
     When I press "Save and publish"
-      And I fill in "field_sf_gallery_photo[0][alt]" with "alt text"
+      And I fill in "field_sf_gallery_photos[0][alt]" with "alt text"
       And I fill in "field_sf_primary_image[0][alt]" with "alt text"
 
   @api
@@ -36,7 +36,7 @@ Feature: Photo Gallery Content Type
   @api @javascript
   Scenario: Title attribute field on photo field should be labeled as Caption instead
     Given I wait for AJAX to finish
-    Then I should see "Caption" in the ".form-item-field-sf-gallery-photo-0-title" element
+    Then I should see "Caption" in the ".form-item-field-sf-gallery-photos-0-title" element
     Then I should see "Caption" in the ".form-item-field-sf-primary-image-0-title" element
 
   @api
@@ -68,7 +68,7 @@ Feature: Photo Gallery Content Type
   @api @javascript
   Scenario: Photo Galleries poster displays
     Given I wait for AJAX to finish
-    When I fill in "field_sf_gallery_photo[0][alt]" with "alt text"
+    When I fill in "field_sf_gallery_photos[0][alt]" with "alt text"
       And I fill in "field_sf_primary_image[0][alt]" with "alt text"
       And I press "Save and publish"
     When I visit "photo-galleries"

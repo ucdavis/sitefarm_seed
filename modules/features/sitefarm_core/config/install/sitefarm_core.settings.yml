@@ -7,3 +7,4 @@ block_visibility_hidden:
   - 'entity_bundle:shortcut'
   - 'entity_bundle:menu_link_content'
   - 'node_type'
+generate_custom_block_title: 1

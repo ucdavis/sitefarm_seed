@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-name: Branding
-vid: sf_branding
-description: 'Campus branding colors'
-hierarchy: 0
-weight: 0
