@@ -19,7 +19,7 @@ the `sitefarm_article` module in the subprofile's `.info` file.
 
 Second, add config files for field instances and node form display. 
 
-**examples:** `modules/features/sitefarm_article/override_examples/`
+**examples:** `modules/features/sitefarm_article/override_examples/add_reference_fields/`
 
 ![Screenshot of file structure to example config files](images/reference-config-examples.png)
 
