@@ -1,4 +1,3 @@
-uuid: a4fb631b-ed4f-4a0f-9547-1d15adaf80f9
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - node.type.sf_article
   module:
     - text
-_core:
-  default_config_hash: oJneVrRE6XFuZ0FeEgEDgXUaMGWq-tSCPXeZ0TWB8QE
 id: node.sf_article.body
 field_name: body
 entity_type: node

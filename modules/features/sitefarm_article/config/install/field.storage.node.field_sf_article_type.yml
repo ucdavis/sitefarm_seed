@@ -1,12 +1,9 @@
-uuid: b67b0da2-0613-411f-9ae4-2e8dff083c8f
 langcode: en
 status: true
 dependencies:
   module:
     - node
     - taxonomy
-_core:
-  default_config_hash: v-9s3YMjgLBcCM-tHofZy8jgF8FytOhb0c0DTW4geJU
 id: node.field_sf_article_type
 field_name: field_sf_article_type
 entity_type: node

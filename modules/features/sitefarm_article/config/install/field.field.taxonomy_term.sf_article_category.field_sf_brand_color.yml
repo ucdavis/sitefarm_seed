@@ -1,4 +1,3 @@
-uuid: d6d9b192-1457-40c2-a2fc-8f4e6a84663c
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - taxonomy.vocabulary.sf_article_category
   module:
     - options
-_core:
-  default_config_hash: Dewv117oSkA4y-wjrvkiqf-x5Bf3UCu_FnbbPtqX33s
 id: taxonomy_term.sf_article_category.field_sf_brand_color
 field_name: field_sf_brand_color
 entity_type: taxonomy_term

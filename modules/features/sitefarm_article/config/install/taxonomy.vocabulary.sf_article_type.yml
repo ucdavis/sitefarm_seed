@@ -1,9 +1,6 @@
-uuid: 54b40fc0-ed08-405d-b4ac-bfc3873f2f79
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: K9sz27KHko2_-AqAAe4NXVLE0j2RxyTTYstC6XgiDLw
 name: 'Article Type'
 vid: sf_article_type
 description: 'The type of article like a News Article, Blog Article, or Press Release.'

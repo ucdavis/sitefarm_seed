@@ -1,4 +1,3 @@
-uuid: 1b9b5ee3-027d-443e-8201-b342b1d2e4da
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - node.type.sf_article
   module:
     - image
-_core:
-  default_config_hash: FSQPxyMiSmYBolAa242ZvJNF6F6tbhLNQf790zvXLJM
 id: node.sf_article.field_sf_primary_image
 field_name: field_sf_primary_image
 entity_type: node

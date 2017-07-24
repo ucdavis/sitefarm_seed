@@ -1,12 +1,9 @@
-uuid: 326d236f-5a1b-4531-83a6-0858af695e38
 langcode: en
 status: true
 dependencies:
   module:
     - ctools
     - taxonomy
-_core:
-  default_config_hash: 0HD7l5KchNKfiZnDzeqrFE8NjaB_2paNpJ8dX0i49Tg
 id: sf_article_category_terms
 label: 'Article Category Terms'
 type: 'canonical_entities:taxonomy_term'

@@ -1,4 +1,3 @@
-uuid: 5b4b85ae-10f6-45da-8eb9-3f94b503374a
 langcode: en
 status: true
 dependencies:
@@ -16,8 +15,6 @@ dependencies:
     - metatag
     - text
     - user
-_core:
-  default_config_hash: srLWMbMAaTK07jKoF9VdqKlUhxZ4POHlNA-Boho3LOU
 id: node.sf_article.default
 targetEntityType: node
 bundle: sf_article

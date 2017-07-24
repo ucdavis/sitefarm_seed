@@ -1,4 +1,3 @@
-uuid: ff58586f-a906-476b-962f-26d294975966
 langcode: en
 status: true
 dependencies:
@@ -16,8 +15,6 @@ dependencies:
     - image
     - text
     - user
-_core:
-  default_config_hash: 0qyTNpboIuJeQfI1sMTI1MXYbqfOgS81a21_ZgUMIQQ
 id: node.sf_article.teaser
 targetEntityType: node
 bundle: sf_article

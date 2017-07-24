@@ -1,4 +1,3 @@
-uuid: d1602e19-3ab0-41cd-87a4-4499c4c658e8
 langcode: en
 status: true
 dependencies:
@@ -11,8 +10,6 @@ dependencies:
     - node
     - taxonomy
     - user
-_core:
-  default_config_hash: YotmeefuoA2h4VMw792yfePPf4VX4JtIzFJ3uuZ0aBg
 id: sf_articles_related
 label: 'Articles Related'
 module: views

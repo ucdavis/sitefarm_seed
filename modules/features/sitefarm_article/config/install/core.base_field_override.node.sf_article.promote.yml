@@ -1,11 +1,8 @@
-uuid: 9cd9998f-3c07-476a-ba7f-5e19cf9638fc
 langcode: en
 status: true
 dependencies:
   config:
     - node.type.sf_article
-_core:
-  default_config_hash: U2gIE2iQ_TeyX1jmJphgsGHFlbtXDpvq-kn78Wa0MEQ
 id: node.sf_article.promote
 field_name: promote
 entity_type: node

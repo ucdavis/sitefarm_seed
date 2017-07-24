@@ -1,4 +1,3 @@
-uuid: e71df15a-2061-4b05-b571-37cfb1b52e1c
 langcode: en
 status: true
 dependencies:
@@ -11,8 +10,6 @@ dependencies:
     - image
     - path
     - text
-_core:
-  default_config_hash: tW89zpjS8OT3UYC1pAdmKPSrfY95DQQ6ohYngBa_Gos
 id: taxonomy_term.sf_article_category.default
 targetEntityType: taxonomy_term
 bundle: sf_article_category

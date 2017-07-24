@@ -1,9 +1,6 @@
-uuid: 60a27c9a-160a-431a-b9a4-9ba369560e79
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: b8tIQ9DCt4Kt5cjSPuRiJIFqD4Uak28jEvhD36odX9w
 name: 'Article Categories'
 vid: sf_article_category
 description: 'This is a taxonomy of article categories to organize the articles on your site.'
