@@ -47,6 +47,15 @@ class LockFeatureAccess implements AccessInterface {
     $this->configFactory = $configFactory;
     $this->routeMatch = $route_match;
     $this->themeHandler = $theme_handler;
+
+    // set properties
+    $this->getLockedNodeTypes();
+    $this->getLockedBlockTypes();
+    $this->getLockedTextFormats();
+    $this->getLockedTaxonomy();
+    $this->getLockedPathautoPatterns();
+    $this->getLockedImageStyles();
+    $this->getLockedViews();
   }
 
   /**
