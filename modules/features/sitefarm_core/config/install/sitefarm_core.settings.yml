@@ -8,3 +8,8 @@ block_visibility_hidden:
   - 'entity_bundle:menu_link_content'
   - 'node_type'
 generate_custom_block_title: 1
+block_views_contextual_hidden:
+  - 'nid'
+  - 'nid_1'
+  - 'tid'
+  - 'field_sf_gallery_category_target_id'

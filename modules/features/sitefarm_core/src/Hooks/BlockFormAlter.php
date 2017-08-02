@@ -61,4 +61,18 @@ class BlockFormAlter {
     }
   }
 
+  public function removeViewsContextualElements(&$form, $form_id) {
+    if ($form_id == 'block_form' && !empty($form['settings']['context_mapping'])) {
+      $context_keys = $this->configFactory
+        ->get('sitefarm_core.settings')
+        ->get('block_views_contextual_hidden');
+
+      foreach ($context_keys as $key) {
+        if (array_key_exists($key, $form['settings']['context_mapping'])) {
+          $form['settings']['context_mapping'][$key]['#access'] = FALSE;
+        }
+      }
+    }
+  }
+
 }
