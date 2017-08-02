@@ -39,6 +39,9 @@ class BlockFormAlterTest extends UnitTestCase {
           'entity_bundle:menu_link_content',
           'node_type',
         ],
+        'block_views_contextual_hidden' => [
+          'nid'
+        ]
       ]
     ]);
 
@@ -118,5 +121,24 @@ class BlockFormAlterTest extends UnitTestCase {
       ]
     ];
     $this->assertArrayEquals($expected, $form);
+  }
+
+  /**
+   * Tests removeViewsContextualElements method
+   */
+  public function testRemoveViewsContextualElements() {
+    $form = [
+      'settings' => [
+        'context_mapping' => [
+          'nid' => [
+            '#access' => TRUE,
+          ]
+        ],
+      ]
+    ];
+    $this->helper->removeViewsContextualElements($form, 'block_form');
+
+    $expected = $form['settings']['context_mapping']['nid']['#access'];
+    $this->assertFalse($expected);
   }
 }
