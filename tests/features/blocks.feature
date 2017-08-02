@@ -7,7 +7,7 @@ Feature: A User should be able to place a block
     Given I am logged in as a user with the "administrator" role
       And I visit "/admin/structure/block/library/bartik?region=content"
 
-  @api
+  @api @current
   Scenario: Block Config UI should not show Views Exposed contextual filters which are required
     When I click "Place block" in the "Content related by Tags" row
     Then I should see "Block description Content related by Tags"
