@@ -3,7 +3,7 @@
 General Behat documentation can be found at [http://behat.org/en/latest/guides.html](http://behat.org/en/latest/guides.html).
 
 ## Local Machine Setup
-1. Copy [behat.template.yml](../../behat.template.yml) to behat.yml and modify the base_url to your local site's url.
+1. Copy [behat.template.yml](../behat.template.yml) to behat.yml and modify the base_url to your local site's url.
 ```
 $ cp behat.template.yml behat.yml
 ```
