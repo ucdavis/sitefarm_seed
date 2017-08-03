@@ -5,8 +5,6 @@ default:
     default:
       paths:
         - %paths.base%/tests/features
-      filters:
-        tags: "~@chrome"
       contexts:
         - FeatureContext
         - Drupal\DrupalExtension\Context\DrupalContext

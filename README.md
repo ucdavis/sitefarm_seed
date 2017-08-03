@@ -1,85 +1,39 @@
-# Behat Testing for SiteFarm
+# SiteFarm Seed
 
-## Local Machine Setup
-1. Copy behat.template.yml to behat.yml and modify the base_url to your local site's url.
-```
-$ cp behat.template.yml behat.yml
-```
+SiteFarm Seed is a base-profile for Drupal 8 meant for extending by a custom built sub-profile.
 
-2. Download and install the Selenium Driver.
-Get the latest version of Selenium Server at [http://docs.seleniumhq.org/download/](http://docs.seleniumhq.org/download/) (currently 2.53.0).
+It provides sensible defaults and features that most websites will need.
 
-Start your Selenium server in a new console window (change the path to reflect where you downloaded it):
-```
-$ java -jar /path/to/selenium-server-standalone-2.53.0.jar
-```
+## Documentation
+Documentation is found in the /docs or at github [https://github.com/ucdavis/SiteFarm_seed/tree/8.x-1.x/docs](https://github.com/ucdavis/SiteFarm_seed/tree/8.x-1.x/docs).
 
-> **Tip:** Add an alias to your `.bash_profile` to simplify life
-> `alias selenium="java -jar /Applications/selenium-server-standalone-2.53.0.jar"`
+## Test Coverage
+SiteFarm Seed has complete test coverage with both PhpUnit and Behat.
 
-3. Run behat from this directory:
-```
-$ cd {PROFILES}/sitefarm
-$ /path/to/MYPROJECT/vendor/bin/behat
-```
-or
-```
-$ ../../../vendor/bin/behat
-```
+## Features
+>FYI, the following links show fully themed components. SiteFarm Seed does **not**
+include any theming so that you can implement theming however you need something to look.
+1. **Sensible Defaults:** We did the tedious work that most websites need so you don't have to
+2. **Content Types:** 
+[Basic Page](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=templates-basic-page), 
+[Article](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=templates-article),
+[Event](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=templates-event),
+[Person](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=templates-person),
+& [Photo Gallery](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=templates-photo-gallery)
+3. **Block Types:** 
+Basic Block, 
+[Focal Link](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=molecules-focal-link), 
+[Focus Box](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=molecules-focus-box), 
+[Hero Banner](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=organisms-hero-banner), 
+[Marketing Highlight](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=molecules-marketing-highlight), 
+& [Marketing Highlight - Horizontal](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=molecules-marketing-highlight-horizontal)
+4. **User Roles and Permissions:** Contributor, Editor, Site Manager, Site Builder, & Administrator
+5. **Image Styles:** Pre-built images styles are ready to be overridden to match a custom theme
+6. **Views:** Dozens of Views create blocks and pages ready for content
+7. **Polished:** Lots of Drupal 8's rough edges have been smoothed out for regular day-to-day users
 
-### Using Chrome Browser to run tests
-By default, Firefox is used to run Selenium tests. However, you can choose to use Chrome instead.
+## Example Sub-Profile template
+An example template for using SiteFarm Seed with a sub-profile can be found on github.
+[https://github.com/ucdavis/SiteFarm-distro-template](https://github.com/ucdavis/SiteFarm-distro-template)
 
-1. Uncomment the following lines in your behat.yml file.
-```
-selenium2:
-  browser: chrome
-  capabilities: {"browser": "chrome", "browserName": "chrome", "browserVersion": "ANY", "version": "ANY"}
-```
-
-2. Download the Chrome driver [https://sites.google.com/a/chromium.org/chromedriver/downloads](https://sites.google.com/a/chromium.org/chromedriver/downloads)
-
-3. Start Selenium using the Chrome driver (change the path to reflect where you downloaded Selenium and Chrome driver):
-```
-$ java -jar /path/to/selenium-server-standalone-2.53.0.jar -Dwebdriver.chrome.driver=/path/to/chromedriver
-```
-
-4. Run behat as usual.
-
-
-## Running behat
-
-From the `/docroot/profiles/sitefarm` directory, you can run all tests using the default profile:
-```
-$ /path/to/MYPROJECT/vendor/bin/behat
-```
-
-Or run one test by name:
-```
-$ /path/to/MYPROJECT/vendor/bin/behat tests/features/featurename.feature
-```
-
-## Grouping with Tags
-Behat tests can be tagged into groups. Tags affect what options from the config file are in effect. You can also use tags to run only a subset of the available tests.
-
-For example, to include only tests that are tagged as 'javascript':
-```
-$ /path/to/MYPROJECT/vendor/bin/behat --tags @javascript
-```
-
-To exclude tests that are tagged as 'javascript':
-```
-$ /path/to/MYPROJECT/vendor/bin/behat --tags ~@javascript
-```
-
-`@api` - Any test that requires anything more than blackbox access (for example, any test that starts by creating a user and logging them in) should be tagged with `@api` so it can use drush or get direct access to internal Drupal functions.
-
-`@javascript` - Any test that requires browser interaction (for example, WYSIWYG editing or other Javascript functions) should be tagged with `@javascript`.
-
-`@local_files` - Any test that requires files stored in the `{PROFILES}/sitefarm/tests/files/` directory should be tagged with `@local_files`.
-
-`@chrome` - Any test that absolutely requires the Chrome browser. These test will be ignored unless they are explicitly run via the chrome profile `$ /path/to/MYPROJECT/vendor/bin/behat --profile chrome`
-
-> **Tip:** during development, add a tag `@current` so that only the test you want can be run with `$ /path/to/MYPROJECT/vendor/bin/behat --tags @current`
-> Even better, add an alias to your `.bash_profile` to speed things up.
-> `alias bhc='/path/to/MYPROJECT/vendor/bin/behat --tags @current'` for "BeHat Current"
+[Composer](https://getcomposer.org/) is a requirement.
