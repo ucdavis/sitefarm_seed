@@ -72,3 +72,33 @@ $ /path/to/MYPROJECT/vendor/bin/behat --tags ~@javascript
 > **Tip:** during development, add a tag `@current` so that only the test you want can be run with `$ /path/to/MYPROJECT/vendor/bin/behat --tags @current`
 > Even better, add an alias to your `.bash_profile` to speed things up.
 > `alias bhc='/path/to/MYPROJECT/vendor/bin/behat --tags @current'` for "BeHat Current"
+
+# PHPUnit for Unit tests
+
+PHPUnit is used for unit testing each class. Unit tests ensure that each class and method does exactly what it is meant to do.
+
+General PHPUnit documentation can be found at [https://phpunit.de/documentation.html](https://phpunit.de/documentation.html).
+
+Drupal specific PHPUnit testing documentation can be found at [https://www.drupal.org/docs/8/phpunit](https://www.drupal.org/docs/8/phpunit).
+
+## Running PHPUnit
+
+PHPUnit tests need to be run from sitefarm_seed profile directory:
+```
+$ cd {PROFILES}/sitefarm_seed
+```
+Then run all unit tests in the sitefarm_seed profile
+
+```
+$ /path/to/MYPROJECT/vendor/bin/phpunit
+```
+or
+```
+$ ../../../vendor/bin/phpunit
+```
+
+### Run only tests in a specific group
+Groups in PHPUnit are specified by a `@group` Annotation. For example, to run all of the "sitefarm_core" tests:
+```
+$ /path/to/MYPROJECT/vendor/bin/phpunit --group sitefarm_core
+```
