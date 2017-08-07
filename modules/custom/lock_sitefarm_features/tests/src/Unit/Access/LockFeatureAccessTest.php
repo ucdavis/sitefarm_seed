@@ -80,6 +80,9 @@ class LockFeatureAccessTest extends UnitTestCase {
         'locked_image_styles' => [
           'sf_thumbnail',
         ],
+        'locked_themes' => [
+          'sitefarm_theme',
+        ],
       ],
     ]);
 
@@ -94,7 +97,7 @@ class LockFeatureAccessTest extends UnitTestCase {
     $this->account->id()->willReturn(2);
 
     $theme_handler = $this->prophesize(ThemeHandler::CLASS);
-    $theme_handler->getDefault()->willReturn('sitefarm_one');
+    $theme_handler->getDefault()->willReturn('sitefarm_theme');
 
     $this->access = new LockFeatureAccess(
       $this->configFactory,
