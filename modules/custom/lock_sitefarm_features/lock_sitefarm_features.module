@@ -15,6 +15,7 @@ function lock_sitefarm_features_element_info_alter(array &$info) {
  * Implements hook_entity_operation_alter().
  */
 function lock_sitefarm_features_entity_operation_alter(array &$operations, EntityInterface $entity) {
+  /** @var \Drupal\lock_sitefarm_features\Access\LockFeatureAccess $lock */
   $lock = \Drupal::service('access_check.lock_sitefarm_features');
   $entity_type = $entity->getEntityTypeId();
 
@@ -28,8 +29,11 @@ function lock_sitefarm_features_entity_operation_alter(array &$operations, Entit
 
     // Lock down Image styles except for the Flush operation
     $theme = \Drupal::service('theme_handler')->getDefault();
+    /** @var \Drupal\Core\Config\ConfigFactoryInterface $config */
+    $config = \Drupal::config('lock_sitefarm_features.settings');
+    $locked_themes = $config->get('locked_themes');
     if ($entity_type == 'image_style'
-      && $theme == 'sitefarm_one'
+      && in_array($theme, $locked_themes)
       && ($lock->matchesLockedPattern($entity->id()) || in_array($entity->id(), $lock->getLockedImageStyles()))
     ) {
       foreach ($operations as $key => $value) {

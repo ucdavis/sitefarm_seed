@@ -232,8 +232,12 @@ class LockFeatureAccess implements AccessInterface {
 
     // Only restrict image styles if we are using the SiteFarm One theme
     if ($this->routeMatch->getParameter('image_style')) {
+      $locked_themes = $this->configFactory
+        ->get('lock_sitefarm_features.settings')
+        ->get('locked_themes');
+
       $theme = $this->themeHandler->getDefault();
-      if ($theme == 'sitefarm_one') {
+      if (in_array($theme, $locked_themes)) {
         $restricted = $this->isLockedEntity('image_style', 'lockedImageStyles');
       }
     }

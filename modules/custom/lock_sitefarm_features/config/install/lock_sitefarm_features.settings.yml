@@ -10,3 +10,5 @@ locked_pathauto_patterns: []
 locked_taxonomy_vocabularies: []
 locked_views: []
 locked_image_styles: []
+# Theme machine name that should be used for locking image styles
+locked_themes: []
