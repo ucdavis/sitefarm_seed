@@ -1,4 +1,4 @@
-# Overriding Node configuration
+# Change fields on content types provided by Sitefarm by overriding Node configuration
 
 Often the default node configuration of Sitefarm features such as the Article
 content type will need to be overridden to meet the needs of a subprofile. This
