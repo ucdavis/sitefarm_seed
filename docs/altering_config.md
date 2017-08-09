@@ -6,7 +6,11 @@ content type will need to be overridden to meet the needs of a sub profile.
 ## General
 In its simplest, altering configuration from SiteFarm Seed means copying config
 files out of SiteFarm Seed and placing them into a sub profile's
-`/config/install` directory or a custom module's `/config/install` directory.
+`/config/install` directory. 
+
+> **Warning!** Configuration files may be placed into a module's
+`/config/install` directory only if it is created by Features and Features is
+enabled.
 
 By doing this, when a new site is installed it will first look to the sub
 profile for config instead of SiteFarm Seed.
