@@ -55,11 +55,17 @@ $ ../vendor/bin/drush site-install sitefarm_subprofile --account-name=janedoe --
 ```
 
 ### Testing updates to existing sites
+Before you start adding new features, create a database backup first so that it
+can be used for testing later. It is helpful to have an older database backup of
+a fresh install. This way it is easier to see if the most recent changes take
+place without the cruft of a live site's backup. So before you start adding new
+features, create a database backup of a fresh install first. Run Behat tests.
+
 Load in a database backup of an existing site and run updates with `drush updb`.
-Then look to see that all config updates have applied and run Behat tests.
+Then look to see that all config updates have applied and then run Behat tests.
 
 ### Behavioral Testing with Behat
-It is recommended to write a Behat test to verify that the desired effects from
+It is recommended to write a Behat tests to verify that the desired effects from
 a configuration change have applied correctly.
 
 ### Unit tests with PHPUnit
