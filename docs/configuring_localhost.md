@@ -6,7 +6,7 @@
 
 ## Step 2: Fire Up Local Dev Stack
 
-Turn on MAMP, WAMP, LAMP, or what ever you local development environment of choice and make sure the [Web Server System Requirements](https://www.drupal.org/docs/8/system-requirements/web-server) for Drupal 8 are being met.
+Turn on MAMP, WAMP, LAMP, or whatever you local development environment of choice and make sure the [Web Server System Requirements](https://www.drupal.org/docs/8/system-requirements/web-server) for Drupal 8 are being met.
 
 ## Step 3: Get Distro Template
 
