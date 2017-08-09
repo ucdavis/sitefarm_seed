@@ -1,13 +1,12 @@
-# Change fields on content types provided by Sitefarm by overriding Node configuration
+# Adding a default core reference field onto an existing content type
 
-Often the default node configuration of Sitefarm features such as the Article
-content type will need to be overridden to meet the needs of a subprofile. This
-configuration can go into a custom module or the subprofile's own
-`config/install` directory.
+Sitefarm Seed already provides base fields for Entity References to core content
+types. This means that by reusing these existing fields all that is needed is
+config for field instances.
 
-# Examples
+![Screenshot of reusing entity reference dropdown](images/reuse-entity-reference-fields.png)
 
-## Adding a Reference field to Photo Galleries or Persons
+## Example: Adding a Reference field to Photo Galleries or Persons
 
 *As a Developer, I want to add an entity reference field on the Article content
 type to the Photo Gallery and Person content types so that I can offer blocks
@@ -22,12 +21,6 @@ Second, add config files for field instances and node form display.
 **examples:** `modules/features/sitefarm_article/override_examples/add_reference_fields/`
 
 ![Screenshot of file structure to example config files](images/reference-config-examples.png)
-
-Sitefarm Seed already provides base fields for Entity References to core content
-types. This means that by reusing these existing fields all that is needed is
-config for field instances.
-
-![Screenshot of reusing entity reference dropdown](images/reuse-entity-reference-fields.png)
 
 The `core.entity_form_display.node.sf_article.default.yml` adds both of the
 new field instances to the edit form so that an editor can add references to the

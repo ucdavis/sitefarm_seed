@@ -21,6 +21,14 @@ Choose the configuration type and name. Then copy the configuration and paste it
 into a new yaml file named based on the "Filename" given at the bottom of the
 page (under the textarea where the config can be copied).
 
+> **Important!** Remember to strip out any UUID or defualt_config_hash information
+
+```yaml
+uuid: e1083155-1afb-4d23-acff-17729aec7bc3
+_core:
+  default_config_hash: p_AtPbTd6niywC8P6zRfczYFjPDsejfH7Qcwo47ixCM
+```
+
 ### Features Module
 
 Using the Features Module to bundle and export a group of configuration is best
@@ -66,6 +74,9 @@ will fail to work. This file stores the general configuration for this field.
 Every field (including reused fields) will require a field instance file
 `field.field.node.content_type_machine_name.field_machine_name.yml`. This file
 stores the specific configuration for this individual instance on a node.
+
+> **Tip!** SiteFarm Seed provides some reference fields already that can be
+use. See docs for [Adding a default core reference field onto an existing content type](adding-core-reference-field.md)
 
 ### Form and Display Mode placement
 Simply adding a field does not mean that it will appear on a node edit form or
