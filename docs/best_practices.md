@@ -44,6 +44,15 @@ into classes. From the Drupal root `web` directory run:
 $ ../vendor/bin/drupal container:debug
 ```
 
+## Style switching with Block Style Plugins
+
+The [Block Style Plugins] module is designed to allow day-to-day editors the
+ability to swap styles per block. A themer can designate which styles apply to
+which blocks. This keeps style and data separate so that a theme can be switched
+and offer its own styles.
+
+Tutorial Video: [https://youtu.be/Y0t8owlV2_4](https://youtu.be/Y0t8owlV2_4)
+
 ## Testing
 
 Always test out new configuration by creating a brand new site installation. To
