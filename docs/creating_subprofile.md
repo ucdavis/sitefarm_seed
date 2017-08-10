@@ -4,7 +4,9 @@ This is all made possible by [Patch 1356276](https://www.drupal.org/node/1356276
 
 ## Download or Clone Sitefarm Distro Template
 
-This is a SiteFarm Composer-based Drupal distribution template. Place this in your local development environment, and follow the [instructions on GitHub](https://github.com/ucdavis/sitefarm-distro-template) to install. The README also contains instructions on how to update and maintain the distro template.
+[Download or Clone](https://github.com/ucdavis/sitefarm-distro-template) from repo.
+
+This is a SiteFarm Composer-based Drupal distribution template. Place this in your local development environment, and follow the [README instructions on GitHub](https://github.com/ucdavis/sitefarm-distro-template/blob/master/README.md) to install. The README also contains instructions on how to update and maintain the distro template.
 
 ## Create Your Own Sub-Profile
 
