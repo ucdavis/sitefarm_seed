@@ -63,7 +63,7 @@ Looking at the example file in the subprofile example `/sitefarm_subprofile.prof
 
 example: 
 
-~~~~
+```php
 <?php
 /**
  * @file
@@ -95,7 +95,7 @@ function my_custom_subprofile_form_install_configure_form_alter(&$form, FormStat
   // Remove update options
   $helper->removeUpdateNotificationOptions($form);
 }
-~~~~
+```
 
 Notice we have added `$helper = \Drupal::service('sitefarm_seed.profile_install');` which provides the `profile_install` service as a variable and allows access to it's methods. You can alter some of the helper methods in this implementation, like `hideAndSetDefaultRegion($form)`, by passing in arguments for the `$country` and `$timezone` found in the methods at `/sitefarm-distro-template/web/profiles/sitefarm_seed/src/ProfileInstall.php`.
 
