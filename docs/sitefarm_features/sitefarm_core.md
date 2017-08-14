@@ -13,7 +13,7 @@ To provide configuration for core components that get used by other features.
 * Content related by Tags
 * SiteFarm Frontpage
 
-##Field Configuration for taxonomy term provided
+## Field Configuration for taxonomy term provided
 * Brand Color
 
 ## Base field storage configuration
