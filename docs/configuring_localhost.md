@@ -10,7 +10,7 @@ Turn on MAMP, WAMP, LAMP, or whatever you local development environment of choic
 
 ## Step 3: Get Distro Template
 
-This repo is just meant as a starting point. There is no plan to maintain and update it.
+The [SiteFarm Distro Template](https://github.com/ucdavis/sitefarm-distro-template) repo is just meant as a starting point. There is no plan to maintain and update it.
 
 Next you will want to "Clone or Download" the [SiteFarm Distro Template](https://github.com/ucdavis/sitefarm-distro-template) into your local servers public directory. If you clone, the root directory will be `sitefarm-distro-template`, which is what will be referenced in the rest of this document. 
 
