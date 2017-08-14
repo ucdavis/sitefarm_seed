@@ -55,7 +55,7 @@ https://api.drupal.org/api/drupal/core!core.api.php/group/container/8.2.x#sec_in
 
 ## Style switching with Block Style Plugins
 
-The [Block Style Plugins] module is designed to allow day-to-day editors the
+The [Block Style Plugins](https://www.drupal.org/project/block_style_plugins) module is designed to allow day-to-day editors the
 ability to swap styles per block. A themer can designate which styles apply to
 which blocks. This keeps style and data separate so that a theme can be switched
 and offer its own styles.
