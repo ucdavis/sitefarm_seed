@@ -14,7 +14,7 @@ To provide configuration for a Photo Gallery content type and related configurat
 * Photo Galleries Related to Content (sf_photo_galleries_related_to_content)
 * Photo Gallery Category Filter (sf_photo_gallery_category_filter)
 
-##Field Configuration provided
+## Field Configuration provided
 * Body
 * Category
 * Photo(s)
