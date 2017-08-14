@@ -43,6 +43,15 @@ into classes. From the Drupal root `web` directory run:
 ```
 $ ../vendor/bin/drupal container:debug
 ```
+## Overriding Services
+
+SiteFarm Seed provides several Services which can be overridden. This is useful especially for services used in procedual hooks within areas like the `sitefarm_core.module` file.
+
+By moving all the code in hooks into services it is possible for a subprofile to swap out the service with one of their own. This means that everything inside a `.module` file can be undone if needed.
+
+This can be more useful than simply turning off a module or overriding it. The base class can be extended and then only the methods that need to be changed can be overridden. This way changes can be more surgical, and the original code can still be used when desired.
+
+https://api.drupal.org/api/drupal/core!core.api.php/group/container/8.2.x#sec_injection
 
 ## Style switching with Block Style Plugins
 
