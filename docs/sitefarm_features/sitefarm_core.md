@@ -65,4 +65,4 @@ To provide configuration for core components that get used by other features.
 * Focal point help text
 * Fix the url of the Place Block link
 * Provide a way to override image styles
-* Flush caches on a them install
+* Flush caches on a theme install
