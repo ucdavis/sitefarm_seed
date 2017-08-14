@@ -14,7 +14,7 @@ To provide Event content type and related configuration. Create an event which w
 * Filter Events Listing (sf_events_listing)
 * Events Upcoming (sf_events_upcoming)
 
-##Field Configuration provided
+## Field Configuration provided
 * Body
 * Event Date
 * Article Type 
