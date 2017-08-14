@@ -1,6 +1,7 @@
 # Table of Contents
 
 * [Local Development Setup](configuring_localhost.md)
+* [Creating a Sub Profile of SiteFarm Seed](creating_subprofile.md)
 * [Adding New Configuration in a Sub Profile](adding_new_config.md)
   * [Altering Existing Config](altering_config.md)
   * [Adding Core Reference Fields](adding-core-reference-field.md)
