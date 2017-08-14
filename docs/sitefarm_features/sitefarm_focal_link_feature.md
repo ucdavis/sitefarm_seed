@@ -12,7 +12,7 @@ To provide configuration for the Focal Link custom block type
 ## Views Provided
 * None
 
-##Field Configuration provided
+## Field Configuration provided
 * Icon or Custom Image
 * Custom Image
 * Link
