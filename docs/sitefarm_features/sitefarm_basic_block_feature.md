@@ -12,7 +12,7 @@ To provide configuration for a Basic Block type of block.
 ## Views Provided
 * None
 
-##Field Configuration provided
+## Field Configuration provided
 * Body (block_content.sf_basic.body)
 
 ## Custom module code included
