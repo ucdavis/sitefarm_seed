@@ -16,7 +16,7 @@ To provide configuration for a Person content type and related configuration. Ad
 * Persons Content Contributions related back to Person (sf_persons_content_related_back_to_person)
 * Persons Related to Content (sf_persons_related_to_content)
 
-##Field Configuration provided
+## Field Configuration provided
 * Bio
 * Hide from Directory
 * Address
