@@ -16,7 +16,7 @@ To provide configuration for Articles, ways to categorize them, as well as ways 
 * Article Featured (sf_article_featured)
 * Article Filter (sf_article_filter)
 
-##Field Configuration provided
+## Field Configuration provided
 * Body
 * Category
 * Article Type 
