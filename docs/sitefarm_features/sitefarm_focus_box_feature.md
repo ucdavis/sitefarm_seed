@@ -12,7 +12,7 @@ To provide configuration for the Focus Box custom block type
 ## Views Provided
 * None
 
-##Field Configuration provided
+## Field Configuration provided
 * Body
 * Primary Image
 * Title
