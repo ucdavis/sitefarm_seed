@@ -12,7 +12,7 @@ To provide configuration for the Hero Banner custom block type
 ## Views Provided
 * None
 
-##Field Configuration provided
+## Field Configuration provided
 * Title
 * Link
 * Primary Image
