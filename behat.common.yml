@@ -68,3 +68,24 @@ chrome:
       selenium2:
         browser: chrome
         capabilities: {"browser": "chrome", "browserName": "chrome", "browserVersion": "ANY", "version": "ANY"}
+
+# Docker profile.
+# For use inside the CLI container in Docksal.
+docker:
+  extensions:
+    Behat\MinkExtension:
+      # URL of the site when accessed inside Docksal.
+      base_url: http://web
+      # Configure browser to be used. Browser must be available on wd_host.
+      # Stick with chrome by default. It's 2x faster than firefox or phantomjs (your results may vary).
+      browser_name: chrome
+      selenium2:
+        wd_host: http://browser:4444/wd/hub
+        capabilities: { "browser": "chrome", "version": "*" }
+    Drupal\DrupalExtension:
+      drupal:
+        # Site docroot inside Docksal.
+        drupal_root: /var/www/web
+      drush:
+        # Site docroot inside Docksal.
+        root: /var/www/web

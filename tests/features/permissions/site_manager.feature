@@ -50,8 +50,6 @@ Feature: SiteFarm Site Manager Permissions
     Then I should get a "403" HTTP response
     Given I am on "admin/config/media/image-toolkit"
     Then I should get a "403" HTTP response
-    Given I am on "admin/config/regional/zones"
-    Then I should get a "403" HTTP response
     Given I am on "admin/config/services/sharemessage"
     Then I should get a "403" HTTP response
 
