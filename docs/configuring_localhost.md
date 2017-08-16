@@ -26,6 +26,8 @@ If cloning you will need to configure an [SSH Key with GitHub](https://help.gith
 
 ### Docksal
 
+Open your CLI of choice and navigate to the SiteFarm Distro Template directory (`sitefarm-distro-template`).
+
 Run, `$ fin init`
 
 Go to: `http://sitefarm-distro.local` and see that it's all installed. You're done!
