@@ -28,13 +28,13 @@ If cloning you will need to configure an [SSH Key with GitHub](https://help.gith
 
 Run, `$ fin init`
 
-Go to: `http://sitefarm-distro.local` and see that it's all installed.
+Go to: `http://sitefarm-distro.local` and see that it's all installed. You're done!
 
 ### Other Local Dev Stack
 
 You will want to set up a local host on your local PHP/MySQL tool of choice. Give it a name like `sitefarm-distro.local` and set the document root to `sitefarm-distro-template/web`
 
-## Step 5: Boss Composer Around
+## Step 5: Boss Composer Around (ignore if using Docksal)
 
 Open your CLI of choice and navigate to the SiteFarm Distro Template directory (`sitefarm-distro-template`).
 
@@ -42,11 +42,11 @@ Run, `$ composer install`
 
 Composer will download and install the SiteFarm install profile. You can then install it like you would any other Drupal site.
 
-## Step 6: Add a Database
+## Step 6: Add a Database (ignore if using Docksal)
 
 Using a tool like [Sequel Pro](https://www.sequelpro.com/) or [phpMyAdmin](https://www.phpmyadmin.net/) create a local database.
 
-## Step 7: Install Drupal
+## Step 7: Install Drupal (ignore if using Docksal)
 
 Before installing drupal you may want to increase your `memory_limit` in your `php.ini` file. I like to bump it up to `520M`. You may also want to increase your `post_max_size` to `120M`. This will reduce the likelihood of errors on install.
 
