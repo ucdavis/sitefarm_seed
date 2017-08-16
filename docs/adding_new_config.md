@@ -52,22 +52,22 @@ In its simplest, the definition of a content type is in a single file:
 `node.type.machine_name.yml`.
 
 Accompanying this file will be form displays
-`core.entity_form_display.node.machine_name.default` and display modes
-`core.entity_view_display.node.machine_name.default`. The last paramater of
+`core.entity_form_display.node.machine_name.default.yml` and display modes
+`core.entity_view_display.node.machine_name.default.yml`. The last paramater of
 those config files `defualt` will be changed based on the view mode machine
 name. So a "Teaser" view mode would be
-`core.entity_view_display.node.machine_name.teaser`.
+`core.entity_view_display.node.machine_name.teaser.yml`.
 
 Finally, any fields that are attached to the content type will have config
 files. Every field will have an instance file
 `field.field.node.machine_name.field_machine_name.yml`. Brand new fields will
-also have an accompanying storage file `field.storage.node.field_machine_name`.
+also have an accompanying storage file `field.storage.node.field_machine_name.yml`.
 
 ## New Field on existing content type
 
 ### Field Storage
 Brand new fields (that are not being reused from existing fields) will have a
-storage file `field.storage.node.field_machine_name`. Without this the new field
+storage file `field.storage.node.field_machine_name.yml`. Without this the new field
 will fail to work. This file stores the general configuration for this field.
 
 ### Field Instance
