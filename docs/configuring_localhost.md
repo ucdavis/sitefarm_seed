@@ -6,6 +6,12 @@
 
 ## Step 2: Fire Up Local Dev Stack
 
+### Docksal
+
+Install Docksal according to [Docksal's installation directions](http://docs.docksal.io/en/master/getting-started/env-setup/)
+
+### Other Local Dev Stack
+
 Turn on MAMP, WAMP, LAMP, or whatever you local development environment of choice and make sure the [Web Server System Requirements](https://www.drupal.org/docs/8/system-requirements/web-server) for Drupal 8 are being met.
 
 ## Step 3: Get Distro Template
@@ -17,6 +23,14 @@ Next you will want to "Clone or Download" the [SiteFarm Distro Template](https:/
 If cloning you will need to configure an [SSH Key with GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
 
 ## Step 4: Configure Your Local Host
+
+### Docksal
+
+Run, `$ fin init`
+
+Go to: `http://sitefarm-distro.local` and see that it's all installed.
+
+### Other Local Dev Stack
 
 You will want to set up a local host on your local PHP/MySQL tool of choice. Give it a name like `sitefarm-distro.local` and set the document root to `sitefarm-distro-template/web`
 
