@@ -56,8 +56,6 @@ Feature: SiteFarm Editor Permissions
     Then I should get a "403" HTTP response
     Given I am on "admin/config/media/image-toolkit"
     Then I should get a "403" HTTP response
-    Given I am on "admin/config/regional/zones"
-    Then I should get a "403" HTTP response
     Given I am on "admin/config/regional/date-time"
     Then I should get a "403" HTTP response
     Given I am on "admin/config/services/rss-publishing"
