@@ -6,13 +6,7 @@
 
 ## Step 2: Fire Up Local Dev Stack
 
-### Docksal
-
-Install Docksal according to [Docksal's installation directions](http://docs.docksal.io/en/master/getting-started/env-setup/)
-
-### Other Local Dev Stack
-
-Turn on MAMP, WAMP, LAMP, or whatever you local development environment of choice and make sure the [Web Server System Requirements](https://www.drupal.org/docs/8/system-requirements/web-server) for Drupal 8 are being met.
+Install and enable [Docksal](https://docksal.io) (recommended), [MAMP](https://www.mamp.info/), [WAMP](http://www.wampserver.com/), [LAMP](https://en.wikipedia.org/wiki/LAMP_(software_bundle)), or whatever you local development environment of choice and make sure the [Web Server System Requirements](https://www.drupal.org/docs/8/system-requirements/web-server) for Drupal 8 are being met.
 
 ## Step 3: Get Distro Template
 
@@ -30,7 +24,9 @@ Open your CLI of choice and navigate to the SiteFarm Distro Template directory (
 
 Run, `$ fin init`
 
-Go to: `http://sitefarm-distro.local` and see that it's all installed. You're done!
+The script will prompt you for your sudo password, and then at the end provide you with a login link.
+
+You're done! You can skip the rest of the steps.
 
 ### Other Local Dev Stack
 
