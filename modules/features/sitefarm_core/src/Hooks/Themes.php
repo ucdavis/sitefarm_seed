@@ -42,7 +42,7 @@ class Themes {
     // Loop through each of the newly installed themes
     foreach ($theme_list as $theme_name) {
       // Exit if the theme does not have config
-      $theme_config_path = $this->getThemePath($theme_name) . '/config/optional';
+      $theme_config_path = $this->getThemePath($theme_name) . '/config/install';
       if (!file_exists($theme_config_path)) {
         continue;
       }
