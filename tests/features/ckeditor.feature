@@ -48,7 +48,7 @@ Feature: CkEditor buttons and functionality
       And I fill in the following:
         | Title | Testing title |
       And I put "This is some body text" into CKEditor
-      And I press "Save and publish"
+      And I press "Save"
       And I click "Edit"
     Then I should not see an alert popup
 
@@ -78,7 +78,7 @@ Feature: CkEditor buttons and functionality
       And I execute the "enter" command in CKEditor
     When I click "Sub Title 3" in the CKEditor style panel
       And I put "Sub Title 3" into CKEditor
-    When I press "Save and publish"
+    When I press "Save"
     Then I should see "Title" in the "h2" element in the "Content" region
       And I should see "Title - Intro" in the "h2.heading--underline" element in the "Content" region
       And I should see "Sub Title" in the "h3" element in the "Content" region
@@ -96,7 +96,7 @@ Feature: CkEditor buttons and functionality
       And I execute the "enter" command in CKEditor
     When I click "Clear Aligns" in the CKEditor style panel
       And I put "Clear Aligns" into CKEditor
-    When I press "Save and publish"
+    When I press "Save"
     Then I should see "Normal" in the "p" element in the "Content" region
       And I should see "Clear Aligns" in the "p.u-clear" element in the "Content" region
 
@@ -114,7 +114,7 @@ Feature: CkEditor buttons and functionality
       And I execute the "enter" command in CKEditor
     When I click "Alert - Error" in the CKEditor style panel
       And I put "Alert - Error" into CKEditor
-    When I press "Save and publish"
+    When I press "Save"
     Then I should see "Alert Base" in the ".alert" element in the "Content" region
       And I should see "Alert - Success" in the ".alert.alert--success" element in the "Content" region
       And I should see "Alert - Warning" in the ".alert.alert--warning" element in the "Content" region
@@ -134,7 +134,7 @@ Feature: CkEditor buttons and functionality
     When I execute the "blockquote" command in CKEditor
       And I click "Pullquote - Right" in the CKEditor style panel
       And I put "Pullquote - Right" into CKEditor
-    When I press "Save and publish"
+    When I press "Save"
     Then I should see "Pullquote Base" in the ".pullquote" element in the "Content" region
       And I should see "Pullquote - Left" in the ".pullquote.u-align--left.u-width--half" element in the "Content" region
       And I should see "Pullquote - Right" in the ".pullquote.u-align--right.u-width--half" element in the "Content" region
@@ -161,7 +161,7 @@ Feature: CkEditor buttons and functionality
       And I press "OK"
       And I click "Table Solid" in the CKEditor style panel
       And I put "Table Solid" into CKEditor
-    When I press "Save and publish"
+    When I press "Save"
     Then I should see "Table Hover" in the ".table--hover tbody tr td" element in the "Content" region
       And I should see "Table Bordered" in the ".table--bordered tbody tr td" element in the "Content" region
       And I should see "Table Striped" in the ".table--striped tbody tr td" element in the "Content" region
@@ -213,7 +213,7 @@ Feature: CkEditor buttons and functionality
     When I execute the "bulletedlist" command in CKEditor
       And I click "5 Columns" in the CKEditor style panel
       And I put "5 Columns" into CKEditor
-    When I press "Save and publish"
+    When I press "Save"
     Then I should see "Flush List" in the "ul.list--flush" element in the "Content" region
       And I should see "Arrow List" in the "ul.list--arrow" element in the "Content" region
       And I should see "Arrow List - White" in the "ul.list--white-arrow" element in the "Content" region
@@ -237,7 +237,7 @@ Feature: CkEditor buttons and functionality
       And I click "Outline List" in the CKEditor style panel
       And I put "Outline List" into CKEditor
       And I execute the "enter" command in CKEditor "3" times
-    When I press "Save and publish"
+    When I press "Save"
     Then I should see "Multilevel List" in the "ol.list--multilevel" element in the "Content" region
       And I should see "Outline List" in the "ol.list--outline" element in the "Content" region
 
@@ -293,7 +293,7 @@ Feature: CkEditor buttons and functionality
       And I click "more..." in the CKEditor style panel
       And The cursor is at the end of CKEditor
       And I execute the "enter" command in CKEditor
-    When I press "Save and publish"
+    When I press "Save"
     Then I should see "http://button.edu" in the "a.btn--primary" element in the "Content" region
       And I should see "http://button-large.edu" in the "a.btn--lg.btn--primary" element in the "Content" region
       And I should see "http://button-block.edu" in the "a.btn--block.btn--primary" element in the "Content" region
@@ -309,7 +309,7 @@ Feature: CkEditor buttons and functionality
       And I wait for AJAX to finish
       And I fill in "Link URL" with "http://example.com"
       And I press "OK"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see "Title" in the "a.media-link .media-link__title" element in the "Content" region
       And I should see an image in the "Content" region
       And I should see "Content" in the ".media-link__content" element in the "Content" region
@@ -322,7 +322,7 @@ Feature: CkEditor buttons and functionality
       And I wait for AJAX to finish
       And I select the radio button "Right"
       And I press "OK"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see "Title" in the "aside.wysiwyg-feature-block .wysiwyg-feature-block__title" element in the "Content" region
     And I should see "Content" in the ".wysiwyg-feature-block__body" element in the "Content" region
       And the element ".u-align--right" should exist
@@ -336,7 +336,7 @@ Feature: CkEditor buttons and functionality
       And I wait for AJAX to finish
       And I select the radio button "Left"
       And I press "OK"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see "Title" in the ".wysiwyg-feature-block__title" element in the "Content" region
       And the element ".u-align--left" should exist
       And the element ".u-width--half" should exist
@@ -349,7 +349,7 @@ Feature: CkEditor buttons and functionality
       And I wait for AJAX to finish
       And I select the radio button "None"
       And I press "OK"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see "Title" in the ".wysiwyg-feature-block__title" element in the "Content" region
       And I should not see a ".u-align--left" element
       And I should not see a ".u-align--right" element
@@ -365,5 +365,5 @@ Feature: CkEditor buttons and functionality
       And I click the ".js-form-submit .ui-button-text" element
       And I wait for AJAX to finish
       And I wait 2 seconds
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see the ".responsive-embed iframe" element in the "Content" region

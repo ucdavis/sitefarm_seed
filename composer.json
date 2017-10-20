@@ -96,6 +96,7 @@
     },
     "patches": {
       "drupal/core": {
+        "Fix broken ckeditor style dropdowns for Objects": "https://www.drupal.org/files/issues/fix_ckeditor_styles_dropdown-2911749-17.patch",
         "datetime-range views enhancements": "https://www.drupal.org/files/issues/improve_the_views-2786577-28.patch",
         "Profile Inheritance": "https://www.drupal.org/files/issues/1356276-389.patch",
         "multiple image upload dimension fix": "https://www.drupal.org/files/issues/multiple_upload_at_once-2644468-66.patch"

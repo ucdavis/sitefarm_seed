@@ -21,7 +21,7 @@ Feature: Basic Page Content Type
 
   @api
   Scenario: Ensure that the page Create New Revision is checked.
-    When I press "Save and publish"
+    When I press "Save"
       And I click "Edit"
     Then the "revision" checkbox should be checked
 
@@ -32,7 +32,7 @@ Feature: Basic Page Content Type
 
   @api
   Scenario: A url alias should be auto generated for Basic Pages.
-    When I press "Save and publish"
+    When I press "Save"
     Then I should see "Testing title" in the "Page Title" region
       And I should be on "/testing-title"
 
@@ -43,7 +43,7 @@ Feature: Basic Page Content Type
     Then I should not see a ".form-item-field-sf-primary-image-0-title" element
       And I should see "What's the plus sign for?"
     When I fill in "field_sf_primary_image[0][alt]" with "alt text"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see the success message "Basic Page Testing title has been created."
 
   @api @javascript
@@ -52,7 +52,7 @@ Feature: Basic Page Content Type
     When I press "Menu settings"
       And I check the box "Provide a menu link"
       And I select "<Main navigation>" from "menu[menu_parent]"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see "Testing title" in the "Primary Menu Region"
 
   @api @javascript
@@ -61,7 +61,7 @@ Feature: Basic Page Content Type
       And I wait for AJAX to finish
       And I attach the file "test 2.pdf" to "files[field_sf_files_1][]"
       And I wait for AJAX to finish
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see the link "test.pdf"
       And I should see the link "test 2.pdf"
 
@@ -72,7 +72,7 @@ Feature: Basic Page Content Type
     When I press "Menu settings"
       And I check the box "Provide a menu link"
       And I select "<Main navigation>" from "menu[menu_parent]"
-      And I press "Save and publish"
+      And I press "Save"
       And I visit "node/add/sf_page"
       And the Administration Toolbar is hidden
       And I fill in the following:
@@ -80,7 +80,7 @@ Feature: Basic Page Content Type
       And I press "Menu settings"
       And I check the box "Provide a menu link"
       And I select "-- Testing title" from "menu[menu_parent]"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see the link "Sub Page" in the "Sidebar Second Region" region
 
   @api @javascript
@@ -94,7 +94,7 @@ Feature: Basic Page Content Type
   @api
   Scenario: Tags added to an Page
     When I fill in "field_sf_tags[target_id]" with "Tag Test, Tag Test 2"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see the link "Tag Test"
     When I click "Edit"
     Then the "field_sf_tags[target_id]" autocomplete field should contain "Tag Test, Tag Test 2"
