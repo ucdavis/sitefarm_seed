@@ -35,7 +35,7 @@ steps:
     script:
       - cd /var/www/html/profiles/sitefarm_seed
       - cp behat.probo.yml behat.yml
-      - $SRC_DIR/sitefarm-distro-template/vendor/bin/behat --profile probo --tags "~@javascript" --colors
+      - $SRC_DIR/sitefarm-distro-template/vendor/bin/behat --profile probo --tags "~@javascript" --colors --format progress
   - name: Run Behat JS
     plugin: Script
     script:
@@ -49,7 +49,7 @@ steps:
       - wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar > /dev/null 2>&1
       - xvfb-run java -jar selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/bin/chromedriver" > /dev/null 2>&1 & sleep 5
       - cd /var/www/html/profiles/sitefarm_seed
-      - $SRC_DIR/sitefarm-distro-template/vendor/bin/behat --profile probo --tags "@javascript" --colors
+      - $SRC_DIR/sitefarm-distro-template/vendor/bin/behat --profile probo --tags "@javascript" --colors --format progress
       - disown
   - name: Post to Slack
     plugin: Script
