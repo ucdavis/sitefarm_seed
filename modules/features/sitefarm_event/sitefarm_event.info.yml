@@ -9,6 +9,7 @@ dependencies:
   - datetime_range
   - field
   - file
+  - focal_point
   - image
   - link
   - menu_ui

@@ -8,7 +8,7 @@ dependencies:
     - field.field.block_content.sf_marketing_highlight_horizntl.field_sf_title
     - image.style.thumbnail
   module:
-    - image
+    - focal_point
     - link
 id: block_content.sf_marketing_highlight_horizntl.default
 targetEntityType: block_content
@@ -20,8 +20,11 @@ content:
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
+      preview_link: true
+      offsets: '50,50'
     third_party_settings: {  }
-    type: image_image
+    type: image_focal_point
+    region: content
   field_sf_link:
     weight: 2
     settings:
@@ -29,6 +32,7 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
+    region: content
   field_sf_title:
     weight: 1
     settings:
@@ -36,6 +40,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
   info:
     type: string_textfield
     weight: 0
@@ -43,4 +48,5 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
 hidden: {  }
