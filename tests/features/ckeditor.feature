@@ -362,7 +362,7 @@ Feature: CkEditor buttons and functionality
       And I wait for AJAX to finish
       And I wait 2 seconds
       And I fill in "URL" with "https://youtu.be/PAwB_t_iM7U"
-      And I click the ".js-form-submit .ui-button-text" element
+      And I click the ".ui-dialog-buttonset .js-form-submit" element
       And I wait for AJAX to finish
       And I wait 2 seconds
       And I press "Save"

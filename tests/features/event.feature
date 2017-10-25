@@ -91,7 +91,7 @@ Feature: Event Content Type
     Then I should see the link "test.pdf"
     When I click "Edit"
       And I attach the file "test 2.pdf" to "files[field_sf_files_1][]"
-      And I press "Save and keep published"
+      And I press "Save"
     Then I should see the link "test 2.pdf"
       And I should see the link "test.pdf"
 
