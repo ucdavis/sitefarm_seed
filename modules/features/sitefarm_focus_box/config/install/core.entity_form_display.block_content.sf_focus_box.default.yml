@@ -8,7 +8,7 @@ dependencies:
     - field.field.block_content.sf_focus_box.field_sf_title
     - image.style.thumbnail
   module:
-    - image
+    - focal_point
     - text
 id: block_content.sf_focus_box.default
 targetEntityType: block_content
@@ -23,13 +23,17 @@ content:
       summary_rows: 3
       placeholder: ''
     third_party_settings: {  }
+    region: content
   field_sf_image:
     weight: 2
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
+      preview_link: true
+      offsets: '50,50'
     third_party_settings: {  }
-    type: image_image
+    type: image_focal_point
+    region: content
   field_sf_title:
     weight: 1
     settings:
@@ -37,6 +41,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
   info:
     type: string_textfield
     weight: 0
@@ -44,4 +49,5 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
 hidden: {  }
