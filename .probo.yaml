@@ -13,9 +13,8 @@ steps:
       - if [ $(git ls-remote --heads git@github.com:ucdavis/sitefarm-distro-template.git $BRANCH_NAME | wc -l) = 1 ]; then BRANCH="$BRANCH_NAME"; else BRANCH=master; fi
       - cd $SRC_DIR ; git clone --branch $BRANCH git@github.com:ucdavis/sitefarm-distro-template.git
       - cd sitefarm-distro-template ; composer self-update ; composer global update
-      - composer install --ansi
       - git apply $ASSET_DIR/sitefarm_seed_local.patch
-      - composer require "ucdavis/sitefarm_seed:dev-master" --ansi
+      - composer install --ansi
   - name: Run PhpUnit
     plugin: Script
     script:
