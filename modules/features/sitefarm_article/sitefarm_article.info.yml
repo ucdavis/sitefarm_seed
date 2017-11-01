@@ -6,6 +6,7 @@ dependencies:
   - block
   - ctools
   - field
+  - focal_point
   - image
   - menu_ui
   - metatag

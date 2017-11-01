@@ -28,7 +28,7 @@ Feature: A User should see a sitemap
         | field_sf_tags[target_id] | Tag Test, Tag Test 2 |
       And I select "Test Type" from "field_sf_article_type"
       And I select "Test Category" from "field_sf_article_category"
-      And I press "Save and publish"
+      And I press "Save"
       And I visit "sitemap"
     Then I should see "Article Categories" in the "Content" region
       And I should see "Test Category" in the "Content" region

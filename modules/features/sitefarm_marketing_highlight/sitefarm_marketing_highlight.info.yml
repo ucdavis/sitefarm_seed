@@ -5,7 +5,9 @@ core: 8.x
 dependencies:
   - block_content
   - field
+  - focal_point
   - image
   - link
   - sitefarm_core
+  - sitefarm_image_styles
 package: SiteFarm

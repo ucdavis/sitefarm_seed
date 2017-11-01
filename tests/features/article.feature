@@ -30,7 +30,7 @@ Feature: A User should create an article
   @api
   Scenario: Ensure that the article Create New Revision is checked.
     Given I select "News" from "field_sf_article_type"
-    When I press "Save and publish"
+    When I press "Save"
     And I click "Edit"
     Then the "revision" checkbox should be checked
 
@@ -42,7 +42,7 @@ Feature: A User should create an article
   @api
   Scenario: A url alias should be auto generated for Articles.
     Given I select "News" from "field_sf_article_type"
-    When I press "Save and publish"
+    When I press "Save"
     Then I should see "Testing title" in the "Content" region
       And I should be on "news/testing-title"
 
@@ -56,7 +56,7 @@ Feature: A User should create an article
       And I fill in "field_sf_primary_image[0][title]" with "title text"
       And I press "Categorizing"
       And I select "News" from "field_sf_article_type"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see an image in the "Content" region
       And I should see the image alt "alt text" in the "Content" region
       And I should see the "img[title='title text']" element in the "Content" region
@@ -65,7 +65,7 @@ Feature: A User should create an article
   Scenario: Tags added to an Article
     When I fill in "field_sf_tags[target_id]" with "Tag Test, Tag Test 2"
       And I select "News" from "field_sf_article_type"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see the link "Tag Test" in the "Content" region
       And I should see the link "Tag Test 2" in the "Content" region
 
@@ -80,7 +80,7 @@ Feature: A User should create an article
         | Title | Testing title |
       And I select "News" from "field_sf_article_type"
       And I select "Test Category" from "field_sf_article_category"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see the link "Test Category"
 
   @api
@@ -89,7 +89,7 @@ Feature: A User should create an article
       And I fill in the following:
         | Title | Testing title |
       And I select "Blog" from "field_sf_article_type"
-      And I press "Save and publish"
+      And I press "Save"
     When I click "Edit"
     Then the "field_sf_article_type" select should be set to "Blog"
 
@@ -97,7 +97,7 @@ Feature: A User should create an article
   Scenario: Social share buttons on an Article
     Given I press "Categorizing"
       And I select "News" from "field_sf_article_type"
-    When I press "Save and publish"
+    When I press "Save"
     Then I should see a ".at-icon-facebook" element
       And I should see a ".at-icon-twitter" element
       And I should see a ".at-icon-google_plusone_share" element
@@ -113,7 +113,7 @@ Feature: A User should create an article
       And I press "OK"
       And I press "Categorizing"
       And I select "News" from "field_sf_article_type"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see "Title" in the "aside.wysiwyg-feature-block .wysiwyg-feature-block__title" element in the "Content" region
     When I visit "news/"
     Then I should not see the ".wysiwyg-feature-block__body" element in the "Content" region

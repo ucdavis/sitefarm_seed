@@ -24,7 +24,7 @@ Feature: Person Content Type
 
   @api
   Scenario: Ensure that the person Create New Revision is checked.
-    When I press "Save and publish"
+    When I press "Save"
       And I click "Edit"
     Then the "revision" checkbox should be checked
 
@@ -36,12 +36,12 @@ Feature: Person Content Type
   @api
   Scenario: The Person title should be hidden and auto-generated using Prefix, First Name, Last Name, and Credentials
     Then I should not see "Display Name"
-    When I press "Save and publish"
+    When I press "Save"
     Then I should see "Dr John Doe Jr." in the "Page Title" region
 
   @api
   Scenario: A url alias should be auto generated for Persons.
-    When I press "Save and publish"
+    When I press "Save"
     Then I should see "Dr John Doe Jr." in the "Page Title" region
       And I should be on "/people/john-doe"
 
@@ -50,7 +50,7 @@ Feature: Person Content Type
     When I attach the file "test_16x9.png" to "files[field_sf_primary_image_0]"
       And I wait for AJAX to finish
       And I fill in "field_sf_primary_image[0][alt]" with "alt text"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see an image in the "Content" region
       And I should see the image alt "alt text" in the "Content" region
 
@@ -64,7 +64,7 @@ Feature: Person Content Type
       And I wait for AJAX to finish
       And I attach the file "test 2.pdf" to "files[field_sf_files_1][]"
       And I wait for AJAX to finish
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see the link "test.pdf"
       And I should see the link "test 2.pdf"
 
@@ -78,7 +78,7 @@ Feature: Person Content Type
         | First Name   | John |
         | Last Name    | Doe  |
       And I select "Student Type" from "field_sf_person_type"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should not see the link "Student Type"
     When I click "Edit"
     Then the "field_sf_person_type" select should be set to "Student Type"
@@ -108,7 +108,7 @@ Feature: Person Content Type
         | First Name   | John |
         | Last Name    | Doe  |
       And I select "Student Type" from "field_sf_person_type"
-      And I press "Save and publish"
+      And I press "Save"
     And I visit "people"
     Then I should see "Student Type" in the "Content" region
 

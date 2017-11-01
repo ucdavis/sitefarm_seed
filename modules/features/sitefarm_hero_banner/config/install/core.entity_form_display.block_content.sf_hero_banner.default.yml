@@ -10,7 +10,7 @@ dependencies:
     - field.field.block_content.sf_hero_banner.field_sf_title
     - image.style.thumbnail
   module:
-    - image
+    - focal_point
     - link
 id: block_content.sf_hero_banner.default
 targetEntityType: block_content
@@ -24,6 +24,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
   field_sf_hb_video_button:
     weight: 5
     settings:
@@ -31,13 +32,17 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
   field_sf_image:
     weight: 1
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
+      preview_link: true
+      offsets: '50,50'
     third_party_settings: {  }
-    type: image_image
+    type: image_focal_point
+    region: content
   field_sf_link:
     weight: 4
     settings:
@@ -45,6 +50,7 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
+    region: content
   field_sf_title:
     weight: 2
     settings:
@@ -52,6 +58,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
   info:
     type: string_textfield
     weight: 0
@@ -59,4 +66,5 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
 hidden: {  }

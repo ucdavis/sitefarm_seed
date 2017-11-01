@@ -25,7 +25,7 @@ Feature: Event Content Type
 
   @api
   Scenario: Ensure that the event Create New Revision is checked.
-    When I press "Save and publish"
+    When I press "Save"
       And I click "Edit"
     Then the "revision" checkbox should be checked
 
@@ -36,7 +36,7 @@ Feature: Event Content Type
 
   @api
   Scenario: A url alias should be auto generated for Events.
-    When I press "Save and publish"
+    When I press "Save"
     Then I should see "Testing title" in the "Page Title" region
     And I should be on "events/testing-title"
 
@@ -48,11 +48,11 @@ Feature: Event Content Type
   @api @local_files
   Scenario: A Primary image should be available to upload.
     When I attach the file "test_16x9.png" to "files[field_sf_primary_image_0]"
-      And I press "Save and publish"
+      And I press "Save"
 #    Alt Text will be required so the form will rerender with the alt and title fields
     And I fill in "field_sf_primary_image[0][alt]" with "alt text"
       And I fill in "field_sf_primary_image[0][title]" with "title text"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see an image in the "Content" region
       And I should see the image alt "alt text" in the "Content" region
 
@@ -70,7 +70,7 @@ Feature: Event Content Type
         | field_sf_dates[0][end_value][date]  | 2016-06-01    |
         | field_sf_dates[0][end_value][time]  | 06:06:22      |
       And I select "Event Test Category" from "field_sf_event_type"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see the link "Event Test Category" in the "Content" region
     When I click "Edit"
     Then the "field_sf_event_type" select should be set to "Event Test Category"
@@ -78,7 +78,7 @@ Feature: Event Content Type
   @api
   Scenario: Tags added to an Event
     When I fill in "field_sf_tags[target_id]" with "Tag Test, Tag Test 2"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see the link "Tag Test" in the "Content" region
       And I should see the link "Tag Test 2" in the "Content" region
     When I click "Edit"
@@ -87,25 +87,25 @@ Feature: Event Content Type
   @api
   Scenario: Multiple file attachements to Event
     When I attach the file "test.pdf" to "files[field_sf_files_0][]"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see the link "test.pdf"
     When I click "Edit"
       And I attach the file "test 2.pdf" to "files[field_sf_files_1][]"
-      And I press "Save and keep published"
+      And I press "Save"
     Then I should see the link "test 2.pdf"
       And I should see the link "test.pdf"
 
   @api
   Scenario: Locations on an Event
     When I fill in "field_sf_event_location[0][value]" with "My current Location"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see "My current Location" in the "Content" region
 
   @api
   Scenario: Map Location Link on an Event
     When I fill in "field_sf_event_map_link[0][uri]" with "http://campusmap.ucdavis.edu/?b=107"
       And I fill in "field_sf_event_map_link[0][title]" with "Location for the event"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see the link "Location for the event" in the "Content" region
 
   @api @javascript

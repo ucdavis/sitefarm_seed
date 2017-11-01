@@ -13,7 +13,7 @@ Feature: Photo Gallery Content Type
         | Title | Gallery Name |
       And I attach the file "test_16x9.png" to "files[field_sf_gallery_photos_0][]"
       And I attach the file "test_16x9.png" to "files[field_sf_primary_image_0]"
-    When I press "Save and publish"
+    When I press "Save"
       And I fill in "field_sf_gallery_photos[0][alt]" with "alt text"
       And I fill in "field_sf_primary_image[0][alt]" with "alt text"
 
@@ -45,7 +45,7 @@ Feature: Photo Gallery Content Type
 
   @api
   Scenario: Ensure that the photo_gallery Create New Revision is NOT checked.
-    When I press "Save and publish"
+    When I press "Save"
       And I click "Edit"
     Then the "revision" checkbox should not be checked
 
@@ -57,7 +57,7 @@ Feature: Photo Gallery Content Type
   @api
   Scenario: Classify Galleries with a single Category taxonomy.
     When I select "Test Category" from "field_sf_gallery_category"
-      And I press "Save and publish"
+      And I press "Save"
     Then I should see the link "Test Category"
     Given a block "views_block:sf_photo_gallery_category_filter-block_1" is in the "sidebar_second" region
     When I visit "photo-galleries"
@@ -70,13 +70,13 @@ Feature: Photo Gallery Content Type
     Given I wait for AJAX to finish
     When I fill in "field_sf_gallery_photos[0][alt]" with "alt text"
       And I fill in "field_sf_primary_image[0][alt]" with "alt text"
-      And I press "Save and publish"
+      And I press "Save"
     When I visit "photo-galleries"
     Then I should see "Gallery Name" in the ".node--view-mode-poster" element
 
   @api
   Scenario: Slideshow Photo Gallery block added to a region
-    When I press "Save and publish"
+    When I press "Save"
       And I visit "admin/structure/block/add/slideshow_gallery_block/bartik?region=sidebar_first"
       And I reference "node" "Gallery Name" in "Gallery Title"
       And the "settings[display][show_title]" checkbox should be checked

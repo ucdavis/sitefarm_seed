@@ -6,6 +6,7 @@ dependencies:
   - block
   - block_content
   - field
+  - focal_point
   - image
   - link
   - options

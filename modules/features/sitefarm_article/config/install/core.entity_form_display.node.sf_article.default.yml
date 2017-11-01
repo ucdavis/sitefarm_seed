@@ -12,7 +12,7 @@ dependencies:
     - image.style.thumbnail
     - node.type.sf_article
   module:
-    - image
+    - focal_point
     - metatag
     - path
     - text
@@ -66,8 +66,10 @@ content:
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
+      preview_link: true
+      offsets: '50,50'
     third_party_settings: {  }
-    type: image_image
+    type: image_focal_point
     region: content
   field_sf_tags:
     weight: 9

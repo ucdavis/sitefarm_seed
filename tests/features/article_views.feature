@@ -143,7 +143,7 @@ Feature: A User should see lists of articles
         | Title | Testing Missing Featured View |
       And I select "News" from "field_sf_article_type"
       And I check the box "field_sf_featured_status[value]"
-      And I press "Save and publish"
+      And I press "Save"
       And I am an anonymous user
     When I visit "/articles/news"
     Then I should not see the ".block-views-blocksf-article-featured-sf-article-featured-block" element in the "Content" region
@@ -163,7 +163,7 @@ Feature: A User should see lists of articles
       And I wait for AJAX to finish
       And I fill in "field_sf_primary_image[0][alt]" with "alt text"
       And I fill in "field_sf_primary_image[0][title]" with "title text"
-      And I press "Save and publish"
+      And I press "Save"
       And I am an anonymous user
     When I visit "/news"
     Then I should see the ".block-views-blocksf-article-featured-sf-article-featured-block" element in the "Content" region
