@@ -137,7 +137,7 @@ function sitefarm_core_field_widget_form_alter(&$element, FormStateInterface $fo
 /**
  * Implements hook_field_widget_WIDGET_TYPE_form_alter().
  */
-function sitefarm_core_field_widget_image_image_form_alter(&$element, FormStateInterface $form_state, $form) {
+function sitefarm_core_field_widget_image_focal_point_form_alter(&$element, FormStateInterface $form_state, $form) {
   // Fetch Helper services
   /** @var \Drupal\sitefarm_core\Hooks\WidgetAlter $widget_helper */
   $widget_helper = \Drupal::service('sf.hooks.widget_alter');

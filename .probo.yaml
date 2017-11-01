@@ -13,9 +13,8 @@ steps:
       - if [ $(git ls-remote --heads git@github.com:ucdavis/sitefarm-distro-template.git $BRANCH_NAME | wc -l) = 1 ]; then BRANCH="$BRANCH_NAME"; else BRANCH=master; fi
       - cd $SRC_DIR ; git clone --branch $BRANCH git@github.com:ucdavis/sitefarm-distro-template.git
       - cd sitefarm-distro-template ; composer self-update ; composer global update
-      - composer install --ansi
       - git apply $ASSET_DIR/sitefarm_seed_local.patch
-      - composer require "ucdavis/sitefarm_seed:dev-master" --ansi
+      - composer install --ansi
   - name: Run PhpUnit
     plugin: Script
     script:
@@ -35,7 +34,7 @@ steps:
     script:
       - cd /var/www/html/profiles/sitefarm_seed
       - cp behat.probo.yml behat.yml
-      - $SRC_DIR/sitefarm-distro-template/vendor/bin/behat --profile probo --tags "~@javascript" --colors
+      - $SRC_DIR/sitefarm-distro-template/vendor/bin/behat --profile probo --tags "~@javascript" --colors --format progress
   - name: Run Behat JS
     plugin: Script
     script:
@@ -44,12 +43,12 @@ steps:
       - sudo apt-get -qq update
       - sudo apt-get -qq install google-chrome-stable -y --force-yes > /dev/null 2>&1
       - which google-chrome
-      - wget http://chromedriver.storage.googleapis.com/2.30/chromedriver_linux64.zip > /dev/null 2>&1
+      - wget http://chromedriver.storage.googleapis.com/2.32/chromedriver_linux64.zip > /dev/null 2>&1
       - sudo unzip chromedriver_linux64.zip -d /usr/bin
       - wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar > /dev/null 2>&1
       - xvfb-run java -jar selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/bin/chromedriver" > /dev/null 2>&1 & sleep 5
       - cd /var/www/html/profiles/sitefarm_seed
-      - $SRC_DIR/sitefarm-distro-template/vendor/bin/behat --profile probo --tags "@javascript" --colors
+      - $SRC_DIR/sitefarm-distro-template/vendor/bin/behat --profile probo --tags "@javascript" --colors --format progress
       - disown
   - name: Post to Slack
     plugin: Script

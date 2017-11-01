@@ -11,7 +11,7 @@ Feature: A User should create a Focus Box custom block
   Scenario: Ensure that the WYSIWYG editor is present.
     Then CKEditor "edit-body-0-value" should exist
 
-  @api @javascript @local_files @local
+  @api @javascript @local_files
   Scenario: Add a Focus Box to the first sidebar region
     When I fill in the following:
       | Title             | Focus Box      |

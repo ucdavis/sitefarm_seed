@@ -17,6 +17,7 @@ dependencies:
   - photoswipe
   - sharemessage
   - sitefarm_core
+  - sitefarm_image_styles
   - system
   - taxonomy
   - text

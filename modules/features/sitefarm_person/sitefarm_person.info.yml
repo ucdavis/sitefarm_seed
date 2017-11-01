@@ -8,6 +8,7 @@ dependencies:
   - ctools
   - field
   - file
+  - focal_point
   - image
   - link
   - menu_ui
@@ -16,6 +17,7 @@ dependencies:
   - path
   - pathauto
   - sitefarm_core
+  - sitefarm_image_styles
   - sitefarm_summary
   - system
   - taxonomy
