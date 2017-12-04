@@ -1,7 +1,9 @@
 <?php
 
 namespace Drupal\sitefarm_core\Hooks;
-use Drupal\config_update\ConfigReverter;
+
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Serialization\Yaml;
 
 /**
  * Class Themes.
@@ -13,19 +15,18 @@ use Drupal\config_update\ConfigReverter;
 class Themes {
 
   /**
-   * The configuration reverter service.
-   *
-   * @var \Drupal\config_update\ConfigReverter
+   * @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    */
-  protected $configReverter;
+  protected $configFactory;
 
   /**
    * Themes constructor.
    *
-   * @param \Drupal\config_update\ConfigReverter $configReverter
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   Config Factory service.
    */
-  public function __construct(ConfigReverter $configReverter) {
-    $this->configReverter = $configReverter;
+  public function __construct(ConfigFactoryInterface $configFactory) {
+    $this->configFactory = $configFactory;
   }
 
   /**
@@ -42,7 +43,7 @@ class Themes {
     // Loop through each of the newly installed themes
     foreach ($theme_list as $theme_name) {
       // Exit if the theme does not have config
-      $theme_config_path = $this->getThemePath($theme_name) . '/config/optional';
+      $theme_config_path = $this->getThemePath($theme_name) . '/config/install';
       if (!file_exists($theme_config_path)) {
         continue;
       }
@@ -51,19 +52,38 @@ class Themes {
       $config_files = scandir($theme_config_path);
       $image_style_files = preg_grep('/image\.style\.sf_/', $config_files);
 
-      // If the new theme has SiteFarm image styles we want to revert to them
-      if ($image_style_files) {
-        $revert_styles = preg_replace('/^image\.style\.(sf_[^\.]+)\.yml$/', '$1', $image_style_files);
+      foreach ($image_style_files as $image_style) {
+        $data = $this->getYamlData($theme_config_path . '/' . $image_style);
+        $config_name = str_replace('.yml', '', $image_style);
 
-        // Revert the image styles in the sitefarm_one theme
-        foreach ($revert_styles as $image_style) {
-          $this->configReverter->revert('image_style', $image_style);
+        $config = $this->configFactory->getEditable($config_name);
+        if ($config && $data) {
+          $config->setData($data)
+            ->save();
         }
       }
     }
 
     // Flush all caches on theme install to fix multiple errors
     $this->flushAllCaches();
+  }
+
+  /**
+   * Get an array of data from a Yaml config file.
+   *
+   * @param $file
+   *   The complete path for the config file.
+   *
+   * @return array|bool
+   */
+  public function getYamlData($file) {
+    $raw = file_get_contents($file);
+    $data = Yaml::decode($raw);
+    // A simple string is valid YAML for any reason.
+    if (!is_array($data)) {
+      return FALSE;
+    }
+    return $data;
   }
 
   /**

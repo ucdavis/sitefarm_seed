@@ -50,4 +50,4 @@ services:
 
   sf.hooks.themes:
     class: Drupal\sitefarm_core\Hooks\Themes
-    arguments: ['@config_update.config_update']
+    arguments: ['@config.factory']

@@ -1,5 +1,5 @@
-name: sf_focal_link
-label: 'Focal Link'
+name: sf_test
+label: 'Test Style'
 langcode: en
 status: true
 dependencies:
