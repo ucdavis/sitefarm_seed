@@ -86,14 +86,6 @@
     "drupal/webform_views": "5.*"
   },
   "extra": {
-    "installer-paths": {
-      "docroot/modules/contrib/{$name}": [
-        "type:drupal-module"
-      ],
-      "docroot/themes/contrib/{$name}": [
-        "type:drupal-theme"
-      ]
-    },
     "patches": {
       "drupal/core": {
         "Fix broken ckeditor style dropdowns for Objects": "https://www.drupal.org/files/issues/fix_ckeditor_styles_dropdown-2911749-17.patch",
