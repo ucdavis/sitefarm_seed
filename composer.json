@@ -98,7 +98,7 @@
       "drupal/core": {
         "Fix broken ckeditor style dropdowns for Objects": "https://www.drupal.org/files/issues/fix_ckeditor_styles_dropdown-2911749-17.patch",
         "datetime-range views enhancements": "https://www.drupal.org/files/issues/the_views_integration-2786577-202.patch",
-        "Profile Inheritance": "https://www.drupal.org/files/issues/1356276-408--8.4.x.patch",
+        "Profile Inheritance": "https://www.drupal.org/files/issues/1356276-419--8.4.4.patch",
         "multiple image upload dimension fix": "https://www.drupal.org/files/issues/multiple_upload_at_once-2644468-66.patch",
         "Drupalimage calling drupallink functions without checking if the plugin is loaded #13": "https://www.drupal.org/files/issues/edit_drupalimage-2855521-13.patch"
       },
