@@ -59,7 +59,7 @@
     "drupal/block_style_plugins": "1.*",
     "drupal/ckwordcount": "1.*",
     "drupal/config_update": "1.*",
-    "drupal/crop": "2.*",
+    "drupal/crop": "^1.4",
     "drupal/ctools": "3.*",
     "drupal/default_content": "1.*",
     "drupal/editor_file": "1.*",
