@@ -22,7 +22,7 @@ steps:
       - $SRC_DIR/sitefarm-distro-template/vendor/bin/phpunit --colors="always"
   - name: Drupal site setup
     plugin: Drupal
-    drupalVersion: 8
+    drupalVersion: 8.4.4
     subDirectory: sitefarm-distro-template/web
     runInstall: true
     profileName: sitefarm_subprofile
