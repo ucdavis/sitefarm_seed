@@ -88,10 +88,10 @@
   },
   "extra": {
     "installer-paths": {
-      "modules/contrib/{$name}": [
+      "web/modules/contrib/{$name}": [
         "type:drupal-module"
       ],
-      "themes/contrib/{$name}": [
+      "web/themes/contrib/{$name}": [
         "type:drupal-theme"
       ]
     },
