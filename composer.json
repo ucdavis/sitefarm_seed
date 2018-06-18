@@ -87,14 +87,6 @@
     "drupal/webform_views": "5.*"
   },
   "extra": {
-    "installer-paths": {
-      "web/modules/contrib/{$name}": [
-        "type:drupal-module"
-      ],
-      "web/themes/contrib/{$name}": [
-        "type:drupal-theme"
-      ]
-    },
     "patches": {
       "drupal/core": {
         "datetime-range views enhancements": "https://www.drupal.org/files/issues/2786577-270_0.patch",
