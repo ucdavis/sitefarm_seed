@@ -12,6 +12,7 @@ Feature: Photo Gallery Content Type
       And I fill in the following:
         | Title | Gallery Name |
       And I attach the file "test_16x9.png" to "files[field_sf_gallery_photos_0][]"
+      And I wait 2 seconds
       And I attach the file "test_16x9.png" to "files[field_sf_primary_image_0]"
     When I press "Save"
       And I fill in "field_sf_gallery_photos[0][alt]" with "alt text"
