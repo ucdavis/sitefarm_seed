@@ -1,6 +1,6 @@
 # SiteFarm Seed
 
-SiteFarm Seed is a base-profile for Drupal 8 meant for extending by a custom built sub-profile.
+SiteFarm Seed is a base profile for Drupal 8 meant for extending by a custom built sub-profile.
 
 It provides sensible defaults and features that most websites will need.
 
