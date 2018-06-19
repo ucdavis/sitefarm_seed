@@ -18,7 +18,7 @@ steps:
   - name: Run PhpUnit
     plugin: Script
     script:
-      - cd $SRC_DIR/sitefarm-distro-templategit /web/profiles/sitefarm_seed
+      - cd $SRC_DIR/sitefarm-distro-template/web/profiles/sitefarm_seed
       - $SRC_DIR/sitefarm-distro-template/vendor/bin/phpunit --colors="always"
   - name: Drupal site setup
     plugin: Drupal
