@@ -10,15 +10,15 @@ steps:
     script:
       - cp -r $SRC_DIR /sitefarm_seed ; mv /sitefarm_seed $SRC_DIR/sitefarm_seed
       - cd $SRC_DIR/sitefarm_seed ; git init ; git config user.email "robot@probo.ci" ; git config user.name "Probo CI" ; git add -A ; git commit -m "$COMMIT_REF" -q
-      - if [ $(git ls-remote --heads git@github.com:ucdavis/sitefarm-distro-template.git $BRANCH_NAME | wc -l) = 1 ]; then BRANCH="$BRANCH_NAME"; else BRANCH=master; fi
-      - cd $SRC_DIR ; git clone --branch $BRANCH git@github.com:ucdavis/sitefarm-distro-template.git
+      - if [ $(git ls-remote --heads https://github.com/ucdavis/sitefarm-distro-template.git $BRANCH_NAME | wc -l) = 1 ]; then BRANCH="$BRANCH_NAME"; else BRANCH=master; fi
+      - cd $SRC_DIR ; git clone --branch $BRANCH https://github.com/ucdavis/sitefarm-distro-template.git
       - cd sitefarm-distro-template ; composer self-update ; composer global update
       - git apply $ASSET_DIR/sitefarm_seed_local.patch
       - composer install --ansi
   - name: Run PhpUnit
     plugin: Script
     script:
-      - cd $SRC_DIR/sitefarm-distro-template/web/profiles/sitefarm_seed
+      - cd $SRC_DIR/sitefarm-distro-templategit /web/profiles/sitefarm_seed
       - $SRC_DIR/sitefarm-distro-template/vendor/bin/phpunit --colors="always"
   - name: Drupal site setup
     plugin: Drupal
