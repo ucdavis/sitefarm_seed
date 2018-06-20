@@ -15,7 +15,7 @@ than a bundle in a Feature.
 To export a single yaml file of configuration, go to the Single Config Export
 page. User 1 has a shortcut to this page in their toolbar.
  
-![Screenshot of toolbar shortcut to Simple Config Export page](images/single-config-export-shortcut.png)
+![Screenshot of toolbar shortcut to Simple Config Export page](./images/single-config-export-shortcut.png)
 
 Choose the configuration type and name. Then copy the configuration and paste it
 into a new yaml file named based on the "Filename" given at the bottom of the

@@ -4,7 +4,7 @@ Sitefarm Seed already provides base fields for Entity References to core content
 types. This means that by reusing these existing fields all that is needed is
 config for field instances.
 
-![Screenshot of reusing entity reference dropdown](images/reuse-entity-reference-fields.png)
+![Screenshot of reusing entity reference dropdown](./images/reuse-entity-reference-fields.png)
 
 ## Example: Adding a Reference field to Photo Galleries or Persons
 
@@ -20,7 +20,7 @@ Second, add config files for field instances and node form display.
 
 **examples:** `modules/features/sitefarm_article/override_examples/add_reference_fields/`
 
-![Screenshot of file structure to example config files](images/reference-config-examples.png)
+![Screenshot of file structure to example config files](./images/reference-config-examples.png)
 
 The `core.entity_form_display.node.sf_article.default.yml` adds both of the
 new field instances to the edit form so that an editor can add references to the
@@ -31,4 +31,4 @@ display. This is intended so that the content can be displayed in blocks.
 
 Creating an article `/node/add/sf_article` will now show the new fields.
 
-![Screenshot of Article add form with new reference fields](images/form-showing-new-reference-fields.png)
+![Screenshot of Article add form with new reference fields](./images/form-showing-new-reference-fields.png)

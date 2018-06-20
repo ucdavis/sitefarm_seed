@@ -35,7 +35,7 @@ To provide Event content type and related configuration. Create an event which w
 * Pathauto pattern for Event content type
 
 ## Custom module code included
-* Plugin implementation of the 'Merge' formatter for 'daterange' fields: This formatter renders the data range using <time> elements, with configurable options for showing the day name and time.
+* Plugin implementation of the 'Merge' formatter for 'daterange' fields: This formatter renders the data range using `<time>` elements, with configurable options for showing the day name and time.
 * Form alters for moving some fields to the advanced tabs. 
 * Form modification for the date field to make format more usable. 
 * Form modification of the validation of form to handle to better date formatting. 
