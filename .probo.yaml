@@ -1,4 +1,4 @@
-image: proboci/ubuntu-14.04-lamp:php7.1-nightly
+image: proboci/ubuntu-14.04-lamp:php-7.1
 assets:
   - probossh.tar.gz
   - sitefarm_seed_local.patch
