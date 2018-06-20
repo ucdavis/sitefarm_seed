@@ -36,21 +36,21 @@ Feature: CkEditor buttons and functionality
       And I should see a ".cke_button__media_link" element
       And I should see a ".cke_button__feature_block" element
 
-  @api @javascript
-  Scenario: The AutoSave plugin should save content after 10 seconds
-    When I put "This is some body text" into CKEditor
-      And I wait 11 seconds
-      And I visit "node/add/sf_page"
-      And I wait 2 seconds
-    Then I should see "An auto-saved version" in popup
-#    Now check that the alert does not come after saving
-    When I cancel the popup
-      And I fill in the following:
-        | Title | Testing title |
-      And I put "This is some body text" into CKEditor
-      And I press "Save"
-      And I click "Edit"
-    Then I should not see an alert popup
+#  @api @javascript
+#  Scenario: The AutoSave plugin should save content after 10 seconds
+#    When I put "This is some body text" into CKEditor
+#      And I wait 11 seconds
+#      And I visit "node/add/sf_page"
+#      And I wait 2 seconds
+#    Then I should see "An auto-saved version" in popup
+#    # Now check that the alert does not come after saving
+#    When I cancel the popup
+#      And I fill in the following:
+#        | Title | Testing title |
+#      And I put "This is some body text" into CKEditor
+#      And I press "Save"
+#      And I click "Edit"
+#    Then I should not see an alert popup
 
   @api @javascript
   Scenario: Word and Character count should appear while typing
