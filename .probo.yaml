@@ -10,8 +10,8 @@ steps:
     script:
       - cp -r $SRC_DIR /sitefarm_seed ; mv /sitefarm_seed $SRC_DIR/sitefarm_seed
       - cd $SRC_DIR/sitefarm_seed ; git init ; git config user.email "robot@probo.ci" ; git config user.name "Probo CI" ; git add -A ; git commit -m "$COMMIT_REF" -q
-      - if [ $(git ls-remote --heads git@github.com:ucdavis/sitefarm-distro-template.git $BRANCH_NAME | wc -l) = 1 ]; then BRANCH="$BRANCH_NAME"; else BRANCH=master; fi
-      - cd $SRC_DIR ; git clone --branch $BRANCH git@github.com:ucdavis/sitefarm-distro-template.git
+      - if [ $(git ls-remote --heads https://github.com/ucdavis/sitefarm-distro-template.git $BRANCH_NAME | wc -l) = 1 ]; then BRANCH="$BRANCH_NAME"; else BRANCH=master; fi
+      - cd $SRC_DIR ; git clone --branch $BRANCH https://github.com/ucdavis/sitefarm-distro-template.git
       - cd sitefarm-distro-template ; composer self-update ; composer global update
       - git apply $ASSET_DIR/sitefarm_seed_local.patch
       - composer install --ansi
@@ -38,18 +38,14 @@ steps:
   - name: Run Behat JS
     plugin: Script
     script:
-      - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-      - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-      - sudo apt-get -qq update
-      - sudo apt-get -qq install google-chrome-stable -y --force-yes > /dev/null 2>&1
-      - which google-chrome
-      - wget http://chromedriver.storage.googleapis.com/2.32/chromedriver_linux64.zip > /dev/null 2>&1
-      - sudo unzip chromedriver_linux64.zip -d /usr/bin
+      - apt-get update > /dev/null 2>&1
+      - apt-get install google-chrome-stable xvfb -y > /dev/null 2>&1
+      - wget http://chromedriver.storage.googleapis.com/2.40/chromedriver_linux64.zip > /dev/null 2>&1
+      - unzip chromedriver_linux64.zip -d /usr/bin
       - wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar > /dev/null 2>&1
       - xvfb-run java -jar selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/bin/chromedriver" > /dev/null 2>&1 & sleep 5
       - cd /var/www/html/profiles/sitefarm_seed
       - $SRC_DIR/sitefarm-distro-template/vendor/bin/behat --profile probo --tags "@javascript" --colors --format progress
-      - disown
   - name: Post to Slack
     plugin: Script
     script: |
