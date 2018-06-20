@@ -38,18 +38,14 @@ steps:
   - name: Run Behat JS
     plugin: Script
     script:
-      - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-      - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-      - sudo apt-get -qq update
-      - sudo apt-get -qq install google-chrome-stable -y --force-yes > /dev/null 2>&1
-      - which google-chrome
-      - wget http://chromedriver.storage.googleapis.com/2.32/chromedriver_linux64.zip > /dev/null 2>&1
-      - sudo unzip chromedriver_linux64.zip -d /usr/bin
+      - apt-get update > /dev/null 2>&1
+      - apt-get install google-chrome-stable xvfb -y > /dev/null 2>&1
+      - wget http://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip > /dev/null 2>&1
+      - unzip chromedriver_linux64.zip -d /usr/bin
       - wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar > /dev/null 2>&1
       - xvfb-run java -jar selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/bin/chromedriver" > /dev/null 2>&1 & sleep 5
       - cd /var/www/html/profiles/sitefarm_seed
       - $SRC_DIR/sitefarm-distro-template/vendor/bin/behat --profile probo --tags "@javascript" --colors --format progress
-      - disown
   - name: Post to Slack
     plugin: Script
     script: |
