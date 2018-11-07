@@ -320,7 +320,7 @@ Feature: CkEditor buttons and functionality
     Given the Administration Toolbar is hidden
     When I execute the "feature_block" command in CKEditor
       And I wait for AJAX to finish
-      And I select the radio button "Right"
+      And I select the radio button "Align Right"
       And I press "OK"
       And I press "Save"
     Then I should see "Title" in the "aside.wysiwyg-feature-block .wysiwyg-feature-block__title" element in the "Content" region
@@ -334,7 +334,7 @@ Feature: CkEditor buttons and functionality
     Given the Administration Toolbar is hidden
     When I execute the "feature_block" command in CKEditor
       And I wait for AJAX to finish
-      And I select the radio button "Left"
+      And I select the radio button "Align Left"
       And I press "OK"
       And I press "Save"
     Then I should see "Title" in the ".wysiwyg-feature-block__title" element in the "Content" region

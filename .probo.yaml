@@ -4,7 +4,13 @@ assets:
   - sitefarm_seed_local.patch
 steps:
   - name: Import SSH Keys
-    command: 'tar -C $HOME/.ssh -zxvf $ASSET_DIR/probossh.tar.gz ; ls -al $HOME/.ssh'
+    plugin: Script
+    script:
+      - mkdir $HOME/.ssh
+      - tar -C $HOME/.ssh -zxvf $ASSET_DIR/probossh.tar.gz
+      - chmod 600 $HOME/.ssh/id_rsa*
+      - ssh-keyscan -H bitbucket.org >> $HOME/.ssh/known_hosts
+      - ls -al $HOME/.ssh
   - name: Build Drupal
     plugin: Script
     script:

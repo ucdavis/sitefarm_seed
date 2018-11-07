@@ -109,7 +109,7 @@ Feature: A User should create an article
     Given the Administration Toolbar is hidden
     When I execute the "feature_block" command in CKEditor
       And I wait for AJAX to finish
-      And I select the radio button "Right"
+      And I select the radio button "Align Right"
       And I press "OK"
       And I press "Categorizing"
       And I select "News" from "field_sf_article_type"
