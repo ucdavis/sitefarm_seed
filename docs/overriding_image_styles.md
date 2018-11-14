@@ -13,7 +13,7 @@ errors occur when installing a site.
 The second half of the solution is to have developers copy each of the image
 style config files into their default theme's `config/install` directory.
 
-![Screenshot of file structure to image style config files](images/image-style-config-directory.png)
+![Screenshot of file structure to image style config files](./images/image-style-config-directory.png)
 
 ## How it works
 

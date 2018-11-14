@@ -1,27 +1,41 @@
-# Table of Contents
+---
+home: true
+actionText: Get Started →
+actionLink: /configuring_localhost
+features:
+- title: Sensible Defaults
+  details: It provides sensible defaults and features that most websites will need.
+- title: Test Coverage
+  details: SiteFarm Seed has complete test coverage with both PhpUnit and Behat.
+- title: Example Sub-Profile
+  details: An example template for using SiteFarm Seed with a sub-profile to kickstart your own distro.
+footer: GPU Licensed | Copyright © 2017-present Regents of the University of California
+---
 
-* [Local Development Setup](configuring_localhost.md)
-* [Creating a Sub Profile of SiteFarm Seed](creating_subprofile.md)
-* [Adding New Configuration in a Sub Profile](adding_new_config.md)
-  * [Altering Existing Config](altering_config.md)
-  * [Adding Core Reference Fields](adding-core-reference-field.md)
-  * [Overriding Image Styles](overriding_image_styles.md)
-* [SiteFarm Seed Custom Modules](sitefarm_custom_modules.md)
-* SiteFarm Seed Feature Modules
-  * [SiteFarm Core](sitefarm_features/sitefarm_core.md)
-  * [SiteFarm Article](sitefarm_features/sitefarm_article_feature.md)
-  * [SiteFarm Basic Block](sitefarm_features/sitefarm_basic_block_feature.md)
-  * [SiteFarm Event](sitefarm_features/sitefarm_event_feature.md)
-  * [SiteFarm Focal Link](sitefarm_features/sitefarm_focal_link_feature.md)
-  * [SiteFarm Focus Box](sitefarm_features/sitefarm_focus_box_feature.md)
-  * [SiteFarm Hero Banner](sitefarm_features/sitefarm_hero_banner_feature.md)
-  * [SiteFarm Image Styles](sitefarm_features/sitefarm_image_styles_feature.md)
-  * [SiteFarm Marketing Highlight](sitefarm_features/sitefarm_marketing_highlight_feature.md)
-  * [SiteFarm Page](sitefarm_features/sitefarm_page_feature.md)
-  * [SiteFarm Person](sitefarm_features/sitefarm_person_feature.md)
-  * [SiteFarm Photo Gallery](sitefarm_features/sitefarm_photo_gallery_feature.md	)
-  * [SiteFarm WYSIWYG](sitefarm_features/sitefarm_wysiwyg_feature.md)
-* [Third-party Libraries](libraries.md)
-  * [Adding New Libraries](adding_libraries.md)
-* [Tests](testing.md)
-* [Best Practices](best_practices.md)
+## Features
+>FYI, the following links show fully themed components. SiteFarm Seed does **not**
+include any theming so that you can implement theming however you need something to look.
+1. **Sensible Defaults:** We did the tedious work that most websites need so you don't have to
+2. **Content Types:** 
+[Basic Page](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=templates-basic-page), 
+[Article](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=templates-article),
+[Event](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=templates-event),
+[Person](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=templates-person),
+& [Photo Gallery](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=templates-photo-gallery)
+3. **Block Types:** 
+Basic Block, 
+[Focal Link](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=molecules-focal-link), 
+[Focus Box](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=molecules-focus-box), 
+[Hero Banner](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=organisms-hero-banner), 
+[Marketing Highlight](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=molecules-marketing-highlight), 
+& [Marketing Highlight - Horizontal](http://ucd-one-patternlab.s3-website-us-west-1.amazonaws.com/?p=molecules-marketing-highlight-horizontal)
+4. **User Roles and Permissions:** Contributor, Editor, Site Manager, Site Builder, & Administrator
+5. **Image Styles:** Pre-built images styles are ready to be overridden to match a custom theme
+6. **Views:** Dozens of Views create blocks and pages ready for content
+7. **Polished:** Lots of Drupal 8's rough edges have been smoothed out for regular day-to-day users
+
+## Example Sub-Profile template
+An example template for using SiteFarm Seed with a sub-profile can be found on github.
+[https://github.com/ucdavis/SiteFarm-distro-template](https://github.com/ucdavis/SiteFarm-distro-template)
+
+[Composer](https://getcomposer.org/) is a requirement.

@@ -29,3 +29,6 @@ behat.yml
 
 # PhpUnit local config
 phpunit.xml
+
+# Vuepress build
+/docs/.vuepress/dist/
