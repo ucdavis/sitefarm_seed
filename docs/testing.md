@@ -25,6 +25,8 @@ $ java -Dwebdriver.chrome.driver="/path/to/chromedriver" -jar /path/to//selenium
 > **Tip:** Add an alias to your `.bash_profile` to simplify life
 > `alias selenium='java -Dwebdriver.chrome.driver="/path/to/chromedriver" -jar /path/to/selenium-server-standalone-3.4.0.jar'`
 
+> **Tip:** If you get an error when running tests like `Could not open connection: Unable to create new service: ChromeDriverService`, then it is probably an isse with the Chrome Driver not being found. The Chrome driver path needs to be absolute when starting Selenium. 
+
 3. Run behat as usual.
 
 
