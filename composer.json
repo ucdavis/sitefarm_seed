@@ -51,7 +51,7 @@
     "drupal/drupal-extension": "^3.1"
   },
   "require": {
-    "drupal/core": "^8.5.4",
+    "drupal/core": "^8.6.0",
     "cweagans/composer-patches": "^1.5",
     "composer/installers": "^1.0",
     "drupal/address": "1.*",
@@ -89,10 +89,8 @@
   "extra": {
     "patches": {
       "drupal/core": {
-        "datetime-range views enhancements": "https://www.drupal.org/files/issues/2786577-270_0.patch",
-        "Profile Inheritance": "https://www.drupal.org/files/issues/1356278-408--8.5.x-real.patch",
-        "multiple image upload dimension fix": "https://www.drupal.org/files/issues/2018-04-28/2644468-91.patch",
-        "Drupalimage calling drupallink functions without checking if the plugin is loaded #15": "https://www.drupal.org/files/issues/edit_drupalimage-2855521-15.patch"
+        "Profile Inheritance": "https://www.drupal.org/files/issues/2018-10-23/1356276-549-8.6.x.patch",
+        "multiple image upload dimension fix": "https://www.drupal.org/files/issues/2018-04-28/2644468-91.patch"
       },
       "drupal/url_embed": {
         "make embeds responsive": "https://www.drupal.org/files/issues/option-to-make-embeds-responsive-2825602-2.patch"
