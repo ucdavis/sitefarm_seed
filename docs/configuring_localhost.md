@@ -2,17 +2,17 @@
 
 ## Step 1: Install Composer
 
-[Install composer globally.](https://getcomposer.org/doc/00-intro.md) 
+[Install composer globally.](https://getcomposer.org/doc/00-intro.md)
 
 ## Step 2: Fire Up Local Dev Stack
 
-Install and enable [Docksal](https://docksal.io) (recommended), [MAMP](https://www.mamp.info/), [WAMP](http://www.wampserver.com/), [LAMP](https://en.wikipedia.org/wiki/LAMP_(software_bundle)), or whatever you local development environment of choice and make sure the [Web Server System Requirements](https://www.drupal.org/docs/8/system-requirements/web-server) for Drupal 8 are being met.
+Install and enable [Docksal](https://docksal.io) (recommended), [Lando](https://docs.devwithlando.io) (best for Pantheon users), [MAMP](https://www.mamp.info/), [WAMP](http://www.wampserver.com/), [LAMP](https://en.wikipedia.org/wiki/LAMP_(software_bundle)), or whatever you local development environment of choice and make sure the [Web Server System Requirements](https://www.drupal.org/docs/8/system-requirements/web-server) for Drupal 8 are being met.
 
 ## Step 3: Get Distro Template
 
 The [SiteFarm Distro Template](https://github.com/ucdavis/sitefarm-distro-template) repo is just meant as a starting point. Use this as a template to build your own distribution.
 
-Next you will want to "Clone or Download" the [SiteFarm Distro Template](https://github.com/ucdavis/sitefarm-distro-template) into your local servers public directory. If you clone, the root directory will be `sitefarm-distro-template`, which is what will be referenced in the rest of this document. 
+Next you will want to "Clone or Download" the [SiteFarm Distro Template](https://github.com/ucdavis/sitefarm-distro-template) into your local servers public directory. If you clone, the root directory will be `sitefarm-distro-template`, which is what will be referenced in the rest of this document.
 
 If cloning you will need to configure an [SSH Key with GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
 
@@ -25,6 +25,16 @@ Open your CLI of choice and navigate to the SiteFarm Distro Template directory (
 Run, `$ fin init`
 
 The script will prompt you for your sudo password, and then at the end provide you with a login link.
+
+You're done! You can skip the rest of the steps.
+
+### Lando
+
+Open your CLI of choice and navigate to the SiteFarm Distro Template directory (`sitefarm-distro-template`).
+
+Run, `lando start`.
+
+Lando will give you several URLs to access the site and run the Drupal installer.
 
 You're done! You can skip the rest of the steps.
 
